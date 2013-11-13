@@ -1,6 +1,7 @@
 include mixins/_nav
 include mixins/_ie
 include mixins/_alert
+include mixins/_footer
 
 doctype 5
 html
@@ -48,15 +49,19 @@ html
 
             +alert(err_alert)#err-alert.err-alert
             +alert(info_alert)#info-alert.info-alert
-            .book
+            .book#book.positioned
                 .book-page.book-page-left
                     .book-page-inner
                         h1 this is left
+                        block left-content
 
                 .book-page.book-page-right
                     .book-page-inner
                         h1 this is right
+                        block right-content
+                #book-belt
                 br.clear
         br.clear
 
-        footer
+        hr
+        +footer()

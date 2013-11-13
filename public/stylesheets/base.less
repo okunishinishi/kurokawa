@@ -4,10 +4,19 @@
 
 @danger: #FF99AC;
 @err : #FF7676;
+
+.wood-back(){
+  background-image:url('../images/purty_wood/purty_wood.png');
+}
+.book-cover-back(){
+  background-image: url('../images/dark_leather/dark_leather.png');
+}
+
 body {
   margin: 0 auto;
   padding: 20px 20px;
-  .icon-holder("../../images")
+  .icon-holder("../../images");
+  .wood-back();
 }
 
 .inline-logo {
@@ -161,7 +170,7 @@ body {
   .linear-gradient(~`"@{dir},@{from},@{to}"`);
 }
 .book(@coverBack:@gray) {
-  .box-shadow(2px 2px 4px; .5);
+  .box-shadow(2px 2px 5px; .75);
   background-color: @coverBack;
   padding: 1%;
   position: relative;
@@ -234,6 +243,22 @@ body {
 
 }
 
-.book {
+#book {
   .book();
+  .border-radius(4px);
+  padding:10px 10px;
+  .book-cover-back();
+}
+#book-belt{
+  z-index: -1;
+  @h:18%;
+  @w:1%;
+  top:50% - (@h / 2);
+  height:@h;
+  right: -1 * @w;
+  width:@w * 2;
+  .book-cover-back();
+  position: absolute;
+  .border-radius(4px);
+  .box-shadow(3px 3px 5px; .5);
 }
