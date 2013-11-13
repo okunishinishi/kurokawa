@@ -10,13 +10,10 @@ block stylesheets
 
     link(rel='stylesheet', href=url.css("sign.css"))
 
-block content
+block right-content
 
     section#sign-section
-        #sign-tabs.tabs
-            label.tab(for='signin-tab-content')=l.lbl.signin
-            label.tab(for='signup-tab-content')=l.lbl.signup
-            br.clear
+        h1=l.lbl.signin
         #sign-tab-contents.tab-contents
             .tab-content#signin-tab-content
                 +signin-form(err)
