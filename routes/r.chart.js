@@ -1,7 +1,8 @@
 var tek = require('tek'),
     copy = tek['meta']['copy'],
     db = require('../db'),
-    Company = db.models['Company'];
+    Company = db.models['Company'],
+    Person = db.models['Person'];
 
 
 function notFound(res) {
@@ -15,28 +16,34 @@ function notFound(res) {
  */
 exports.sheet = function (req, res) {
     var p = req.params;
-    exports.getData(p.company_id, function (data, company) {
-        if (!data) {
+    exports.getData(p.company_id, function (persons, company) {
+        if (!persons) {
             notFound(res);
             return;
         }
         res.render('chart/sheet.jade', {
-            company:company
+            persons: persons,
+            company: company
         });
     });
 };
+
+
 exports.getData = function (company_id, callback) {
-    if(!company_id){
+    if (!company_id) {
         callback(null);
         return;
     }
-    console.log('company_id',company_id,company_id.length);
     Company.findById(company_id.toString(), function (company) {
         if (!company) {
             callback(null);
             return;
         }
-        callback({}, company);
+        Person.findByCondition({
+            company_id: company._id.toString()
+        }, function (persons) {
+            callback(persons, company);
+        });
     });
 };
 

@@ -193,13 +193,20 @@
         book: function () {
             var book = $(this),
                 leftPage = $('#left-page', book),
-                rightPage = $('#right-page', book);
+                rightPage = $('#right-page', book),
+                crossPage = $('#cross-page');
+            if (!crossPage.is(':empty')) crossPage.show();
             var both = leftPage.is(':visible') && rightPage.is(':visible');
             if (both) {
                 book.on('resize-book',function () {
                     var h1 = leftPage.height('auto').height(),
                         h2 = rightPage.height('auto').height();
                     var h = h1 && h2 && (h1 > h2 ? h1 : h2);
+                    if (crossPage.is(':visible')) {
+                        var h3 = crossPage.outerHeight();
+                        console.log(h3, h, crossPage.height());
+                        h = h < h3 ? h3 : h;
+                    }
                     if (h) {
                         leftPage.height(h);
                         rightPage.height(h);

@@ -28,8 +28,11 @@ l.lbl.actual_name = 'real name';
 l.lbl.first_name = 'first name';
 l.lbl.last_name = 'last name';
 l.lbl.email = 'email';
-l.lbl.company = 'company'.replace(/_/g,' ');
-l.lbl.chart = 'chart'.replace(/_/g,' ');
+l.lbl.company = 'company'.replace(/_/g, ' ');
+l.lbl.chart = 'chart'.replace(/_/g, ' ');
+l.lbl.person = 'person'.replace(/_/g, ' ');
+l.lbl.birthday = 'birthday';
+l.lbl.birthplace = 'birthplace';
 
 l.msg = {};
 l.msg.sure = 'Are you ABSOLUTELY sure?';

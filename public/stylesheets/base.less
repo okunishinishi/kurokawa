@@ -297,7 +297,7 @@ header{
   line-height: 1em;
 }
 table{
-  @c:#666666;
+  @c:#888;
   th,td{
     background-image: none;
     background-color: transparent;
@@ -307,6 +307,14 @@ table{
     font-size: 1.25em;
     text-align: left;
     margin: 0 5px 5px;
+  }
+  thead{
+    th:first-child{
+      border-left-width: 0;
+    }
+    th:last-child{
+      border-right-width: 0;
+    }
   }
   tbody{
     th{
@@ -360,4 +368,9 @@ th{
   border:1px solid #F3F3F3;
   .border-radius(4px);
   .box-shadow(1px 1px 2px;.1);
+}
+
+#cross-page{
+  padding: 80px 40px;
+  .box-sizing(border-box);
 }

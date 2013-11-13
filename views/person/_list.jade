@@ -1,0 +1,15 @@
+section.list-section#person-list-section
+    form#person-list-form.positioned.block-list-header(
+    data-role='search-form',action=url('/api/person.json'),method='get')
+        label.float-left.block-list-title=l.lbl.person
+        input(type='search', name='search_word', results).float-right
+        input(type='hidden', name='skip', value='0')
+        input(type='hidden', name='limit', value='500')
+        input.btn(type='submit')=l.lbl.search
+        br.clear
+    ul#person_list.block-list
+
+
+    a.add-btn.wide-btn#person-add-btn(
+    href='javascript:void(0)', data-role='add-btn')
+        | #{l.btn.new}

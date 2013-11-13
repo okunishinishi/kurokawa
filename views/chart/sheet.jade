@@ -8,3 +8,24 @@ block javascripts
 
 block left-content
     h1.page-title=company.name
+    br
+
+    table#sheet-table
+        thead
+            tr
+                th
+                th=l.lbl.birthday
+                th=l.lbl.birthplace
+                th
+                th
+                th
+                th
+                th
+                th
+        tbody
+            for person in persons
+                tr
+                    th
+                        a(href=url("/person/#{person._id}"))=person.name
+                    td=person.birthday
+                    td=person.birthplace
