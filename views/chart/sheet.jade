@@ -15,11 +15,11 @@ block left-content
         thead
             tr
                 th
-                for key in sheet_keys
+                each key in sheet_keys
                     th=key
 
         tbody
-            for person in persons
+            each person in persons
                 tr
                     th
                         a(href=url("/person/#{person._id}"))=person.name
