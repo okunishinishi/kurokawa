@@ -33,6 +33,13 @@ l.lbl.chart = 'chart'.replace(/_/g, ' ');
 l.lbl.person = 'person'.replace(/_/g, ' ');
 l.lbl.birthday = 'birthday';
 l.lbl.birthplace = 'birthplace';
+l.lbl.department = 'department';
+l.lbl.post = 'post';
+l.lbl.mission = 'mission';
+l.lbl.hobby = 'hobby';
+l.lbl.graduated_from = 'graduated_from';
+l.lbl.join_year = 'join year';
+l.lbl.years_of_service = 'years_of_service';
 
 l.msg = {};
 l.msg.sure = 'Are you ABSOLUTELY sure?';

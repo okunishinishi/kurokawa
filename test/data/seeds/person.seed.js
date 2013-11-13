@@ -11,8 +11,12 @@ module.exports = {
             _id: "${padZero(rownum, 24)}",
             name: '${name}',
             company_id: "1${padZero((rownum + choice(1,2,3,4)) % 9, 23)}",
+            department:'${star}部門',
+            post:"${choice('部長,課長,ひら'.split(','))}",
+            mission:"",
             birthday:"${birthday}",
-            birthplace:"${country}"
+            birthplace:"${country}",
+            graduated_from:"${flower}大学"
         }.repeat(100)
     ]
 };

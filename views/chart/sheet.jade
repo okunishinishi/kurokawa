@@ -7,6 +7,7 @@ block javascripts
     script(src=url.js('p.chart.js'))
 
 block left-content
+    - var key,sheet_keys='department,post,mission,birthday,birthplace,graduated_from,years_of_service,join_year,hobby'.split(',')
     h1.page-title=company.name
     br
 
@@ -14,18 +15,13 @@ block left-content
         thead
             tr
                 th
-                th=l.lbl.birthday
-                th=l.lbl.birthplace
-                th
-                th
-                th
-                th
-                th
-                th
+                for key in sheet_keys
+                    th=key
+
         tbody
             for person in persons
                 tr
                     th
                         a(href=url("/person/#{person._id}"))=person.name
-                    td=person.birthday
-                    td=person.birthplace
+                    for key in sheet_keys
+                        td=person[key]
