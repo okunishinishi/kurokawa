@@ -1,0 +1,22 @@
+<li class="company-list-item positioned">
+    <a class="cover detail-link" data-role="detail-link" href="{{ctx}}/company/?_id={{_id}}&t={{t}}"></a>
+    <form class="inline-form" action="{{ctx}}/api/company/save"
+          method="post" name="edit-form">
+        <input type="hidden" value="{{_id}}" name="_id"/>
+        <input type="hidden" value="{{_vr}}" name="_vr"/>
+        <input type="text" data-role="editable-text" name="name" value="{{name}}"/>
+    </form>
+    <div class="stick-right stick-top block-list-item-control">
+        <a href="javascript:void(0)" data-role='edit-btn'>
+            <i class="icon icon-pencil"></i>
+        </a>
+
+        <form class="inline-form" action="{{ctx}}/api/company/destroy"
+              method="post" name="destroy-form">
+            <input type="hidden" value="{{_id}}" name="_id"/>
+            <a href="javascript:void(0)" data-role='submit-btn'>
+                <i class="icon icon-trash"></i>
+            </a>
+        </form>
+    </div>
+</li>

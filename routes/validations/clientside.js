@@ -23,8 +23,11 @@ function evalScriptFile(filepath) {
 module.exports = (function () {
     evalScriptFile(resolve(publicJSDir, 'lib/revalidator.js'));
     evalScriptFile(resolve(publicJSDir, 'lib/tek.js'));
-    fs.readdirSync(publicVDir).sort().forEach(function (filename) {
-        evalScriptFile(resolve(publicVDir, filename));
-    });
+    fs.readdirSync(publicVDir).sort(function(a,b){
+        return a.split('.').length - b.split('.').length;
+    })
+        .forEach(function (filename) {
+            evalScriptFile(resolve(publicVDir, filename));
+        });
     return v;
 })();
