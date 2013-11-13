@@ -160,10 +160,9 @@ body {
 .linear-gradient(@dir, @from, @to){
   .linear-gradient(~`"@{dir},@{from},@{to}"`);
 }
-.book(@back:@black) {
+.book(@coverBack:@gray) {
   .box-shadow(2px 2px 4px; .5);
-  background-color: @back;
-  background-color: #FAFAFA;
+  background-color: @coverBack;
   padding: 1%;
   position: relative;
   z-index: 1;
@@ -195,25 +194,28 @@ body {
       z-index: -1;
     }
   }
-  @dark:darken(@back, 2);
   .book-page(@direction) when(@direction=left){
     &:before{
+      .linear-gradient(90deg, @back, darken(@back,1));
       right:0;
+      border-right:1px solid darken(@back,5);
     }
     &:after{
-      .rotate(-2deg);
+      .rotate(-1deg);
       left:1%;
     }
+    .box-shadow(-2px 2px 0;.07);
   }
   .book-page(@direction) when(@direction=right){
     &:before{
       left:0;
-      .linear-gradient(-90deg, @back, @dark);
+      .linear-gradient(-90deg, @back, darken(@back, 3));
     }
     &:after{
       .rotate(2deg);
       right:1%;
     }
+    .box-shadow(2px 2px 0;.07);
   }
 
 
