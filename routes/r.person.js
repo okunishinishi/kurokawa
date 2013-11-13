@@ -1,7 +1,10 @@
 var tek = require('tek'),
     copy = tek['meta']['copy'],
     db = require('../db'),
-    Person = db.models['Person'];
+    Person = db.models['Person'],
+    Company = db.models['Company'],
+    util = require('../util'),
+    toIdMap = util.obj.toIdMap;
 
 function notFound(res) {
     res.redirect('/404');
@@ -43,12 +46,18 @@ exports.index = function (req, res) {
         return;
     }
     Person.findById(p._id, function (person) {
-        if(!person){
+        if (!person) {
             notFound(res);
             return;
         }
-        res.render('person/index.jade', {
-            person:person
+        Company.findAll(function (companies) {
+            var companyMap = toIdMap(companies);
+            var company = companyMap[person.company_id];
+            person.company_name = company && company.name;
+            res.render('person/index.jade', {
+                person: person,
+                companies: companies
+            });
         });
     });
 };

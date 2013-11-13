@@ -7,5 +7,7 @@ block javascripts
     script(src=url.js('p.person.js'))
 
 block left-content
+    if person.company_name
+        span=person.company_name
     h1.page-title=person.name
 
