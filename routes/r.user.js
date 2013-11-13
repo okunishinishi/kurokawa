@@ -1,7 +1,9 @@
 var tek = require('tek'),
     copy = tek.meta.copy,
     db = require('../db'),
-    getSignUser = require('./r.sign').getSignUser,
+    sign = require('./r.sign'),
+    getSignUser = sign.getSignUser,
+    setSignUser = sign.setSignUser,
     User = db.models['User'];
 
 /**
@@ -45,9 +47,9 @@ exports.index = function (req, res) {
  */
 exports.mypage = function (req, res) {
     var user = getSignUser(req);
-    User.findById(user._id, function (sign_user) {
+    User.findOneByCondition({username: user.username}, function (sign_user) {
+        setSignUser(req, sign_user);
         res.render('user/mypage.jade', {
-            sign_user:sign_user
         });
     });
 };

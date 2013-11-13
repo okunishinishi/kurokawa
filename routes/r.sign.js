@@ -12,6 +12,7 @@ function setSignUser(req, user) {
     req.session.sign_user.password = undefined;
     req.session.sign_user.password_digest = undefined;
     req.session.sign_user.salt = undefined;
+    req.session.sign_user._id = user._id.toString();
 }
 function clearSignUser(req) {
     req.session.sign_user = undefined;

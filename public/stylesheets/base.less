@@ -169,6 +169,9 @@ body {
 .linear-gradient(@dir, @from, @to){
   .linear-gradient(~`"@{dir},@{from},@{to}"`);
 }
+.linear-gradient(@dir, @from, @from2, @to){
+  .linear-gradient(~`"@{dir},@{from},@{from2}, @{to}"`);
+}
 .book(@coverBack:@gray) {
   .box-shadow(2px 2px 5px; .75);
   background-color: @coverBack;
@@ -218,7 +221,7 @@ body {
   .book-page(@direction) when(@direction=right){
     &:before{
       left:0;
-      .linear-gradient(-90deg, @back, darken(@back, 3));
+      .linear-gradient(-90deg, @back, darken(@back, 3), darken(@back, 10));
     }
     &:after{
       .rotate(2deg);
@@ -273,5 +276,63 @@ footer{
 }
 
 header{
+  @c:#66300C;
   background-color: transparent;
+  color:@c;
+  .logo{
+    font-weight: bolder;
+    .text-shadow(0 -1px 1px rgba(255,255,255,.5));
+    font-size: 1.5em;
+    color:rgb(29, 29, 29);
+  }
+  .nav-item{
+    @c:#8A5800;
+    .a(@c);
+  }
+}
+.page-title{
+  font-size: 3em;
+  margin: 0;
+  padding-top: 0;
+  line-height: 1em;
+}
+table{
+  @c:#666666;
+  th,td{
+    background-image: none;
+    background-color: transparent;
+    border-color: @c;
+  }
+  caption{
+    font-size: 1.25em;
+    text-align: left;
+    margin: 0 5px 5px;
+  }
+  tbody{
+    th{
+      border-left-width: 0;
+    }
+    td:last-child{
+      border-right-width: 0;
+    }
+  }
+}
+#book{
+  .btn{
+    background-image: none;
+    background-color: transparent;
+    border-color:@gray;
+    &:hover{
+      .box-shadow(2px 2px 3px, .4);
+    }
+    &:active{
+      .box-shadow(none);
+    }
+  }
+}
+.wide-table{
+  width:100%;
+}
+th{
+  width:120px;
 }

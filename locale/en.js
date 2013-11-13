@@ -23,6 +23,11 @@ l.lbl.description = 'description';
 l.lbl.signin = 'sign in';
 l.lbl.signup = 'sign up';
 l.lbl.signout = 'sign out';
+l.lbl.personal = 'personal';
+l.lbl.actual_name = 'real name';
+l.lbl.first_name = 'first name';
+l.lbl.last_name = 'last name';
+l.lbl.email = 'email';
 
 l.msg = {};
 l.msg.sure = 'Are you ABSOLUTELY sure?';
@@ -36,6 +41,8 @@ l.msg.signout_done = [l.lbl.signout, 'done.'].join(' ');
 l.plh = {};
 l.plh.search = l.lbl.search;
 l.plh.captcha_text = 'type above number';
+l.plh.first_name = l.lbl.first_name;
+l.plh.last_name = l.lbl.last_name;
 
 
 l.alt = {}; //alert

@@ -7,6 +7,8 @@ block javascripts
 block stylesheets
     link(rel='stylesheet', href=url.css("user.css"))
 
-block content
-    section#user-detail-section
-        +user_detail_form(sign_user)
+block left-content
+    h1.page-title=l.lbl.mypage
+
+block right-content
+    +user_detail_form(sign_user)

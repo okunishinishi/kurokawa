@@ -47,6 +47,7 @@ html
     body
         article#main
             header
+                a(href=url('/')).logo=l.app.name
                 +nav(sign_user)
 
             +alert(err_alert)#err-alert.err-alert
