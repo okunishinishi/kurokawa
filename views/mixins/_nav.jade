@@ -1,0 +1,15 @@
+mixin nav(sign_user)
+    nav#nav
+        if sign_user
+            span.positioned
+                label(for='user-action-list', data-role='dropdown-btn')=sign_user.username
+                ul#user-action-list(style='display:none').dropdown-list
+                    li
+                        a(href=url('/mypage'))=l.lbl.mypage
+                    li
+                        form#signout-form.inline-form(method='post',action=url('/signout'))
+                            a(href='#', onclick="$('#signout-form').submit();")=l.lbl.signout
+
+        else
+            if needs_sign
+                a#sign-link.nav-item(href=url('/sign'))=l.lbl.sign

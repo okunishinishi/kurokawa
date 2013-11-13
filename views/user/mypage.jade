@@ -1,0 +1,12 @@
+include _detail_form
+extends ../layout
+
+block javascripts
+    script(src=url.js('validation/v.user.js'))
+    script(src=url.js('p.user.mypage.js'))
+block stylesheets
+    link(rel='stylesheet', href=url.css("user.css"))
+
+block content
+    section#user-detail-section
+        +user_detail_form(sign_user)

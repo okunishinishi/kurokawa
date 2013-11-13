@@ -1,0 +1,15 @@
+section.list-section#user-list-section
+    form#user-list-form.positioned.block-list-header(
+    data-role='search-form',action=url('/api/user.json'),method='get')
+        label.float-left.block-list-title=l.lbl.user
+        input(type='search', name='search_word', results).float-right
+        input(type='hidden', name='skip', value='0')
+        input(type='hidden', name='limit', value='500')
+        input.btn(type='submit')=l.lbl.search
+        br.clear
+    ul#user_list.block-list
+
+
+    a.add-btn.wide-btn#user-add-btn(
+    href='javascript:void(0)', data-role='add-btn')
+        | #{l.btn.new}

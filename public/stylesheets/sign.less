@@ -1,0 +1,43 @@
+@import "lib/tek-mixin";
+
+.sign-form {
+  position: relative;
+  display: inline-block;
+  min-width:260px;
+}
+
+#sign-link {
+  display: none;
+}
+
+.tabs {
+  margin: 0 8px;
+}
+
+.tab-contents {
+  padding: 4px 8px;
+  .border-radius(4px);
+  border: 1px solid darken(@white, 10);
+  display: inline-block;
+}
+
+.btn-area {
+  margin-top: 10px;
+}
+
+#captcha-img {
+  height: 120px;
+}
+.caption{
+  color:lighten(@gray, 20);
+  margin: 5px 0 10px;
+}
+.wide-input{
+  width:100%;
+  .box-sizing(border-box);
+}
+
+#captcha-refresh-btn{
+  position: relative;
+  top: -10px;
+}

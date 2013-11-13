@@ -1,0 +1,23 @@
+mixin signup_form(err)
+    form#signup-form.sign-form(
+        method='post', action=url('/api/signup'))
+        p.caption.text-center=l.msg.new_account
+        if err
+            #signup-form-err-div.err-msg=err
+        .field
+            label.block-label(for='signup-username-input')=l.lbl.username
+            input.wide-input#signup-username-input(type='text', name='username', reuqired)
+        .field
+            label.block-label(for='signup-password-input')=l.lbl.password
+            input.wide-input#signup-password-input(type='password', name='password', reuqired)
+        br
+        .field.positioned
+            label.block-label(for='captcha_text-input')=l.msg.prove_human
+            img#captcha-img(data-src=url('/sign/captcha'))
+            a(href='javascript:void(0)')#captcha-refresh-btn
+                small=l.btn.refrech
+            br
+            input#captcha_text-input(type='text', name='captcha_text', placeholder=l.plh.captcha_text)
+
+        .btn-area
+            input.btn.wide-btn(type='submit', value=l.btn.signup)

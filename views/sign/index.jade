@@ -1,0 +1,26 @@
+extends ../layout
+include _signin_form
+include _signup_form
+
+block javascripts
+    script(src=url.js('validation/v.sign.js'))
+    script(src=url.js('p.sign.js'))
+
+block stylesheets
+
+    link(rel='stylesheet', href=url.css("sign.css"))
+
+block content
+
+    section#sign-section
+        #sign-tabs.tabs
+            label.tab(for='signin-tab-content')=l.lbl.signin
+            label.tab(for='signup-tab-content')=l.lbl.signup
+            br.clear
+        #sign-tab-contents.tab-contents
+            .tab-content#signin-tab-content
+                +signin-form(err)
+                a#signin-success-link(href=back_url&&back_url.length?back_url:url('/'))
+            .tab-content#signup-tab-content(style='display:none;')
+                +signup-form(err)
+                a#signup-success-link(href=url('/'))

@@ -1,0 +1,11 @@
+extends layout
+
+block stylesheets
+    link(rel='stylesheet', href=url.css('index.css'))
+
+block javascripts
+    script(src=url.js('p.index.js'))
+
+
+block content
+    h1#large-logo=l.app.name

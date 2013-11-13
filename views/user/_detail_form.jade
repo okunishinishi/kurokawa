@@ -1,0 +1,14 @@
+mixin user_detail_form(user)
+    form#user-detail-form(action=url('/api/user/save'), method='post', autocomplete='off')
+        input(type='hidden', name='_id', value=user._id)
+        input(type='hidden', name='_vr', value=user._vr)
+
+        table
+            caption=l.lbl.account
+            tbody
+                tr
+                    th
+                        label.block-label(for=username-input)=l.lbl.username
+                    td
+                        input(type='text', name='username', value=user.username, id='username-input', data-role='editable-text')
+

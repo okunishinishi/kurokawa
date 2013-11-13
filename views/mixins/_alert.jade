@@ -1,0 +1,4 @@
+mixin alert(data)
+    .alert(style="display:#{data&&data.length?'block':'none'};")
+        span=data
+        span.alert-close-btn(href='#').float-right &times;

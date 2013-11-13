@@ -1,0 +1,13 @@
+mixin signin_form(err)
+    form#signin-form.sign-form(
+        method='post', action=url('/api/signin'))
+        #signin-form-err-div.err-msg
+        .field
+            label.block-label(for='username_or_email-input')=l.lbl.username_or_email
+            input.wide-input#username_or_email-input(type='text', name='username_or_email', reuqired)
+        .field
+            label.block-label(for='password-input')=l.lbl.password
+            input.wide-input#password-input(type='password', name='password', reuqired)
+
+        .btn-area
+            input.btn.wide-btn(type='submit', value=l.lbl.signin)

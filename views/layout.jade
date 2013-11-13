@@ -1,0 +1,62 @@
+include mixins/_nav
+include mixins/_ie
+include mixins/_alert
+
+doctype 5
+html
+    head
+        meta(charset='utf-8')
+        meta(name="viewport", content="width=device-width")
+        title=l.app.name
+
+        link(rel='shortcut icon', href=url('fav.ico'))
+        link(rel="apple-touch-icon", href=url('touch.ico'))
+        link(rel='stylesheet', href=url.css("base.css"))
+
+        //+ie_scripts()
+
+        block stylesheets
+
+
+        if NODE_ENV == 'production'
+            script(src=url.js('lib.min.js'))
+        else
+            script(src=url.js('lib/tek.js'))
+            script(src=url.js('lib/jquery.js'))
+            script(src=url.js('lib/jquery-ui.custom.js'))
+            script(src=url.js('lib/spin.js'))
+            script(src=url.js('lib/handlebars.runtime.min.js'))
+            script(src=url.js('lib/tek.view.js'))
+            script(src=url.js('lib/revalidator.js'))
+
+
+        script.
+            window.l = !{JSON.stringify(l)};
+            window.ctx = "#{context}";
+        script(src=url.js('templates.js'))
+        script(src=url.js('p.js'))
+        script(src=url.js('validation/v.js'))
+
+
+        block javascripts
+
+        block head
+
+
+    body
+        article#main
+
+            +alert(err_alert)#err-alert.err-alert
+            +alert(info_alert)#info-alert.info-alert
+            .book
+                .book-page.book-page-left
+                    .book-page-inner
+                        h1 this is left
+
+                .book-page.book-page-right
+                    .book-page-inner
+                        h1 this is right
+                br.clear
+        br.clear
+
+        footer

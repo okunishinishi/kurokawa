@@ -1,0 +1,220 @@
+@import "lib/tek-mixin";
+@import "lib/tek.view.less";
+@import "lib/tek-style-clean";
+
+@danger: #FF99AC;
+@err : #FF7676;
+body {
+  margin: 0 auto;
+  padding: 20px 20px;
+  .icon-holder("../../images")
+}
+
+.inline-logo {
+  a,
+  a:hover {
+    color: lighten(@gray, 30);
+  }
+
+}
+
+/*
+  ```
+    <a class="btn-danger"> btn danger </a>
+  ```
+ */
+.btn-danger {
+  .btn(@danger);
+}
+
+#main {
+  margin: 32px auto;
+  width: 100%;
+}
+
+.wide-btn {
+  .full-width;
+  display: block;
+  text-align: center;
+}
+
+.add-btn {
+  .add-btn(@gray; @white;);
+}
+
+.half-width-btn {
+  display: inline-block;
+  width: 50%;
+  .box-sizing(border-box);
+}
+
+.block-list-item-control {
+  top: 0;
+  padding: 5px;
+  z-index: 199;
+  a {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.tk-loading {
+  opacity: 0.5;
+}
+
+.no-style-list {
+  .no-style-list();
+}
+
+.field {
+  margin: 4px 0;
+  label {
+    margin-right: 5px;
+  }
+}
+
+.tab-content {
+  padding: 4px 8px;
+}
+
+.err-input {
+  &[type='text'],
+  &[type='url'],
+  &[type='search'],
+  &[type='tel'],
+  &[type='password'] {
+    border: 1px solid @err;
+  }
+}
+
+.err-msg {
+  color: @err;
+}
+
+/**
+ ```
+  <div class="err-alert"> err alert </div>
+ ```
+ */
+.err-alert {
+  .balloon(@red);
+  color: #310000;
+}
+
+/**
+ ```
+  <div class="info-alert"> info alert </div>
+ ```
+ */
+.info-alert {
+  .balloon(@blue);
+}
+
+.alert-close-btn,
+.alert-close-btn:hover {
+  color: lighten(@red, 10);
+  display: inline-block;
+  padding: 1px 8px 2px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 22px;
+  line-height: 16px;
+  position: relative;
+  right: -10px;
+}
+
+/**
+  ```
+    <ul>
+      <li><a>menu01</a></li>
+      <li><a>menu02</a></li>
+    </ul>
+  ```
+ */
+.dropdown-list {
+  .no-style-list;
+  .box-shadow(1px 1px 2px; .4);
+  .border-radius(2px);
+  position: absolute;
+  margin: 5px 10px;
+  right: 0;
+  li {
+    padding: 0;
+    margin: 0;
+  }
+  a {
+    display: inline-block;
+    padding: 4px 8px;
+    &:hover {
+
+    }
+  }
+}
+
+.no-style-submit {
+  background: transparent;
+  border: none;
+}
+
+.book(@back:@black) {
+  .box-shadow(2px 2px 4px; .5);
+  background-color: @back;
+  background-color: #FAFAFA;
+  padding: 1%;
+  position: relative;
+  z-index: 1;
+
+  .book-page-flip(@direction){
+    .black-back(.7);
+    .box-shadow(0 15px 10px rgba(0, 0, 0, 0.7));
+    content: "";
+    position: absolute;
+    top: 55%;
+    width: 50%;
+    height: 10%;
+    z-index: -1;
+  }
+  .book-page-flip(@direction) when(@direction=left){
+    .rotate(-2deg);
+    left:1%;
+    .book-page-inner{
+    }
+  }
+  .book-page-flip(@direction) when(@direction=right){
+    .rotate(2deg);
+    right:1%;
+    .book-page-inner{
+    }
+  }
+
+
+  .book-page(@direction) {
+    position: relative;
+    float: @direction;
+    @back: @white;
+    background-color: @back;
+    display: inline-block;
+    width: 50%;
+    .box-sizing(border-box);
+    .border-radius(2px;);
+
+    &:after {
+      .book-page-flip(@direction);
+    }
+  }
+  .book-page-left {
+    .book-page(left);
+  }
+  .book-page-right {
+    .book-page(right);
+  }
+  .book-page-inner{
+    margin: 10px 15px;
+  }
+
+}
+
+.book {
+  .book();
+}
