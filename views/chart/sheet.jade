@@ -1,0 +1,10 @@
+extends ../layout
+
+block stylesheets
+    link(rel='stylesheet', href=url.css('chart.css'))
+
+block javascripts
+    script(src=url.js('p.chart.js'))
+
+block left-content
+    h1.page-title=company.name

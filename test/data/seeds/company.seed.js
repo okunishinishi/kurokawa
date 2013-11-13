@@ -8,7 +8,7 @@ module.exports = {
     /** データ定義 **/
     entries: [
         {
-            _id: "${padZero(rownum, 24)}",
+            _id: "1${padZero(rownum, 23)}",
             name: '${flower}${choice("商事,コーポレーション,株式会社,グループ".split(","))}'
         }.repeat(10)
     ]

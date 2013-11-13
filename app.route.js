@@ -41,9 +41,13 @@ post('/api/user/save', user.api.save);
 post('/api/user/destroy', user.api.destroy);
 get('/api/user.json', user.api.list);
 get('/api/user/:_id', user.api.one);
+
 var company = r['company'];
 get('/company', company.index);
 post('/api/company/save', company.api.save);
 post('/api/company/destroy', company.api.destroy);
 get('/api/company.json', company.api.list);
 get('/api/company/:_id', company.api.one);
+
+var chart = r['chart'];
+get('/chart/sheet/:company_id', chart.sheet);

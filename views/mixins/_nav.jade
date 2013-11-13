@@ -1,8 +1,7 @@
 mixin nav(sign_user)
     nav#nav
         if sign_user
-            label(for='user-action-list', data-role='dropdown-btn')=sign_user.username
-            a.nav-item(href=url('/mypage'))=l.lbl.mypage
+            a.nav-item(href=url('/mypage'))=sign_user.username
             form#signout-form.inline-form(method='post',action=url('/signout'))
                 a.nav-item(href='#', onclick="$('#signout-form').submit();")=l.lbl.signout
         else

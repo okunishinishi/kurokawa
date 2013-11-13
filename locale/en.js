@@ -29,6 +29,7 @@ l.lbl.first_name = 'first name';
 l.lbl.last_name = 'last name';
 l.lbl.email = 'email';
 l.lbl.company = 'company'.replace(/_/g,' ');
+l.lbl.chart = 'chart'.replace(/_/g,' ');
 
 l.msg = {};
 l.msg.sure = 'Are you ABSOLUTELY sure?';
