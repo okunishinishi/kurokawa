@@ -1,4 +1,5 @@
 extends ../layout
+include ./_detail_form
 
 block stylesheets
     link(rel='stylesheet', href=url.css('person.css'))
@@ -10,4 +11,11 @@ block left-content
     if person.company_name
         span=person.company_name
     h1.page-title=person.name
+
+
+    +person_basic_form(person)
+
+block right-content
+
+    +person_extra_form(person)
 

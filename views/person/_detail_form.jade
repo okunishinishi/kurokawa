@@ -1,0 +1,30 @@
+mixin input_table_row(key, data)
+    tr
+        th
+            label(for=key+'-input')=l.lbl[key]
+        td
+            input(type='text', name=key, value=data[key], id=key+'-input', data-role='editable-text')
+
+mixin person_basic_form(person)
+    form#person-basic-form(action='/api/person/save', method="post")
+        each key in '_id,_vr,sort_num'.split(',')
+            input(type='hidden', value=person[key], name=key)
+        br
+
+        table.wide-table
+            thead
+            tbody
+                +input_table_row('department', person)
+                +input_table_row('post', person)
+                +input_table_row('mission', person)
+                +input_table_row('birthday', person)
+                +input_table_row('birthplace', person)
+                +input_table_row('graduated_from', person)
+                +input_table_row('years_of_service', person)
+                +input_table_row('join_year', person)
+                +input_table_row('hobby', person)
+
+mixin person_extra_form(person)
+        table.wide-table
+            thead
+            tbody

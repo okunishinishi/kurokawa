@@ -19,19 +19,19 @@ mixin user_detail_form(user)
             tbody
                 tr
                     th
-                        label(for=first_name-input)=l.lbl.actual_name
+                        label(for='first_name-input')=l.lbl.actual_name
                     td
                         span.filed
                             input(type='text', name='first_name',
-                                value=first_name, id='first_name-input', placeholder=l.plh.first_name, data-role='editable-text')
+                                value=user.first_name, id='first_name-input', placeholder=l.plh.first_name, data-role='editable-text')
                         span.filed
-                            input(type='text', name='last_name', value=last_name,
+                            input(type='text', name='last_name', value=user.last_name,
                                 id='last_name-input', placeholder=l.plh.last_name, data-role='editable-text')
                 tr
                     th
-                        label(for=email-input)=l.lbl.email
+                        label(for='email-input')=l.lbl.email
                     td
-                        input(type='text', name='text', value=email, id='email-input', data-role='editable-text')
+                        input(type='text', name='text', value=user.email, id='email-input', data-role='editable-text')
 
 
         br

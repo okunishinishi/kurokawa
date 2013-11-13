@@ -12,36 +12,6 @@
 (function ($, l, v, hbs) {
 
     $.fn.extend({
-        editableForm: function (mode) {
-            var form = $(this);
-            var editableText = form.findByRole('editable-text')
-                .editableText('dblclick')
-                .off('change');
-            var $checkable = $('.checkable-label', form);
-            switch (mode) {
-                case 'view':
-                    $checkable.each(function () {
-                        var label = $(this),
-                            input = $('#' + label.attr('for'));
-                        if (!input.size()) return;
-                        var checked = input.is(':checked');
-                        if (checked) {
-                            label.show();
-                        } else {
-                            label.hide();
-                        }
-                    });
-                    editableText.trigger('tk-editable-text-fix');
-                    $(':text,textarea', form).filter(':visible').hide();
-                    break;
-                case 'edit':
-                    $checkable.show();
-                    editableText.trigger('tk-editable-text-edit');
-                    break;
-            }
-
-            form.attr('data-mode', mode);
-        },
         userDetailForm: function (mode) {
             var form = $(this),
                 saveBtn = $('#user-detail-save-btn').hide(),

@@ -176,6 +176,36 @@
             form.find('.err-input').first().focus();
             return form;
         },
+        editableForm: function (mode) {
+            var form = $(this);
+            var editableText = form.findByRole('editable-text')
+                .editableText('dblclick')
+                .off('change');
+            var $checkable = $('.checkable-label', form);
+            switch (mode) {
+                case 'view':
+                    $checkable.each(function () {
+                        var label = $(this),
+                            input = $('#' + label.attr('for'));
+                        if (!input.size()) return;
+                        var checked = input.is(':checked');
+                        if (checked) {
+                            label.show();
+                        } else {
+                            label.hide();
+                        }
+                    });
+                    editableText.trigger('tk-editable-text-fix');
+                    $(':text,textarea', form).filter(':visible').hide();
+                    break;
+                case 'edit':
+                    $checkable.show();
+                    editableText.trigger('tk-editable-text-edit');
+                    break;
+            }
+
+            form.attr('data-mode', mode);
+        },
         dropdownBtn: function () {
             return $(this).each(function () {
                 var btn = $(this),
@@ -202,11 +232,6 @@
                     var h1 = leftPage.height('auto').height(),
                         h2 = rightPage.height('auto').height();
                     var h = h1 && h2 && (h1 > h2 ? h1 : h2);
-                    if (crossPage.is(':visible')) {
-                        var h3 = crossPage.outerHeight();
-                        console.log(h3, h, crossPage.height());
-                        h = h < h3 ? h3 : h;
-                    }
                     if (h) {
                         leftPage.height(h);
                         rightPage.height(h);

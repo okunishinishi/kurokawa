@@ -31,5 +31,6 @@
             sheetTable.resize(book.width());
         });
         sheetTable.resize(book.width());
+        book.trigger('resize-book');
     });
 })(jQuery, window['l'], Handlebars);
