@@ -17,29 +17,7 @@
                 saveBtn = $('#user-detail-save-btn').hide(),
                 editBtn = $('#user-detail-edit-btn');
 
-            form.ajaxForm(function () {
-                editBtn.show();
-                saveBtn.hide();
-                form.editableForm('view');
-            });
-            editBtn.click(function () {
-                form.editableForm('edit');
-                editBtn.hide();
-                saveBtn.show();
-            });
-            form
-                .change(function () {
-                    $.confirmLeave(l.msg.leave_with_unsaved);
-                });
-            form.find(':text')
-                .keydown(function (e) {
-                    switch (e.which) {
-                        case $.ui.keyCode.ENTER:
-                            e.preventDefault();
-                            break;
-                    }
-                });
-            form.editableForm(mode || 'view');
+            form.detailForm(mode, saveBtn, editBtn);
 
             return form;
         }

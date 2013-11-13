@@ -8,45 +8,31 @@
  *
  */
 (function ($, l, Hbs) {
-    var tmpl = {
-        li: Hbs.templates['person-list-item']
-    };
     $.fn.extend({
-        personSearchForm: function (callback) {
-            var form = $(this);
-            form.searchForm(callback);
-            return form;
+        personDetailForm: function (mode) {
+            var form = $(this),
+                saveBtn = $('#person-save-btn', form),
+                editBtn = $('#person-edit-btn', form);
+
+            form.detailForm(mode, saveBtn, editBtn);
         },
-        personListItem: function () {
-            return $(this)
-                .destroyableListItem()
-                .editableListItem('dblclick');
-        },
-        personList: function (data) {
-            var ul = $(this);
-            ul.htmlHandlebars(tmpl.li, data)
-                .find('li')
-                .personListItem();
-            return ul;
-        },
-        personListSection: function () {
-            var section = $(this),
-                addBtn = section.findByRole('add-btn'),
-                ul = section.find('ul'),
-                searchForm = section.findByRole('search-form');
-            ul.appendableList(tmpl.li, addBtn, function (li) {
-                li.personListItem();
-            });
-            searchForm.personSearchForm(function (data) {
-                ul.personList(data);
-            }).submit();
-            return section;
+        personBook: function (q) {
+            var book = $(this),
+                form = $('#person-detail-form');
+            book.after(form);
+            form.append(book);
+
+            form.personDetailForm(q.mode);
+            return book;
         }
     });
 
     $(function () {
-        var body = $(document.body);
+        var body = $(document.body),
+            q = $.getQuery();
 
-        $('#person-list-section', body).personListSection();
+        $('#book', body).personBook(q);
+
+
     });
 })(jQuery, window['l'], Handlebars);

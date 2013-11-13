@@ -22,27 +22,24 @@ mixin radio-tr(key, data, choices)
                     input(name=key, type='radio',value=choice.value, checked=data[key]==choice.value)
                     span=l.lbl[choice.label]
 
-mixin person_basic_form(person)
-    form#person-basic-form(action='/api/person/save', method="post")
-        each key in '_id,_vr,sort_num'.split(',')
-            input(type='hidden', value=person[key], name=key)
-        br
+mixin person_basic_table(person)
+    br
 
-        table.wide-table
-            caption=l.lbl.personal_basic
-            thead
-            tbody
-                +text-tr('department', person)
-                +text-tr('post', person)
-                +text-tr('mission', person)
-                +text-tr('birthday', person)
-                +text-tr('birthplace', person)
-                +text-tr('graduated_from', person)
-                +text-tr('years_of_service', person)
-                +text-tr('join_year', person)
-                +text-tr('hobby', person)
+    table.wide-table
+        caption=l.lbl.personal_basic
+        thead
+        tbody
+            +text-tr('department', person)
+            +text-tr('post', person)
+            +text-tr('mission', person)
+            +text-tr('birthday', person)
+            +text-tr('birthplace', person)
+            +text-tr('graduated_from', person)
+            +text-tr('years_of_service', person)
+            +text-tr('join_year', person)
+            +text-tr('hobby', person)
 
-mixin person_extra_form(person)
+mixin person_extra_table(person)
     table.wide-table
         caption=l.lbl.personal_extra
         thead
@@ -58,3 +55,4 @@ mixin person_extra_form(person)
                 {label:l.lbl.false,value:'false'}
             ])
             +textarea-tr('free_word', person)
+
