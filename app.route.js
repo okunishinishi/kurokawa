@@ -51,8 +51,10 @@ get('/api/company/:_id', company.api.one);
 
 var chart = r['chart'];
 get('/chart/sheet/:company_id', chart.sheet);
+
+
 var person = r['person'];
-get('/person', person.index);
+get('/person/:_id', person.index);
 post('/api/person/save', person.api.save);
 post('/api/person/destroy', person.api.destroy);
 get('/api/person.json', person.api.list);

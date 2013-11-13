@@ -3,6 +3,10 @@ var tek = require('tek'),
     db = require('../db'),
     Person = db.models['Person'];
 
+function notFound(res) {
+    res.redirect('/404');
+}
+
 /**
  * find single model
  * @param _id
@@ -33,7 +37,20 @@ function find(condition, limit, skip, callback) {
  * @param res
  */
 exports.index = function (req, res) {
-    res.render('person/index.jade', {});
+    var p = req.params;
+    if (!p._id) {
+        notFound(res);
+        return;
+    }
+    Person.findById(p._id, function (person) {
+        if(!person){
+            notFound(res);
+            return;
+        }
+        res.render('person/index.jade', {
+            person:person
+        });
+    });
 };
 
 
