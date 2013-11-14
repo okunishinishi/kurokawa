@@ -1,13 +1,22 @@
 extends ../layout
+include ../mixins/_back_link
+
 
 block stylesheets
     link(rel='stylesheet', href=url.css('admin.css'))
 
 block javascripts
-    script(src=url.js('p.admin.js'))
+    script(src=url.js('p.admin.master.js'))
+
+block upper-content
+    +back_link(l.lbl.admin, url('/admin'))
+
 
 block left-content
+    h1.page-title=l.lbl.master
+    ul
+        li
+            a(href='javascript:void(0)', data-ref='#team-list-section')=l.lbl.team-list
 
-
-block rign-content
-
+block right-content
+    include ../team/_list

@@ -1,5 +1,5 @@
 /**
- * public script for team
+ * public script for admin master page
  *
  *  -- namespaces --
  *  $ : jQuery
@@ -7,9 +7,9 @@
  *  Hbs : handlebars
  *
  */
-(function ($, l, Hbs) {
+(function ($, l, hbs) {
     var tmpl = {
-        li: Hbs.templates['team-list-item']
+        teamLi: hbs.templates['team-list-item']
     };
     $.fn.extend({
         teamSearchForm: function (callback) {
@@ -24,7 +24,7 @@
         },
         teamList: function (data) {
             var ul = $(this);
-            ul.htmlHandlebars(tmpl.li, data)
+            ul.htmlHandlebars(tmpl.teamLi, data)
                 .find('li')
                 .teamListItem();
             return ul;
@@ -34,11 +34,13 @@
                 addBtn = section.findByRole('add-btn'),
                 ul = section.find('ul'),
                 searchForm = section.findByRole('search-form');
-            ul.appendableList(tmpl.li, addBtn, function (li) {
+            ul.appendableList(tmpl.teamLi, addBtn, function (li) {
                 li.teamListItem();
+                section.trigger('resize-book');
             });
             searchForm.teamSearchForm(function (data) {
                 ul.teamList(data);
+                section.trigger('resize-book');
             }).submit();
             return section;
         }
@@ -48,5 +50,6 @@
         var body = $(document.body);
 
         $('#team-list-section', body).teamListSection();
+
     });
 })(jQuery, window['l'], Handlebars);

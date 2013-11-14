@@ -29,6 +29,9 @@ mixin person_basic_table(person)
         caption=l.lbl.personal_basic
         thead
         tbody
+            tr
+                th=l.lbl.company
+                td=person.company_name
             +text-tr('department', person)
             +text-tr('post', person)
             +text-tr('mission', person)

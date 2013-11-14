@@ -34,3 +34,26 @@ body{
     .item(lighten(@back, 4));
   }
 }
+
+.block-list .user-list-item{
+  padding: 0;
+  .detail-arrow{
+    opacity: 0;
+    position: relative;
+    right: 10px;
+  }
+  a{
+    display: inline-block;
+    padding: 5px 10px 5px 10px;
+    width:100%;
+    height: 100%;
+    &:hover{
+      .detail-arrow{
+        opacity: 1;
+      }
+    }
+  }
+}
+.detail-arrow{
+  border-left-color:#693B00;
+}

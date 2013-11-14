@@ -86,7 +86,7 @@ exports.api = {
             condition = {};
 
         if (search_word) {
-            var search_fields = ['name'];
+            var search_fields = ['username'];
             search_fields.forEach(function (field) {
                 condition[field] = search_word;
             });

@@ -181,31 +181,23 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<li class=\"user-list-item positioned\">\n    <form class=\"inline-form\" action=\"";
+  buffer += "<li class=\"user-list-item positioned\">\n    <a href=\"javascript:void(0)\">\n        <form class=\"inline-form\" action=\"";
   if (stack1 = helpers.ctx) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.ctx; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "/api/user/save\"\n          method=\"post\" name=\"edit-form\">\n        <input type=\"hidden\" value=\"";
+    + "/api/user/save\"\n              method=\"post\" name=\"edit-form\">\n            <input type=\"hidden\" value=\"";
   if (stack1 = helpers._id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0._id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\" name=\"_id\"/>\n        <input type=\"hidden\" value=\"";
+    + "\" name=\"_id\"/>\n            <input type=\"hidden\" value=\"";
   if (stack1 = helpers._vr) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0._vr; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\" name=\"_vr\"/>\n        <input type=\"text\" data-role=\"editable-text\" name=\"username\" value=\"";
+    + "\" name=\"_vr\"/>\n            <input type=\"text\" data-role=\"editable-text\" name=\"username\" value=\"";
   if (stack1 = helpers.username) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.username; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\"/>\n    </form>\n    <div class=\"stick-right stick-top block-list-item-control\">\n        <a href=\"javascript:void(0)\" data-role='edit-btn'>\n            <i class=\"icon icon-pencil\"></i>\n        </a>\n\n        <form class=\"inline-form\" action=\"";
-  if (stack1 = helpers.ctx) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.ctx; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "/api/user/destroy\"\n              method=\"post\" name=\"destroy-form\">\n            <input type=\"hidden\" value=\"";
-  if (stack1 = helpers._id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0._id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\" name=\"_id\"/>\n            <a href=\"javascript:void(0)\" data-role='submit-btn'>\n                <i class=\"icon icon-trash\"></i>\n            </a>\n        </form>\n    </div>\n</li>";
+    + "\"/>\n        </form>\n        <span class=\"detail-arrow float-right\"></span>\n    </a>\n</li>";
   return buffer;
   }
 	);
