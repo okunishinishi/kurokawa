@@ -30,3 +30,9 @@ block left-content
                         a(href=url("/person/#{person._id}"))=person.name
                     for key,i in sheet_keys
                         td(class='col-'+i)=person[key]
+
+    from#sheet-search-form.inline-form.stick-right.stick-top(
+            action='',
+            style='right:0;'
+        )
+        input(type='search', results, name='search_word')

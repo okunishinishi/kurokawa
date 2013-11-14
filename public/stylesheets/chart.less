@@ -12,6 +12,7 @@
   @color:@gray;
   label{
     position: relative;
+    cursor: pointer;
   }
   label:before {
     content: "";
@@ -46,8 +47,16 @@
   }
 }
 #left-page{
-  z-index: 2;
 }
-#right-page{
+#book .book-page-right{
   z-index: 0;
+  &:after{
+    display: none;
+  }
+}
+
+.filter-table-row-hidden{
+  display: none;
+}
+.serach-input-active{
 }
