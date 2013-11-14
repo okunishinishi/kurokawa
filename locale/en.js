@@ -28,9 +28,10 @@ l.lbl.actual_name = 'real name';
 l.lbl.first_name = 'first name';
 l.lbl.last_name = 'last name';
 l.lbl.email = 'email';
-l.lbl.company = 'company'.replace(/_/g, ' ');
-l.lbl.chart = 'chart'.replace(/_/g, ' ');
-l.lbl.person = 'person'.replace(/_/g, ' ');
+l.lbl.company = 'company';
+l.lbl.companies = 'companies';
+l.lbl.chart = 'chart';
+l.lbl.person = 'person';
 l.lbl.birthday = 'birthday';
 l.lbl.birthplace = 'birthplace';
 l.lbl.department = 'department';
@@ -58,9 +59,16 @@ l.lbl.admin = 'admin';
 l.lbl.admin_page_title = 'admin menu';
 l.lbl.master = 'master';
 l.lbl.user = 'user';
-l.lbl.team = 'team'.replace(/_/g, ' ');
+l.lbl.team = 'team';
 l.lbl.breadcrumb_sperator = '>';
 l.lbl.back_link_prefix = '<<';
+l.lbl.report = 'report';
+l.lbl.reports = 'reports';
+l.lbl.client = 'client';
+l.lbl.sub_menu = {
+    company: l.lbl.client,
+    report: l.lbl.reports
+};
 
 l.msg = {};
 l.msg.sure = 'Are you ABSOLUTELY sure?';
@@ -105,5 +113,6 @@ l.btn.signin = l.lbl.signin;
 l.btn.signout = l.lbl.signout;
 l.btn.signup = l.lbl.signup;
 l.btn.company_list = 'company list';
+
 
 

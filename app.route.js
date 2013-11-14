@@ -43,7 +43,6 @@ get('/api/user.json', user.api.list);
 get('/api/user/:_id', user.api.one);
 
 var company = r['company'];
-get('/company', company.index);
 post('/api/company/save', company.api.save);
 post('/api/company/destroy', company.api.destroy);
 get('/api/company.json', company.api.list);
@@ -51,7 +50,6 @@ get('/api/company/:_id', company.api.one);
 
 var chart = r['chart'];
 get('/chart/sheet/:company_id', chart.sheet);
-
 
 var person = r['person'];
 get('/person/:_id', person.index);
@@ -71,3 +69,6 @@ post('/api/team/save', team.api.save);
 post('/api/team/destroy', team.api.destroy);
 get('/api/team.json', team.api.list);
 get('/api/team/:_id', team.api.one);
+
+var report = r['report'];
+get('/report', report.index);

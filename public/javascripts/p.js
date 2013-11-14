@@ -290,6 +290,11 @@
                 }).trigger('resize-book');
             }
             return book;
+        },
+        subNav:function(key){
+            var nav = $(this);
+            nav.findByAttr('data-key', key).addClass('active');
+            return nav;
         }
     });
     $(function () {

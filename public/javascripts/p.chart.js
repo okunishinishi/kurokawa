@@ -32,5 +32,7 @@
         });
         sheetTable.resize(book.width());
         book.trigger('resize-book');
+
+        $('#sub-nav', body).subNav('company');
     });
 })(jQuery, window['l'], Handlebars);

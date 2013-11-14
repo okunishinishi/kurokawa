@@ -48,6 +48,7 @@
     $(function () {
         var body = $(document.body);
         $('#company-list-section', body).companyListSection();
+        $('#sub-nav', body).subNav('company');
     });
 })(jQuery, window['l'], Handlebars);
 

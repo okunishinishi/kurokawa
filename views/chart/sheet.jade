@@ -8,10 +8,10 @@ block javascripts
     script(src=url.js('p.chart.js'))
 
 block upper-content
-    +back_link(l.btn.company_list, url('/'))
+    //+back_link(l.btn.company_list, url('/'))
 
 block left-content
-    - var key,sheet_keys='department,post,mission,birthday,birthplace,graduated_from,years_of_service,join_year,hobbyhobby'.split(',')
+    - var key,sheet_keys='department,post,mission,birthday,birthplace,graduated_from,years_of_service,join_year,hobby'.split(',')
     h1.page-title=company.name
     br
 
@@ -20,7 +20,7 @@ block left-content
             tr
                 th
                 each key in sheet_keys
-                    th=key
+                    th=l.lbl[key]
 
         tbody
             each person in persons

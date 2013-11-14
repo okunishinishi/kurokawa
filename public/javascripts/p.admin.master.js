@@ -51,5 +51,7 @@
 
         $('#team-list-section', body).teamListSection();
 
+        $('#sub-nav', body).subNav('admin');
+
     });
 })(jQuery, window['l'], Handlebars);

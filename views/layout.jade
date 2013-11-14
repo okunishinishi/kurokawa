@@ -48,15 +48,16 @@ html
         article#main
             header
                 a(href=url('/')).logo=l.app.name
-                +nav(sign_user)
+                +main_nav(sign_user)
 
             +alert(err_alert)#err-alert.err-alert
-
             +alert(info_alert)#info-alert.info-alert
 
             block upper-content
 
             .book#book.positioned
+                +suv_nav(sign_user)
+
                 .book-page.book-page-left#left-page
                     .book-page-inner
                         block left-content

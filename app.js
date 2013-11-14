@@ -40,7 +40,7 @@ app.locals({
 app.all('*', function (req, res, next) {
 //    var lang = util['lang'];
 //    res.locals.lang = lang.fromRequest(req);
-    res.locals.lang = 'en';//FIXME
+    res.locals.lang = 'ja';
     res.locals.l = locale[res.locals.lang];
     res.locals.context = config.context;
     next();

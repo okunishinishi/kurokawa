@@ -232,6 +232,7 @@ body {
   }
   .book-page-right {
     .book-page(right);
+    .box-shadow(0px -2px 3px, .4);
   }
   .book-page-inner{
     margin: 20px 35px;
@@ -277,7 +278,6 @@ header{
   .box-shadow(none);
   color:@c;
   .logo{
-    font-weight: thin;
     font-size: 1.5em;
     padding: 0 6px;
     display: inline-block;
@@ -289,12 +289,45 @@ header{
     .a(@c);
   }
 }
+#main-nav{
+  float: right;
+}
 #sub-nav{
-    @back:#4d1c00;
-    background-color: @back;
-    .box-shadow(1px 1px 2px, .4);
-    color:@white;
-
+  float: none;
+  .box-shadow(1px 1px 2px, .4);
+  position: absolute;
+  top:-16px;
+  right:24px;
+  .box-shadow(none);
+  .nav-item(@i){
+    @back:spin(#4d1c00, 360 / 4 * (@i+1));
+    background-color: darken(@back,4);
+    border:1px solid darken(@back,6);
+    @color:@white;
+    color:fadeout(@color, 50);
+    padding: 6px 10px 20px;
+    .border-radius(@r;@r;0;0;);
+    .box-shadow(2px 2px 4px, .4);
+    @r:4px;
+    margin: 0 2px;
+    font-family: cursive;
+    line-height: 1em;
+    &:hover{
+      color:@color;
+      background-color: @back;
+    }
+    &.active{
+      background-color: @back;
+      color:@color;
+      .box-shadow(3px 3px 4px, .8);
+    }
+  }
+  .nav-item{
+    &:nth-child(4n){.nav-item(0);}
+    &:nth-child(4n+1){.nav-item(1);}
+    &:nth-child(4n+2){.nav-item(2);}
+    &:nth-child(4n+3){.nav-item(3);}
+  }
 }
 .page-title{
   font-size: 3em;
@@ -371,7 +404,7 @@ th{
     background-color: @back;
     border-color:@back;
     .block-list-item-control{
-      display: none;
+      opacity: 0;
     }
   }
 }
@@ -437,4 +470,9 @@ th{
   display: inline-block;
   position: relative;
   top: 2px;
+}
+.block-list-item-control{
+  width:50px;
+  text-align: center;
+  top:3px;
 }
