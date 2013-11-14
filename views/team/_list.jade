@@ -1,14 +1,15 @@
-section.list-section#user-list-section
-    form#user-list-form.positioned.block-list-header(
-    data-role='search-form',action=url('/api/user.json'),method='get')
+section.list-section#team-list-section
+    form#team-list-form.positioned.block-list-header(
+    data-role='search-form',action=url('/api/team.json'),method='get')
+        label.float-left.block-list-title=l.lbl.team
         input(type='search', name='search_word', results).float-right
         input(type='hidden', name='skip', value='0')
         input(type='hidden', name='limit', value='500')
         input.btn(type='submit')=l.lbl.search
         br.clear
-    ul#user_list.block-list
+    ul#team_list.block-list
 
 
-    a.add-btn.wide-btn#user-add-btn(
+    a.add-btn.wide-btn#team-add-btn(
     href='javascript:void(0)', data-role='add-btn')
         | #{l.btn.new}

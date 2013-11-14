@@ -1,0 +1,13 @@
+extends ../layout
+
+block stylesheets
+    link(rel='stylesheet', href=url.css('admin.css'))
+
+block javascripts
+    script(src=url.js('p.admin.user.js'))
+
+block left-content
+
+
+block right-content
+    include ../user/_list

@@ -4,6 +4,9 @@ mixin nav(sign_user)
             a.nav-item(href=url('/mypage'))=sign_user.username
             form#signout-form.inline-form(method='post',action=url('/signout'))
                 a.nav-item(href='#', onclick="$('#signout-form').submit();")=l.lbl.signout
+            case sign_user.role
+                when 'admin'
+                    a.nav-item(href=url('/admin'))=l.lbl.admin
         else
             if needs_sign
                 a#sign-link.nav-item(href=url('/sign'))=l.lbl.sign

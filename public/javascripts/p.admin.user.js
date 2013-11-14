@@ -1,5 +1,5 @@
 /**
- * public script for user
+ * public script for user manage page
  *
  *  -- namespaces --
  *  $ : jQuery
@@ -36,9 +36,11 @@
                 searchForm = section.findByRole('search-form');
             ul.appendableList(tmpl.li, addBtn, function (li) {
                 li.userListItem();
+                section.trigger('resize-book');
             });
             searchForm.userSearchForm(function (data) {
                 ul.userList(data);
+                section.trigger('resize-book');
             }).submit();
             return section;
         }

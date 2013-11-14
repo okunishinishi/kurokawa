@@ -1,1 +1,36 @@
 @import "lib/tek-mixin";
+@import "base-mixins";
+
+@back:#FEFEF7;
+@color:#531;
+body{
+  color:@color;
+}
+#book .book-page-left{
+  background-color:@back;
+  &:before{
+    .linear-gradient(90deg, @back, darken(@back,1));
+  }
+}
+
+#book .book-page-right{
+  background-color:@back;
+  &:before{
+   .linear-gradient(-90deg, @back, darken(@back, 3), darken(@back, 10));
+  }
+}
+
+.block-list li{
+  .item(@back){
+    background-color: @back;
+    border-color:@back;
+    color:@color;
+  }
+  border-color:darken(@back,4);
+  &:hover{
+    .item(lighten(@back, 2));
+  }
+  &:active{
+    .item(lighten(@back, 4));
+  }
+}

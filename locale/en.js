@@ -55,6 +55,10 @@ l.lbl.personal_basic = 'basic';
 l.lbl.personal_extra = 'extra';
 l.lbl.free_word = 'free word';
 l.lbl.admin = 'admin';
+l.lbl.admin_page_title = 'admin menu';
+l.lbl.master = 'master';
+l.lbl.user = 'user';
+l.lbl.team = 'team'.replace(/_/g, ' ');
 
 l.msg = {};
 l.msg.sure = 'Are you ABSOLUTELY sure?';

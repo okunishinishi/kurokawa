@@ -62,3 +62,12 @@ get('/api/person/:_id', person.api.one);
 
 var admin = r['admin'];
 get('/admin', admin.index);
+get('/admin/master', admin.master);
+get('/admin/user', admin.user);
+
+
+var team = r['team'];
+post('/api/team/save', team.api.save);
+post('/api/team/destroy', team.api.destroy);
+get('/api/team.json', team.api.list);
+get('/api/team/:_id', team.api.one);

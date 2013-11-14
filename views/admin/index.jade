@@ -7,7 +7,11 @@ block javascripts
     script(src=url.js('p.admin.js'))
 
 block left-content
+    h1.page-title=l.lbl.admin_page_title
 
-
-block rign-content
-
+block right-content
+    ul
+        li
+            a(href=url('admin/user'))=l.lbl.user
+        li
+            a(href=url('admin/master'))=l.lbl.master

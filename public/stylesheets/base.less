@@ -166,12 +166,8 @@ body {
   border: none;
 }
 
-.linear-gradient(@dir, @from, @to){
-  .linear-gradient(~`"@{dir},@{from},@{to}"`);
-}
-.linear-gradient(@dir, @from, @from2, @to){
-  .linear-gradient(~`"@{dir},@{from},@{from2}, @{to}"`);
-}
+@import "base-mixins";
+
 .book(@coverBack:@gray) {
   .box-shadow(2px 2px 5px; .75);
   background-color: @coverBack;
