@@ -1,7 +1,6 @@
 section.list-section#company-list-section
     form#company-list-form.positioned.block-list-header(
     data-role='search-form',action=url('/api/company.json'),method='get')
-        label.float-left.block-list-title=l.lbl.company
         input(type='search', name='search_word', results).float-right
         input(type='hidden', name='skip', value='0')
         input(type='hidden', name='limit', value='500')

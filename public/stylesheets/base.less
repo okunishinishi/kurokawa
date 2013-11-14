@@ -9,7 +9,7 @@
   background-image:url('../images/purty_wood/purty_wood.png');
 }
 .book-cover-back(){
-  background-image: url('../images/dark_leather/dark_leather.png');
+  background-image: url('../images/dark_leather/dark_leather_@2X.png');
 }
 
 body {
@@ -355,6 +355,19 @@ th{
 .block-list li{
   .no-style();
   border-width:1px 0;
+  &:hover{
+    @back:rgba(199, 199, 199, 0.2);
+    background-color: @back;
+    border-color:@back;
+  }
+  &:active{
+    @back:#BEBEBE;
+    background-color: @back;
+    border-color:@back;
+    .block-list-item-control{
+      display: none;
+    }
+  }
 }
 .add-btn{
   opacity: 1;
@@ -373,4 +386,22 @@ th{
 #cross-page{
   padding: 80px 40px;
   .box-sizing(border-box);
+}
+
+.editable-form{
+  &[data-mode="edit"]{
+
+  }
+  &[data-mode="view"]{
+    input[type="checkbox"],
+    input[type="radio"]{
+      display: none;
+    }
+    .checkable-label{
+      display: none !important;
+      &.checked{
+        display: inline-block !important;
+      }
+    }
+  }
 }

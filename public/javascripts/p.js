@@ -181,6 +181,19 @@
             var editableText = form.findByRole('editable-text')
                 .editableText('dblclick')
                 .off('change');
+
+            form.find('.checkable-label').each(function () {
+                var label = $(this),
+                    checkable = label.find(':checkbox,:radio');
+                checkable.change(function () {
+                    var checked = checkable.is(':checked');
+                    label.addClass('checked')
+                        .siblings('.checked')
+                        .removeClass('checked');
+                });
+                var checked = checkable.is(':checked');
+                if(checked) label.addClass('checked');
+            });
             var $checkable = $('.checkable-label', form);
             switch (mode) {
                 case 'view':
@@ -207,7 +220,7 @@
             form.attr('data-mode', mode);
         },
         detailForm: function (mode, saveBtn, editBtn) {
-            var form = $(this);
+            var form = $(this).addClass('editable-form');
 
             form.ajaxForm(function () {
                 editBtn.show();
@@ -233,7 +246,7 @@
                 });
             form.editableForm(mode || 'view');
 
-            switch(mode){
+            switch (mode) {
                 case 'edit':
                     editBtn.hide();
                     break;

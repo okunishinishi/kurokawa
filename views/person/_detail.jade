@@ -18,7 +18,7 @@ mixin radio-tr(key, data, choices)
             label=l.lbl[key]
         td
             each choice in choices
-                label
+                label.checkable-label
                     input(name=key, type='radio',value=choice.value, checked=data[key]==choice.value)
                     span=l.lbl[choice.label]
 
@@ -46,6 +46,10 @@ mixin person_extra_table(person)
         tbody
             +text-tr('live_at', person)
             +text-tr('favorite_food', person)
+            +radio-tr('single', person,[
+                {label:l.lbl.true,value:'true'},
+                {label:l.lbl.false,value:'false'}
+            ])
             +radio-tr('drinks', person,[
                 {label:l.lbl.true,value:'true'},
                 {label:l.lbl.false,value:'false'}
