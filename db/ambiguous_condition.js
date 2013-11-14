@@ -6,6 +6,8 @@
 
 var tek = require('tek'),
     string = tek['string'],
+    toHiragana = string['toHiragana'],
+    toKatakana = string['toKatakana'],
     toHankaku = string['toHankaku'] ,
     toZenkaku = string['toZenkaku'];
 
@@ -25,7 +27,9 @@ module.exports = function (query) {
             toHankaku(str).toUpperCase(),
             toZenkaku(str),
             toZenkaku(str).toLowerCase(),
-            toZenkaku(str).toUpperCase()
+            toZenkaku(str).toUpperCase(),
+            toKatakana(str),
+            toHiragana(str)
         ].join("|");
         s[key] = {
             $regex: new RegExp(str)

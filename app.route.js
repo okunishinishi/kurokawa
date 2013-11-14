@@ -49,7 +49,7 @@ get('/api/company.json', company.api.list);
 get('/api/company/:_id', company.api.one);
 
 var chart = r['chart'];
-get('/chart/sheet/:company_id', chart.sheet);
+get('/chart/:company_id', chart.index);
 
 var person = r['person'];
 get('/person/:_id', person.index);

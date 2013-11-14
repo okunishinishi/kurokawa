@@ -14,14 +14,14 @@ function notFound(res) {
  * @param req
  * @param res
  */
-exports.sheet = function (req, res) {
+exports.index = function (req, res) {
     var p = req.params;
     exports.getData(p.company_id, function (persons, company) {
         if (!persons) {
             notFound(res);
             return;
         }
-        res.render('chart/sheet.jade', {
+        res.render('chart/index.jade', {
             persons: persons,
             company: company
         });
