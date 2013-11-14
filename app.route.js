@@ -59,3 +59,6 @@ post('/api/person/save', person.api.save);
 post('/api/person/destroy', person.api.destroy);
 get('/api/person.json', person.api.list);
 get('/api/person/:_id', person.api.one);
+
+var master = r['master'];
+get('/master', master.index);
