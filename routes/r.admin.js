@@ -9,6 +9,6 @@ var tek = require('tek'),
  * @param res
  */
 exports.index = function (req, res) {
-    res.render('master/index.jade', {});
+    res.render('admin/index.jade', {});
 };
 

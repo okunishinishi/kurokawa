@@ -54,7 +54,7 @@ l.lbl.favorite_vender = 'favorite vendor';
 l.lbl.personal_basic = 'basic';
 l.lbl.personal_extra = 'extra';
 l.lbl.free_word = 'free word';
-l.lbl.master = 'master'.replace(/_/g,' ');
+l.lbl.admin = 'admin';
 
 l.msg = {};
 l.msg.sure = 'Are you ABSOLUTELY sure?';
