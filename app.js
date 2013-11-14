@@ -29,6 +29,13 @@ app.configure('development', function () {
     hbs.precompileAll(config.hbsDir, config.hbsTemplateFile, function () {
         console.log('precompile templates file:', config.hbsTemplateFile);
     });
+
+    var publish = require('./util/u.publish');
+    Object.keys(locale).forEach(function (lang) {
+        if(lang =='default') return;
+        var filename = 'locale/' + ['l', lang, 'js'].join('.');
+        publish(filename, 'l', locale[lang]);
+    });
 });
 
 app.locals({
