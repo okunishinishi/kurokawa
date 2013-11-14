@@ -19,13 +19,14 @@ block left-content
         thead
             tr
                 th
-                each key in sheet_keys
-                    th=l.lbl[key]
+                each key,i in sheet_keys
+                    th.sortable-th(data-col=i)
+                        label=l.lbl[key]
 
         tbody
             each person in persons
                 tr
                     th
                         a(href=url("/person/#{person._id}"))=person.name
-                    for key in sheet_keys
-                        td=person[key]
+                    for key,i in sheet_keys
+                        td(class='col-'+i)=person[key]

@@ -1,8 +1,53 @@
 @import "lib/tek-mixin";
 
-#cross-page{
-  padding-top:100px;
+#cross-page {
+  padding-top: 100px;
 }
-.page-title{
-  padding-top:10px;
+
+.page-title {
+  padding-top: 10px;
+}
+
+.sortable-th {
+  @color:@gray;
+  label{
+    position: relative;
+  }
+  label:before {
+    content: "";
+    @w: 5px;
+    border-style: solid;
+    .square(0);
+    border-width: @w;
+    display: none;
+    border-color: transparent;
+    margin: 0 3px;
+    position: absolute;
+    left:-5px;
+    top:7px;
+  }
+  @l:12px;
+  &[data-asc="false"] {
+    label{padding-left:@l;}
+    label:before {
+
+      display: inline-block;
+      border-top-width:0;
+      border-bottom-color: @color;
+    }
+  }
+  &[data-asc="true"] {
+    label{padding-left:@l;}
+    label:before {
+      display: inline-block;
+      border-top-color: @color;
+      border-bottom-width:0;
+    }
+  }
+}
+#left-page{
+  z-index: 2;
+}
+#right-page{
+  z-index: 0;
 }
