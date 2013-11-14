@@ -12,6 +12,6 @@ mixin suv_nav(sign_user)
     nav#sub-nav
         a.nav-item(href='/', data-key='company')=l.lbl.sub_menu.company
         a.nav-item(href='/report', data-key='report')=l.lbl.sub_menu.report
-        case sign_user.role
+        case sign_user && sign_user.role
             when 'admin'
                 a.nav-item(href=url('/admin'), data-key='admin')=l.lbl.admin

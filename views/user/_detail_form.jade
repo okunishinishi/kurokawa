@@ -1,4 +1,4 @@
-mixin user_detail_form(user)
+mixin user_detail_form(user, teams)
     form#user-detail-form(action=url('/api/user/save'), method='post', autocomplete='off').positioned
         input(type='hidden', name='_id', value=user._id)
         input(type='hidden', name='_vr', value=user._vr)
@@ -32,6 +32,15 @@ mixin user_detail_form(user)
                         label(for='email-input')=l.lbl.email
                     td
                         input(type='text', name='text', value=user.email, id='email-input', data-role='editable-text')
+
+                tr
+                    th
+                        label(for=team-input)=l.lbl.team
+                    td
+                        select(name='team_id', id='team-input')
+                            each team in teams
+                                option(value=team._id, selected=team._id==user.team_id)=team.name
+
 
 
         br

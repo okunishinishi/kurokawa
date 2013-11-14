@@ -4,7 +4,8 @@ var tek = require('tek'),
     sign = require('./r.sign'),
     getSignUser = sign.getSignUser,
     setSignUser = sign.setSignUser,
-    User = db.models['User'];
+    User = db.models['User'],
+    Team = db.models['Team'];
 
 /**
  * find single model
@@ -49,7 +50,10 @@ exports.mypage = function (req, res) {
     var user = getSignUser(req);
     User.findOneByCondition({username: user.username}, function (sign_user) {
         setSignUser(req, sign_user);
-        res.render('user/mypage.jade', {
+        Team.findAll(function (teams) {
+            res.render('user/mypage.jade', {
+                teams:teams
+            });
         });
     });
 };
