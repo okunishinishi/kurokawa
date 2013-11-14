@@ -1,10 +1,14 @@
 extends ../layout
+include ../mixins/_back_link
 
 block stylesheets
     link(rel='stylesheet', href=url.css('chart.css'))
 
 block javascripts
     script(src=url.js('p.chart.js'))
+
+block upper-content
+    +back_link(l.btn.company_list, url('/'))
 
 block left-content
     - var key,sheet_keys='department,post,mission,birthday,birthplace,graduated_from,years_of_service,join_year,hobbyhobby'.split(',')

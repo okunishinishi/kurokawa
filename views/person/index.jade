@@ -1,5 +1,6 @@
 extends ../layout
 include ./_detail
+include ../mixins/_back_link
 
 block stylesheets
     link(rel='stylesheet', href=url.css('person.css'))
@@ -7,9 +8,12 @@ block stylesheets
 block javascripts
     script(src=url.js('p.person.js'))
 
-block left-content
+block upper-content
     if person.company_name
-        span=person.company_name
+        +back_link(person.company_name, url("/chart/sheet/"+person.company_id))
+
+
+block left-content
     h1.page-title=person.name
 
 

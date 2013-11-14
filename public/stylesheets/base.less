@@ -14,7 +14,7 @@
 
 body {
   margin: 0 auto;
-  padding: 20px 20px;
+  padding: 30px 15px;
   .icon-holder("../../images");
   .wood-back();
 }
@@ -274,17 +274,27 @@ footer{
 header{
   @c:#66300C;
   background-color: transparent;
+  .box-shadow(none);
   color:@c;
   .logo{
-    font-weight: bolder;
-    .text-shadow(0 -1px 1px rgba(255,255,255,.5));
+    font-weight: thin;
     font-size: 1.5em;
-    color:rgb(29, 29, 29);
+    padding: 0 6px;
+    display: inline-block;
+    .text-shadow(0 -1px 1px rgba(255,255,255,0.2));
+    opacity: 1;
   }
   .nav-item{
     @c:#8A5800;
     .a(@c);
   }
+}
+#sub-nav{
+    @back:#4d1c00;
+    background-color: @back;
+    .box-shadow(1px 1px 2px, .4);
+    color:@white;
+
 }
 .page-title{
   font-size: 3em;
@@ -400,4 +410,18 @@ th{
       }
     }
   }
+}
+.breadcrumbs{
+  display: block;
+  padding: 4px 0;
+  .breadcrumb-sperator{
+    display: inline-block;
+    margin: 0 4px;
+  }
+}
+
+.back-link{
+  display: inline-block;
+  margin: 2px 4px;
+  font-style: italic;
 }

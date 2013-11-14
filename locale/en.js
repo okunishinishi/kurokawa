@@ -59,6 +59,8 @@ l.lbl.admin_page_title = 'admin menu';
 l.lbl.master = 'master';
 l.lbl.user = 'user';
 l.lbl.team = 'team'.replace(/_/g, ' ');
+l.lbl.breadcrumb_sperator = '>';
+l.lbl.back_link_prefix = '<<';
 
 l.msg = {};
 l.msg.sure = 'Are you ABSOLUTELY sure?';
@@ -102,5 +104,6 @@ l.btn.remove_it = 'remove ';
 l.btn.signin = l.lbl.signin;
 l.btn.signout = l.lbl.signout;
 l.btn.signup = l.lbl.signup;
+l.btn.company_list = 'company list';
 
 
