@@ -292,7 +292,7 @@ header{
 #main-nav{
   float: right;
 }
-#sub-nav{
+.sub-nav{
   float: none;
   .box-shadow(1px 1px 2px, .4);
   position: absolute;
@@ -302,7 +302,7 @@ header{
   .nav-item(@i){
     @back:spin(#4d1c00, 360 / 4 * (@i+1));
     background-color: darken(@back,4);
-    border:1px solid darken(@back,6);
+    border:1px solid darken(@back,5);
     @color:@white;
     color:fadeout(@color, 50);
     padding: 6px 10px 20px;
@@ -328,6 +328,11 @@ header{
     &:nth-child(4n+2){.nav-item(2);}
     &:nth-child(4n+3){.nav-item(3);}
   }
+}
+.front-sub-nav-item{
+  position: absolute;
+  top:-16px;
+  right:24px;
 }
 .page-title{
   font-size: 3em;

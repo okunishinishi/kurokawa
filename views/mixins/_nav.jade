@@ -8,8 +8,8 @@ mixin main_nav(sign_user)
             if needs_sign
                 a#sign-link.nav-item(href=url('/sign'))=l.lbl.sign
 
-mixin suv_nav(sign_user)
-    nav#sub-nav
+mixin suv_nav(sign_user, id)
+    nav.sub-nav(id=id)
         a.nav-item(href='/', data-key='company')=l.lbl.sub_menu.company
         a.nav-item(href='/report', data-key='report')=l.lbl.sub_menu.report
         case sign_user && sign_user.role
