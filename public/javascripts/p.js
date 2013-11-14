@@ -50,7 +50,8 @@
          */
         editableListItem: function (trigger) {
             return this.each(function () {
-                var li = $(this);
+                var li = $(this),
+                    detailLink = li.find('.detail-link');
                 var editableTxt = li.findByRole('editable-text')
                     .editableText(trigger)
                     .change(function () {
@@ -64,6 +65,7 @@
                         if (data.valid) {
                             form.setFormValue(data.model);
                             form.trigger('edit-done');
+                            detailLink.show();
                         } else {
                             var errors = data['errors'];
                             if (errors && errors.length) {
@@ -72,6 +74,7 @@
                         }
                     });
                 li.findByRole('edit-btn').off('click').click(function (e) {
+                    detailLink.hide();
                     var onEdit = editableTxt.filter(':visible');
                     if (onEdit.length) {
                         //noinspection JSCheckFunctionSignatures
@@ -192,7 +195,7 @@
                         .removeClass('checked');
                 });
                 var checked = checkable.is(':checked');
-                if(checked) label.addClass('checked');
+                if (checked) label.addClass('checked');
             });
             var $checkable = $('.checkable-label', form);
             switch (mode) {
@@ -291,7 +294,7 @@
             }
             return book;
         },
-        subNav:function(key){
+        subNav: function (key) {
             var nav = $(this);
             nav.findByAttr('data-key', key).addClass('active');
             return nav;
