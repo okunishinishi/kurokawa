@@ -9,8 +9,8 @@
 }
 
 .sortable-th {
-  @color:@gray;
-  label{
+  @color: @gray;
+  label {
     position: relative;
     cursor: pointer;
   }
@@ -24,39 +24,50 @@
     border-color: transparent;
     margin: 0 3px;
     position: absolute;
-    left:-5px;
-    top:7px;
+    left: -5px;
+    top: 7px;
   }
-  @l:12px;
+  @l: 12px;
   &[data-asc="false"] {
-    label{padding-left:@l;}
+    label {
+      padding-left: @l;
+    }
     label:before {
 
       display: inline-block;
-      border-top-width:0;
+      border-top-width: 0;
       border-bottom-color: @color;
     }
   }
   &[data-asc="true"] {
-    label{padding-left:@l;}
+    label {
+      padding-left: @l;
+    }
     label:before {
       display: inline-block;
       border-top-color: @color;
-      border-bottom-width:0;
+      border-bottom-width: 0;
     }
   }
 }
-#left-page{
+
+#left-page {
 }
-#book .book-page-right{
+
+#book .book-page-right {
   z-index: 0;
-  &:after{
+  &:after {
     display: none;
   }
 }
 
-.filter-table-row-hidden{
+.filter-table-row-hidden {
   display: none;
 }
-.serach-input-active{
+
+.search-form-active {
+  .border-radius(8px);
+  @highlight: #F3F3F3;
+  background-color: @highlight;
+  .box-shadow(0 0 25px @highlight);
 }

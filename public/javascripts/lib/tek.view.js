@@ -1,9 +1,9 @@
 /**
  * tek.view.js
  * - javascript library for tek -
- * @version v0.2.21
+ * @version v0.2.27
  * @author Taka Okunishi
- * @date 2013-11-10
+ * @date 2013-11-15
  *
  */
 (function (dependencies, window, undefined) {
@@ -81,6 +81,17 @@
 		  else { stack1 = depth0.close_label; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
 		  buffer += escapeExpression(stack1)
 		    + "</a>\n    </div>\n</div>";
+		  return buffer;
+		  });
+		templates['tk-hit-word'] = template(function (Handlebars,depth0,helpers,partials,data) {
+		  this.compilerInfo = [4,'>= 1.0.0'];
+		helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+		  var buffer = "", functionType="function", escapeExpression=this.escapeExpression;
+		
+		
+		  buffer += "<span class=\"tk-hit-word\">"
+		    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+		    + "</span>";
 		  return buffer;
 		  });
 		templates['tk-no-support-dialog'] = template(function (Handlebars,depth0,helpers,partials,data) {
@@ -166,6 +177,10 @@
 		    hbs = global['hbs'],
 		    $ = global['$'];
 		
+		/**
+		 * form value object
+		 * @type {tek.define|*}
+		 */
 		$.FormValue = tek.define({
 		    init: function (values) {
 		        var s = this;
@@ -329,7 +344,10 @@
 		    hst.pushState(null, null, new_url);
 		};
 		
-		
+		/**
+		 * show sorry page for not supported
+		 * @param data
+		 */
 		$.sorryNoSupport = function (data) {
 		    var body = document.body;
 		    $('#tk-no-support-dialog', body).remove();
@@ -345,6 +363,10 @@
 		    $(html).appendTo(body);
 		};
 		
+		/**
+		 * confirm before page unload
+		 * @param msg
+		 */
 		$.confirmLeave = function (msg) {
 		    if (!$.confirmLeave.initialized) {
 		        $.confirmLeave.initialized = true;
@@ -354,11 +376,43 @@
 		    }
 		    $.confirmLeave.msg = msg;
 		};
+		
+		
+		/**
+		 * scroll page to top
+		 * @param duration
+		 */
+		$.scrollToTop = function (duration) {
+		    $('html,body').animate({
+		        scrollTop: 0
+		    }, duration || 300);
+		};
+		
+		$.wordSearch={};
+		$.wordSearch.restore = function (word) {
+		    if (!word) return;
+		    for (var i = 0, len = word.length; i < len; i++) {
+		        var parent = word[i].parentNode;
+		        var text = document.createTextNode();
+		        text.nodeValue = parent.dataset.origin;
+		        parent.parentNode.replaceChild(text, parent);
+		    }
+		};
+		$.wordSearch.hitElement = function(match){
+		    var tmpl = hbs.templates['tk-hit-word'];
+		    var origin = match.input,
+		        span = document.createElement('span'),
+		        hit = match[0];
+		    span.innerHTML = origin.replace(hit, tmpl(hit));
+		    span.dataset.origin = origin;
+		    return span;
+		};
 	})(dependencies, undefined);
 	/** tek.view for $.fn **/
 	(function (global, undefined) {
 	
-		var $ = global['$'],
+		var tek = global['tek'],
+		    $ = global['$'],
 		    hbs = global['hbs'];
 		
 		/**
@@ -645,7 +699,7 @@
 		                setTimeout(function () {
 		                    var focused = $('.tk-editable-text').filter(':focus').size();
 		                    if (!focused) {
-                                input.focus();
+		                        input.last().focus().select();
 		                    }
 		                }, 20);
 		                label.hide();
@@ -912,12 +966,97 @@
 		        }),
 		        balloon = elm.append(balloonHTML).find('.tk-err-balloon');
 		    balloon.click(function () {
-		        balloon.fadeOut(200, function(){
+		        balloon.fadeOut(200, function () {
 		            balloon.remove();
 		        });
 		    });
 		    return elm;
 		};
+		
+		/**
+		 * input with auto format feature
+		 * @param format
+		 * @returns {*}
+		 *
+		 * available formats
+		 *   hankaku,zenkaku,hiragana,katakana
+		 */
+		$.fn.autoformatInput = function (format) {
+		    var string = tek.string;
+		    var input = $(this);
+		    input.data('autoformat', format);
+		    return input.each(function () {
+		        var input = $(this);
+		        if (input.data('autoformat-input')) return;
+		        input.data('autoformat-input', true);
+		        input.change(function () {
+		            var input = $(this),
+		                format = input.data('autoformat'),
+		                val = input.val();
+		            if (typeof(format) === 'string') {
+		                format = format.split(',');
+		            }
+		            for (var i = 0, len = format.length; i < len; i++) {
+		                switch (format[i]) {
+		                    case 'hankaku':
+		                        val = string.toHankaku(val);
+		                        break;
+		                    case 'zenkaku':
+		                        val = string.toZenkaku(val);
+		                        break;
+		                    case 'hiragana':
+		                        val = string.toHiragana(val);
+		                        break;
+		                    case 'katakana':
+		                        val = string.toKatakana(val);
+		                        break;
+		                    default:
+		                        console.warn('[tek.view.js]', format[i], 'is not supported for autoformat');
+		                        break;
+		                }
+		            }
+		            input.val(val);
+		        });
+		    });
+		};
+		
+		/**
+		 * search by word
+		 * @param word
+		 */
+		$.fn.wordSearch = function (word) {
+		    var ambiguousMatch = tek.string.ambiguousMatch;
+		    var elm = $(this);
+		    if (!elm.length) return false;
+		    if (elm.is('.tk-hit-word')) return false;
+		
+		    $.wordSearch.restore(elm.find('.tk-hit-word'));
+		
+		    var hit = false,
+		        contents = elm.contents(),
+		        inner = $();
+		
+		
+		    for (var i = 0, len = contents.length; i < len; i++) {
+		        var content = contents[i];
+		        switch (content.nodeType) {
+		            case 3:
+		                var match = ambiguousMatch(word, content.nodeValue);
+		                if (match) {
+		                    var span = $.wordSearch.hitElement(match);
+		                    content.parentNode.replaceChild(span, content);
+		                    hit = true;
+		                }
+		                break;
+		            default:
+		                inner = inner.add(content);
+		                break;
+		
+		        }
+		    }
+		    return inner.wordSearch(word) || hit;
+		};
+		
 	})(dependencies, undefined);
 
 })({

@@ -63,68 +63,19 @@
                 e.preventDefault();
                 var val = searchWordInput.val();
                 if (val) {
-                    searchWordInput.addClass('search-input-active');
+                    form.addClass('search-form-active');
                 } else {
-                    searchWordInput.removeClass('search-input-active');
+                    form.removeClass('search-form-active');
                 }
                 callback && callback(val);
             });
             return form;
         },
-        restoreHitWord: function () {
-            var word = this;
-            for (var i = 0, len = word.length; i < len; i++) {
-                var parent = word[i].parentNode;
-                var text = document.createTextNode();
-                text.nodeValue = parent.dataset.origin;
-                parent.parentNode.replaceChild(text, parent);
-            }
-        },
-        filterHit: function (filterword) {
-            var ambiguousMatch = tek.string.ambiguousMatch;
-            var elm = $(this);
-            if (!elm.length) return false;
-            if (elm.is('.hit-word')) return false;
-
-            elm.find('.hit-word').restoreHitWord();
-
-            var hit = false,
-                contents = elm.contents(),
-                inner = $();
-
-            function hitElement(match) {
-                var origin = match.input,
-                    span = document.createElement('span'),
-                    hit = match[0];
-                span.innerHTML = origin.replace(hit, tmpl.hitWord(hit));
-                span.dataset.origin=origin;
-                return span;
-            }
-
-            for (var i = 0, len = contents.length; i < len; i++) {
-                var content = contents[i];
-                switch (content.nodeType) {
-                    case 3:
-                        var match = ambiguousMatch(filterword, content.nodeValue);
-                        if (match) {
-                            var span = hitElement(match);
-                            content.parentNode.replaceChild(span, content);
-                            hit = true;
-                        }
-                        break;
-                    default:
-                        inner = inner.add(content);
-                        break;
-
-                }
-            }
-            return inner.filterHit(filterword) || hit;
-        },
         filterTableRow: function (filterword) {
             var trs = $(this);
             for (var i = 0, len = trs.size(); i < len; i++) {
                 var tr = trs.eq(i);
-                var hit = tr.filterHit(filterword);
+                var hit = tr.wordSearch(filterword);
                 if (hit) {
                     tr.removeClass('filter-table-row-hidden');
                 } else {
