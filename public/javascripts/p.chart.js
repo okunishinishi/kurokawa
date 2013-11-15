@@ -71,11 +71,23 @@
             });
             return form;
         },
+        restoreHitWord: function () {
+            var word = this;
+            for (var i = 0, len = word.length; i < len; i++) {
+                var parent = word[i].parentNode;
+                var text = document.createTextNode();
+                text.nodeValue = parent.dataset.origin;
+                parent.parentNode.replaceChild(text, parent);
+            }
+        },
         filterHit: function (filterword) {
             var ambiguousMatch = tek.string.ambiguousMatch;
             var elm = $(this);
             if (!elm.length) return false;
-            if(elm.is('.hit-word')) return false;
+            if (elm.is('.hit-word')) return false;
+
+            elm.find('.hit-word').restoreHitWord();
+
             var hit = false,
                 contents = elm.contents(),
                 inner = $();
@@ -85,7 +97,7 @@
                     span = document.createElement('span'),
                     hit = match[0];
                 span.innerHTML = origin.replace(hit, tmpl.hitWord(hit));
-                span.dataset.origin = origin;
+                span.dataset.origin=origin;
                 return span;
             }
 
@@ -101,7 +113,7 @@
                         }
                         break;
                     default:
-                        inner = inner.add($(content));
+                        inner = inner.add(content);
                         break;
 
                 }
@@ -121,13 +133,14 @@
             }
             return trs;
         },
-        filterTable: function (fileterword) {
+        filterTable: function (filterword) {
             var table = $(this),
                 tbody = table.find('tbody');
-            if (fileterword) {
-                tbody.find('tr').filterTableRow(fileterword);
+            if (filterword) {
+                tbody.find('tr').filterTableRow(filterword);
             } else {
                 tbody.find('.filter-table-row-hidden').removeClass('filter-table-row-hidden');
+                tbody.find('.hit-word').restoreHitWord();
             }
             return table;
         },
