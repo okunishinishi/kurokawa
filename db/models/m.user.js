@@ -13,7 +13,14 @@ var User = module.exports = defineModel({
 
 
 User.schema = new Schema({
-    //schemas
+    username: {
+        required: true,
+        minLength: 2
+    },
+    password_digest: {
+        required: true,
+        minLength: 2
+    }
 });
 
 User.prototype.validate = function () {

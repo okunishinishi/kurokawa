@@ -11,27 +11,33 @@ exports.format = 'username,email,first_name,last_name,password,role'.split(',');
 exports.parseUsers = function (data, callback) {
     var line = data.pop();
     if (line) {
-        exports.parseUsers(data, function (errors, result) {
+        exports.parseUsers(data, function (result) {
             exports.parseUsers.lineToUser(line, function (err, user) {
-                errors = err && (errors || []).concat(err);
-                result.push(user);
-                callback(errors, result);
+                result.push({
+                    err:err,
+                    user:user
+                });
+                callback(result);
             });
         });
     } else {
-        callback(null, []);
+        callback([]);
     }
 };
+
+
 exports.parseUsers.lineToUser = function (line, callback) {
     var data = {};
     exports.format.forEach(function (key, i) {
         var value = line[i];
-        if (value === undefined) return;
-        data[key] = value;
+        if (value || (value === 0))data[key] = value;
     });
     User.newUser(data, function (user) {
         user.password_expired = true;
-        callback(null, user);
+
+        var validated = user.validate(),
+            err = validated.valid ? null : validated.errors;
+        callback(err, user);
     });
 };
 

@@ -7,6 +7,12 @@ var data0 = [
     'ttt,t@example.com,Tek,Roman,p555,'.split(',')
 ];
 
+//invalid data
+var data1 = [
+    'j0123,j@example.com,John,Crazy,p123,'.split(','),
+    ',,John,Crazy,p123,'.split(',')
+];
+
 exports.lineToUserTest = function (test) {
     route.parseUsers.lineToUser(data0[0], function (err, user) {
         should.not.exist(err);
@@ -21,11 +27,22 @@ exports.lineToUserTest = function (test) {
         test.done();
     });
 };
+exports.lineToUserTest2 = function (test) {
+    route.parseUsers.lineToUser(data1[1], function (err, user) {
+        should.exist(err);
+        test.done();
+    });
+};
 
 exports.parseUsersTest = function (test) {
-    route.parseUsers(data0, function (err, data) {
-        should.not.exist(err);
-        data.should.be.lengthOf(2);
+    route.parseUsers(data0, function (result) {
+        result.should.be.lengthOf(2);
+        test.done();
+    });
+};
+exports.parseUsersTest2 = function (test) {
+    route.parseUsers(data1, function (result) {
+        console.log(result[1].err);
         test.done();
     });
 };
