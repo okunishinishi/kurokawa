@@ -70,6 +70,12 @@ l.lbl.sub_menu = {
     report: l.lbl.reports
 };
 
+l.lbl.admin_menu = {
+    master_manage: [l.lbl.master, 'manage'].join(' '),
+    user_import: [l.lbl.user, 'import'].join(' '),
+    user_manage: [l.lbl.user, 'manage'].join(' ')
+};
+
 l.msg = {};
 l.msg.sure = 'Are you ABSOLUTELY sure?';
 l.msg.never_go_back = 'Once this done, there will be no way to go back.';
@@ -84,6 +90,7 @@ l.plh.search = l.lbl.search;
 l.plh.captcha_text = 'type above number';
 l.plh.first_name = l.lbl.first_name;
 l.plh.last_name = l.lbl.last_name;
+l.plh.csv_textarea = 'paste your csv here';
 
 
 l.alt = {}; //alert
@@ -113,6 +120,10 @@ l.btn.signin = l.lbl.signin;
 l.btn.signout = l.lbl.signout;
 l.btn.signup = l.lbl.signup;
 l.btn.company_list = 'company list';
+
+l.btn.back_link = {
+    admin_page: [l.lbl.admin, 'menu'].join(' ')
+};
 
 
 

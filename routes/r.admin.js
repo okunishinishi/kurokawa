@@ -29,3 +29,12 @@ exports.master = function (req, res) {
 exports.user = function (req, res) {
     res.render('admin/user.jade', {});
 };
+
+/**
+ * show user import page
+ * @param req
+ * @param res
+ */
+exports.user.import = function (req, res) {
+    res.render('admin/user_import.jade', {});
+};

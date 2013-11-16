@@ -1,5 +1,4 @@
 extends ../layout
-include ../mixins/_back_link
 
 block stylesheets
     link(rel='stylesheet', href=url.css('admin.css'))
@@ -8,10 +7,10 @@ block javascripts
     script(src=url.js('p.admin.user.js'))
 
 block upper-content
-    +back_link(l.lbl.admin, url('/admin'))
+    include back_to_admin
 
 block left-content
-    h1.page-title=l.lbl.user
+    h1.page-title=l.lbl.admin_menu.user_manage
     include ../user/_list
 
 block right-content

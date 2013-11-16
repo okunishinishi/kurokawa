@@ -1,0 +1,24 @@
+extends ../layout
+include ../csv/_import_forms
+
+block stylesheets
+    link(rel='stylesheet', href=url.css('admin.css'))
+
+block javascripts
+    script(src=url.js('p.admin.user.import.js'))
+
+block upper-content
+    include back_to_admin
+
+block left-content
+    h1.page-title=l.lbl.admin_menu.user_import
+
+
+block right-content
+    br
+
+    .tab-content
+        +import_form_by_text(url('/api/user/import/text')))
+
+    .tab-content
+        +import_form_by_file(url('/api/user/import/file')))

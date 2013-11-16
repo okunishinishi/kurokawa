@@ -1,51 +1,38 @@
-/**
- * User: okunishitaka
- * Date: 9/20/13
- * Time: 6:41 AM
- */
-
-
 var tek = require('tek'),
-    config = require('../app.config'),
-    publicDir = config['publicDir'],
-    uploadDir = config['uploadDir'],
+    file = tek.file,
+    uuid = tek.uuid,
+    copy = file.copy,
+    mkdirP = file.mkdirP,
+    JobQueue = tek['JobQueue'],
     path = require('path'),
-    resolve = path['resolve'];
+    resolve = path.resolve,
+    fs = require('fs'),
+    extname = path.extname,
+    config = require('../app.config');
 
 
-function ensureArray(obj) {
-    if (!obj) return [];
-    if (obj instanceof Array) {
-        return obj;
-    } else {
-        return [obj];
-    }
+
+
+function handleErr(err) {
+    console.error(err);
 }
 
-
-function rename(filename) {
-    var extname = path['extname'],
-        uuid = tek['util']['uuid'];
-
-    return uuid() + extname(filename);
-}
-
-function save(files, saveDir, callback) {
-    var fileUtil = tek['file'],
-        copy = fileUtil['copy'],
-        mkdirP = fileUtil['mkdirP'];
-
-    if (files.length) {
-        var file = files.shift(),
-            savePath = resolve(saveDir, rename(file.name));
-        mkdirP(savePath, function () {
-            copy(file.path, savePath, function () {
-                save(files, saveDir, function (saved) {
-                    saved.push({
-                        name: file.name,
-                        url: savePath.replace(publicDir, '')
-                    });
-                    callback(saved);
+/**
+ * save multiple files with unique name
+ * @param save_dirpath
+ * @param files
+ * @param callback
+ */
+function saveFiles(save_dirpath, files, callback) {
+    var file = files.shift();
+    if (file) {
+        mkdirP(save_dirpath, function () {
+            var save_path = resolve(save_dirpath, uuid().replace(/\-/g, '') + extname(file.name));
+            copy(file.path, save_path, function (err) {
+                err && handleErr(err);
+                saveFiles(save_dirpath, files, function (result) {
+                    result.unshift(save_path);
+                    callback(result);
                 });
             });
         });
@@ -54,29 +41,25 @@ function save(files, saveDir, callback) {
     }
 }
 
-
-exports.index = function (req, res) {
-    res.render('upload/index');
-};
-
-exports.save = function (req, res) {
-    var result = [];
-    var names = Object.keys(req.files);
-    var count = names.length;
-    if (!count) {
-        res.json(result);
-        return;
-    }
-    names.forEach(function (name) {
-        var saveDir = resolve(uploadDir, name);
-        var files = ensureArray(req.files[name]);
-        save(files, saveDir, function (saved) {
-            result = result.concat(saved);
-            count--;
-            var finish = count <= 0;
-            if (finish) {
-                res.send(JSON.stringify(result));
-            }
+/**
+ * save upload file in request
+ * @param req
+ * @param callback
+ */
+exports.saveUploaded = function (req, callback) {
+    var queue = new JobQueue;
+    var result = {};
+    Object.keys(req.files).forEach(function (name) {
+        var saveDir = resolve(config.uploadDir, name),
+            files = [].concat(req.files[name]);
+        queue.push(function (next) {
+            saveFiles(saveDir, files, function (saved) {
+                result[name] = saved;
+                next();
+            });
         });
+    });
+    queue.execute(function () {
+        callback(result);
     });
 };

@@ -36,10 +36,11 @@ exports.use = [
         secret: '1384337047839' + version.replace(/\./g, '')
     }),
     flash(),
+    express['bodyParser'](),
     express['favicon'](),
     express.logger('dev'),
     express.json(),
-    express.urlencoded(),
+    express['urlencoded'](),
     express['methodOverride'](),
     lessMiddleware({src: exports.publicDir}),
     express.static(exports.publicDir)

@@ -63,6 +63,11 @@ l = {
         "sub_menu": {
             "company": "client",
             "report": "reports"
+        },
+        "admin_menu": {
+            "master_manage": "master manage",
+            "user_import": "user import",
+            "user_manage": "user manage"
         }
     },
     "msg": {
@@ -77,7 +82,8 @@ l = {
         "search": "search",
         "captcha_text": "type above number",
         "first_name": "first name",
-        "last_name": "last name"
+        "last_name": "last name",
+        "csv_textarea": "paste your csv here"
     },
     "alt": {
         "sure": "Are you sure?"
@@ -103,6 +109,9 @@ l = {
         "signin": "sign in",
         "signout": "sign out",
         "signup": "sign up",
-        "company_list": "company list"
+        "company_list": "company list",
+        "back_link": {
+            "admin_page": "admin menu"
+        }
     }
 };

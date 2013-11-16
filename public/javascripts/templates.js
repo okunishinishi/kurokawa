@@ -61,21 +61,6 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 	);
 })();(function() {
 	var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
-	templates['hit-word'] = template(
-	function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", functionType="function", escapeExpression=this.escapeExpression;
-
-
-  buffer += "<span class=\"hit-word\">"
-    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
-    + "</span>";
-  return buffer;
-  }
-	);
-})();(function() {
-	var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
 	templates['input-err-msg'] = template(
 	function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];

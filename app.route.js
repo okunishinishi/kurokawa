@@ -41,6 +41,8 @@ post('/api/user/save', user.api.save);
 post('/api/user/destroy', user.api.destroy);
 get('/api/user.json', user.api.list);
 get('/api/user/:_id', user.api.one);
+post('/api/user/import/text', user.api.import.text);
+post('/api/user/import/file', user.api.import.file);
 
 var company = r['company'];
 post('/api/company/save', company.api.save);
@@ -62,6 +64,7 @@ var admin = r['admin'];
 get('/admin', admin.index);
 get('/admin/master', admin.master);
 get('/admin/user', admin.user);
+get('/admin/user/import', admin.user.import);
 
 
 var team = r['team'];

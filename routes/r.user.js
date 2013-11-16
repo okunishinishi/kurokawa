@@ -5,7 +5,8 @@ var tek = require('tek'),
     getSignUser = sign.getSignUser,
     setSignUser = sign.setSignUser,
     User = db.models['User'],
-    Team = db.models['Team'];
+    Team = db.models['Team'],
+    upload = require('./r.upload');
 
 /**
  * find single model
@@ -52,7 +53,7 @@ exports.mypage = function (req, res) {
         setSignUser(req, sign_user);
         Team.findAll(function (teams) {
             res.render('user/mypage.jade', {
-                teams:teams
+                teams: teams
             });
         });
     });
@@ -155,5 +156,28 @@ exports.api = {
                 res.json({count: 0});
             }
         });
+    },
+    /**
+     * import
+     */
+    import: {
+        text: function (req, res) {
+            res.json({
+
+            });
+        },
+        file: function (req, res) {
+            console.log('req.files', req.files);
+            upload.saveUploaded(req, function (saved) {
+
+                console.log('saved', saved);
+
+                res.send(
+                    JSON.stringify({
+                        success:true
+                    })
+                );
+            });
+        }
     }
 };
