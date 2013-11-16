@@ -1,4 +1,4 @@
-//<h1>tek.view.less-0.2.21</h1>
+//<h1>tek.view.less-0.2.34</h1>
 //stylesheet for tek.view
 @import "tek-mixin";
 
@@ -148,6 +148,85 @@
     }
   }
 }
-.tek-text-center{
+.tk-text-center{
   text-align: center;
+}
+
+.tk-hit-word {
+  background-color: lighten(@yellow, 20);
+  color:rgb(88, 53, 20);
+}
+
+.tk-sortable-th {
+  @color: @gray;
+  label {
+    position: relative;
+    cursor: pointer;
+  }
+  label:before {
+    content: "";
+    @w: 5px;
+    border-style: solid;
+    .square(0);
+    border-width: @w;
+    display: none;
+    border-color: transparent;
+    margin: 0 3px;
+    position: absolute;
+    left: -5px;
+    top: 7px;
+  }
+  @l: 12px;
+  &[data-tk-asc="false"] {
+    label {
+      padding-left: @l;
+    }
+    label:before {
+
+      display: inline-block;
+      border-top-width: 0;
+      border-bottom-color: @color;
+    }
+  }
+  &[data-tk-asc="true"] {
+    label {
+      padding-left: @l;
+    }
+    label:before {
+      display: inline-block;
+      border-top-color: @color;
+      border-bottom-width: 0;
+    }
+  }
+}
+
+.tk-upload-form{
+  @back:@white;
+  @highlight:darken(@yellow, 15);
+  .square(200px);
+  background-color:@back;
+  text-align: center;
+  color: lighten(@black, 20);
+  .box-shadow(2px 2px 4px, 0.4, inset);
+  font-size: 2em;
+  position: relative;
+  font-weight: bold;
+  padding: 20px 0 0;
+  &:hover {
+    font-style: italic;
+  }
+  &.loading {
+    opacity: 0.8;
+  }
+  &.tk-drop-ready{
+    color:@white;
+    background-color: @highlight;
+  }
+
+  [type="file"] {
+    opacity: 0;
+  }
+  .tk-cover{
+    .cover(2);
+  }
 }

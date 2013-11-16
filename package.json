@@ -21,7 +21,9 @@
         "revalidator": "*",
         "dateformat":"*",
         "tek": "*",
-        "sqlite3": "*",
-        "tek-web": "*"
+        "tek-html": "*",
+        "tek-web": "*",
+        "csv":"*",
+        "sqlite3": "*"
     }
 }

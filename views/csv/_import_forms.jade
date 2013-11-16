@@ -1,11 +1,9 @@
 mixin import_form_by_text(action, name)
-    form(action=action).csv-form
+    form(action=action, method='post').csv-form
         textarea.wide-textarea(
         placeholder=l.plh.csv_textarea
         name=name || 'csv_text')
         input.wide-btn.btn(type='submit')=l.btn.submit
 
 mixin import_form_by_file(action, name)
-    form(action=action, enctype="multipart/form-data", method='post').csv-form
-        input(type='file', name=name || 'csv_file', multiple="multiple")
-        input.wide-btn.btn(type='submit')=l.btn.submit
+    div(data-role='drop-upload-form-container', data-action=action, data-name=name)

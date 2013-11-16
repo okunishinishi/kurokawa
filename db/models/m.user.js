@@ -60,3 +60,14 @@ User.newSalt = function () {
 User.derive = function (password, salt, callback) {
     return util.auth.derive(password, salt, callback);
 };
+
+User.newUser = function (data, callback) {
+    var user = new User(data);
+    user.salt = User.newSalt();
+    User.derive(user.password, user.salt, function (password_digest) {
+        delete user.password;
+        delete user.captcha_text;
+        user.password_digest = password_digest;
+        callback(user);
+    });
+};

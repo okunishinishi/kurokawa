@@ -41,8 +41,6 @@ post('/api/user/save', user.api.save);
 post('/api/user/destroy', user.api.destroy);
 get('/api/user.json', user.api.list);
 get('/api/user/:_id', user.api.one);
-post('/api/user/import/text', user.api.import.text);
-post('/api/user/import/file', user.api.import.file);
 
 var company = r['company'];
 post('/api/company/save', company.api.save);
@@ -75,3 +73,7 @@ get('/api/team/:_id', team.api.one);
 
 var report = r['report'];
 get('/report', report.index);
+
+var csv  = r['csv'];
+post('/api/csv/user_import/text', csv.import_user.from_text);
+post('/api/csv/user_import/file', csv.import_user.from_file);

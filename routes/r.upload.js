@@ -11,8 +11,6 @@ var tek = require('tek'),
     config = require('../app.config');
 
 
-
-
 function handleErr(err) {
     console.error(err);
 }
@@ -40,6 +38,16 @@ function saveFiles(save_dirpath, files, callback) {
         callback([]);
     }
 }
+
+/**
+ * upload files
+ * @type {Function}
+ */
+exports = module.exports = function (req, res) {
+    exports.saveUploaded(req, function (result) {
+        res.json(result);
+    });
+};
 
 /**
  * save upload file in request

@@ -157,12 +157,7 @@ exports.api.signup = function (req, res) {
                 });
                 return;
             }
-            var user = new User(body);
-            user.salt = User.newSalt();
-            User.derive(user.password, user.salt, function (password_digest) {
-                delete user.password;
-                delete user.captcha_text;
-                user.password_digest = password_digest;
+            User.newUser(body, function(user){
                 user.save(function (user) {
                     setSignUser(req, user);
                     res.json({

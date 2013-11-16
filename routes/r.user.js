@@ -4,9 +4,9 @@ var tek = require('tek'),
     sign = require('./r.sign'),
     getSignUser = sign.getSignUser,
     setSignUser = sign.setSignUser,
+    csv = require('./r.csv'),
     User = db.models['User'],
-    Team = db.models['Team'],
-    upload = require('./r.upload');
+    Team = db.models['Team'];
 
 /**
  * find single model
@@ -156,28 +156,5 @@ exports.api = {
                 res.json({count: 0});
             }
         });
-    },
-    /**
-     * import
-     */
-    import: {
-        text: function (req, res) {
-            res.json({
-
-            });
-        },
-        file: function (req, res) {
-            console.log('req.files', req.files);
-            upload.saveUploaded(req, function (saved) {
-
-                console.log('saved', saved);
-
-                res.send(
-                    JSON.stringify({
-                        success:true
-                    })
-                );
-            });
-        }
     }
 };
