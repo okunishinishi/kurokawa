@@ -21,8 +21,8 @@ User.schema = new Schema({
         required: true,
         minLength: 2
     },
-    email:{
-        format:'email'
+    email: {
+        format: 'email'
     }
 });
 
@@ -79,5 +79,17 @@ User.newUser = function (data, callback) {
         delete user.captcha_text;
         user.password_digest = password_digest;
         callback(user);
+    });
+};
+
+User.listAllTakeValues = function (callback) {
+    var usernames = [],
+        emails = [];
+    User.findByCondition({}, function (users) {
+        users && users.forEach(function (user) {
+            usernames.push(user.username);
+            emails.push(user.email);
+        });
+        callback(usernames, emails);
     });
 };

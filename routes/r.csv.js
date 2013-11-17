@@ -51,6 +51,7 @@ exports.parse_users = function (data, callback) {
     if (line) {
         exports.parse_users(data, function (users, errors) {
             exports.parse_users.lineToUser(line, function (err, user) {
+                user.row = row;
                 users.push(user);
                 errors = errors.concat((err || []).map(function (data) {
                     data.row = row;
@@ -92,22 +93,48 @@ exports.parse_users.lineToUser = function (line, callback) {
     });
 };
 
+function validateTakenValues(users, callback) {
+    function takenErr(property, user, takens) {
+        var taken = (takens.indexOf(user[property]) !== -1);
+        return taken && {
+            row: user.row,
+            col: exports.format.user_import.indexOf(property),
+            property: property,
+            msg: ' is taken'
+        }
+    }
+
+    User.listAllTakeValues(function (taken_usernames, taken_emails) {
+        var errors = [];
+        users.forEach(function (user) {
+            var userTaken = takenErr('username', user, taken_usernames);
+            if (userTaken) errors.push(userTaken);
+            var emailTaken = takenErr('email', user, taken_emails);
+            if (emailTaken) errors.push(emailTaken);
+        });
+        callback && callback(errors);
+    });
+}
 
 exports.import_user = function (raw, callback) {
     var hasHead = raw && raw.length && (raw[0].join(',') == exports.format.user_import.join(','));
     if (hasHead) raw.shift();
     exports.parse_users([].concat(raw), function (users, errors) {
-        var valid = !errors.length;
-        exports.import_user.save_preview(raw, errors, users, function (saved) {
-            Object.keys(saved).forEach(function (key) {
-                saved[key] = ['/', config.context, relative(config.publicDir, saved[key])].join('');
+            validateTakenValues(users, function (takenError) {
+                errors = errors.concat(takenError);
+                var valid = !errors.length;
+                exports.import_user.save_preview(raw, errors, users, function (saved) {
+                    Object.keys(saved).forEach(function (key) {
+                        saved[key] = ['/', config.context, relative(config.publicDir, saved[key])].join('');
+                    });
+                    callback({
+                        valid: valid,
+                        files: saved
+                    });
+                });
             });
-            callback({
-                valid: valid,
-                files: saved
-            });
-        });
-    });
+        }
+    );
 };
 
 exports.import_user.save_preview = function (raw, errors, users, callback) {
@@ -217,13 +244,17 @@ exports.import_user.execute = function (req, res) {
                     return a.concat(b);
                 });
             var valid = !(errors && errors.length);
-            if(valid){
+            if (valid) {
                 req.flash('info_alert', l.msg.user_import_done);
+                User.saveAll(users, function () {
+                    res.json({
+                        valid: valid,
+                        errors: errors
+                    });
+                });
+            } else {
+                fail(res, errors);
             }
-            res.json({
-                valid: valid,
-                errors: errors
-            });
         });
     });
 
