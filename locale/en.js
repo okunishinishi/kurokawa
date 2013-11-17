@@ -99,7 +99,7 @@ l.msg.user_import = {
         'Format is below:'
     ].join('<br/>'),
     example: 'Example:',
-    before_submit: 'Sure to import these data? If so, press submit btn.'
+    before_submit: 'Sure to import these data? If so, press the submit btn.'
 };
 l.msg.drop_csv_here = 'Drag and drop your CSV file HERE!';
 

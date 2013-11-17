@@ -58,6 +58,7 @@
             }
             form.find(':text,textarea').hide();
             form.setFormValue(data);
+            $('.tk-editable-text', form).trigger('tk-editable-text-fix');
             form.fadeIn();
             return form;
         },
@@ -79,6 +80,7 @@
 
         doc.on('click', '.user-list-item', function () {
             var li = $(this);
+            if(li.is('.selected')) return;
             li.addClass('selected')
                 .siblings('.selected').removeClass('selected');
             userDetailSection.userDetailSection(li.data('user'));
