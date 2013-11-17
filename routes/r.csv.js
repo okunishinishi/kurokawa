@@ -109,8 +109,10 @@ function validateTakenValues(users, callback) {
         users.forEach(function (user) {
             var userTaken = takenErr('username', user, taken_usernames);
             if (userTaken) errors.push(userTaken);
+            taken_usernames.push(user.username);
             var emailTaken = takenErr('email', user, taken_emails);
             if (emailTaken) errors.push(emailTaken);
+            taken_emails.push(user.email);
         });
         callback && callback(errors);
     });
@@ -227,7 +229,9 @@ exports.import_user.execute = function (req, res) {
             var users;
             try {
                 err && handleErr(err);
-                users = JSON.parse(buffer.toString());
+                users = JSON.parse(buffer.toString()).map(function (user) {
+                    return new User(user);
+                })
             } catch (e) {
                 console.error(e);
                 fail(res, null, l.err.something_worng);
@@ -235,7 +239,7 @@ exports.import_user.execute = function (req, res) {
             }
             var errors = users
                 .map(function (user) {
-                    return new User(user).validate().errors;
+                    return user.validate().errors;
                 })
                 .filter(function (err) {
                     return !!err;
@@ -243,18 +247,21 @@ exports.import_user.execute = function (req, res) {
                 .reduce(function (a, b) {
                     return a.concat(b);
                 });
-            var valid = !(errors && errors.length);
-            if (valid) {
-                req.flash('info_alert', l.msg.user_import_done);
-                User.saveAll(users, function () {
-                    res.json({
-                        valid: valid,
-                        errors: errors
+            validateTakenValues(users, function (takenErr) {
+                errors = errors.concat(takenErr);
+                var valid = !(errors && errors.length);
+                if (valid) {
+                    req.flash('info_alert', l.msg.user_import_done);
+                    User.saveAll(users, function () {
+                        res.json({
+                            valid: valid,
+                            errors: errors
+                        });
                     });
-                });
-            } else {
-                fail(res, errors);
-            }
+                } else {
+                    fail(res, errors);
+                }
+            });
         });
     });
 
