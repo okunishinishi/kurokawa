@@ -98,8 +98,12 @@ exports.api = {
             condition = new db.AmbiguousCondition(condition);
         }
 
-        find(condition, limit, skip, function (models) {
-            res.json(models);
+        find(condition, limit, skip, function (users) {
+            users.forEach(function (user) {
+                delete user.salt;
+                delete user.password_digest;
+            });
+            res.json(users);
         });
     },
 

@@ -37,28 +37,6 @@ body{
   }
 }
 
-.block-list .user-list-item{
-  padding: 0;
-  .detail-arrow{
-    opacity: 0;
-    position: relative;
-    right: 10px;
-  }
-  a{
-    display: inline-block;
-    padding: 5px 10px 5px 10px;
-    width:100%;
-    height: 100%;
-    &:hover{
-      .detail-arrow{
-        opacity: 1;
-      }
-    }
-  }
-}
-.detail-arrow{
-  border-left-color:#693B00;
-}
 .large-font{
   font-size: 1.5em;
 }
@@ -169,4 +147,40 @@ a,input,textarea{
 blockquote{
   border-color: @color;
 
+}
+
+
+.selectable-list-item{
+  padding: 0 !important;
+  .detail-arrow{
+    opacity: 0;
+    position: relative;
+    right: 10px;
+    border-left-color:#693B00;
+  }
+  a{
+    display: inline-block;
+    padding: 5px 10px 5px 10px;
+    width:100%;
+    height: 100%;
+    &:hover{
+      .detail-arrow{
+        opacity: 1;
+      }
+    }
+  }
+  &.selected,
+  &.selected:hover,
+  &.selected:active{
+    @back:#813401;
+    background-color: @back;
+    color:@white;
+    a{
+      color:@white;
+    }
+    .detail-arrow{
+      opacity: 1;
+      border-left-color:@white;
+    }
+  }
 }

@@ -1,6 +1,7 @@
 var tek = require('tek'),
     copy = tek['meta']['copy'],
-    db = require('../db');
+    db = require('../db'),
+    Team = db.models['Team'];
 
 
 /**
@@ -27,8 +28,11 @@ exports.master = function (req, res) {
  * @param res
  */
 exports.user = function (req, res) {
-    res.render('admin/user.jade', {
-        info_alert: req.flash('info_alert')
+    Team.findByCondition({}, function (teams) {
+        res.render('admin/user.jade', {
+            info_alert: req.flash('info_alert'),
+            teams: teams
+        });
     });
 };
 

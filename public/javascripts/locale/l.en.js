@@ -90,7 +90,7 @@ l = {
         "user_import": {
             "lead": "Import users via CSV.<br/>Format is below:",
             "example": "Example:",
-            "before_submit": "Sure to import there data?If so, press submit btn."
+            "before_submit": "Sure to import there data? If so, press submit btn."
         },
         "drop_csv_here": "Drag and drop your CSV file HERE!"
     },

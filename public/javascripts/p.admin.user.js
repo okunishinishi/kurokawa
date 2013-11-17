@@ -4,12 +4,12 @@
  *  -- namespaces --
  *  $ : jQuery
  *  l : message resource
- *  Hbs : handlebars
+ *  hbs : handlebars
  *
  */
-(function ($, l, Hbs) {
+(function ($, l, hbs) {
     var tmpl = {
-        li: Hbs.templates['user-list-item']
+        li: hbs.templates['user-list-item']
     };
     $.fn.extend({
         userSearchForm: function (callback) {
@@ -26,7 +26,11 @@
             var ul = $(this);
             ul.htmlHandlebars(tmpl.li, data)
                 .find('li')
-                .userListItem();
+                .userListItem()
+                .each(function (i) {
+                    var li = $(this);
+                    li.data('user', data[i]);
+                });
             return ul;
 
         },
@@ -44,13 +48,42 @@
                 section.trigger('resize-book');
             }).submit();
             return section;
+        },
+        userDetailForm: function (data) {
+            var form = $(this).hide();
+            if (!form.data('user-detail-form')) {
+                var saveBtn = $('#user-detail-save-btn').hide(),
+                    editBtn = $('#user-detail-edit-btn');
+                form.detailForm('view', saveBtn, editBtn);
+            }
+            form.setFormValue(data);
+            form.fadeIn();
+            return form;
+        },
+        userDetailSection: function (data) {
+            var section = $(this),
+                form = $('#user-detail-form', section);
+            form.userDetailForm(data);
+            return section;
         }
     });
 
     $(function () {
-        var body = $(document.body);
+        var doc = $(document),
+            body = $(document.body);
 
         $('#user-list-section', body).userListSection();
+
+        var userDetailSection = $('#user-detail-section', body);
+
+        doc.on('click', '.user-list-item', function () {
+            var li = $(this);
+            li.addClass('selected')
+                .siblings('.selected').removeClass('selected');
+            userDetailSection.userDetailSection(li.data('user'));
+        });
+
+        $('#user-detail-form').hide();
 
         $('#sub-nav', body).subNav('admin');
     });

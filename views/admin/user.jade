@@ -1,3 +1,4 @@
+include ../user/_detail_form
 extends ../layout
 
 block stylesheets
@@ -14,3 +15,7 @@ block left-content
     include ../user/_list
 
 block right-content
+    #user-detail-section
+        +user_detail_form({}, teams)
+
+
