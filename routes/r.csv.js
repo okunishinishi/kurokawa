@@ -1,3 +1,4 @@
+var fileUtil = require('../util/u.file');
 var csv = require('../util/u.csv'),
     tek = require('tek'),
     mkdirP = tek.file.mkdirP,
@@ -8,12 +9,14 @@ var csv = require('../util/u.csv'),
     resolve = path.resolve,
     relative = path.relative,
     fs = require('fs'),
+    saveJson = fileUtil.saveJson,
     config = require('../app.config.js'),
     upload = require('./r.upload')
     ;
 
 
-exports.format = 'username,email,first_name,last_name,password,role'.split(',');
+exports.format = {};
+exports.format.user_import = 'username,email,first_name,last_name,password,role'.split(',');
 
 function handleErr(err) {
     console.error(err);
@@ -42,7 +45,7 @@ exports.parse_users = function (data, callback) {
 
 exports.parse_users.lineToUser = function (line, callback) {
     var data = {};
-    exports.format.forEach(function (key, i) {
+    exports.format.user_import.forEach(function (key, i) {
         var value = line[i];
         if (value || (value === 0))data[key] = value;
     });
@@ -53,7 +56,7 @@ exports.parse_users.lineToUser = function (line, callback) {
                     if (data.property === 'password_digest') {
                         data.property = 'password';
                     }
-                    var col = exports.format.indexOf(data.property);
+                    var col = exports.format.user_import.indexOf(data.property);
                     if (col === -1) return null;
                     return {
                         col: col,
@@ -69,14 +72,15 @@ exports.parse_users.lineToUser = function (line, callback) {
 
 
 exports.import_user = function (raw, callback) {
-    exports.parse_users(raw, function (users, errors) {
+    exports.parse_users([].concat(raw), function (users, errors) {
         var valid = !errors.length;
         exports.import_user.save_preview(raw, errors, users, function (saved) {
+            Object.keys(saved).forEach(function (key) {
+                saved[key] = ['/', config.context, relative(config.publicDir, saved[key])].join('');
+            });
             callback({
                 valid: valid,
-                files: saved.map(function (filepath) {
-                    return relative(config.publicDir, filepath);
-                })
+                files: saved
             });
         });
     });
@@ -95,8 +99,7 @@ exports.import_user.save_preview = function (raw, errors, users, callback) {
                 return;
             }
             var filepath = resolve(dirpath, [t, name, 'json'].join('.'));
-            fs.writeFile(filepath, JSON.stringify(data, null, 4), function (err) {
-                err && handleErr(err);
+            saveJson(filepath, data, function (filepath) {
                 saved[name] = filepath;
                 next();
             })
@@ -105,7 +108,17 @@ exports.import_user.save_preview = function (raw, errors, users, callback) {
 
     new JobQueue()
         .push(function (next) {
-            mkdirP(dirpath, next);
+            fs.exists(dirpath, function (exists) {
+                if (exists) {
+                    next();
+                } else {
+                    mkdirP(dirpath, next);
+                }
+            });
+        })
+        .push(function (next) {
+            var max = 24 * 60 * 60 * 1000;
+            fileUtil.cleanDatePrefixFiles(dirpath, max, next);
         })
         .push(save_job('raw', raw))
         .push(save_job('errors', errors))

@@ -1,0 +1,14 @@
+[
+    {
+        "col": 4,
+        "property": "password",
+        "msg": "is required",
+        "row": 0
+    },
+    {
+        "col": 4,
+        "property": "password",
+        "msg": "is required",
+        "row": 1
+    }
+]

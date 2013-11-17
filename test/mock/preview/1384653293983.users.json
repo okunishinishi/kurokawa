@@ -1,0 +1,12 @@
+[
+    {
+        "username": "asdf",
+        "salt": "bLuvsKZaO0QA1s1HQn1yQPGa+thDJyVhooO1dbBKEkVcotNF55RhvG6dwthFZhQk8Av6eYkPJ0rtQTcFkHkNcHvX/jkiiK0Iffv0+gayo8Oq637ruDetrnnxRf6ZV6nM2lKVyMIUd7CXYskihgyjwUPrqQ4CEaTtPYictUtwUGo=",
+        "password_expired": true
+    },
+    {
+        "username": "dd",
+        "salt": "3piF0ZFblmFkIBxHeL4qOQ73BHwMQGFVoPjt8JZJVuWFzUHD5NEWGxSAwej2JNFH4kiSvj1EFy9sK/DlcdBYg6gTx07lcUC/OZ6o1x6ayMF6uhomznamX5+awEbSCKUJM1Zo+XZYyvUBylRWSwJ6NegTUl8yWXeEi5JLr0dZ5Rc=",
+        "password_expired": true
+    }
+]

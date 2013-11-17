@@ -5,6 +5,7 @@ block stylesheets
     link(rel='stylesheet', href=url.css('admin.css'))
 
 block javascripts
+    script(src=url.js('validation/v.csv.js'))
     script(src=url.js('p.admin.user.import.js'))
 
 block upper-content
@@ -15,10 +16,44 @@ block left-content
 
 
 block right-content
+
+    a#preview-btn(data-role='slideshow-link',
+        style='display:none',
+    href='#preview-section')=l.btn.show_preview
     br
 
-    .tab-content#text-import-div
-        +import_form_by_text(url('/api/csv/user_import/text')))
+    #import-way-tabs.tab-container
+        a#text-import-tab.tab(href='#text-import-div')=l.lbl.import_ways.text
+        a#file-import-tab.tab(href='#file-import-div')=l.lbl.import_ways.file
+    br.clear
+    #import-way-tab-contents
+        .tab-content#text-import-div
+            +import_form_by_text(url('/api/csv/user_import/text')))
 
-    .tab-content#file-import-div
-        +import_form_by_file(url('/api/csv/user_import/file')))
+        .tab-content#file-import-div
+            +import_form_by_file(url('/api/csv/user_import/file')))
+
+
+mixin head_row(headers)
+    thead
+        tr
+            each header in headers
+                td=header
+
+block downer-content
+    #slideshow-container
+        #preview-section.positioned
+            a(data-role='slideshow-link',href='#main',
+            data-reverse="true").back-link=l.btn.modify
+            .paper
+                #err-preview.preview.paper-content(data-headers=csv_headers).text-left
+                    h1.paper-title=l.lbl.import_preview
+                    p.large-err=l.msg.invalid_csv
+                    br
+                    #err-preview-sheet.preview-sheet
+                    br
+                    a#err-preview-back-btn.wide-btn.btn(
+                    data-role='slideshow-link',href='#main', data-reverse="true")
+                        h1=l.btn.modify
+                #confirm-preview.preview.paper-content
+                    .paper-title=l.lbl.import_preview

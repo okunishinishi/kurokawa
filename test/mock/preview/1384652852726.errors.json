@@ -1,0 +1,50 @@
+[
+    {
+        "col": 0,
+        "property": "username",
+        "msg": "is too short (minimum is 2 characters)",
+        "row": 0
+    },
+    {
+        "col": 4,
+        "property": "password",
+        "msg": "is required",
+        "row": 0
+    },
+    {
+        "col": 0,
+        "property": "username",
+        "msg": "is too short (minimum is 2 characters)",
+        "row": 1
+    },
+    {
+        "col": 4,
+        "property": "password",
+        "msg": "is required",
+        "row": 1
+    },
+    {
+        "col": 0,
+        "property": "username",
+        "msg": "is too short (minimum is 2 characters)",
+        "row": 2
+    },
+    {
+        "col": 4,
+        "property": "password",
+        "msg": "is required",
+        "row": 2
+    },
+    {
+        "col": 0,
+        "property": "username",
+        "msg": "is too short (minimum is 2 characters)",
+        "row": 3
+    },
+    {
+        "col": 4,
+        "property": "password",
+        "msg": "is required",
+        "row": 3
+    }
+]

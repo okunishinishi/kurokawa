@@ -12,7 +12,9 @@ body{
     .linear-gradient(90deg, @back, darken(@back,1));
   }
 }
-
+#main{
+  .box-sizing(border-box);
+}
 #book .book-page-right{
   background-color:@back;
   &:before{
@@ -64,4 +66,92 @@ body{
 .wide-textarea{
   width:100%;
   min-height: 200px;
+}
+body{
+  .rich();
+  .paper{
+    &:before,&:after{
+      content:"&nbsp;";
+    }
+  }
+}
+
+#preview-section {
+  margin-top:40px;
+  td {
+    padding: 0;
+  }
+  .preview-sheet-content {
+    position: relative;
+    padding: 5px 10px;
+  }
+  .paper-content {
+  }
+  thead th{
+    border-top:none;
+  }
+  .err-mark {
+    display: none;
+  }
+  .has-err {
+    position: relative;
+    .err-mark {
+      display: block;
+      font-size: 8em;
+      line-height: 40px;
+      position: absolute;
+      left: 0;
+      top:0;
+      .text-shadow(1px 1px 2px, .1);
+      color: @red;
+    }
+  }
+  .err-msg {
+    font-family: cursive;
+    color: @red;
+    float: right;
+    font-style: italic;
+    text-align: right;
+  }
+}
+#slideshow-container{
+  position: relative;
+}
+.large-err{
+  color:lighten(@red, 10);
+  font-size: 2em;
+}
+.tk-upload-form{
+  width:100%;
+  font-size: 3em;
+  color:darken(@white, 15);
+  @back:darken(@white, 4);
+  background-color: @back;
+  .border-radius(2px);
+  border:1px solid darken(@back, 10);
+  font-weight: normal;
+}
+
+.tab,
+.tab:hover,
+.tab.tab-active,
+.tab.tab-active:hover,
+.tab-content{
+  background-color: @back;
+  border-color:@color;
+  color:@color;
+}
+.tk-upload-form{
+  background-color: white;
+  &.tk-drop-ready{
+    background-color: rgb(104, 57, 30);
+  }
+}
+
+a,input,textarea{
+  outline-color: lighten(fadeout(@yellow, 90), 20);
+}
+.tab,
+.tab.tab-active{
+  outline: none;
 }

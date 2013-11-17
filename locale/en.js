@@ -61,7 +61,7 @@ l.lbl.master = 'master';
 l.lbl.user = 'user';
 l.lbl.team = 'team';
 l.lbl.breadcrumb_sperator = '>';
-l.lbl.back_link_prefix = '<<';
+l.lbl.back_link_prefix = '';
 l.lbl.report = 'report';
 l.lbl.reports = 'reports';
 l.lbl.client = 'client';
@@ -69,7 +69,12 @@ l.lbl.sub_menu = {
     company: l.lbl.client,
     report: l.lbl.reports
 };
-
+l.lbl.preview = 'preview';
+l.lbl.import_preview = 'import data preview';
+l.lbl.import_ways = {
+    text:'paste text',
+    file:'upload file'
+};
 l.lbl.admin_menu = {
     master_manage: [l.lbl.master, 'manage'].join(' '),
     user_import: [l.lbl.user, 'import'].join(' '),
@@ -83,6 +88,7 @@ l.msg.has_unsaved = 'You have unsaved changes.';
 l.msg.new_account = 'create new account';
 l.msg.prove_human = 'prove you are human, not a bot.';
 l.msg.signout_done = [l.lbl.signout, 'done.'].join(' ');
+l.msg.invalid_csv = 'Oops! Your CSV is not valid. Please modify and retry.';
 
 
 l.plh = {};
@@ -113,6 +119,7 @@ l.btn.save = 'save';
 l.btn.cancel = 'cancel';
 l.btn.remove = 'remove';
 l.btn.search = 'search';
+l.btn.modify = 'modify';
 l.btn.execute = 'execute';
 l.btn.refrech = 'refresh';
 l.btn.remove_it = 'remove ';
@@ -120,7 +127,7 @@ l.btn.signin = l.lbl.signin;
 l.btn.signout = l.lbl.signout;
 l.btn.signup = l.lbl.signup;
 l.btn.company_list = 'company list';
-
+l.btn.show_preview = 'show preview';
 l.btn.back_link = {
     admin_page: [l.lbl.admin, 'menu'].join(' ')
 };

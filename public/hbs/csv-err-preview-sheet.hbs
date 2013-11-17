@@ -1,0 +1,29 @@
+<table class="wide-table">
+    <thead>
+    <tr>
+        {{#each headers}}
+            <th>{{this}}</th>
+        {{/each}}
+
+    </tr>
+    </thead>
+    <tbody>
+    {{#each rows}}
+        <tr>
+            {{#each this}}
+                {{#if this}}
+                <td class="{{style_class}}">
+                        <span class="err-mark">&times;</span>
+                        <div class="preview-sheet-content">
+                            {{text}}
+                            <div class='err-msg'>{{err.msg}}</div>
+                        </div>
+                </td>
+                {{else}}
+                    <td></td>
+                {{/if}}
+            {{/each}}
+        </tr>
+    {{/each}}
+    </tbody>
+</table>

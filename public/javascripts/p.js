@@ -298,6 +298,58 @@
             var nav = $(this);
             nav.findByAttr('data-key', key).addClass('active');
             return nav;
+        },
+        slideshowContainer: function (callback) {
+            var container = $(this),
+                slide = container.children().addClass('slideshow-slide');
+
+            slide.each(function () {
+                var slide = $(this);
+                slide.findByRole('slideshow-link').click(function (e) {
+                    e.preventDefault();
+                    var link = $(this),
+                        current = link.parents('.slideshow-slide');
+
+                    var href = link.attr('href');
+                    location.href = href;
+
+                    var next = $(href).removeAttr('style').show();
+                    var hMove = current.width() + 80;
+
+                    if (link.data('reverse')) hMove *= -1;
+                    var top = current.offset().top;
+                    current.css({
+                        left: hMove * -1,
+                        width: current.width(),
+                        position: 'absolute'
+                    });
+                    container
+                        .css({
+                            position: 'relative',
+                            left: hMove
+                        });
+                    var vMove = current.offset().top - top;
+                    current.css({top: vMove * -1});
+                    callback && callback();
+                    container
+                        .animate({
+                            left: 0
+                        }, function () {
+                            current
+                                .add(container)
+                                .add(next)
+                                .removeAttr('style');
+                            current.hide();
+                            callback && callback();
+                        })
+                });
+            }).hide();
+
+            var first = slide.filter(location.hash);
+            if (!first.length) first = slide.first();
+            first.show();
+
+            return container;
         }
     });
     $(function () {

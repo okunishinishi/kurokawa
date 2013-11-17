@@ -36,5 +36,7 @@ exports.user = function (req, res) {
  * @param res
  */
 exports.user.import = function (req, res) {
-    res.render('admin/user_import.jade', {});
+    res.render('admin/user_import.jade', {
+        csv_headers:require('./r.csv').format.user_import
+    });
 };

@@ -45,10 +45,11 @@ html
 
 
     body
+        header
+            a(href=url('/')).logo=l.app.name
+            +main_nav(sign_user)
+
         article#main
-            header
-                a(href=url('/')).logo=l.app.name
-                +main_nav(sign_user)
 
             +alert(err_alert)#err-alert.err-alert
             +alert(info_alert)#info-alert.info-alert
@@ -70,6 +71,10 @@ html
 
                 #cross-page.cover(style='display:none')
                     block content
+            br.clear
+
+            block downer-content
+
         br.clear
 
         hr

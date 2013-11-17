@@ -5,14 +5,6 @@
 @danger: #FF99AC;
 @err : #FF7676;
 
-.wood-back() {
-  background-image: url('../images/purty_wood/purty_wood.png');
-}
-
-.book-cover-back() {
-  background-image: url('../images/dark_leather/dark_leather_@2X.png');
-}
-
 body {
   margin: 0 auto;
   padding: 30px 15px;
@@ -93,7 +85,8 @@ body {
   &[type='url'],
   &[type='search'],
   &[type='tel'],
-  &[type='password'] {
+  &[type='password'],
+  &textarea {
     border: 1px solid @err;
   }
 }
@@ -367,20 +360,14 @@ table {
     text-align: left;
     margin: 0 5px 5px;
   }
-  thead {
-    th:first-child {
-      border-left-width: 0;
-    }
-    th:last-child {
-      border-right-width: 0;
-    }
-  }
-  tbody {
-    th {
-      border-left-width: 0;
-    }
-    td:last-child {
-      border-right-width: 0;
+  tr {
+    td, th {
+      &:first-child {
+        border-left-width: 0;
+      }
+      &:last-child {
+        border-right-width: 0;
+      }
     }
   }
 }
@@ -491,6 +478,9 @@ th {
   display: inline-block;
   margin: 2px 4px;
   font-style: italic;
+  &:before {
+    content: "<<";
+  }
 }
 
 .detail-arrow {
@@ -521,4 +511,58 @@ th {
   textarea {
     width: 100%;
   }
+}
+
+.paper {
+  .btn {
+    background-image: none;
+    background-color: transparent;
+    border-color: @gray;
+    &:hover {
+      background-color: darken(@white, 2);
+    }
+    &:acive {
+      border-color: lighten(@gray, 30);
+    }
+  }
+}
+
+.tab-style(@back:@white) {
+  @color: lighten(@gray, 10);
+  border: 1px solid @color;
+  background-color: @back;
+  color:@color;
+}
+
+.tab-container{
+  padding: 0 10px;
+}
+.tab {
+  .tab-style();
+  position: relative;
+  z-index: 1;
+  margin-right: -1px;
+  margin-bottom: -1px;
+  border-bottom: none;
+  .border-radius(4px 4px 0 0 );
+  &:hover {
+    .tab-style();
+    border-bottom: none;
+    background-color: darken(@white, 4);
+  }
+  &:active {
+  }
+  &.tab-active,
+  &.tab-active:hover{
+    background-color: @white;
+    z-index: 3;
+  }
+}
+
+.tab-content {
+  padding: 20px 20px 10px;
+  position: relative;
+  z-index: 2;
+  .tab-style();
+  .border-radius(2px;);
 }

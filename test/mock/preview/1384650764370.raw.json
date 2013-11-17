@@ -1,0 +1,18 @@
+[
+    {
+        "username": "j0123",
+        "password_digest": "242542271701662451565023250208117148123177981601622482331213039211160222428642101642010419417267613418520554241574015690253178100219724050235159532481612002101644218123",
+        "email": "not_email_format",
+        "first_name": "John",
+        "last_name": "Crazy",
+        "salt": "/Meo9LUvDqOvc2Y+lWbD4B4KxoNhke1aIJso9ugXyszHdJkLhQqdnZu9wxC5p8AQuQu0T0qbWStS3u4cXRBmOUqIOWaA8316sir2+LEHDrtCjxwnYHqZClsLDthIeq3yWXN38coSXF/U9X+6sTqJlyNymlglUutd+RV0IgoyevU=",
+        "password_expired": true
+    },
+    {
+        "email": "j@example.com",
+        "first_name": "John",
+        "last_name": "Crazy",
+        "salt": "b0XfQP4Ajr1NZauOb0kYg1YcnkVFBJnRahWinomVDVDUxAFf5Ck1b7mSfnYrXEhkbyxcX5SnjRj5wn5yZJaWEA3IDMdxWr/YbPu0Gzta2EKwzTka2d/oi5Jbgwe/iDSCVGDbvZvSHG5nic1Y/3XqB3JdZkEsjNIF6UYz0EX0eos=",
+        "password_expired": true
+    }
+]
