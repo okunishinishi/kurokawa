@@ -13,7 +13,8 @@
             return this.each(function () {
                 var container = $(this),
                     data = container.data();
-                container.dropUploadInput(data.action, data.name);
+                var msg = l.msg.drop_csv_here;
+                container.dropUploadInput(data.action, data.name, msg);
             });
         },
         textImportDiv: function (callback) {
@@ -32,6 +33,29 @@
 
             return div;
 
+        },
+        submitPreview: function (files) {
+            var tmpl = {
+                sheet: hbs.templates['csv-submit-preview-sheet']
+            };
+            var preview = $(this),
+                sheet = $('#submit-preview-sheet', preview);
+            sheet.showSpin();
+            $.getJSON(files['raw'], function (data) {
+                var headers = preview.data('headers') || [];
+                data.forEach(function (data) {
+                    while (data.length < headers.length) {
+                        data.push(null);
+                    }
+                });
+                sheet
+                    .removeSpin()
+                    .html(tmpl.sheet({
+                        headers: headers,
+                        rows: data
+                    }));
+            });
+            return preview;
         },
         errorPreview: function (files) {
             var tmpl = {
@@ -57,7 +81,7 @@
                         data[row][col].err = err;
                         data[row][col].style_class = err ? 'has-err' : '';
                     });
-                    var headers = preview.data('headers');
+                    var headers = preview.data('headers') || [];
                     data.forEach(function (data) {
                         while (data.length < headers.length) {
                             data.push(null);
@@ -77,7 +101,7 @@
             var section = $(this);
             $('.preview', section).hide();
             if (data.valid) {
-
+                $('#submit-preview', section).submitPreview(data['files']).show();
             } else {
                 $('#err-preview', section).errorPreview(data['files']).show();
             }
@@ -114,18 +138,40 @@
             };
             return page;
         },
-        rightPage:function(){
+        rightPage: function () {
             var page = $(this),
                 inner = $('.book-page-inner', page);
-            page.enable = function(){
+            page.enable = function () {
                 inner.removeAttr('style');
             };
-            page.disable =function(){
+            page.disable = function () {
                 inner.css({
-                    zIndex:-1
+                    zIndex: -1
                 });
             };
             return page;
+        },
+        importSubmitForm: function () {
+            var form = $(this);
+            form.ajaxForm(function (data) {
+                var errAlert = $('#err-alert');
+                if(data.err_alert){
+                    errAlert.show().text(data.err_alert);
+                    $.scrollToTop();
+                    $.confirmLeave(false);
+                } else{
+                    errAlert.text('').hide();
+                }
+                if(data.valid){
+                    $.confirmLeave(false);
+                    location.href = form.data('onsuccess');
+                }
+
+            });
+            form.findByRole('submit-btn').click(function(){
+                form.submit();
+            });
+            return form;
         }
     });
     $(function () {
@@ -135,7 +181,8 @@
             book = $('#book', main),
             leftPage = $('#left-page', book).leftPage(),
             rightPage = $('#right-page', book).rightPage(),
-            importSection = $('#import-section', rightPage);
+            importSection = $('#import-section', rightPage),
+            lead = $('#user-import-lead');
 
 
         $('#import-way-tabs', body).importWayTabs(location.hash, function (selector) {
@@ -158,22 +205,28 @@
 
         main.showPreview = function (data) {
             previewSection.previewSection(data);
-            importSection.fadeOut(200,function () {
+            importSubmitForm.findByName('user_json_path').val(data['files']['users']);
+            importSection.add(lead).fadeOut(200, function () {
                 leftPage.resize(book.width());
                 rightPage.disable();
-                previewSection.fadeIn(300,function () {
+                previewSection.fadeIn(300, function () {
                     book.trigger('resize-book');
+                    $.confirmLeave(l.msg.leave_with_unsaved);
                 });
             });
         };
         main.hidePreview = function () {
-            previewSection.fadeOut(200,function () {
+            previewSection.fadeOut(200, function () {
                 book.trigger('resize-book');
-                importSection.fadeIn(300,function(){
+                importSection.add(lead).fadeIn(300, function () {
+                    leftPage.resize(book.width());
                     rightPage.enable();
+                    $('.book-page-inner', book).removeAttr('style');
+                    $.confirmLeave(false);
                 });
             });
         };
+        var importSubmitForm = $('#submit-form').importSubmitForm();
 
         body.findByRole('drop-upload-form-container').dropUploadFormContainer();
 

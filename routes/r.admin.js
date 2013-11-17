@@ -27,7 +27,9 @@ exports.master = function (req, res) {
  * @param res
  */
 exports.user = function (req, res) {
-    res.render('admin/user.jade', {});
+    res.render('admin/user.jade', {
+        info_alert: req.flash('info_alert')
+    });
 };
 
 /**
@@ -36,7 +38,9 @@ exports.user = function (req, res) {
  * @param res
  */
 exports.user.import = function (req, res) {
+    var format = require('./r.csv').format;
     res.render('admin/user_import.jade', {
-        csv_headers:require('./r.csv').format.user_import
+        csv_headers: format.user_import,
+        csv_examples: format.user_import_example
     });
 };

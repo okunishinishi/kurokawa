@@ -60,6 +60,7 @@ l = {
         "report": "report",
         "reports": "reports",
         "client": "client",
+        "example": "example",
         "sub_menu": {
             "company": "client",
             "report": "reports"
@@ -80,10 +81,18 @@ l = {
         "sure": "Are you ABSOLUTELY sure?",
         "never_go_back": "Once this done, there will be no way to go back.",
         "has_unsaved": "You have unsaved changes.",
+        "leave_with_unsaved": "You have unsaved changes.",
         "new_account": "create new account",
         "prove_human": "prove you are human, not a bot.",
         "signout_done": "sign out done.",
-        "invalid_csv": "Oops! Your CSV is not valid. Please modify and retry."
+        "user_import_done": "user import done.",
+        "invalid_csv": "Oops! Your CSV is not valid. Please modify and retry.",
+        "user_import": {
+            "lead": "Import users via CSV.<br/>Format is below:",
+            "example": "Example:",
+            "before_submit": "Sure to import there data?If so, press submit btn."
+        },
+        "drop_csv_here": "Drag and drop your CSV file HERE!"
     },
     "plh": {
         "search": "search",
@@ -101,7 +110,8 @@ l = {
         "loign_failed": "username or password is wrong.",
         "sign_required": "sign is required",
         "is_wrong": "is wrong",
-        "already_taken": "is already taken"
+        "already_taken": "is already taken",
+        "something_worng": "Sorry! Something is wrong."
     },
     "btn": {
         "new": "new",
@@ -117,8 +127,10 @@ l = {
         "signin": "sign in",
         "signout": "sign out",
         "signup": "sign up",
+        "submit": "submit",
         "company_list": "company list",
         "show_preview": "show preview",
+        "preview": "preview",
         "back_link": {
             "admin_page": "admin menu"
         }

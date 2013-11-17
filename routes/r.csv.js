@@ -17,6 +17,28 @@ var csv = require('../util/u.csv'),
 
 exports.format = {};
 exports.format.user_import = 'username,email,first_name,last_name,password,role'.split(',');
+exports.format.user_import_example = [
+    {
+        username: 't_okunishi',
+        email: 't_okuni@example.com',
+        first_name: 'Taka',
+        last_name: 'Okunishi',
+        password: 'asd3',
+        role: 'admin'
+    },
+    {
+        username: 'some_body',
+        email: '',
+        first_name: 'Sum',
+        last_name: 'Body',
+        password: 'ekj9',
+        role: ''
+    }
+].map(function (user) {
+        return exports.format.user_import.map(function (key) {
+            return user[key];
+        });
+    });
 
 function handleErr(err) {
     console.error(err);
@@ -72,6 +94,8 @@ exports.parse_users.lineToUser = function (line, callback) {
 
 
 exports.import_user = function (raw, callback) {
+    var hasHead = raw && raw.length && (raw[0].join(',') == exports.format.user_import.join(','));
+    if (hasHead) raw.shift();
     exports.parse_users([].concat(raw), function (users, errors) {
         var valid = !errors.length;
         exports.import_user.save_preview(raw, errors, users, function (saved) {
@@ -147,4 +171,60 @@ exports.import_user.from_file = function (req, res) {
             })
         );
     });
+};
+
+function fail(res, errors, err_alert) {
+    res.json({
+        valid: false,
+        errors: errors,
+        err_alert: err_alert
+    });
+}
+
+exports.import_user.execute = function (req, res) {
+    var body = req.body,
+        user_json_path = body['user_json_path'];
+
+    var l = res.locals.l;
+    if (!user_json_path) {
+        fail(res, null, l.err.something_worng);
+        return;
+    }
+    var json_filepath = resolve(config.publicDir + user_json_path);
+    fs.exists(json_filepath, function (exists) {
+        if (!exists) {
+            fail(res, null, l.err.something_worng);
+            return;
+        }
+        fs.readFile(json_filepath, function (err, buffer) {
+            var users;
+            try {
+                err && handleErr(err);
+                users = JSON.parse(buffer.toString());
+            } catch (e) {
+                console.error(e);
+                fail(res, null, l.err.something_worng);
+                return;
+            }
+            var errors = users
+                .map(function (user) {
+                    return new User(user).validate().errors;
+                })
+                .filter(function (err) {
+                    return !!err;
+                })
+                .reduce(function (a, b) {
+                    return a.concat(b);
+                });
+            var valid = !(errors && errors.length);
+            if(valid){
+                req.flash('info_alert', l.msg.user_import_done);
+            }
+            res.json({
+                valid: valid,
+                errors: errors
+            });
+        });
+    });
+
 };

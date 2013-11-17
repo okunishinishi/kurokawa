@@ -14,15 +14,40 @@ block upper-content
 block left-content
     h1.page-title=l.lbl.admin_menu.user_import
 
+    #user-import-lead
+        p!=l.msg.user_import.lead
+
+        blockquote
+            div=csv_headers.join(',')
+
+        p!=l.msg.user_import.example
+        blockquote
+            each csv_example in csv_examples
+                div=csv_example.join(',')
+
     #preview-section.positioned
         #err-preview.preview(data-headers=csv_headers).text-left
             p.large-err=l.msg.invalid_csv
             br
             #err-preview-sheet.preview-sheet
             br
+            br
             a.preview-hide-btn.float-right.btn.large-btn(
             href='javascript:void(0)')=l.btn.modify
-        #confirm-preview.preview
+            br
+        #submit-preview.preview(data-headers=csv_headers)
+            p=l.msg.user_import.before_submit
+            br
+            br
+            #submit-preview-sheet.preview-sheet
+            form.wide-form#submit-form.inline-form(
+            data-onsuccess=url('/admin/user'),
+            method='post',
+            action=url('/api/csv/user_import/execute'))
+                input(type='hidden', name='user_json_path')
+                a.float-right.btn.large-btn(data-role='submit-btn',href='javascript:void(0)')=l.btn.submit
+                a.float-right.preview-hide-btn.btn.large-btn(href='javascript:void(0)')=l.btn.cancel
+            br
 
 
 block right-content

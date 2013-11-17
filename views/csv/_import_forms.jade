@@ -3,7 +3,7 @@ mixin import_form_by_text(action, name)
         textarea.wide-textarea(
         placeholder=l.plh.csv_textarea
         name=name || 'csv_text')
-        input.wide-btn.btn(type='submit')=l.btn.submit
+        input.wide-btn.btn(type='submit')=l.btn.preview
 
 mixin import_form_by_file(action, name)
     div(data-role='drop-upload-form-container', data-action=action, data-name=name)

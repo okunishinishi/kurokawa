@@ -65,6 +65,7 @@ l.lbl.back_link_prefix = '';
 l.lbl.report = 'report';
 l.lbl.reports = 'reports';
 l.lbl.client = 'client';
+l.lbl.example = 'example';
 l.lbl.sub_menu = {
     company: l.lbl.client,
     report: l.lbl.reports
@@ -72,8 +73,8 @@ l.lbl.sub_menu = {
 l.lbl.preview = 'preview';
 l.lbl.import_preview = 'import data preview';
 l.lbl.import_ways = {
-    text:'paste text',
-    file:'upload file'
+    text: 'paste text',
+    file: 'upload file'
 };
 l.lbl.admin_menu = {
     master_manage: [l.lbl.master, 'manage'].join(' '),
@@ -85,10 +86,21 @@ l.msg = {};
 l.msg.sure = 'Are you ABSOLUTELY sure?';
 l.msg.never_go_back = 'Once this done, there will be no way to go back.';
 l.msg.has_unsaved = 'You have unsaved changes.';
+l.msg.leave_with_unsaved = l.msg.has_unsaved;
 l.msg.new_account = 'create new account';
 l.msg.prove_human = 'prove you are human, not a bot.';
 l.msg.signout_done = [l.lbl.signout, 'done.'].join(' ');
+l.msg.user_import_done = 'user import done.';
 l.msg.invalid_csv = 'Oops! Your CSV is not valid. Please modify and retry.';
+l.msg.user_import = {
+    lead: [
+        'Import users via CSV.',
+        'Format is below:'
+    ].join('<br/>'),
+    example: 'Example:',
+    before_submit: 'Sure to import there data?If so, press submit btn.'
+};
+l.msg.drop_csv_here = 'Drag and drop your CSV file HERE!';
 
 
 l.plh = {};
@@ -110,6 +122,7 @@ l.err.loign_failed = [l.lbl.username, 'or', l.lbl.password].join(' ') + ' is wro
 l.err.sign_required = 'sign is required';
 l.err.is_wrong = 'is wrong';
 l.err.already_taken = ['is', 'already taken'].join(' ');
+l.err.something_worng = 'Sorry! Something is wrong.';
 
 
 l.btn = {};
@@ -126,8 +139,10 @@ l.btn.remove_it = 'remove ';
 l.btn.signin = l.lbl.signin;
 l.btn.signout = l.lbl.signout;
 l.btn.signup = l.lbl.signup;
+l.btn.submit = 'submit';
 l.btn.company_list = 'company list';
 l.btn.show_preview = 'show preview';
+l.btn.preview = 'preview';
 l.btn.back_link = {
     admin_page: [l.lbl.admin, 'menu'].join(' ')
 };
