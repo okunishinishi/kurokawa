@@ -83,6 +83,9 @@ l.lbl.admin_menu = {
     user_manage: [l.lbl.user, 'manage'].join(' ')
 };
 
+l.lead = {};
+l.lead.index_page = 'Select client company.';
+
 l.msg = {};
 l.msg.sure = 'Are you ABSOLUTELY sure?';
 l.msg.never_go_back = 'Once this done, there will be no way to go back.';

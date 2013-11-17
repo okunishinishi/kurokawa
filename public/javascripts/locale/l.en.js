@@ -78,6 +78,9 @@ l = {
             "user_manage": "user manage"
         }
     },
+    "lead": {
+        "index_page": "Select client company."
+    },
     "msg": {
         "sure": "Are you ABSOLUTELY sure?",
         "never_go_back": "Once this done, there will be no way to go back.",

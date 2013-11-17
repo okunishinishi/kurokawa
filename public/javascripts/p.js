@@ -239,10 +239,7 @@
                 editBtn.hide();
                 saveBtn.show();
             });
-            form
-                .change(function () {
-                    $.confirmLeave(l.msg.leave_with_unsaved);
-                });
+
             form.find(':text')
                 .keydown(function (e) {
                     switch (e.which) {
@@ -252,6 +249,11 @@
                     }
                 });
             form.editableForm(mode || 'view');
+
+            form
+                .change(function () {
+                    $.confirmLeave(l.msg.leave_with_unsaved);
+                });
 
             switch (mode) {
                 case 'edit':
