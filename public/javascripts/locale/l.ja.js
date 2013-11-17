@@ -55,6 +55,7 @@ l = {
         "master": "master",
         "user": "user",
         "team": "team",
+        "teams": "teams",
         "breadcrumb_sperator": ">",
         "back_link_prefix": "",
         "report": "report",

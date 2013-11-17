@@ -11,9 +11,10 @@ block upper-content
 
 block left-content
     h1.page-title=l.lbl.master
-    ul
-        li
-            a(href='javascript:void(0)', data-ref='#team-list-section')=l.lbl.team-list
+    ul.block-list#master-select-list
+        li.selectable-list-item.master-select-list-item
+            a(href='javascript:void(0)', data-ref='#team-list-section')=l.lbl.teams
+                span.detail-arrow.float-right
 
 block right-content
     include ../team/_list

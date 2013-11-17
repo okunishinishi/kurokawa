@@ -60,6 +60,7 @@ l.lbl.admin_page_title = 'admin menu';
 l.lbl.master = 'master';
 l.lbl.user = 'user';
 l.lbl.team = 'team';
+l.lbl.teams = 'teams';
 l.lbl.breadcrumb_sperator = '>';
 l.lbl.back_link_prefix = '';
 l.lbl.report = 'report';

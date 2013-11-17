@@ -47,11 +47,21 @@
     });
 
     $(function () {
-        var body = $(document.body);
+        var doc = $(document),
+            body = $(document.body);
 
         $('#team-list-section', body).teamListSection();
 
         $('#sub-nav', body).subNav('admin');
+
+
+        doc.on('click', '.master-select-list-item', function () {
+            var li = $(this);
+            li.addClass('selected')
+                .siblings('.selected').removeClass('selected');
+        });
+
+        $('#master-select-list').find('li').first().click();
 
     });
 })(jQuery, window['l'], Handlebars);
