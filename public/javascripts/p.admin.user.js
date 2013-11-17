@@ -56,6 +56,7 @@
                     editBtn = $('#user-detail-edit-btn');
                 form.detailForm('view', saveBtn, editBtn);
             }
+            form.find(':text,textarea').hide();
             form.setFormValue(data);
             form.fadeIn();
             return form;
