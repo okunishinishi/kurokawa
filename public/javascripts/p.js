@@ -277,9 +277,7 @@
         book: function () {
             var book = $(this),
                 leftPage = $('#left-page', book),
-                rightPage = $('#right-page', book),
-                crossPage = $('#cross-page');
-            if (!crossPage.is(':empty')) crossPage.show();
+                rightPage = $('#right-page', book);
             var both = leftPage.is(':visible') && rightPage.is(':visible');
             if (both) {
                 book.on('resize-book',function () {

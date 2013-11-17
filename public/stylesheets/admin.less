@@ -75,9 +75,12 @@ body{
     }
   }
 }
-
+#book{
+  position: relative;
+}
 #preview-section {
-  margin-top:40px;
+  display: none;
+  padding-bottom: 20px;
   td {
     padding: 0;
   }
@@ -114,11 +117,8 @@ body{
     text-align: right;
   }
 }
-#slideshow-container{
-  position: relative;
-}
 .large-err{
-  color:lighten(@red, 10);
+  color:@red;
   font-size: 2em;
 }
 .tk-upload-form{
@@ -154,4 +154,13 @@ a,input,textarea{
 .tab,
 .tab.tab-active{
   outline: none;
+}
+
+#main{
+  .btn{
+    background-color: @white;
+  }
+}
+.large-btn{
+  font-size:1.5em;
 }

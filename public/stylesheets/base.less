@@ -372,16 +372,18 @@ table {
   }
 }
 
-#book {
+#main {
   .btn {
     background-image: none;
     background-color: transparent;
     border-color: @gray;
     &:hover {
-      .box-shadow(2px 2px 3px, .4);
+      .box-shadow(1px 1px 2px, .4);
+      background-image: none;
     }
     &:active {
       .box-shadow(none);
+      background-image: none;
     }
   }
 }
@@ -434,11 +436,6 @@ th {
   border: 1px solid #F3F3F3;
   .border-radius(4px);
   .box-shadow(1px 1px 2px; .1);
-}
-
-#cross-page {
-  padding: 80px 40px;
-  .box-sizing(border-box);
 }
 
 .editable-form {
@@ -513,19 +510,6 @@ th {
   }
 }
 
-.paper {
-  .btn {
-    background-image: none;
-    background-color: transparent;
-    border-color: @gray;
-    &:hover {
-      background-color: darken(@white, 2);
-    }
-    &:acive {
-      border-color: lighten(@gray, 30);
-    }
-  }
-}
 
 .tab-style(@back:@white) {
   @color: lighten(@gray, 10);

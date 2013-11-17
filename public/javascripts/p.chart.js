@@ -112,6 +112,7 @@
         var book = $('#book', body),
             leftPage = $('#left-page', book).leftPage(),
             sheetTable = $('#sheet-table', book).sheetTable();
+
         win.resize(function () {
             leftPage.resize(book.width());
         });

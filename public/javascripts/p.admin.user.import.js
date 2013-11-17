@@ -90,7 +90,7 @@
                 var a = $(this),
                     href = a.attr('href');
                 var id = a.attr('id');
-                if(id){
+                if (id) {
                     tab.hide();
                     location.href = '#' + id;
                     tab.show();
@@ -105,14 +105,37 @@
             first = first.size() ? first : tab.first();
             first.click();
             return tabs;
+        },
+        leftPage: function () {
+            var page = $(this),
+                inner = $('.book-page-inner', page);
+            page.resize = function (bookWidth) {
+                inner.width(bookWidth - 70);
+            };
+            return page;
+        },
+        rightPage:function(){
+            var page = $(this),
+                inner = $('.book-page-inner', page);
+            page.enable = function(){
+                inner.removeAttr('style');
+            };
+            page.disable =function(){
+                inner.css({
+                    zIndex:-1
+                });
+            };
+            return page;
         }
     });
     $(function () {
         var body = $(document.body),
             win = $(window),
             main = $('#main', body),
-            slideshowContainer = $('#slideshow-container', main),
-            book = $('#book', main);
+            book = $('#book', main),
+            leftPage = $('#left-page', book).leftPage(),
+            rightPage = $('#right-page', book).rightPage(),
+            importSection = $('#import-section', rightPage);
 
 
         $('#import-way-tabs', body).importWayTabs(location.hash, function (selector) {
@@ -120,18 +143,36 @@
                 .hide().filter(selector).show();
         });
 
-        main.after(slideshowContainer);
-        slideshowContainer
-            .prepend(main)
-            .slideshowContainer(function () {
-                book.trigger('resize-book');
-            });
-
-
         var previewSection = $('#preview-section', body);
+        $('.preview-hide-btn', body).click(function () {
+            main.hidePreview();
+        });
+
+        win.resize(function () {
+            if (previewSection.is(':visible')) {
+                leftPage.resize(book.width());
+            }
+            book.trigger('resize-book');
+        });
+
+
         main.showPreview = function (data) {
             previewSection.previewSection(data);
-            $('#preview-btn').click();
+            importSection.fadeOut(200,function () {
+                leftPage.resize(book.width());
+                rightPage.disable();
+                previewSection.fadeIn(300,function () {
+                    book.trigger('resize-book');
+                });
+            });
+        };
+        main.hidePreview = function () {
+            previewSection.fadeOut(200,function () {
+                book.trigger('resize-book');
+                importSection.fadeIn(300,function(){
+                    rightPage.enable();
+                });
+            });
         };
 
         body.findByRole('drop-upload-form-container').dropUploadFormContainer();
