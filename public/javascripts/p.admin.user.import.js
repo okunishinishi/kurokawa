@@ -14,7 +14,10 @@
                 var container = $(this),
                     data = container.data();
                 var msg = l.msg.drop_csv_here;
-                container.dropUploadInput(data.action, data.name, msg);
+                container.dropUploadInput(data.action, data.name, msg, function (data) {
+                    $('.tk-drop-ready').removeClass('.tk-drop-ready');
+                    container.trigger('drop-upload-done', [data]);
+                });
             });
         },
         textImportDiv: function (callback) {
@@ -30,7 +33,10 @@
         },
         fileImportDiv: function (callback) {
             var div = $(this);
-
+            div.on('drop-upload-done', function (e, data) {
+                console.log('data', data);
+                callback(data);
+            });
             return div;
 
         },
@@ -155,20 +161,20 @@
             var form = $(this);
             form.ajaxForm(function (data) {
                 var errAlert = $('#err-alert');
-                if(data.err_alert){
+                if (data.err_alert) {
                     errAlert.show().text(data.err_alert);
                     $.scrollToTop();
                     $.confirmLeave(false);
-                } else{
+                } else {
                     errAlert.text('').hide();
                 }
-                if(data.valid){
+                if (data.valid) {
                     $.confirmLeave(false);
                     location.href = form.data('onsuccess');
                 }
 
             });
-            form.findByRole('submit-btn').click(function(){
+            form.findByRole('submit-btn').click(function () {
                 form.submit();
             });
             return form;

@@ -192,13 +192,40 @@ exports.import_user.from_text = function (req, res) {
 
 
 exports.import_user.from_file = function (req, res) {
+    var l = res.locals.l;
     upload.saveUploaded(req, function (saved) {
-        console.log('saved', saved);
-        res.send(
-            JSON.stringify({
-                success: true
+        var filepaths = saved['csv_file'],
+            filepath = filepaths && filepaths.length && filepaths[0];
+
+        function send(data) {
+            res.send(JSON.stringify(data));
+        }
+
+        function fail(err_alert) {
+            send({
+                valid: false,
+                err_alert: err_alert
             })
-        );
+        }
+
+        fs.exists(filepath, function (exists) {
+            if (!exists) {
+                fail(l.err.something_worng);
+                return;
+            }
+            fs.readFile(filepath, function (err, buffer) {
+                if (err) {
+                    fail(l.err.something_worng);
+                    return;
+                }
+                csv.parseString(buffer.toString(), function(data){
+                    exports.import_user(data, function (result) {
+                        send(result);
+                    });
+                });
+            });
+
+        });
     });
 };
 

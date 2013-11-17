@@ -1,9 +1,9 @@
 /**
  * tek.view.js
  * - javascript library for tek -
- * @version v0.2.34
+ * @version v0.2.35
  * @author Taka Okunishi
- * @date 2013-11-16
+ * @date 2013-11-17
  *
  */
 (function (dependencies, window, undefined) {
@@ -1052,6 +1052,7 @@
 		                    form.addClass('tk-loading').showSpin();
 		                })
 		                .uploadFileInput(action, function (data) {
+		                    form.removeClass('tk-drop-ready');
 		                    form.removeClass('tk-loading').removeSpin();
 		                    callback && callback(data);
 		                });
