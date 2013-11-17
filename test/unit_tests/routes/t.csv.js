@@ -1,20 +1,28 @@
 var route = require('../../../routes/r.csv'),
-    should = require('should');
+    config = require('../../../app.config'),
+    should = require('should'),
+    path = require('path'),
+    tek = require('tek'),
+    fs = require('fs');
 
 // valid data
-var data0 = [
-    'j0123,j@example.com,John,Crazy,p123,'.split(','),
-    'ttt,t@example.com,Tek,Roman,p555,'.split(',')
-];
+function data0() {
+    return [
+        'j0123,j@example.com,John,Crazy,p123,'.split(','),
+        'ttt,t@example.com,Tek,Roman,p555,'.split(',')
+    ];
+}
 
 //invalid data
-var data1 = [
-    'j0123,j@example.com,John,Crazy,p123,'.split(','),
-    ',,John,Crazy,p123,'.split(',')
-];
+function data1() {
+    return [
+        'j0123,not_email_format,John,Crazy,p123,'.split(','),
+        ',j@example.com,John,Crazy,,'.split(',')
+    ];
+}
 
 exports.lineToUserTest = function (test) {
-    route.parseUsers.lineToUser(data0[0], function (err, user) {
+    route.parse_users.lineToUser(data0()[0], function (err, user) {
         should.not.exist(err);
         should.exist(user.password_digest);
         should.exist(user.salt);
@@ -28,21 +36,33 @@ exports.lineToUserTest = function (test) {
     });
 };
 exports.lineToUserTest2 = function (test) {
-    route.parseUsers.lineToUser(data1[1], function (err, user) {
+    route.parse_users.lineToUser(data1()[1], function (err, user) {
         should.exist(err);
         test.done();
     });
 };
 
-exports.parseUsersTest = function (test) {
-    route.parseUsers(data0, function (result) {
+exports.parse_usersTest = function (test) {
+    route.parse_users(data0(), function (result) {
         result.should.be.lengthOf(2);
         test.done();
     });
 };
-exports.parseUsersTest2 = function (test) {
-    route.parseUsers(data1, function (result) {
-        console.log(result[1].err);
+exports.parse_usersTest2 = function (test) {
+    route.parse_users(data1(), function (users, errors) {
+        should.exist(errors);
+        console.log(errors);
         test.done();
+    });
+};
+
+exports.save_previewTest = function (test) {
+
+    var resolve = path.resolve;
+    config.jsonDir = resolve(__dirname, '../../work');
+    tek.file.cleanDir(resolve(config.jsonDir, 'preview/user_import'), function () {
+        route.import_user.save_preview(data1(), null, null, function (saved) {
+            test.done();
+        });
     });
 };

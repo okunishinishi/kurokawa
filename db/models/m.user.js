@@ -20,6 +20,9 @@ User.schema = new Schema({
     password_digest: {
         required: true,
         minLength: 2
+    },
+    email:{
+        format:'email'
     }
 });
 

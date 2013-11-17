@@ -21,6 +21,7 @@ exports.jsDir = resolve(exports.publicDir, 'javascripts');
 exports.imgDir = resolve(exports.publicDir, 'images');
 exports.cssDir = resolve(exports.publicDir, 'stylesheets');
 exports.hbsDir = resolve(exports.publicDir, 'hbs');
+exports.jsonDir = resolve(exports.publicDir, 'json');
 exports.hbsTemplateFile = resolve(exports.jsDir, "templates.js");
 
 exports.set = {
