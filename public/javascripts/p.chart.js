@@ -87,11 +87,10 @@
         filterTable: function (filterword) {
             var table = $(this),
                 tbody = table.find('tbody');
+            tbody.find('tr').filterTableRow(filterword);
             if (filterword) {
-                tbody.find('tr').filterTableRow(filterword);
             } else {
                 tbody.find('.filter-table-row-hidden').removeClass('filter-table-row-hidden');
-                tbody.find('.hit-word').restoreHitWord();
             }
             return table;
         },
