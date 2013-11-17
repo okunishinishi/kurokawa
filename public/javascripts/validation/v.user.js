@@ -3,9 +3,20 @@
  */
 v.user = (function (v) {
     var Schema = v.Schema;
-    return {
-        mypage: new Schema({
 
-        })
+    var user = {
+        username: {
+            required: true,
+            minLength: 2
+        },
+        email: {
+            format: 'email'
+        }
+    };
+    var mypage = new Schema(user),
+        admin = new Schema(user);
+    return {
+        mypage: mypage,
+        admin: admin
     }
 })(v);

@@ -154,8 +154,10 @@
         validatableAjaxForm: function (callback) {
             var form = $(this);
             return form.ajaxForm(function (data) {
-                form.errForm(data.errors || []);
-                callback.call(form, data);
+                var errors = data.errors || [];
+                form.errForm(errors);
+                var valid = !errors.length;
+                callback.call(form, data, valid);
             })
         },
         errForm: function (err) {
@@ -225,10 +227,12 @@
         detailForm: function (mode, saveBtn, editBtn) {
             var form = $(this).addClass('editable-form');
 
-            form.ajaxForm(function () {
+            form.validatableAjaxForm(function (data, valid) {
+                if (!valid) return;
                 editBtn.show();
                 saveBtn.hide();
                 form.editableForm('view');
+                $.confirmLeave(false);
             });
             editBtn.click(function () {
                 form.editableForm('edit');

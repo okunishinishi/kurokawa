@@ -2,11 +2,13 @@ var tek = require('tek'),
     copy = tek.meta.copy,
     db = require('../db'),
     sign = require('./r.sign'),
+    validations = require('./validations'),
     getSignUser = sign.getSignUser,
     setSignUser = sign.setSignUser,
     csv = require('./r.csv'),
     User = db.models['User'],
-    Team = db.models['Team'];
+    Team = db.models['Team'],
+    JobQueue = tek['JobQueue'];
 
 /**
  * find single model
@@ -115,11 +117,17 @@ exports.api = {
     save: function (req, res) {
         var l = res.locals.l;
         var user = new User(req.body);
-        var result = user.validate();
-        if (!result.valid) {
-            res.json(result);
-            return;
+
+        function send(user, action) {
+            user[action](function (user) {
+                res.json({
+                    valid: true,
+                    model: user,
+                    action: action
+                });
+            });
         }
+
         findOne(user._id, function (duplicate) {
             var action = duplicate ? 'update' : 'save';
             if (duplicate) {
@@ -132,15 +140,32 @@ exports.api = {
                     });
                     return;
                 }
-                copy.fallback(duplicate, user);
-            }
-            user[action](function (user) {
-                res.json({
-                    valid: true,
-                    model: user,
-                    action: action
+                validateUserChange(duplicate, user, function (errors) {
+                    if (errors) {
+                        res.json({
+                            valid: false,
+                            errors: errors
+                        });
+                        return;
+                    }
+                    delete user.password_digest;
+                    copy.fallback(duplicate, user);
+                    var result = user.validate();
+                    if (!result.valid) {
+                        res.json(result);
+                        return;
+                    }
+                    send(user, action);
                 });
-            });
+            } else {
+                var result = user.validate();
+                if (!result.valid) {
+                    res.json(result);
+                    return;
+                }
+                send(user, action);
+            }
+
         });
     },
 
@@ -162,3 +187,34 @@ exports.api = {
         });
     }
 };
+
+
+function validateUserChange(orign, changed, callback) {
+    var queue = new JobQueue,
+        errors = [];
+
+    function validate(key) {
+        return function (next) {
+            var isChanged = changed[key] && (orign[key] != changed[key]);
+            if (!isChanged) {
+                next();
+                return;
+            }
+            var condition = {};
+            condition[key] = changed[key];
+            User.findOneByCondition(condition, function (duplicate) {
+                if (duplicate)errors.push({
+                    property: key,
+                    message: 'is already taken'
+                });
+                next();
+            });
+        }
+    }
+
+    queue.push(validate('username'));
+    queue.push(validate('email'));
+    queue.execute(function () {
+        callback && callback(errors.length && errors || null);
+    });
+}
