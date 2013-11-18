@@ -78,6 +78,9 @@ l = {
             "user_manage": "user manage"
         }
     },
+    "titles": {
+        "chart_sheet_filter": "filter"
+    },
     "lead": {
         "index_page": "Select client company."
     },
@@ -138,6 +141,7 @@ l = {
         "add_filter": "+ add filter",
         "back_link": {
             "admin_page": "admin menu"
-        }
+        },
+        "apply": "apply"
     }
 };

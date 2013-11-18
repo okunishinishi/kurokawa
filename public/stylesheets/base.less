@@ -241,6 +241,49 @@ body {
   .border-radius(8px);
   padding: 10px 10px;
   .book-cover-back();
+
+  @back:darken(@white,5);
+  @color:darken(@gray, 20);
+  .checkbox-radio-style(@back;@color);
+  [type="checkbox"] + label,
+  [type="radio"] + label{
+    padding-right: 15px;
+    padding-left:22px;
+    white-space:nowrap;
+    &:before{
+      border:1px solid #CACACA;
+      bottom:3px;
+      .square(9px);
+      background-color: darken(@white,1);
+      .box-shadow(none);
+    }
+    &:after{
+      border-color: #5A5A5A;
+      left: 11px;
+      height: 7px;
+      bottom: 6px;
+    }
+    &:hover{
+      &:before{
+        background-color: darken(@white,3);
+      }
+      &:after{
+        display: inline-block;
+        opacity: .5;
+      }
+    }
+  }
+  [type="checkbox"],
+  [type="radio"]{
+    &:checked{
+      & + label{
+        &:after{
+          display: inline-block;
+          opacity: 1;
+        }
+      }
+    }
+  }
 }
 
 #book-belt {
@@ -374,6 +417,7 @@ table {
 
 #main {
   .btn {
+    outline: none;
     background-image: none;
     background-color: transparent;
     border-color: @gray;
@@ -529,7 +573,10 @@ th {
   margin-bottom: -1px;
   border-bottom: none;
   .border-radius(4px 4px 0 0);
+  opacity: .75;
+  padding: 4px 10px;
   &:hover {
+    opacity: 1;
     .tab-style();
     border-bottom: none;
     background-color: darken(@white, 4);
@@ -538,6 +585,7 @@ th {
   }
   &.tab-active,
   &.tab-active:hover {
+    opacity: 1;
     background-color: @white;
     z-index: 3;
   }

@@ -12,6 +12,36 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 	);
 })();(function() {
 	var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+	templates['chart-filter-select-form'] = template(
+	function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "";
+  buffer += "\n            <li class=\"chart-filter-select-list-item\">\n                <input type=\"checkbox\" name=\"filter_value\" value=\""
+    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+    + "\" id=\"chart-filter-value-input-"
+    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+    + "\" checked/>\n                <label for=\"chart-filter-value-input-"
+    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+    + "\">"
+    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+    + "</label>\n            </li>\n        ";
+  return buffer;
+  }
+
+  buffer += "<form id=\"chart-filter-select-form\">\n    <ul class=\"no-style-list\">\n        ";
+  stack1 = helpers.each.call(depth0, depth0.values, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    </ul>\n</form>";
+  return buffer;
+  }
+	);
+})();(function() {
+	var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
 	templates['company-list-item'] = template(
 	function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];

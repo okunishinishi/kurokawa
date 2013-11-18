@@ -18,8 +18,8 @@
                 tbody = table.find('tbody');
 
             var bodyTr = tbody.find('tr');
-            thead.find('th').click(function () {
-                var th = $(this),
+            thead.find('th label').click(function () {
+                var th = $(this).parent('th'),
                     asc = eval(th.attr('data-asc') || 'false'),
                     col = th.data('col');
                 th.siblings('[data-asc]').removeAttr('data-asc');
@@ -49,8 +49,19 @@
             return table;
         },
         sheetTable: function () {
-            var table = $(this);
+            var table = $(this),
+                thead = table.find('.sheet-thead'),
+                tbody = table.find('.sheet-tbody');
             table.sortableTable();
+
+            table.on('mouseenter', '.sheet-th,.sheet-cell', function () {
+                var cell = $(this),
+                    col = cell.data('col');
+                thead.find('.col-' + col)
+                    .addClass('hovered')
+                    .siblings('.hovered')
+                    .removeClass('hovered');
+            });
             return table;
         },
         sheetSearchForm: function (callback) {
@@ -101,6 +112,39 @@
                 inner.width(bookWidth - 70);
             };
             return page;
+        },
+        filterSelectSection: function (values, callback) {
+            var section = $(this),
+                content = $('.section-content', section);
+            var tmpl = {
+                form: hbs.templates['chart-filter-select-form']
+            };
+            var html = tmpl.form({
+                values: values
+            });
+            content.html(html);
+
+            var form = content.find('form');
+            form.submit(function (e) {
+                e.preventDefault();
+                var values = form.getFormValue().toObj();
+                callback && callback(values);
+            });
+
+            var checkbox = form.find(':checkbox');
+            checkbox.doStyle = function () {
+                checkbox.each(function () {
+                    var checked = this.checked,
+                        li = $(this).parent('li');
+                    li.toggleClass('disabled', !checked);
+                });
+            };
+            form.change(function () {
+                checkbox.doStyle();
+                form.submit();
+            });
+            checkbox.doStyle();
+            return section;
         }
     });
 
@@ -124,5 +168,30 @@
         $('#sheet-search-form', body).sheetSearchForm(function (search_word) {
             sheetTable.filterTable(search_word);
         });
+
+
+        sheetTable.getColValues = function (key) {
+            var thead = sheetTable.find('.sheet-thead'),
+                tbody = sheetTable.find('.sheet-tbody');
+            var th = thead.findByAttr('data-key', key),
+                col = th.data('col');
+            var cell = tbody.find('.col-' + col);
+            return cell.toArray().map(function (cell) {
+                return $.trim($(cell).text());
+            });
+        };
+
+        sheetTable.find('.filter-add-btn').click(function () {
+            var btn = $(this),
+                key = btn.parent('th').data('key');
+            var values = tek.unique(sheetTable.getColValues(key).filter(function (value) {
+                return !!value;
+            })).sort();
+            filterSelectSection.filterSelectSection(values, function (values) {
+            });
+        });
+        var filterSelectSection = $('#filter-select-section', body);
+
+        sheetTable.find('.filter-add-btn').first().click(); //TODO remvoe
     });
 })(jQuery, window['l'], Handlebars);

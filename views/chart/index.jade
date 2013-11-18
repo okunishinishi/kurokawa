@@ -15,29 +15,34 @@ block left-content
     h1.page-title=company.name
     br
 
-    #filter-section
-        #filter-select-tabs
-            each key in sheet_keys
-                a.tab=l.lbl[key]
-        br.clear
-        .tab-content
-    a.float-left#add-filter-btn(href='javascript:void(0)')=l.btn.add_filter
+    #filter-select-section.stick-right.stick-top.paper
+        .paper-content
+            h1.paper-title=l.titles.chart_sheet_filter
+            .section-content
+
     br.clear
+    br
     table#sheet-table
-        thead
+        colgroup.sheet-colgroup
+            col
+            each key,i in sheet_keys
+                col(data-col=i, data-key=key,class='col-'+i)
+
+        thead.sheet-thead
             tr
                 th
                 each key,i in sheet_keys
-                    th.sortable-th(data-col=i)
+                    th(data-col=i, data-key=key, class='sortable-th col-'+i).positioned
+                        a.filter-add-btn="+"
                         label=l.lbl[key]
 
-        tbody
+        tbody.sheet-tbody
             each person in persons
                 tr
                     th
                         a(href=url("/person/#{person._id}"))=person.name
                     for key,i in sheet_keys
-                        td(class='col-'+i)=person[key]
+                        td(class='sheet-cell col-'+i, data-col=i)=person[key]
 
     from#sheet-search-form.inline-form.stick-right.stick-top(
             action='',

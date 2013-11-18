@@ -83,6 +83,10 @@ l.lbl.admin_menu = {
     user_manage: [l.lbl.user, 'manage'].join(' ')
 };
 
+l.titles = {
+    chart_sheet_filter: 'filter'
+};
+
 l.lead = {};
 l.lead.index_page = 'Select client company.';
 
@@ -151,6 +155,6 @@ l.btn.add_filter = '+ add filter';
 l.btn.back_link = {
     admin_page: [l.lbl.admin, 'menu'].join(' ')
 };
-
+l.btn.apply = 'apply';
 
 

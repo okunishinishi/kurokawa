@@ -392,6 +392,15 @@
         },
         mainNav: function () {
             return $(this).slideinMenu();
+        },
+        tab: function (callback) {
+            return $(this).click(function (e) {
+                var clicked = $(this);
+                clicked.addClass('tab-active')
+                    .siblings('.tab-active')
+                    .removeClass('tab-active');
+                callback && callback.apply(this, e);
+            });
         }
     });
     $(function () {

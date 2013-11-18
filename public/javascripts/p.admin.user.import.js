@@ -116,7 +116,7 @@
         importWayTabs: function (hash, callback) {
             var tabs = $(this);
             var tab = tabs.find('.tab');
-            tab.click(function (e) {
+            tab.tab(function(e){
                 var a = $(this),
                     href = a.attr('href');
                 var id = a.attr('id');
@@ -125,9 +125,6 @@
                     location.href = '#' + id;
                     tab.show();
                 }
-                a.addClass('tab-active')
-                    .siblings('.tab-active')
-                    .removeClass('tab-active');
                 e.preventDefault();
                 callback(href);
             });

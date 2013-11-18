@@ -1,0 +1,10 @@
+<form id="chart-filter-select-form">
+    <ul class="no-style-list">
+        {{#each values}}
+            <li class="chart-filter-select-list-item">
+                <input type="checkbox" name="filter_value" value="{{this}}" id="chart-filter-value-input-{{this}}" checked/>
+                <label for="chart-filter-value-input-{{this}}">{{this}}</label>
+            </li>
+        {{/each}}
+    </ul>
+</form>
