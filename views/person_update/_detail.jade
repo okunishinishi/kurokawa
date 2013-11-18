@@ -1,18 +1,21 @@
+mixin person_update_history_th(key)
+    th=l.lbl.person_update_history[key]
+
 mixin person_update_history_table(person_update)
     table#person_update-table.wide-table
         caption=l.lbl.person_update_history.caption
         thead
             tr
-                th=l.lbl.person_update_history.date
-                th=l.lbl.person_update_history.property
-                th=l.lbl.person_update_history.from
-                th=l.lbl.person_update_history.to
-                th=l.lbl.person_update_history.user
+                +person_update_history_th('date')
+                +person_update_history_th('property')
+                +person_update_history_th('from')
+                +person_update_history_th('to')
+                +person_update_history_th('user')
         tbody
             if person_update.changes
                 each change in person_update.changes
                     tr
-                        th=change.date
+                        th=change.date_label
                         td=change.property
                         td=change.from
                         td=change.to

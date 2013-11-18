@@ -1,11 +1,13 @@
-var tek = require('tek'),
-    copy = tek['meta']['copy'],
-    db = require('../db'),
-    Person = db.models['Person'],
-    PersonUpdate = db.models['PersonUpdate'],
-    Company = db.models['Company'],
-    util = require('../util'),
-    toIdMap = util.obj.toIdMap;
+var tek, copy, db, Person, PersonUpdate, dateformat, Company, util, toIdMap;
+tek = require('tek');
+copy = tek['meta']['copy'];
+db = require('../db');
+Person = db.models['Person'];
+PersonUpdate = db.models['PersonUpdate'];
+dateformat = require('dateformat');
+Company = db.models['Company'];
+util = require('../util');
+toIdMap = util.obj.toIdMap;
 
 function notFound(res) {
     res.redirect('/404');
@@ -47,24 +49,31 @@ exports.index = function (req, res) {
         return;
     }
     Person.findById(p._id, function (person) {
-        if (!person) {
-            notFound(res);
-            return;
-        }
-        Company.findAll(function (companies) {
-            var companyMap = toIdMap(companies);
-            var company = companyMap[person.company_id];
-            person.company_name = company && company.name;
-            PersonUpdate.findByPerson(person, function (personUpdate) {
-                res.render('person/index.jade', {
-                    person: person,
-                    companies: companies,
-                    personUpdate: personUpdate
+            if (!person) {
+                notFound(res);
+                return;
+            }
+            Company.findAll(function (companies) {
+                var companyMap = toIdMap(companies);
+                var company = companyMap[person.company_id];
+                person.company_name = company && company.name;
+                PersonUpdate.findByPerson(person, function (personUpdate) {
+                    personUpdate.changes = personUpdate.changes.map(function (change) {
+                        change.date_label = dateformat(new Date(Number(change.date)), 'yyyy/mm/dd HH:MM:ss');
+                        return change;
+                    });
+                    res.render('person/index.jade', {
+                        person: person,
+                        companies: companies,
+                        personUpdate: personUpdate
+                    });
                 });
             });
-        });
-    });
-};
+        }
+    )
+    ;
+}
+;
 
 
 exports.api = {
@@ -155,7 +164,9 @@ exports.api = {
                 });
                 copy.fallback(duplicate, person);
                 PersonUpdate.findByPerson(person, function (personUpdate) {
-                    personUpdate.changes = change.concat(personUpdate.changes);
+                    personUpdate.changes = change.concat(personUpdate.changes).sort(function (a, b) {
+                        return Number(b.date) - Number(a.date);
+                    });
                     personUpdate.update(function () {
                         person.person_update_id = personUpdate._id;
                         save(person, action);
