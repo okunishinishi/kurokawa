@@ -7,7 +7,7 @@
  *  Hbs : handlebars
  *
  */
-(function ($, l, hbs) {
+(function ($, l, hbs, window) {
     hbs.registerHelper('l', function (name) {
         return name && eval(["window", "l"].concat(name).join('.'));
     });
@@ -438,7 +438,11 @@
             });
         });
 
-        $('#book').book();
+        var book = $('#book').book();
+
+        $(window).resize(function () {
+            book.trigger('resize-book');
+        });
     });
-})(jQuery, window['l'], Handlebars);
+})(jQuery, window['l'], Handlebars, window);
 

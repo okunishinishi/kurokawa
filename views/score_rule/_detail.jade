@@ -11,14 +11,16 @@ mixin person_score_rule_tr(data, key)
             value=data && data[key])
 
 mixin person_score_rule_table_basic(data, basic_data_keys)
-    table.float-left
+    table.float-left.float-table
         caption=l.lbl.personal_basic
         thead
         tbody
             each basic_data_key in basic_data_keys
                 +person_score_rule_tr(data,basic_data_key)
-mixin person_score_rule_table_extra(data, basic_data_keys)
-    table.float-left
+mixin person_score_rule_table_extra(data, extra_data_keys)
+    table.float-left.float-table
         caption=l.lbl.personal_extra
         thead
         tbody
+            each extra_data_key in extra_data_keys
+                +person_score_rule_tr(data,extra_data_key)
