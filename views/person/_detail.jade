@@ -48,11 +48,11 @@ mixin bool_radio_tr(key, data)
 mixin person_extra_tr(key, data)
     case key
         when 'single'
-            bool_radio_tr(key, data)
-        when 'drink'
-            bool_radio_tr(key, data)
+            +bool_radio_tr(key, data)
+        when 'drinks'
+            +bool_radio_tr(key, data)
         when 'smokes'
-            bool_radio_tr(key, data)
+            +bool_radio_tr(key, data)
         when 'free_word'
             +textarea-tr(key, person)
         default
