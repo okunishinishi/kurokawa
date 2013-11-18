@@ -1,7 +1,21 @@
 mixin person_update_history_th(key)
-    th=l.lbl.person_update_history[key]
+    th
+        label=l.lbl.person_update_history[key]
+
+mixin person_update_history_td(data, key)
+    td(data-key=key)=data[key]
+
+mixin person_update_history_tr(data)
+    tr
+        +person_update_history_td(data, 'date_label')
+        +person_update_history_td(data, 'property')
+        +person_update_history_td(data, 'from')
+        +person_update_history_td(data, 'to')
+        +person_update_history_td(data, 'username')
+
 
 mixin person_update_history_table(person_update)
+
     table#person_update-table.wide-table
         caption=l.lbl.person_update_history.caption
         thead
@@ -14,9 +28,8 @@ mixin person_update_history_table(person_update)
         tbody
             if person_update.changes
                 each change in person_update.changes
-                    tr
-                        th=change.date_label
-                        td=change.property
-                        td=change.from
-                        td=change.to
-                        td=change.username
+                    +person_update_history_tr(change)
+
+        tfoot#person_update-tr-tmpl.hidden
+            +person_update_history_tr({})
+

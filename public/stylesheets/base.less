@@ -503,7 +503,7 @@ th {
   &[data-mode="view"] {
     input[type="checkbox"],
     input[type="radio"] {
-      display: none;
+      display: none ;
     }
     select {
       border: none;
@@ -513,8 +513,12 @@ th {
     }
     .checkable-label {
       display: none !important;
-      &.checked {
-        display: inline-block !important;
+    }
+    :checked + .checkable-label {
+      display: inline-block !important;
+      padding-left: 0 !important;
+      &:before,&:after{
+        display: none !important;
       }
     }
   }

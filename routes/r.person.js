@@ -13,6 +13,11 @@ function notFound(res) {
     res.redirect('/404');
 }
 
+function formatChange(change) {
+    change.date_label = dateformat(new Date(Number(change.date)), 'yyyy/mm/dd HH:MM:ss');
+    return change;
+}
+
 /**
  * find single model
  * @param _id
@@ -59,8 +64,7 @@ exports.index = function (req, res) {
                 person.company_name = company && company.name;
                 PersonUpdate.findByPerson(person, function (personUpdate) {
                     personUpdate.changes = personUpdate.changes.map(function (change) {
-                        change.date_label = dateformat(new Date(Number(change.date)), 'yyyy/mm/dd HH:MM:ss');
-                        return change;
+                        return formatChange(change);
                     });
                     res.render('person/index.jade', {
                         person: person,
@@ -133,12 +137,13 @@ exports.api = {
             return;
         }
 
-        function save(person, action) {
+        function save(person, action, change) {
             person[action](function (person) {
                 res.json({
                     valid: true,
                     model: person,
-                    action: action
+                    action: action,
+                    change: change
                 });
             });
         }
@@ -169,7 +174,9 @@ exports.api = {
                     });
                     personUpdate.update(function () {
                         person.person_update_id = personUpdate._id;
-                        save(person, action);
+                        save(person, action, change.map(function (change) {
+                            return formatChange(change);
+                        }));
                     });
                 });
             } else {

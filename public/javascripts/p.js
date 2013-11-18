@@ -227,7 +227,7 @@
 
             form.attr('data-mode', mode);
         },
-        detailForm: function (mode, saveBtn, editBtn) {
+        detailForm: function (mode, saveBtn, editBtn, callback) {
             var form = $(this).addClass('editable-form');
 
             form.validatableAjaxForm(function (data, valid) {
@@ -237,6 +237,7 @@
                 form.editableForm('view');
                 form.setFormValue(data.model);
                 $.confirmLeave(false);
+                callback && callback(data);
             });
             editBtn.click(function () {
                 form.editableForm('edit');

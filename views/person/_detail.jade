@@ -18,9 +18,10 @@ mixin radio-tr(key, data, choices)
             label=l.lbl[key]
         td
             each choice in choices
-                label.checkable-label
-                    input(name=key, type='radio',value=choice.value, checked=data[key]==choice.value)
-                    span=l.lbl[choice.label]
+                input(name=key, type='radio',value=choice.value, checked=data[key]==choice.value, id="#{key}-input-#{choice.value}")
+                label.checkable-label(
+                    for="#{key}-input-#{choice.value}"
+                )=l.lbl[choice.label]
 
 mixin person_basic_table(person)
     br
