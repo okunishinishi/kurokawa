@@ -272,9 +272,7 @@
                 })).sort();
                 if (!values.length) {
                     btn.hide();
-                    return;
                 }
-                ;
             })
             .click(function (e) {
                 e.stopPropagation();
@@ -289,8 +287,10 @@
                     sheetTable.findCol(key).toggleClass('filter-active', filter_active);
                     var th = sheetTable.findTh(key),
                         col = th.data('col');
-                    th.find('.filter-edit-btn,.filter-add-btn')
-                        .toggleClass('filter-active', filter_active);
+                    th
+                        .find('.filter-edit-btn,.filter-add-btn')
+                        .toggleClass('filter-active', filter_active)
+                        .filter('.filter-edit-btn').data('values', values);
 
                     if (filter_active) {
                         sheetTable.applyFilter(col, values['filter_value']);
@@ -301,6 +301,10 @@
 
                 filterSelectSection.showAtPoint(btn.offset());
 
+                var savedValue = btn.data('values');
+                if (savedValue) {
+                    filterSelectSection.setValues(savedValue);
+                }
                 filterSelectSection.find('form').submit();
             });
 
@@ -326,6 +330,18 @@
             }
             filterSelectSection.css(point);
         };
+        filterSelectSection.setValues = function (values) {
+            var form = filterSelectSection.find('form');
+            var filter_value = values['filter_value'];
+            form
+                .findByName('filter_value')
+                .each(function () {
+                    var input = $(this),
+                        val = input.val();
+                    var checked = !!(filter_value && (filter_value.indexOf(val) != -1));
+                    input.prop('checked', checked);
+                });
+        };
 
 
         body.click(function () {
@@ -333,8 +349,5 @@
                 filterSelectSection.hide();
             }
         });
-        sheetTable.find('.filter-add-btn').first().click(); //TODO remvoe
-
-
     });
 })(jQuery, window['l'], Handlebars, window);
