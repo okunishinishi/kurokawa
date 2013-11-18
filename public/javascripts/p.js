@@ -217,7 +217,7 @@
                         }
                     });
                     editableText.trigger('tk-editable-text-fix');
-                    $(':text,textarea', form).filter(':visible').hide();
+                    $(':text,textarea,[type="number"],[type="email"]', form).filter(':visible').hide();
                     break;
                 case 'edit':
                     $checkable.show();
@@ -245,7 +245,7 @@
                 saveBtn.show();
             });
 
-            form.find(':text')
+            form.find(':text,[type="number"]')
                 .keydown(function (e) {
                     switch (e.which) {
                         case $.ui.keyCode.ENTER:

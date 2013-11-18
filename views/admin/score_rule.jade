@@ -17,8 +17,10 @@ block left-content
     p.lead=l.lead.score_rule
 
 block right-content
-    #score_rule-form(action=url('/api/score_rule/save'), method='post')
+    form#score_rule-form(action=url('/api/score_rule/save'), method='post')
+        input(type='hidden', value=scoreRule._id, name='_id',)
+        a#score_rule-edit-btn.float-right(href='javascript:void(0)')=l.btn.edit
         +person_score_rule_table_basic(scoreRule.person, person_keys.basic_data_keys)
         +person_score_rule_table_extra(scoreRule.person, person_keys.extra_data_keys)
         br.clear
-        input.wide-btn.btn(type='submit', value=l.btn.save)
+        input#score_rule-save-btn.wide-btn.btn(type='submit', value=l.btn.save)

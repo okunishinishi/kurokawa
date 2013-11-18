@@ -8,6 +8,7 @@ mixin person_score_rule_tr(data, key)
             max=100,
             type='number',
             name="person.#{key}",
+                data-role='editable-text',
             value=data && data[key])
 
 mixin person_score_rule_table_basic(data, basic_data_keys)

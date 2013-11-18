@@ -17,7 +17,7 @@ exports.api = {
             res.json(result);
             return;
         }
-        findOne(scoreRule._id, function (duplicate) {
+        ScoreRule.findSingleton(function (duplicate) {
             var action = duplicate ? 'update' : 'save';
             if (duplicate) {
                 var vr = scoreRule._vr,
