@@ -11,7 +11,7 @@ block javascripts
 
 block upper-content
     if person.company_name
-        +back_link(person.company_name, url("/chart/sheet/"+person.company_id))
+        +back_link(person.company_name, url("/chart/"+person.company_id))
 
 
 block left-content

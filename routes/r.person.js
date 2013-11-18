@@ -157,6 +157,7 @@ exports.api = {
                 PersonUpdate.findByPerson(person, function (personUpdate) {
                     personUpdate.changes = change.concat(personUpdate.changes);
                     personUpdate.update(function () {
+                        person.person_update_id = personUpdate._id;
                         save(person, action);
                     });
                 });

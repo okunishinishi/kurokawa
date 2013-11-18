@@ -422,7 +422,7 @@
             .ajaxComplete(function (e, xhr, settings) {
                 var json = xhr['responseJSON'];
                 var error_alert = json && json['error_alert'];
-                if (json) {
+                if (error_alert) {
                     $.errAlert(error_alert);
                 }
             });

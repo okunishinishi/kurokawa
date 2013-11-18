@@ -25,20 +25,27 @@ PersonUpdate.prototype.validate = function () {
 
 PersonUpdate.findByPerson = function (person, callback) {
     var s = this;
-    var _id = person._id;
-    s.findOneByCondition({
-        person_id: _id
-    }, function (personUpdate) {
+    var person_update_id = person.person_update_id;
+
+    function new_person_update(person, callback) {
+        var personUpdate = new PersonUpdate({
+            person_id: person._id
+        });
+        personUpdate.changes = [];
+        personUpdate.save(function (personUpdate) {
+            callback(personUpdate);
+        });
+    }
+
+    if (!person_update_id) {
+        new_person_update(person, callback);
+        return;
+    }
+    s.findById(person_update_id, function (personUpdate) {
         if (personUpdate) {
             callback(personUpdate);
         } else {
-            personUpdate = new PersonUpdate({
-                person_id:_id
-            });
-            personUpdate.changes = [];
-            personUpdate.save(function (personUpdate) {
-                callback(personUpdate);
-            });
+            new_person_update(person, callback);
         }
     });
 };
