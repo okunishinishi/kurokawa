@@ -46,7 +46,10 @@ function program1(depth0,data) {
     + "</label>\n        <input type=\"radio\" name=\"filter_active\" value=\"false\" id=\"filter_active-input-false\"/>\n        <label for=\"filter_active-input-false\">";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers['l'] || depth0['l']),stack1 ? stack1.call(depth0, "lbl.off", options) : helperMissing.call(depth0, "l", "lbl.off", options)))
-    + "</label>\n    </div>\n    <ul class=\"no-style-list chart-filter-value-list\">\n        ";
+    + "</label>\n    </div>\n    <ul class=\"no-style-list chart-filter-value-list\">\n        <li class=\"chart-filter-select-list-item\">\n            <input type=\"checkbox\" name=\"filter_value\" value=\"__empty__\" id=\"chart-filter-value-input-__empty__\"\n                   checked/>\n            <label for=\"chart-filter-value-input-__empty__\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers['l'] || depth0['l']),stack1 ? stack1.call(depth0, "lbl.__empty__", options) : helperMissing.call(depth0, "l", "lbl.__empty__", options)))
+    + "</label>\n        </li>\n        ";
   stack2 = helpers.each.call(depth0, depth0.values, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n        <li class=\"stick-bottom stick-right toogle-list-item\">\n            <a class=\"toogle-all-btn\" href=\"javascript:void(0)\">";

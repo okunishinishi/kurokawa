@@ -316,7 +316,8 @@
             })
             .click(function (e) {
                 e.stopPropagation();
-            });
+            })
+            .hide();
 
 
         filterSelectSection.showAtPoint = function (point) {

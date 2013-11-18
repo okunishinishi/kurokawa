@@ -80,7 +80,8 @@ l = {
             "user_manage": "user manage"
         },
         "filter": "filter",
-        "filter_on": "filtered"
+        "filter_on": "filtered",
+        "__empty__": "__empty__"
     },
     "titles": {
         "chart_sheet_filter": "filter"

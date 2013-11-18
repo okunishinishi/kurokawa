@@ -12,6 +12,11 @@
         <label for="filter_active-input-false">{{l 'lbl.off'}}</label>
     </div>
     <ul class="no-style-list chart-filter-value-list">
+        <li class="chart-filter-select-list-item">
+            <input type="checkbox" name="filter_value" value="__empty__" id="chart-filter-value-input-__empty__"
+                   checked/>
+            <label for="chart-filter-value-input-__empty__">{{l 'lbl.__empty__'}}</label>
+        </li>
         {{#each values}}
             <li class="chart-filter-select-list-item">
                 <input type="checkbox" name="filter_value" value="{{this}}" id="chart-filter-value-input-{{this}}"

@@ -84,11 +84,12 @@ l.lbl.admin_menu = {
     user_import: [l.lbl.user, 'import'].join(' '),
     user_manage: [l.lbl.user, 'manage'].join(' ')
 };
-l.lbl.filter='filter';
-l.lbl.filter_on='filtered';
+l.lbl.filter = 'filter';
+l.lbl.filter_on = 'filtered';
 l.titles = {
     chart_sheet_filter: 'filter'
 };
+l.lbl.__empty__ = '__empty__';
 
 l.lead = {};
 l.lead.index_page = 'Select client company.';
