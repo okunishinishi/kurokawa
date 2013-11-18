@@ -3,7 +3,12 @@ mixin text-tr(key, data)
         th
             label(for=key+'-input')=l.lbl[key]
         td
-            input(type='text', name=key, value=data[key], id=key+'-input', data-role='editable-text')
+            input(type='text',
+            name=key,
+            value=data[key],
+            id=key+'-input',
+            data-role='editable-text',
+            data-helper=person_helpers && person_helpers[key])
 
 mixin textarea-tr(key, data)
     tr

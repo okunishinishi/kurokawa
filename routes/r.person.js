@@ -1,13 +1,13 @@
-var tek, copy, db, Person, PersonUpdate, dateformat, Company, util, toIdMap;
-tek = require('tek');
-copy = tek['meta']['copy'];
-db = require('../db');
-Person = db.models['Person'];
-PersonUpdate = db.models['PersonUpdate'];
-dateformat = require('dateformat');
-Company = db.models['Company'];
-util = require('../util');
-toIdMap = util.obj.toIdMap;
+var tek = require('tek'),
+    copy = tek['meta']['copy'],
+    db = require('../db'),
+    Person = db.models['Person'],
+    PersonUpdate = db.models['PersonUpdate'],
+    dateformat = require('dateformat'),
+    Company = db.models['Company'],
+    util = require('../util'),
+    toIdMap = util.obj.toIdMap,
+    Helper = db.models['Helper'];
 
 function notFound(res) {
     res.redirect('/404');
@@ -58,20 +58,23 @@ exports.index = function (req, res) {
                 notFound(res);
                 return;
             }
-            Company.findAll(function (companies) {
-                var companyMap = toIdMap(companies);
-                var company = companyMap[person.company_id];
-                person.company_name = company && company.name;
-                PersonUpdate.findByPerson(person, function (personUpdate) {
-                    personUpdate.changes = personUpdate.changes.map(function (change) {
-                        return formatChange(change);
-                    });
-                    res.render('person/index.jade', {
-                        person: person,
-                        companies: companies,
-                        personUpdate: personUpdate,
-                        basic_data_keys:Person.basic_data_keys,
-                        extra_data_keys:Person.extra_data_keys
+            Helper.findSingleton(function (helper) {
+                Company.findAll(function (companies) {
+                    var companyMap = toIdMap(companies);
+                    var company = companyMap[person.company_id];
+                    person.company_name = company && company.name;
+                    PersonUpdate.findByPerson(person, function (personUpdate) {
+                        personUpdate.changes = personUpdate.changes.map(function (change) {
+                            return formatChange(change);
+                        });
+                        res.render('person/index.jade', {
+                            person: person,
+                            companies: companies,
+                            personUpdate: personUpdate,
+                            basic_data_keys: Person.basic_data_keys,
+                            extra_data_keys: Person.extra_data_keys,
+                            person_helpers: helper.person || ''
+                        });
                     });
                 });
             });

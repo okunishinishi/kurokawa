@@ -15,6 +15,12 @@
                 editBtn = $('#person-edit-btn', form);
 
             form.detailForm(mode, saveBtn, editBtn, callback);
+
+            form.find('[data-helper]').each(function () {
+                var input = $(this),
+                    helper = input.data('helper');
+                if (helper)input.selectableText(helper);
+            });
         },
         personBook: function (q, callback) {
             var book = $(this),
