@@ -25,6 +25,9 @@
         };
     })($.confirmRemove);
     $.extend({
+        errAlert: function (text) {
+            $('#err-alert').text(text).show();
+        }
     });
     $.fn.extend({
         /**
@@ -408,13 +411,21 @@
 
         var body = $(document.body);
 
-        body.ajaxError(function (e, req, setting, err) {
-            if (req.status) {
-                var statusCode = req.statusCode();
-//                alert(statusCode + 'something is wrong!');
-                console.error('[ajax err]', statusCode, err);
-            }
-        });
+        $(document)
+            .ajaxError(function (e, req, setting, err) {
+                if (req.status) {
+                    var statusCode = req.statusCode();
+                    console.error('[ajax err]', statusCode, err);
+                    $.errAlert(l.err.something_worng);
+                }
+            })
+            .ajaxComplete(function (e, xhr, settings) {
+                var json = xhr['responseJSON'];
+                var error_alert = json && json['error_alert'];
+                if (json) {
+                    $.errAlert(error_alert);
+                }
+            });
 
 
         $('#main-nav', body).mainNav();

@@ -1,15 +1,7 @@
 var tek = require('tek'),
     copy = tek['meta']['copy'],
     db = require('../db'),
-    Person = db.models['Person'],
-    PersonUpdate = db.models['PersonUpdate'],
-    Company = db.models['Company'],
-    util = require('../util'),
-    toIdMap = util.obj.toIdMap;
-
-function notFound(res) {
-    res.redirect('/404');
-}
+    PersonUpdate = db.models['PersonUpdate'];
 
 /**
  * find single model
@@ -18,7 +10,7 @@ function notFound(res) {
  * @returns {*}
  */
 function findOne(_id, callback) {
-    return Person.findById(_id, callback);
+    return PersonUpdate.findById(_id, callback);
 }
 
 /**
@@ -30,7 +22,7 @@ function findOne(_id, callback) {
  * @returns {*|Cursor}
  */
 function find(condition, limit, skip, callback) {
-    return Person.findByCondition(condition,function (models) {
+    return PersonUpdate.findByCondition(condition,function (models) {
         callback(models.splice(skip, limit));
     }).limit(limit).skip(skip);
 }
@@ -41,29 +33,7 @@ function find(condition, limit, skip, callback) {
  * @param res
  */
 exports.index = function (req, res) {
-    var p = req.params;
-    if (!p._id) {
-        notFound(res);
-        return;
-    }
-    Person.findById(p._id, function (person) {
-        if (!person) {
-            notFound(res);
-            return;
-        }
-        Company.findAll(function (companies) {
-            var companyMap = toIdMap(companies);
-            var company = companyMap[person.company_id];
-            person.company_name = company && company.name;
-            PersonUpdate.findByPerson(person, function (personUpdate) {
-                res.render('person/index.jade', {
-                    person: person,
-                    companies: companies,
-                    personUpdate: personUpdate
-                });
-            });
-        });
-    });
+    res.render('person_update/index.jade', {});
 };
 
 
@@ -117,52 +87,34 @@ exports.api = {
      * @param res
      */
     save: function (req, res) {
-        var person = new Person(req.body);
-        var result = person.validate();
+        var personUpdate = new PersonUpdate(req.body);
+        var result = personUpdate.validate();
         if (!result.valid) {
             res.json(result);
             return;
         }
-
-        function save(person, action) {
-            person[action](function (person) {
-                res.json({
-                    valid: true,
-                    model: person,
-                    action: action
-                });
-            });
-        }
-
-        findOne(person._id, function (duplicate) {
+        findOne(personUpdate._id, function (duplicate) {
             var action = duplicate ? 'update' : 'save';
             if (duplicate) {
-                var vr = person._vr,
+                var vr = personUpdate._vr,
                     conflict = vr && (vr != duplicate._vr);
                 if (conflict) {
-                    var l = res.locals.l;
+                    const l = res.locals.l;
                     res.json({
                         valid: false,
                         err_alert: l.err.conflict
                     });
                     return;
                 }
-                var change = duplicate.getChanges(person) || [];
-                var sign_user = res.locals.sign_user;
-                change.forEach(function (change) {
-                    change.user_id = sign_user._id;
-                    change.username = sign_user.username;
-                });
-                copy.fallback(duplicate, person);
-                PersonUpdate.findByPerson(person, function (personUpdate) {
-                    personUpdate.changes = change.concat(personUpdate.changes);
-                    personUpdate.update(function () {
-                        save(person, action);
-                    });
-                });
-            } else {
-                save(person, action);
+                copy.fallback(duplicate, personUpdate);
             }
+            personUpdate[action](function (personUpdate) {
+                res.json({
+                    valid: true,
+                    model: personUpdate,
+                    action: action
+                });
+            });
         });
     },
 
@@ -173,9 +125,9 @@ exports.api = {
      */
     destroy: function (req, res) {
         var _id = req.body['_id'];
-        findOne(_id, function (person) {
-            if (person) {
-                person.remove(function () {
+        findOne(_id, function (personUpdate) {
+            if (personUpdate) {
+                personUpdate.remove(function () {
                     res.json({count: 1});
                 });
             } else {

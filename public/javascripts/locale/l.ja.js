@@ -81,7 +81,15 @@ l = {
         },
         "filter": "filter",
         "filter_on": "filtered",
-        "__empty__": "__empty__"
+        "__empty__": "__empty__",
+        "person_update_history": {
+            "caption": "update history",
+            "date": "date",
+            "property": "property",
+            "from": "from",
+            "to": "to",
+            "user": "user"
+        }
     },
     "titles": {
         "chart_sheet_filter": "filter"

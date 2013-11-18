@@ -1,7 +1,26 @@
 @import "lib/tek-mixin";
+@import "base-mixins";
 
-#person-detail-form{
-  &.tk-loading{
+#person-detail-form {
+  &.tk-loading {
     opacity: 1;
+  }
+}
+
+#person_update-table {
+  @color: @brown;
+  color: @color;
+  caption{
+    font-weight: bolder;
+    font-size: 1.5em;
+    .text-shadow(0 -1px 1px rgba(255,255,255,.4));
+  }
+  td,th{
+    border-color: @color;
+  }
+  thead {
+    th {
+      border-top: none;
+    }
   }
 }

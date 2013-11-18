@@ -102,7 +102,7 @@ exports.api = {
                     const l = res.locals.l;
                     res.json({
                         valid: false,
-                        errors: [l.err.conflict]
+                        err_alert: l.err.conflict
                     });
                     return;
                 }

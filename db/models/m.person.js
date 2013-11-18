@@ -11,17 +11,29 @@ var tek = require('tek'),
     defineModel = DB['defineModel'];
 
 var Person = module.exports = defineModel({
-    //properties
-    parent_id: null,
-    children_ids: []
 });
 
 Person.schema = new Schema({
     //schemas
-
 });
 
 Person.prototype.validate = function () {
     var s = this;
     return Person.schema.validate(s);
+};
+
+
+Person.prototype.getChanges = function (data) {
+    var s = this;
+    return Object.keys(data).map(function (key) {
+        var isChanged = data[key] != s[key];
+        return isChanged ? {
+            date: new Date().getTime(),
+            property:key,
+            from: s[key],
+            to: data[key]
+        } : null
+    }).filter(function (data) {
+            return !!data;
+        });
 };

@@ -90,6 +90,14 @@ l.titles = {
     chart_sheet_filter: 'filter'
 };
 l.lbl.__empty__ = '__empty__';
+l.lbl.person_update_history = {
+    caption: 'update history',
+    date:'date',
+    property:'property',
+    from:'from',
+    to:'to',
+    user: l.lbl.user
+};
 
 l.lead = {};
 l.lead.index_page = 'Select client company.';

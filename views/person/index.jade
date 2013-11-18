@@ -1,6 +1,7 @@
 extends ../layout
 include ./_detail
 include ../mixins/_back_link
+include ../person_update/_detail
 
 block stylesheets
     link(rel='stylesheet', href=url.css('person.css'))
@@ -8,9 +9,9 @@ block stylesheets
 block javascripts
     script(src=url.js('p.person.js'))
 
-//block upper-content
-    //if person.company_name
-        //+back_link(person.company_name, url("/chart/sheet/"+person.company_id))
+block upper-content
+    if person.company_name
+        +back_link(person.company_name, url("/chart/sheet/"+person.company_id))
 
 
 block left-content
@@ -31,3 +32,7 @@ block right-content
 
     form#person-detail-form(method='post', action='/api/person/save')
 
+
+
+block downer-content
+    +person_update_history_table(personUpdate)
