@@ -232,6 +232,7 @@
                 editBtn.show();
                 saveBtn.hide();
                 form.editableForm('view');
+                form.setFormValue(data.model);
                 $.confirmLeave(false);
             });
             editBtn.click(function () {
