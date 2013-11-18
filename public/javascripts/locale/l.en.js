@@ -62,6 +62,8 @@ l = {
         "reports": "reports",
         "client": "client",
         "example": "example",
+        "on": "on",
+        "off": "off",
         "sub_menu": {
             "company": "client",
             "report": "reports"
@@ -76,7 +78,9 @@ l = {
             "master_manage": "master manage",
             "user_import": "user import",
             "user_manage": "user manage"
-        }
+        },
+        "filter": "filter",
+        "filter_on": "filtered"
     },
     "titles": {
         "chart_sheet_filter": "filter"
@@ -142,6 +146,7 @@ l = {
         "back_link": {
             "admin_page": "admin menu"
         },
-        "apply": "apply"
+        "apply": "apply",
+        "toggle_all": "toggle all"
     }
 };

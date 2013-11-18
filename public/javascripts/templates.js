@@ -16,7 +16,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 	function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
 
 function program1(depth0,data) {
   
@@ -25,7 +25,7 @@ function program1(depth0,data) {
     + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
     + "\" id=\"chart-filter-value-input-"
     + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
-    + "\" checked/>\n                <label for=\"chart-filter-value-input-"
+    + "\"\n                       checked/>\n                <label for=\"chart-filter-value-input-"
     + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
     + "\">"
     + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
@@ -33,10 +33,26 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  buffer += "<form id=\"chart-filter-select-form\">\n    <ul class=\"no-style-list\">\n        ";
-  stack1 = helpers.each.call(depth0, depth0.values, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    </ul>\n</form>";
+  buffer += "<form id=\"chart-filter-select-form\">\n    <div class=\"margin-box\">\n\n    <a class=\"close-btn stick-right stick-top\" href=\"javascript:void(0)\">&times</a>\n    <h1 class=\"paper-title\">";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</h1>\n    </div>\n    <div class=\"margin-box\">\n        <span>";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers['l'] || depth0['l']),stack1 ? stack1.call(depth0, "lbl.filter", options) : helperMissing.call(depth0, "l", "lbl.filter", options)))
+    + "</span>\n        <input type=\"radio\" name=\"filter_active\" value=\"true\" id=\"filter_active-input-true\" checked/>\n        <label for=\"filter_active-input-true\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers['l'] || depth0['l']),stack1 ? stack1.call(depth0, "lbl.on", options) : helperMissing.call(depth0, "l", "lbl.on", options)))
+    + "</label>\n        <input type=\"radio\" name=\"filter_active\" value=\"false\" id=\"filter_active-input-false\"/>\n        <label for=\"filter_active-input-false\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers['l'] || depth0['l']),stack1 ? stack1.call(depth0, "lbl.off", options) : helperMissing.call(depth0, "l", "lbl.off", options)))
+    + "</label>\n    </div>\n    <ul class=\"no-style-list chart-filter-value-list\">\n        ";
+  stack2 = helpers.each.call(depth0, depth0.values, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n        <li class=\"stick-bottom stick-right toogle-list-item\">\n            <a class=\"toogle-all-btn\" href=\"javascript:void(0)\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers['l'] || depth0['l']),stack1 ? stack1.call(depth0, "btn.toggle_all", options) : helperMissing.call(depth0, "l", "btn.toggle_all", options)))
+    + "</a>\n        </li>\n    </ul>\n</form>";
   return buffer;
   }
 	);

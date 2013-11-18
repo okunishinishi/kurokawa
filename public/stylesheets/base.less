@@ -236,7 +236,7 @@ body {
 
 }
 
-#book {
+#book,.paper {
   .book();
   .border-radius(8px);
   padding: 10px 10px;
@@ -272,15 +272,29 @@ body {
         opacity: .5;
       }
     }
+    &:active{
+      &:after{
+        opacity: .75;
+      }
+    }
   }
-  [type="checkbox"],
-  [type="radio"]{
+  [type="radio"],
+  [type="checkbox"]{
+    &:active,
     &:checked{
       & + label{
         &:after{
           display: inline-block;
           opacity: 1;
         }
+      }
+    }
+  }
+  [type="radio"]{
+    & + label{
+      &:after{
+        bottom:5px;
+        left:10px;
       }
     }
   }

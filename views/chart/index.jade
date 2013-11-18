@@ -10,17 +10,17 @@ block javascripts
 block upper-content
     +back_link(l.btn.company_list, url('/'))
 
+    #filter-select-section.stick-top.paper
+        .paper-content
+            .section-content
+    br.clear
+
 block left-content
     - var key,sheet_keys='department,post,mission,birthday,birthplace,graduated_from,years_of_service,join_year,hobby'.split(',')
     h1.page-title=company.name
     br
 
-    #filter-select-section.stick-right.stick-top.paper
-        .paper-content
-            h1.paper-title=l.titles.chart_sheet_filter
-            .section-content
 
-    br.clear
     br
     table#sheet-table
         colgroup.sheet-colgroup
@@ -33,6 +33,7 @@ block left-content
                 th
                 each key,i in sheet_keys
                     th(data-col=i, data-key=key, class='sortable-th col-'+i).positioned
+                        a.filter-edit-btn="F"
                         a.filter-add-btn="+"
                         label=l.lbl[key]
 

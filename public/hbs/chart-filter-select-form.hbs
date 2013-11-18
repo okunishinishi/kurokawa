@@ -1,10 +1,26 @@
 <form id="chart-filter-select-form">
-    <ul class="no-style-list">
+    <div class="margin-box">
+
+    <a class="close-btn stick-right stick-top" href="javascript:void(0)">&times</a>
+    <h1 class="paper-title">{{title}}</h1>
+    </div>
+    <div class="margin-box">
+        <span>{{l 'lbl.filter'}}</span>
+        <input type="radio" name="filter_active" value="true" id="filter_active-input-true" checked/>
+        <label for="filter_active-input-true">{{l 'lbl.on'}}</label>
+        <input type="radio" name="filter_active" value="false" id="filter_active-input-false"/>
+        <label for="filter_active-input-false">{{l 'lbl.off'}}</label>
+    </div>
+    <ul class="no-style-list chart-filter-value-list">
         {{#each values}}
             <li class="chart-filter-select-list-item">
-                <input type="checkbox" name="filter_value" value="{{this}}" id="chart-filter-value-input-{{this}}" checked/>
+                <input type="checkbox" name="filter_value" value="{{this}}" id="chart-filter-value-input-{{this}}"
+                       checked/>
                 <label for="chart-filter-value-input-{{this}}">{{this}}</label>
             </li>
         {{/each}}
+        <li class="stick-bottom stick-right toogle-list-item">
+            <a class="toogle-all-btn" href="javascript:void(0)">{{l 'btn.toggle_all'}}</a>
+        </li>
     </ul>
 </form>

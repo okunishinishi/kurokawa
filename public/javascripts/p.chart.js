@@ -7,10 +7,23 @@
  *  Hbs : handlebars
  *
  */
-(function ($, l, hbs) {
-    var tmpl = {
-        hitWord: hbs.templates['hit-word']
-    };
+(function ($, l, hbs, window) {
+    function doNonthing() {
+
+    }
+
+    $.extend({
+        enableWindowScroll: function (enable) {
+            if (enable) {
+                window.onscroll = doNonthing;
+            } else {
+                var top = $(window).scrollTop();
+                window.onscroll = function () {
+                    $(window).scrollTop(top);
+                };
+            }
+        }
+    })
     $.fn.extend({
         sortableTable: function () {
             var table = $(this),
@@ -113,14 +126,15 @@
             };
             return page;
         },
-        filterSelectSection: function (values, callback) {
+        filterSelectSection: function (key, values, callback) {
             var section = $(this),
                 content = $('.section-content', section);
             var tmpl = {
                 form: hbs.templates['chart-filter-select-form']
             };
             var html = tmpl.form({
-                values: values
+                values: values,
+                title: l.lbl[key]
             });
             content.html(html);
 
@@ -128,7 +142,7 @@
             form.submit(function (e) {
                 e.preventDefault();
                 var values = form.getFormValue().toObj();
-                callback && callback(values);
+                callback && callback(key, values);
             });
 
             var checkbox = form.find(':checkbox');
@@ -144,7 +158,47 @@
                 form.submit();
             });
             checkbox.doStyle();
-            return section;
+
+            var valueList = $('.chart-filter-value-list', form);
+            form.findByName('filter_active').change(function () {
+                var active = eval($(this).val());
+                if (active) {
+                    valueList.openUp();
+                } else {
+                    valueList.closeDown();
+                }
+            });
+            valueList
+                .hover(function () {
+                    $.enableWindowScroll(false);
+                }, function () {
+                    $.enableWindowScroll(true);
+                });
+
+            valueList
+                .find('li')
+                .click(function (e) {
+                    var li = $(this);
+                    if (e.target === this) {
+                        li.find('label').click();
+                    }
+                })
+                .find('label')
+                .click(function (e) {
+                    e.stopPropagation();
+                });
+
+            valueList
+                .find('.toogle-all-btn')
+                .click(function () {
+                    var hasUnchecked = !!checkbox.not(':checked').size();
+                    checkbox.prop('checked', hasUnchecked);
+                    checkbox.doStyle();
+                });
+            form.find('.close-btn').click(function () {
+                section.fadeOut(100);
+            });
+            return section.show();
         }
     });
 
@@ -171,9 +225,8 @@
 
 
         sheetTable.getColValues = function (key) {
-            var thead = sheetTable.find('.sheet-thead'),
-                tbody = sheetTable.find('.sheet-tbody');
-            var th = thead.findByAttr('data-key', key),
+            var tbody = sheetTable.find('.sheet-tbody');
+            var th = sheetTable.findTh(key),
                 col = th.data('col');
             var cell = tbody.find('.col-' + col);
             return cell.toArray().map(function (cell) {
@@ -181,17 +234,63 @@
             });
         };
 
-        sheetTable.find('.filter-add-btn').click(function () {
+        sheetTable.findTh = function (key) {
+            return sheetTable.find('.sheet-thead').findByAttr('data-key', key);
+        };
+
+        sheetTable.findCol = function (key) {
+            return sheetTable.find('.sheet-colgroup').findByAttr('data-key', key);
+        };
+        sheetTable.find('.filter-add-btn').click(function (e) {
+            e.stopPropagation();
             var btn = $(this),
                 key = btn.parent('th').data('key');
             var values = tek.unique(sheetTable.getColValues(key).filter(function (value) {
                 return !!value;
             })).sort();
-            filterSelectSection.filterSelectSection(values, function (values) {
-            });
-        });
-        var filterSelectSection = $('#filter-select-section', body);
+            filterSelectSection.filterSelectSection(key, values, function (key, values) {
+                var filter_active = eval(values['filter_active']);
+                filter_active = true; //TODO rmeove;
+                sheetTable.findCol(key).toggleClass('filter-active', filter_active);
 
+                var th = sheetTable.findTh(key);
+                th.find('.filter-edit-btn,.filter-add-btn').toggleClass('filter-active', filter_active);
+            });
+
+            filterSelectSection.showAtPoint(btn.offset());
+
+            filterSelectSection.find('form').submit(); //TODO remove
+        });
+
+
+        var filterSelectSection = $('#filter-select-section', body)
+            .draggable({
+                handle: '.paper-title',
+                containment:'parent'
+            })
+            .click(function (e) {
+                e.stopPropagation();
+            });
+
+
+        filterSelectSection.showAtPoint = function (point) {
+            var width = filterSelectSection.outerWidth();
+            var right = point.left + width;
+            var tooRight = $(window).width() < right;
+            if(tooRight){
+                point.left -= (width + 100);
+            } else{
+                point.left += 20;
+            }
+            filterSelectSection.css(point);
+        };
+
+
+        body.click(function () {
+            if (filterSelectSection.is(':visible')) {
+                filterSelectSection.hide();
+            }
+        });
         sheetTable.find('.filter-add-btn').first().click(); //TODO remvoe
     });
-})(jQuery, window['l'], Handlebars);
+})(jQuery, window['l'], Handlebars, window);

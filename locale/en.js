@@ -67,6 +67,8 @@ l.lbl.report = 'report';
 l.lbl.reports = 'reports';
 l.lbl.client = 'client';
 l.lbl.example = 'example';
+l.lbl.on = 'on';
+l.lbl.off = 'off';
 l.lbl.sub_menu = {
     company: l.lbl.client,
     report: l.lbl.reports
@@ -82,7 +84,8 @@ l.lbl.admin_menu = {
     user_import: [l.lbl.user, 'import'].join(' '),
     user_manage: [l.lbl.user, 'manage'].join(' ')
 };
-
+l.lbl.filter='filter';
+l.lbl.filter_on='filtered';
 l.titles = {
     chart_sheet_filter: 'filter'
 };
@@ -156,5 +159,6 @@ l.btn.back_link = {
     admin_page: [l.lbl.admin, 'menu'].join(' ')
 };
 l.btn.apply = 'apply';
+l.btn.toggle_all = 'toggle all';
 
 
