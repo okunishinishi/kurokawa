@@ -61,3 +61,41 @@ Person.extra_data_keys = [
     'smokes',
     'free_word'
 ];
+
+Person.prototype.save = (function (save) {
+    var Helper = require('./m.helper');
+    return function (callback) {
+        var s = this;
+        return save.call(s, function (saved) {
+            Helper.findSingleton(function (helper) {
+                var person_values = helper.person || {},
+                    helperChanged = false;
+                if (saved) {
+                    Object.keys(saved).forEach(function (key) {
+
+                        var isHelpKey = Helper.person_help_keys.indexOf(key) != -1;
+                        if (!isHelpKey) return;
+
+                        var value = saved[key];
+                        if (!value) return;
+                        var values = person_values[key] || [],
+                            isNew = values.indexOf(value) == -1;
+                        if (isNew) {
+                            values.push(value);
+                            person_values[key] = values;
+                            helperChanged = true;
+                        }
+                    });
+                }
+                if (helperChanged) {
+                    helper.person = person_values;
+                    helper.update(function () {
+                        callback && callback(saved);
+                    });
+                } else {
+                    callback && callback(saved);
+                }
+            });
+        });
+    }
+})(new Person({}).save);
