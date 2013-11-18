@@ -147,6 +147,7 @@ l.btn.submit = 'submit';
 l.btn.company_list = 'company list';
 l.btn.show_preview = 'show preview';
 l.btn.preview = 'preview';
+l.btn.add_filter = '+ add filter';
 l.btn.back_link = {
     admin_page: [l.lbl.admin, 'menu'].join(' ')
 };

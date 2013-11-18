@@ -135,6 +135,7 @@ l = {
         "company_list": "company list",
         "show_preview": "show preview",
         "preview": "preview",
+        "add_filter": "+ add filter",
         "back_link": {
             "admin_page": "admin menu"
         }

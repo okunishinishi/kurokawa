@@ -559,8 +559,8 @@ blockquote {
   .border-radius(2px);
   margin: 10px 20px;
   color: @gray;
-  white-space: nowrap;
   overflow: auto;
+  white-space: nowrap;
   text-overflow: ellipsis;
 }
 
@@ -577,4 +577,15 @@ blockquote {
 }
 .wide-input{
   width:100%;
+}
+
+.slidein-menu{
+  display: block;
+  overflow: hidden;
+  .slidein-menu-inner{
+    position: relative;
+  }
+  .slidein-menu-content{
+    white-space: nowrap;
+  }
 }

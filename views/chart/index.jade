@@ -8,13 +8,21 @@ block javascripts
     script(src=url.js('p.chart.js'))
 
 block upper-content
-    //+back_link(l.btn.company_list, url('/'))
+    +back_link(l.btn.company_list, url('/'))
 
 block left-content
     - var key,sheet_keys='department,post,mission,birthday,birthplace,graduated_from,years_of_service,join_year,hobby'.split(',')
     h1.page-title=company.name
     br
 
+    #filter-section
+        #filter-select-tabs
+            each key in sheet_keys
+                a.tab=l.lbl[key]
+        br.clear
+        .tab-content
+    a.float-left#add-filter-btn(href='javascript:void(0)')=l.btn.add_filter
+    br.clear
     table#sheet-table
         thead
             tr
@@ -36,3 +44,4 @@ block left-content
             style='right:0;'
         )
         input(type='search', results, name='search_word')
+

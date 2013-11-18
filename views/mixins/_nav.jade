@@ -1,12 +1,15 @@
 mixin main_nav(sign_user)
-    nav#main-nav
-        if sign_user
-            a.nav-item(href=url('/mypage'))=sign_user.username
-            form#signout-form.inline-form(method='post',action=url('/signout'))
-                a.nav-item(href='#', onclick="$('#signout-form').submit();")=l.lbl.signout
-        else
-            if needs_sign
-                a#sign-link.nav-item(href=url('/sign'))=l.lbl.sign
+    nav#main-nav.slidein-menu
+        #main-nav-inner.slidein-menu-inner
+            if sign_user
+                a.slidein-menu-btn.nav-item(href='javascript:void(0)')=sign_user.username
+                span.slidein-menu-content
+                    a.nav-item(href=url('/mypage'))=l.lbl.mypage
+                    form#signout-form.inline-form(method='post',action=url('/signout'))
+                        a.nav-item(href='#', onclick="$('#signout-form').submit();")=l.lbl.signout
+            else
+                if needs_sign
+                    a#sign-link.nav-item(href=url('/sign'))=l.lbl.sign
 
 mixin suv_nav(sign_user, id)
     nav.sub-nav(id=id)
