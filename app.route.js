@@ -78,3 +78,6 @@ var csv = r['csv'];
 post('/api/csv/user_import/text', csv.import_user.from_text);
 post('/api/csv/user_import/file', csv.import_user.from_file);
 post('/api/csv/user_import/execute', csv.import_user.execute);
+
+var score_rule = r['score_rule'];
+post('/api/score_rule/save', score_rule.api.save);

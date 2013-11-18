@@ -38,24 +38,32 @@ mixin person_basic_table(person)
             each basic_data_key in basic_data_keys
                 +text-tr(basic_data_key, person)
 
+
+mixin bool_radio_tr(key, data)
+    +radio-tr(key, data,[
+        {label:l.lbl.true,value:'true'},
+        {label:l.lbl.false,value:'false'}
+    ])
+
+mixin person_extra_tr(key, data)
+    case key
+        when 'single'
+            bool_radio_tr(key, data)
+        when 'drink'
+            bool_radio_tr(key, data)
+        when 'smokes'
+            bool_radio_tr(key, data)
+        when 'free_word'
+            +textarea-tr(key, person)
+        default
+            +text-tr(key, data)
+
 mixin person_extra_table(person)
     table.wide-table
         caption=l.lbl.personal_extra
         thead
         tbody
-            +text-tr('live_at', person)
-            +text-tr('favorite_food', person)
-            +radio-tr('single', person,[
-                {label:l.lbl.true,value:'true'},
-                {label:l.lbl.false,value:'false'}
-            ])
-            +radio-tr('drinks', person,[
-                {label:l.lbl.true,value:'true'},
-                {label:l.lbl.false,value:'false'}
-            ])
-            +radio-tr('smokes', person,[
-                {label:l.lbl.true,value:'true'},
-                {label:l.lbl.false,value:'false'}
-            ])
-            +textarea-tr('free_word', person)
+            each extra_data_key in extra_data_keys
+                +person_extra_tr(extra_data_key, person)
+
 

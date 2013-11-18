@@ -54,4 +54,10 @@ Person.basic_data_keys = [
 ];
 
 Person.extra_data_keys = [
+    'live_at',
+    'favorite_food',
+    'single',
+    'drinks',
+    'smokes',
+    'free_word'
 ];

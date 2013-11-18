@@ -70,7 +70,8 @@ exports.index = function (req, res) {
                         person: person,
                         companies: companies,
                         personUpdate: personUpdate,
-                        basic_data_keys:Person.basic_data_keys
+                        basic_data_keys:Person.basic_data_keys,
+                        extra_data_keys:Person.extra_data_keys
                     });
                 });
             });
