@@ -8,14 +8,14 @@
  *
  */
 (function ($, l, hbs, window) {
-    function doNonthing() {
+    function doNothing() {
 
     }
 
     $.extend({
         enableWindowScroll: function (enable) {
             if (enable) {
-                window.onscroll = doNonthing;
+                window.onscroll = doNothing;
             } else {
                 var top = $(window).scrollTop();
                 window.onscroll = function () {
@@ -23,7 +23,7 @@
                 };
             }
         }
-    })
+    });
     $.fn.extend({
         sortableTable: function () {
             var table = $(this),
@@ -194,6 +194,7 @@
                     var hasUnchecked = !!checkbox.not(':checked').size();
                     checkbox.prop('checked', hasUnchecked);
                     checkbox.doStyle();
+                    form.submit();
                 });
             form.find('.close-btn').click(function () {
                 section.fadeOut(100);
@@ -234,6 +235,7 @@
             });
         };
 
+
         sheetTable.findTh = function (key) {
             return sheetTable.find('.sheet-thead').findByAttr('data-key', key);
         };
@@ -241,32 +243,72 @@
         sheetTable.findCol = function (key) {
             return sheetTable.find('.sheet-colgroup').findByAttr('data-key', key);
         };
-        sheetTable.find('.filter-add-btn').click(function (e) {
-            e.stopPropagation();
-            var btn = $(this),
-                key = btn.parent('th').data('key');
-            var values = tek.unique(sheetTable.getColValues(key).filter(function (value) {
-                return !!value;
-            })).sort();
-            filterSelectSection.filterSelectSection(key, values, function (key, values) {
-                var filter_active = eval(values['filter_active']);
-                filter_active = true; //TODO rmeove;
-                sheetTable.findCol(key).toggleClass('filter-active', filter_active);
 
-                var th = sheetTable.findTh(key);
-                th.find('.filter-edit-btn,.filter-add-btn').toggleClass('filter-active', filter_active);
+        sheetTable.applyFilter = function (col, filter_values) {
+            sheetTable.find('.sheet-tbody')
+                .find('tr')
+                .each(function () {
+                    var tr = $(this),
+                        cell = tr.find('.col-' + col);
+                    var value = $.trim(cell.text()) || '__empty__';
+                    var hit = filter_values && (filter_values.indexOf(value) != -1);
+                    var class_name = 'sheet-tr-filter-hidden-' + col;
+                    tr.toggleClass(class_name, !hit);
+                });
+        };
+        sheetTable.removeFilter = function (col) {
+            var class_name = 'sheet-tr-filter-hidden-' + col;
+            sheetTable.find('.' + class_name).removeClass(class_name);
+        };
+
+        sheetTable
+            .find('.filter-add-btn,.filter-edit-btn')
+            .each(function () {
+                var btn = $(this),
+                    key = btn.parent('th').data('key');
+                btn.data('key', key);
+                var values = tek.unique(sheetTable.getColValues(key).filter(function (value) {
+                    return !!value;
+                })).sort();
+                if (!values.length) {
+                    btn.hide();
+                    return;
+                }
+                ;
+            })
+            .click(function (e) {
+                e.stopPropagation();
+                var btn = $(this),
+                    key = btn.data('key');
+                var values = tek.unique(sheetTable.getColValues(key).filter(function (value) {
+                    return !!value;
+                })).sort();
+
+                filterSelectSection.filterSelectSection(key, values, function (key, values) {
+                    var filter_active = eval(values['filter_active']);
+                    sheetTable.findCol(key).toggleClass('filter-active', filter_active);
+                    var th = sheetTable.findTh(key),
+                        col = th.data('col');
+                    th.find('.filter-edit-btn,.filter-add-btn')
+                        .toggleClass('filter-active', filter_active);
+
+                    if (filter_active) {
+                        sheetTable.applyFilter(col, values['filter_value']);
+                    } else {
+                        sheetTable.removeFilter(col);
+                    }
+                });
+
+                filterSelectSection.showAtPoint(btn.offset());
+
+                filterSelectSection.find('form').submit();
             });
-
-            filterSelectSection.showAtPoint(btn.offset());
-
-            filterSelectSection.find('form').submit(); //TODO remove
-        });
 
 
         var filterSelectSection = $('#filter-select-section', body)
             .draggable({
                 handle: '.paper-title',
-                containment:'parent'
+                containment: 'parent'
             })
             .click(function (e) {
                 e.stopPropagation();
@@ -277,9 +319,9 @@
             var width = filterSelectSection.outerWidth();
             var right = point.left + width;
             var tooRight = $(window).width() < right;
-            if(tooRight){
+            if (tooRight) {
                 point.left -= (width + 100);
-            } else{
+            } else {
                 point.left += 20;
             }
             filterSelectSection.css(point);
@@ -292,5 +334,7 @@
             }
         });
         sheetTable.find('.filter-add-btn').first().click(); //TODO remvoe
+
+
     });
 })(jQuery, window['l'], Handlebars, window);

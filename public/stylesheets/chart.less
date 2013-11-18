@@ -104,9 +104,9 @@
   height: @size + 2px;
   line-height: @size;
   font-size: @size;
-  right: -2px;
+  right: -1px;
+  top:-1px;
   padding: 2px 4px 4px;
-  top: @size * -1 - 4px;
   @back:@brown;
   @color:@white;
   color:@white;
@@ -114,6 +114,10 @@
   .border-radius(2px 2px 0 0);
   background-color: @back;
   display: none;
+  &:hover{
+    text-decoration: none;
+    cursor: pointer;
+  }
   &.filter-active{
     display: inline-block;
   }
@@ -129,7 +133,7 @@
 .sheet-colgroup{
   .filter-active{
     @color:@brown;
-    border:2px solid @color;
+    border:3px solid @color;
   }
 }
 
@@ -187,4 +191,21 @@ body {
   &.disabled {
     color:darken(@white, 30);
   }
+}
+
+
+.sheet-tr-filter-hidden-0,
+.sheet-tr-filter-hidden-1,
+.sheet-tr-filter-hidden-2,
+.sheet-tr-filter-hidden-3,
+.sheet-tr-filter-hidden-4,
+.sheet-tr-filter-hidden-5,
+.sheet-tr-filter-hidden-6,
+.sheet-tr-filter-hidden-7,
+.sheet-tr-filter-hidden-8,
+.sheet-tr-filter-hidden-9,
+.sheet-tr-filter-hidden-10,
+.sheet-tr-filter-hidden-11,
+.sheet-tr-filter-hidden-12{
+  display: none !important;
 }
