@@ -1,0 +1,21 @@
+extends ../layout
+include ../score_rule/_detail
+
+block stylesheets
+    link(rel='stylesheet', href=url.css('admin.css'))
+
+block javascripts
+    script(src=url.js('p.admin.score_rule.js'))
+
+
+
+block upper-content
+    include back_to_admin
+
+block left-content
+    h1.page-title=l.lbl.admin_menu.score_rule
+    p.lead=l.lead.score_rule
+
+block right-content
+    +person_score_rule_table_basic(scoreRule.person, person_keys.basic_data_keys)
+    +person_score_rule_table_extra(scoreRule.person, person_keys.extra_data_keys)

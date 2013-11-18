@@ -411,19 +411,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<li class=\"team-list-item positioned\">\n    <a class=\"cover detail-link\" data-role=\"detail-link\" href=\"";
-  if (stack1 = helpers.ctx) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.ctx; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "/team/?_id=";
-  if (stack1 = helpers._id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0._id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "&t=";
-  if (stack1 = helpers['t']) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0['t']; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\"></a>\n    <form class=\"inline-form\" action=\"";
+  buffer += "<li class=\"team-list-item positioned\">\n    <form class=\"inline-form\" action=\"";
   if (stack1 = helpers.ctx) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.ctx; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)

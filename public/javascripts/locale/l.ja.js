@@ -68,6 +68,7 @@ l = {
             "company": "client",
             "report": "reports"
         },
+        "score_rule": "score rule",
         "preview": "preview",
         "import_preview": "import data preview",
         "import_ways": {
@@ -77,7 +78,8 @@ l = {
         "admin_menu": {
             "master_manage": "master manage",
             "user_import": "user import",
-            "user_manage": "user manage"
+            "user_manage": "user manage",
+            "score_rule": "score rule"
         },
         "filter": "filter",
         "filter_on": "filtered",
@@ -95,7 +97,8 @@ l = {
         "chart_sheet_filter": "filter"
     },
     "lead": {
-        "index_page": "Select client company."
+        "index_page": "Select client company.",
+        "score_rule": "Manage how much score will be given for each data."
     },
     "msg": {
         "sure": "Are you ABSOLUTELY sure?",

@@ -69,7 +69,8 @@ exports.index = function (req, res) {
                     res.render('person/index.jade', {
                         person: person,
                         companies: companies,
-                        personUpdate: personUpdate
+                        personUpdate: personUpdate,
+                        basic_data_keys:Person.basic_data_keys
                     });
                 });
             });

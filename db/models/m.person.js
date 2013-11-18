@@ -41,3 +41,17 @@ Person.prototype.getChanges = function (data) {
             return !!data;
         });
 };
+Person.basic_data_keys = [
+    'department' ,
+    'post' ,
+    'mission' ,
+    'birthday' ,
+    'birthplace' ,
+    'graduated_from' ,
+    'years_of_service' ,
+    'join_year' ,
+    'hobby'
+];
+
+Person.extra_data_keys = [
+];

@@ -34,15 +34,9 @@ mixin person_basic_table(person)
                 th=l.lbl.company
                 td
                     a(href=url("/chart/sheet/"+person.company_id))=person.company_name
-            +text-tr('department', person)
-            +text-tr('post', person)
-            +text-tr('mission', person)
-            +text-tr('birthday', person)
-            +text-tr('birthplace', person)
-            +text-tr('graduated_from', person)
-            +text-tr('years_of_service', person)
-            +text-tr('join_year', person)
-            +text-tr('hobby', person)
+
+            each basic_data_key in basic_data_keys
+                +text-tr(basic_data_key, person)
 
 mixin person_extra_table(person)
     table.wide-table

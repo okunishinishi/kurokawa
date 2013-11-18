@@ -1,6 +1,8 @@
 var tek = require('tek'),
     copy = tek['meta']['copy'],
     db = require('../db'),
+    ScoreRule = db.models['ScoreRule'],
+    Person = db.models['Person'],
     Team = db.models['Team'];
 
 
@@ -36,6 +38,24 @@ exports.user = function (req, res) {
     });
 };
 
+/**
+ * show score_rule page
+ * @param req
+ * @param res
+ */
+exports.score_rule = function (req, res) {
+    ScoreRule.findSingleton(function (scoreRule) {
+        res.render('admin/score_rule.jade', {
+            scoreRule: scoreRule,
+            person_keys: {
+                basic_data_keys: Person.basic_data_keys,
+                extra_data_keys: Person.extra_data_keys
+            }
+        });
+    });
+};
+
+//noinspection ReservedWordAsName
 /**
  * show user import page
  * @param req

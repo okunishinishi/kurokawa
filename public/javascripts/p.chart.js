@@ -329,6 +329,7 @@
             } else {
                 point.left += 20;
             }
+            point.top -= 40;
             filterSelectSection.css(point);
         };
         filterSelectSection.setValues = function (values) {

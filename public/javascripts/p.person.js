@@ -52,5 +52,7 @@
             personUpdateTable.appendData(data.change);
         });
 
+        $('#sub-nav', body).subNav('company');
+
     });
 })(jQuery, window['l'], Handlebars);

@@ -73,6 +73,7 @@ l.lbl.sub_menu = {
     company: l.lbl.client,
     report: l.lbl.reports
 };
+l.lbl.score_rule = 'score rule';
 l.lbl.preview = 'preview';
 l.lbl.import_preview = 'import data preview';
 l.lbl.import_ways = {
@@ -82,7 +83,8 @@ l.lbl.import_ways = {
 l.lbl.admin_menu = {
     master_manage: [l.lbl.master, 'manage'].join(' '),
     user_import: [l.lbl.user, 'import'].join(' '),
-    user_manage: [l.lbl.user, 'manage'].join(' ')
+    user_manage: [l.lbl.user, 'manage'].join(' '),
+    score_rule: l.lbl.score_rule
 };
 l.lbl.filter = 'filter';
 l.lbl.filter_on = 'filtered';
@@ -92,15 +94,16 @@ l.titles = {
 l.lbl.__empty__ = '__empty__';
 l.lbl.person_update_history = {
     caption: 'update history',
-    date:'date',
-    property:'property',
-    from:'from',
-    to:'to',
+    date: 'date',
+    property: 'property',
+    from: 'from',
+    to: 'to',
     user: l.lbl.user
 };
 
 l.lead = {};
 l.lead.index_page = 'Select client company.';
+l.lead.score_rule = 'Manage how much score will be given for each data.';
 
 l.msg = {};
 l.msg.sure = 'Are you ABSOLUTELY sure?';

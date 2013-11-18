@@ -63,7 +63,7 @@ get('/admin', admin.index);
 get('/admin/master', admin.master);
 get('/admin/user', admin.user);
 get('/admin/user/import', admin.user.import);
-
+get('/admin/score_rule', admin.score_rule);
 
 var team = r['team'];
 post('/api/team/save', team.api.save);
@@ -74,7 +74,7 @@ get('/api/team/:_id', team.api.one);
 var report = r['report'];
 get('/report', report.index);
 
-var csv  = r['csv'];
+var csv = r['csv'];
 post('/api/csv/user_import/text', csv.import_user.from_text);
 post('/api/csv/user_import/file', csv.import_user.from_file);
 post('/api/csv/user_import/execute', csv.import_user.execute);
