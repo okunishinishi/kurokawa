@@ -43,11 +43,16 @@
 
             return section;
         },
-        scoreChartCanvas: function (data) {
+        scoreChartCanvas: function (data, animation) {
             var canvas = $(this),
+                w = canvas.width(),
+                h = canvas.height();
+            canvas.attr({
+                width: w,
+                height: h
+            });
+            var
                 ctx = canvas[0].getContext('2d');
-
-            console.log('data', data);
             new Chart(ctx)
                 .Bar({
                     labels: data.map(function (data) {
@@ -55,30 +60,59 @@
                     }),
                     datasets: [
                         {
-                            data:data.map(function (data) {
+                            fillColor: '#FFCC77',
+                            strokeColor: '#efAe50',
+                            data: data.map(function (data) {
                                 return Number(data.total);
                             })
                         }
 
                     ]
+                }, {
+                    animation: animation
                 });
             return canvas;
         },
         scoreChartSection: function (data) {
-            var section = $(this);
-            $('#score-chart-canvas', section).scoreChartCanvas(data);
+            var section = $(this),
+                form = $('#score-chart-condition-form', section),
+                canvas = $('#score-chart-canvas', section);
+
+            form.data('chart', data);
+            form.submit(function (e) {
+                e.preventDefault();
+                var data = form.data('chart'),
+                    settings = form.getFormValue().toObj();
+                data = data.slice(0, Number(settings.max_count || 10));
+                canvas
+                    .removeAttr('style')
+                    .removeAttr('width')
+                    .removeAttr('height')
+                    .scoreChartCanvas(data, settings.animation);
+            });
+
+            $(window).resize(function () {
+                form.submit();
+            });
+            form
+                .submit()
+                .findByName('animation').val('false');
+
             return section;
         }
     });
 
     $(function () {
-        var body = $(document.body);
+        var win = $(window),
+            body = $(document.body);
+
 
         var data = d && d['report'];
-
 
         $('#score-list-section', body).scoreListSection(data['score']);
         $('#score-chart-section', body).scoreChartSection(data['score']);
         $('#sub-nav', body).subNav('report');
+
+
     });
 })(jQuery, window['l'], Handlebars, Chart);

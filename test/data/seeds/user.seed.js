@@ -16,6 +16,6 @@ module.exports = {
             real_name: '${name}',
             team_id: "90${padZero(rownum%4, 22)}",
             role: 'admin'
-        }.repeat(10)
+        }.repeat(50)
     ]
 };

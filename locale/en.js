@@ -109,6 +109,7 @@ l.lbl.user_roles = {
     none:'none'
 };
 
+l.lbl.top10 = 'top10';
 l.lead = {};
 l.lead.index_page = 'Select client company.';
 l.lead.score_rule = 'Manage how much score will be given for each data.';

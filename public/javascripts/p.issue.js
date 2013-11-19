@@ -32,7 +32,7 @@
             });
         },
         issueList: function (data) {
-            data = data.filter(function (data) {
+            data = data && data.filter(function (data) {
                 return !!data.title;
             });
             var ul = $(this);
@@ -60,9 +60,10 @@
 
             ul
                 .each(function () {
+                    if(!data) return;
                     var ul = $(this),
                         status = ul.data('status');
-                    ul.issueList(data.filter(function (data) {
+                    ul.issueList(data && data.filter(function (data) {
                         return data.status == status;
                     }))
                 })

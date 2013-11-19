@@ -98,7 +98,8 @@ l = {
         "user_roles": {
             "admin": "admin",
             "none": "none"
-        }
+        },
+        "top10": "top10"
     },
     "titles": {
         "chart_sheet_filter": "filter"

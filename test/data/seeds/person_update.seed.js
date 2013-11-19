@@ -52,6 +52,6 @@ module.exports = {
                     user_id: "14${padZero(rownum%5, 22)}"
                 }
             ]
-        }.repeat(10)
+        }.repeat(50)
     ]
 };
