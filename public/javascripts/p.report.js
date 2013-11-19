@@ -43,30 +43,32 @@
 
             return section;
         },
-        scoreChartCanvas: function (data, animation) {
-            var canvas = $(this),
+        chartCanvas: function () {
+            var canvas = $(this);
+            canvas.removeAttr('style')
+                .removeAttr('width')
+                .removeAttr('height');
+            var
                 w = canvas.width(),
                 h = canvas.height();
             canvas.attr({
                 width: w,
                 height: h
             });
-            var
+            return canvas;
+        },
+        top10ChartCanvas: function (animation) {
+            var canvas = $(this).chartCanvas(),
                 ctx = canvas[0].getContext('2d');
             new Chart(ctx)
                 .Bar({
-                    labels: data.map(function (data) {
-                        return data.real_name;
-                    }),
+                    labels: canvas.data('labels'),
                     datasets: [
                         {
-                            fillColor: '#FFCC77',
-                            strokeColor: '#efAe50',
-                            data: data.map(function (data) {
-                                return Number(data.total);
-                            })
+                            fillColor: canvas.data('fillcolor'),
+                            strokeColor: canvas.data('strockcolor'),
+                            data: canvas.data('values')
                         }
-
                     ]
                 }, {
                     animation: animation
@@ -76,31 +78,31 @@
         scoreChartSection: function (data) {
             var section = $(this),
                 form = $('#score-chart-condition-form', section),
-                canvas = $('#score-chart-canvas', section);
+                top10canvas = $('#top10-chart-canvas', section);
 
-            form.data('chart', data);
-            form.submit(function (e) {
-                e.preventDefault();
-                var data = form.data('chart'),
-                    settings = form.getFormValue().toObj();
-                data = data.slice(0, Number(settings.max_count || 10));
-                canvas
-                    .removeAttr('style')
-                    .removeAttr('width')
-                    .removeAttr('height')
-                    .scoreChartCanvas(data, settings.animation);
+
+            var top10Data = data.slice(0, 10);
+            top10canvas.data({
+                labels: top10Data.map(function (data) {
+                    return data.real_name;
+                }),
+                values: top10Data.map(function (data) {
+                    return Number(data.total);
+                })
             });
+
+            section.draw = function (animation) {
+                top10canvas.top10ChartCanvas(animation);
+            };
 
             $(window).resize(function () {
-                form.submit();
+                section.draw(false);
             });
-            form
-                .submit()
-                .findByName('animation').val('false');
-
+            section.draw(true);
             return section;
         }
-    });
+    })
+    ;
 
     $(function () {
         var win = $(window),
@@ -115,4 +117,5 @@
 
 
     });
-})(jQuery, window['l'], Handlebars, Chart);
+})
+    (jQuery, window['l'], Handlebars, Chart);

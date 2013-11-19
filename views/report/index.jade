@@ -29,7 +29,6 @@ block right-content
     section#score-chart-section
         br
         h1.text-center=l.lbl.top10
-        form#score-chart-condition-form
-            input(type='hidden',name='max_count', value='10')
-            input(type='hidden', name='animation', value='true')
-        canvas#score-chart-canvas
+        canvas#top10-chart-canvas.score-chart-canvas(
+        data-fillcolor='rgba(255, 165, 0, 0.56)',
+        data-strockcolor='rgba(255, 165, 0, 1)')
