@@ -15,7 +15,12 @@ mixin head_th(key)
 
 block left-content
     h1.page-title=l.lbl.score
+    br
     section#score-list-section
+        span.float-right#score-table-count-label
+            span=l.lbl.user_count_preffix
+            span#score-table-count
+            span=l.lbl.user_count_suffix
         table#score-table.wide-table
             thead
                 tr

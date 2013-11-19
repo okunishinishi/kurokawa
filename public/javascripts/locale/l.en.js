@@ -103,7 +103,9 @@ l = {
         "report_charts": {
             "top10": "top10",
             "team": "team points"
-        }
+        },
+        "user_count_preffix": "",
+        "user_count_suffix": ""
     },
     "titles": {
         "chart_sheet_filter": "filter"

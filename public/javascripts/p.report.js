@@ -17,7 +17,8 @@
             var tmpl = {
                 bodyRow: hbs.templates['score-report-table-body-row']
             };
-
+            var len = data.length;
+            $('#score-table-count').text(['1-'+len, '/', len].join('')).hide();
             tbody.htmlHandlebars(tmpl.bodyRow, data);
             table.sortableTable();
 
@@ -101,7 +102,7 @@
                 pointMap[team_name] = (pointMap[team_name] || 0) + Number(data.total);
             });
             var teamNames = Object.keys(pointMap),
-                colors = $.rainbowColor(canvas.data('basecolor'), teamNames.length+1);
+                colors = $.rainbowColor(canvas.data('basecolor'), teamNames.length + 1);
             colors.shift();
             var pieData = teamNames.map(function (team_name, i) {
                 return {

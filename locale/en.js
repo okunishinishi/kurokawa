@@ -115,6 +115,8 @@ l.lbl.report_charts = {
     top10: l.lbl.top10,
     team: 'team points'
 };
+l.lbl.user_count_preffix = '';
+l.lbl.user_count_suffix = '';
 
 l.lead = {};
 l.lead.index_page = 'Select client company.';
