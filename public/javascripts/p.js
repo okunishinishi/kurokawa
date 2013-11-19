@@ -19,6 +19,21 @@
         return ctx ? '/' + ctx : '';
     });
 
+    var supported = (function (detected) {
+        if (!detected) return true;
+        switch (detected.browser) {
+            case 'IE':
+                return 9.0 <= detected.version;
+        }
+        return true;
+    })(tek.detectBrowser(window));
+
+    if (!supported) {
+        $(function () {
+            $.sorryNoSupport();
+        });
+    }
+
     $.confirmRemove = (function (confirmRemove) {
         return function () {
             return confirmRemove.apply(this, arguments);
