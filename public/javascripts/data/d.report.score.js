@@ -68,7 +68,7 @@ d.report.score = [
         ],
         "user_id": "140000000000000000000000",
         "username": "user00",
-        "actual_name": "拓 小堀"
+        "actual_name": "小堀 拓"
     },
     {
         "total": 15,
@@ -130,7 +130,7 @@ d.report.score = [
         ],
         "user_id": "140000000000000000000001",
         "username": "user01",
-        "actual_name": "幸子 半田"
+        "actual_name": "半田 幸子"
     },
     {
         "total": 14,
@@ -186,7 +186,7 @@ d.report.score = [
         ],
         "user_id": "140000000000000000000002",
         "username": "user02",
-        "actual_name": "篤志 入江"
+        "actual_name": "入江 篤志"
     },
     {
         "total": 8,
@@ -224,7 +224,7 @@ d.report.score = [
         ],
         "user_id": "140000000000000000000003",
         "username": "user03",
-        "actual_name": "しのぶ 後藤"
+        "actual_name": "後藤 しのぶ"
     },
     {
         "total": 6,
@@ -250,7 +250,7 @@ d.report.score = [
         ],
         "user_id": "140000000000000000000004",
         "username": "user04",
-        "actual_name": "和哉 神田"
+        "actual_name": "神田 和哉"
     },
     {
         "total": 2,
@@ -264,7 +264,7 @@ d.report.score = [
         ],
         "user_id": "140000000000000000000005",
         "username": "user05",
-        "actual_name": "隆太郎 尾形"
+        "actual_name": "尾形 隆太郎"
     },
     {
         "total": 2,
@@ -278,7 +278,7 @@ d.report.score = [
         ],
         "user_id": "140000000000000000000006",
         "username": "user06",
-        "actual_name": "祥太 宮野"
+        "actual_name": "宮野 祥太"
     },
     {
         "total": 2,
@@ -292,7 +292,7 @@ d.report.score = [
         ],
         "user_id": "140000000000000000000007",
         "username": "user07",
-        "actual_name": "光希 栗林"
+        "actual_name": "栗林 光希"
     },
     {
         "total": 2,
@@ -306,7 +306,7 @@ d.report.score = [
         ],
         "user_id": "140000000000000000000008",
         "username": "user08",
-        "actual_name": "勇斗 河田"
+        "actual_name": "河田 勇斗"
     },
     {
         "total": 2,
@@ -320,6 +320,6 @@ d.report.score = [
         ],
         "user_id": "140000000000000000000009",
         "username": "user09",
-        "actual_name": "奏 磯野"
+        "actual_name": "磯野 奏"
     }
 ];

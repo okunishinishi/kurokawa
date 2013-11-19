@@ -69,7 +69,7 @@ exports.publishScoreReport = function (callback) {
             data = data.map(function (data) {
                 var user = userMap[data.user_id] || {};
                 data.username = user.username;
-                data.actual_name = [user.first_name || '', user.last_name || ''].join(' ');
+                data.actual_name = [user.first_name || '', user.last_name || ''].reverse().join(' ');
                 return data;
             });
             var dataDir = resolve(config.jsDir, 'data');

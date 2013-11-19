@@ -2,20 +2,43 @@
 <html>
 <head>
     <meta charset="utf-8"/>
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+
     <title>score report</title>
 
     <link rel="shortcut icon" href="../fav.ico"/>
+    <link rel="stylesheet" href="../stylesheets/lib/tek.view.css"/>
     <link rel="stylesheet" href="../stylesheets/report.score.css"/>
 
     <script src="../javascripts/lib/jquery.js"></script>
     <script src="../javascripts/lib/spin.js"></script>
     <script src="../javascripts/lib/jquery-ui.custom.js"></script>
+    <script src="../javascripts/lib/handlebars.runtime.min.js"></script>
     <script src="../javascripts/lib/tek.js"></script>
     <script src="../javascripts/lib/tek.view.js"></script>
+    <script src="../javascripts/templates.js"></script>
+    <script src="../javascripts/data/d.report.score.js"></script>
     <script src="../javascripts/p.report.score.js"></script>
 
 </head>
 <body>
-
+<article id="main">
+    <section id="score-report-section">
+        <table id="score-report-table">
+            <thead>
+            <tr>
+                <th><label>rank</label></th>
+                <th><label>user</label></th>
+                <th><label>score</label></th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+</article>
 </body>
 </html>
