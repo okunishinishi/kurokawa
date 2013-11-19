@@ -64,6 +64,7 @@ l = {
         "example": "example",
         "on": "on",
         "off": "off",
+        "issue": "issue",
         "sub_menu": {
             "company": "client",
             "report": "reports"

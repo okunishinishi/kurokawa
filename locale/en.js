@@ -69,6 +69,7 @@ l.lbl.client = 'client';
 l.lbl.example = 'example';
 l.lbl.on = 'on';
 l.lbl.off = 'off';
+l.lbl.issue = 'issue';
 l.lbl.sub_menu = {
     company: l.lbl.client,
     report: l.lbl.reports
@@ -88,6 +89,7 @@ l.lbl.admin_menu = {
 };
 l.lbl.filter = 'filter';
 l.lbl.filter_on = 'filtered';
+l.lbl.issue = 'issue'.replace(/_/g,' ');
 l.titles = {
     chart_sheet_filter: 'filter'
 };

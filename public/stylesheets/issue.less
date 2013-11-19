@@ -1,0 +1,85 @@
+@import "lib/tek-mixin";
+@import "base-mixins";
+
+body {
+  .rich();
+  padding: 20px 0;
+  color:@brown;
+  .title-text {
+    font-size: 2em;
+  }
+  fieldset{
+    border-color: @brown;
+  }
+
+  .block-list-item-control {
+    right: -5px;
+    top: 0;
+    opacity: .1;
+    display: none;
+  }
+  .issue-list-item {
+    list-style: none;
+    display: inline-block;
+    color: #3F1A01;
+    .border-radius(2px);
+    textarea {
+      width: 100%;
+      height: 80%;
+    }
+    .paper-content{
+      min-height: 100px;
+    }
+
+    &:hover {
+      .block-list-item-control {
+        opacity: 1;
+      }
+    }
+    &.editable-list-item-fixed {
+      select {
+        border: none;
+        background-color: transparent;
+        -webkit-appearance: none;
+        -moz-appearance: window;
+        outline: none;
+      }
+      .block-list-item-control {
+        display: block;
+      }
+    }
+  }
+
+
+}
+
+header,
+#book {
+  display: none !important;
+}
+
+.add-btn {
+  display: inline-block;
+  font-size: 2em;
+  padding: 10px;
+  @r: 10px;
+  .border-radius(0 @r @r 0);
+  float: left;
+  .black-back(.2);
+  font-weight: bolder;
+  @c: #552F19;
+  border-color: fadeout(@c, 30);
+  color: @c;
+  &:hover {
+    color: lighten(@c, 10);
+    border-color: fadeout(@c, 40);
+    .black-back(.1);
+  }
+  &:active {
+    color: @c;
+    .box-shadow(none);
+    .black-back(.2);
+  }
+}
+
+

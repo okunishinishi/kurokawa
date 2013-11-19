@@ -1,0 +1,24 @@
+extends ../layout
+
+block stylesheets
+    link(rel='stylesheet', href=url.css('issue.css'))
+
+block javascripts
+    script(src=url.js('p.issue.js'))
+
+block downer-content
+    #issue-list-section(data-issues=issues)
+        h1 issues
+        a#issue-add-btn.stick-right.stick-top(
+        data-role='add-btn', href='javascript:void(0)') +new issue
+        fieldset
+            legend request
+            ul#request-issues-list(data-status='request')
+        fieldset#working-fieldset
+            legend working
+            ul#working-issues-list(data-status='working')
+        fieldset#done-fieldset
+            legend done
+            ul#done-issues-list(data-status='done')
+
+

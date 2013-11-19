@@ -81,3 +81,10 @@ post('/api/csv/user_import/execute', csv.import_user.execute);
 
 var score_rule = r['score_rule'];
 post('/api/score_rule/save', score_rule.api.save);
+
+var issue = r['issue'];
+get('/issue', issue.index);
+post('/api/issue/save', issue.api.save);
+post('/api/issue/destroy', issue.api.destroy);
+get('/api/issue.json', issue.api.list);
+get('/api/issue/:_id', issue.api.one);

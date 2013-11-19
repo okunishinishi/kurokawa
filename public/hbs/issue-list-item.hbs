@@ -1,0 +1,40 @@
+<li class="issue-list-item positioned paper editable-list-item-fixed" data-priority="{{priority}}">
+    <div class="paper-content">
+
+        <form class="inline-form" action="{{ctx}}/api/issue/save"
+              method="post" name="edit-form">
+            <input type="hidden" value="{{_id}}" name="_id"/>
+            <input type="hidden" value="{{status}}" name="status"/>
+            <input type="hidden" value="{{_vr}}" name="_vr"/>
+
+
+            <div class="title-text">
+                <textarea name="title" id=""
+                          data-role="editable-text"
+                          placeholder="request for improvement"
+                          cols="30" rows="10">{{title}}</textarea>
+            </div>
+            <div style="display: none !important;">
+                <label for="priority-select-{{_id}}">priority : </label>
+                <select name="priority" id="priority-select-{{_id}}" data-value="{{priority}}">
+                    <option value="high">high</option>
+                    <option value="middle">middle</option>
+                    <option value="low">low</option>
+                </select>
+            </div>
+        </form>
+        <div class="stick-right stick-top block-list-item-control">
+            <a href="javascript:void(0)" data-role='edit-btn'>
+                <i class="icon icon-pencil"></i>
+            </a>
+
+            <form class="inline-form" action="{{ctx}}/api/issue/destroy"
+                  method="post" name="destroy-form">
+                <input type="hidden" value="{{_id}}" name="_id"/>
+                <a href="javascript:void(0)" data-role='submit-btn'>
+                    <i class="icon icon-trash"></i>
+                </a>
+            </form>
+        </div>
+    </div>
+</li>

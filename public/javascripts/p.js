@@ -68,6 +68,7 @@
                         if (data.valid) {
                             form.setFormValue(data.model);
                             form.trigger('edit-done');
+                            li.addClass('editable-list-item-fixed');
                             detailLink.show();
                         } else {
                             var errors = data['errors'];
@@ -81,10 +82,12 @@
                     var onEdit = editableTxt.filter(':visible');
                     if (onEdit.length) {
                         //noinspection JSCheckFunctionSignatures
-                        editableTxt.trigger('tk-editable-text-edit');
+                        editableTxt.trigger('tk-editable-text-fix');
+                        li.addClass('editable-list-item-fixed');
                     } else {
                         //noinspection JSCheckFunctionSignatures
                         editableTxt.trigger('tk-editable-text-edit');
+                        li.removeClass('editable-list-item-fixed');
                     }
                     e.stopPropagation();
                 });

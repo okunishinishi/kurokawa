@@ -1,0 +1,15 @@
+section.list-section#issue-list-section
+    form#issue-list-form.positioned.block-list-header(
+    data-role='search-form',action=url('/api/issue.json'),method='get')
+        label.float-left.block-list-title=l.lbl.issue
+        input(type='search', name='search_word', results).float-right
+        input(type='hidden', name='skip', value='0')
+        input(type='hidden', name='limit', value='500')
+        input.btn(type='submit')=l.lbl.search
+        br.clear
+    ul#issue_list.block-list
+
+
+    a.add-btn.wide-btn#issue-add-btn(
+    href='javascript:void(0)', data-role='add-btn')
+        | #{l.btn.new}
