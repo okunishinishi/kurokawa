@@ -7,11 +7,12 @@ block javascripts
     script(src=url.js('p.issue.js'))
 
 block downer-content
-    #issue-list-section(data-issues=issues)
-        h1 issues
-        a#issue-add-btn.stick-right.stick-top(
-        data-role='add-btn', href='javascript:void(0)') +new issue
-        fieldset
+    #issue-list-section(data-issues=issues).positioned
+        h1#section-title issues
+        a#issue-add-btn.float-right(
+        data-role='add-btn', href='javascript:void(0)', style='right:10px;') +new issue
+        br.clear
+        fieldset.positioned
             legend request
             ul#request-issues-list(data-status='request')
         fieldset#working-fieldset
