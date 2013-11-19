@@ -11,3 +11,9 @@ exports.publishTest = function (test) {
         test.done();
     });
 };
+
+exports.namespaceDeclareLinesTest = function (test) {
+    var lines = publish.namespaceDeclareLines('report.score.chess');
+    lines.should.be.lengthOf(2);
+    test.done();
+};

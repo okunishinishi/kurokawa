@@ -1,31 +1,15 @@
 var tek = require('tek'),
     copy = tek['meta']['copy'],
+    file = tek['file'],
+    path = require('path'),
+    resolve = path['resolve'],
+    config = require('../app.config'),
     db = require('../db'),
-    Report = db.models['Report'];
+    obj = require('../util/u.obj'),
+    models = db.models;
 
-/**
- * find single model
- * @param _id
- * @param callback
- * @returns {*}
- */
-function findOne(_id, callback) {
-    return Report.findById(_id, callback);
-}
-
-/**
- * list models
- * @param condition
- * @param limit
- * @param skip
- * @param callback
- * @returns {*|Cursor}
- */
-function find(condition, limit, skip, callback) {
-    return Report.findByCondition(condition,function (models) {
-        callback(models.splice(skip, limit));
-    }).limit(limit).skip(skip);
-}
+var publicDir = config.publicDir,
+    reportDir = resolve(config.jsDir, 'report');
 
 /**
  * show index page
@@ -36,103 +20,53 @@ exports.index = function (req, res) {
     res.render('report/index.jade', {});
 };
 
+/**
+ * get scores from db
+ * @param callback
+ */
+exports.aggregateScores = function (callback) {
+    var toIdMap = obj['toIdMap'],
+        ScoreRule = models['ScoreRule'],
+        PersonUpdate = models['PersonUpdate'];
+    ScoreRule.findSingleton(function (scoreRule) {
+        PersonUpdate.findAll(function (personUpdates) {
+            var userMap = {};
+            personUpdates.forEach(function (personUpdate) {
+                personUpdate.changes.forEach(function (change) {
+                    var score = scoreRule.person[change.property];
+                    if (!score) return;
+                    score = Number(score);
 
-exports.api = {
-    /**
-     * one data
-     * @param req
-     * @param res
-     */
-    one: function (req, res) {
-        var p = req['param'];
-        findOne(p._id, function (model) {
-            res.json(model);
-        });
-    },
-
-    /**
-     * list data
-     * @param req
-     * @param res
-     */
-    list: function (req, res) {
-        var parameters = {
-            skip: 0,
-            limit: 500,
-            search_word: null
-        };
-        copy(eval(req.query), parameters);
-
-        var skip = Number(parameters.skip),
-            limit = Number(parameters.limit),
-            search_word = parameters.search_word,
-            condition = {};
-
-        if (search_word) {
-            var search_fields = ['name'];
-            search_fields.forEach(function (field) {
-                condition[field] = search_word;
-            });
-            condition = new db.AmbiguousCondition(condition);
-        }
-
-        find(condition, limit, skip, function (models) {
-            res.json(models);
-        });
-    },
-
-    /**
-     * save data
-     * @param req
-     * @param res
-     */
-    save: function (req, res) {
-        var report = new Report(req.body);
-        var result = report.validate();
-        if (!result.valid) {
-            res.json(result);
-            return;
-        }
-        findOne(report._id, function (duplicate) {
-            var action = duplicate ? 'update' : 'save';
-            if (duplicate) {
-                var vr = report._vr,
-                    conflict = vr && (vr != duplicate._vr);
-                if (conflict) {
-                    const l = res.locals.l;
-                    res.json({
-                        valid: false,
-                        err_alert: l.err.conflict
-                    });
-                    return;
-                }
-                copy.fallback(duplicate, report);
-            }
-            report[action](function (report) {
-                res.json({
-                    valid: true,
-                    model: report,
-                    action: action
+                    var user_id = change.user_id,
+                        user_scores = userMap[user_id];
+                    if (!user_scores) {
+                        user_scores = userMap[user_id] = {
+                            total: 0,
+                            detail: []
+                        };
+                    }
+                    user_scores.total += score;
+                    delete change.user_id;
+                    user_scores.detail.push(change);
                 });
             });
+            var result = Object.keys(userMap).map(function (user_id) {
+                var data = userMap[user_id];
+                data.user_id = user_id;
+                return data;
+            });
+            callback(result);
         });
-    },
+    });
+};
 
-    /**
-     * destroy data
-     * @param req
-     * @param res
-     */
-    destroy: function (req, res) {
-        var _id = req.body['_id'];
-        findOne(_id, function (report) {
-            if (report) {
-                report.remove(function () {
-                    res.json({count: 1});
-                });
-            } else {
-                res.json({count: 0});
-            }
+exports.publishScoreReport = function (callback) {
+    var publish = require('../util/u.publish');
+
+    exports.aggregateScores(function (data) {
+        var filepath = resolve(reportDir, 'report.score.js');
+        publish(filepath, 'report.score', data, function (filepath) {
+            callback && callback(filepath);
         });
-    }
+    });
 };

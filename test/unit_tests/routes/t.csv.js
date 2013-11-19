@@ -51,7 +51,7 @@ exports.parse_usersTest = function (test) {
 exports.parse_usersTest2 = function (test) {
     route.parse_users(data1(), function (users, errors) {
         should.exist(errors);
-        console.log(errors);
+        errors.should.be.lengthOf(3);
         test.done();
     });
 };

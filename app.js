@@ -30,11 +30,14 @@ app.configure('development', function () {
         console.log('precompile templates file:', config.hbsTemplateFile);
     });
 
-    var publish = require('./util/u.publish');
+    var publish = require('./util/u.publish'),
+        resolve = require('path').resolve;
     Object.keys(locale).forEach(function (lang) {
-        if(lang =='default') return;
-        var filename = 'locale/' + ['l', lang, 'js'].join('.');
-        publish(filename, 'l', locale[lang]);
+        if (lang == 'default') return;
+        var filepath = resolve(config.jsDir, "locale", ['l', lang, 'js'].join('.'));
+        publish(filepath, 'l', locale[lang], function (filepath) {
+            console.log('published locale file:', filepath);
+        });
     });
 });
 

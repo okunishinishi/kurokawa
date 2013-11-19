@@ -8,7 +8,8 @@ module.exports = {
     /** データ定義 **/
     entries: [
         {
-            _id: "${padZero(rownum, 24)}",
+            _id: "77${padZero(rownum, 22)}",
+            person_update_id: "66${padZero(rownum, 22)}",
             name: '${name}',
             company_id: "1${padZero((rownum + choice(1,2,3,4)) % 9, 23)}",
             department:'${star}部門',
