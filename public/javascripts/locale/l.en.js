@@ -102,7 +102,7 @@ l = {
         "top10": "top10",
         "report_charts": {
             "top10": "top10",
-            "team": "team points"
+            "team": "contributions"
         },
         "user_count_preffix": "",
         "user_count_suffix": ""

@@ -113,7 +113,7 @@ l.lbl.top10 = 'top10';
 
 l.lbl.report_charts = {
     top10: l.lbl.top10,
-    team: 'team points'
+    team: 'contributions'
 };
 l.lbl.user_count_preffix = '';
 l.lbl.user_count_suffix = '';
