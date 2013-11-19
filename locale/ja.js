@@ -2,18 +2,35 @@ var tek = require('tek'),
     copy = tek.meta.copy,
     en = require('./en');
 
-exports = copy.deep(en, exports);
+l = exports = copy.deep(en, exports);
 
-var app = exports.app = exports.app || {};
+l.app = l.app || {};
 
-var msg = exports.msg = exports.msg || {};
+l.msg = l.msg || {};
 
-var err = exports.err = exports.err || {};
+l.err = l.err || {};
 
-var btn = exports.btn = exports.btn || {};
+l.btn = l.btn || {};
 
-var lbl = exports.lbl = exports.lbl || {};
+l.lbl = l.lbl || {};
 
-var plh = exports.plh = exports.plh || {};
+l.lbl.company = '会社';
+l.lbl.department = '部門';
+l.lbl.post = '役職';
+l.lbl.mission = 'ミッション';
+l.lbl.hobby = '趣味';
+l.lbl.graduated_from = '出身大学';
+l.lbl.join_year = '入社年次';
+l.lbl.years_of_service = '社会人歴';
+l.lbl.family = 'family';
+l.lbl.single = 'single';
+l.lbl.children = '子供';
+l.lbl.favorite_food = '好きな食べ物';
+l.lbl.birthday = '生年月日';
+l.lbl.birthplace = '出身地';
+l.lbl.live_at = '住所';
+l.lbl.free_word = 'フリーワード';
 
-var alt = exports.alt = exports.alt || {};
+l.plh = l.plh || {};
+
+l.alt = l.alt || {};

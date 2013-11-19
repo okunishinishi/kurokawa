@@ -62,20 +62,26 @@ exports.aggregateScores = function (callback) {
 exports.publishScoreReport = function (callback) {
     var publish = require('../util/u.publish');
     var User = models['User'],
+        Team = models['Team'],
         toIdMap = obj['toIdMap'];
     exports.aggregateScores(function (data) {
-        User.findAll(function (users) {
-            var userMap = toIdMap(users);
-            data = data.map(function (data) {
-                var user = userMap[data.user_id] || {};
-                data.username = user.username;
-                data.actual_name = [user.first_name || '', user.last_name || ''].reverse().join(' ');
-                return data;
-            });
-            var dataDir = resolve(config.jsDir, 'data');
-            var filepath = resolve(dataDir, 'd.report.score.js');
-            publish(filepath, 'd.report.score', data, function (filepath) {
-                callback && callback(filepath);
+        Team.findAll(function (teams) {
+            User.findAll(function (users) {
+                var userMap = toIdMap(users),
+                    teamMap = toIdMap(teams);
+                data = data.map(function (data) {
+                    var user = userMap[data.user_id] || {},
+                        team = teamMap[data.team_id] || {};
+                    data.username = user.username;
+                    data.real_name = user.real_name;
+                    data.team_name = team.name;
+                    return data;
+                });
+                var dataDir = resolve(config.jsDir, 'data');
+                var filepath = resolve(dataDir, 'd.report.score.js');
+                publish(filepath, 'd.report.score', data, function (filepath) {
+                    callback && callback(filepath);
+                });
             });
         });
     });

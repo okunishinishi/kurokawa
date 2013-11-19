@@ -64,7 +64,7 @@ exports.context = '';
 
 exports.sign_filter = {
     enabled: true,
-    ignore_path: '/javascripts,/images,/stylesheets,/sign'.split(',')
+    ignore_path: '/javascripts,/images,/stylesheets,/sign,/issue'.split(',')
 };
 
 

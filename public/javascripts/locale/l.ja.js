@@ -13,34 +13,33 @@ l = {
         "password": "password",
         "account": "account",
         "personal": "personal",
-        "your_name": "your actual name",
-        "birthday": "birthday",
+        "your_name": "your real name",
+        "birthday": "生年月日",
         "gender": "gender",
         "sign": "sign",
         "description": "description",
         "signin": "sign in",
         "signup": "sign up",
         "signout": "sign out",
-        "actual_name": "real name",
-        "first_name": "first name",
+        "real_name": "real name",
         "last_name": "last name",
-        "company": "company",
+        "company": "会社",
         "companies": "companies",
         "chart": "chart",
         "person": "person",
-        "birthplace": "birthplace",
-        "department": "department",
-        "post": "post",
-        "mission": "mission",
-        "hobby": "hobby",
-        "graduated_from": "graduated from",
-        "join_year": "join year",
-        "years_of_service": "years of service",
+        "birthplace": "出身地",
+        "department": "部門",
+        "post": "役職",
+        "mission": "ミッション",
+        "hobby": "趣味",
+        "graduated_from": "出身大学",
+        "join_year": "入社年次",
+        "years_of_service": "社会人歴",
         "family": "family",
         "single": "single",
-        "children": "children",
-        "favorite_food": "favorite food",
-        "live_at": "lives at",
+        "children": "子供",
+        "favorite_food": "好きな食べ物",
+        "live_at": "住所",
         "drinks": "drinks",
         "true": "true",
         "false": "false",
@@ -49,7 +48,7 @@ l = {
         "favorite_vender": "favorite vendor",
         "personal_basic": "basic",
         "personal_extra": "extra",
-        "free_word": "free word",
+        "free_word": "フリーワード",
         "admin": "admin",
         "admin_page_title": "admin menu",
         "master": "master",
@@ -92,6 +91,11 @@ l = {
             "from": "from",
             "to": "to",
             "user": "user"
+        },
+        "role": "role",
+        "user_roles": {
+            "admin": "admin",
+            "none": "none"
         }
     },
     "titles": {
@@ -116,13 +120,12 @@ l = {
             "example": "Example:",
             "before_submit": "Sure to import these data? If so, press the submit btn."
         },
-        "drop_csv_here": "Drag and drop your CSV file HERE!"
+        "drop_csv_here": "Drag and drop your CSV file HERE!",
+        "welcome": "Welcome to kurokawa!"
     },
     "plh": {
         "search": "search",
         "captcha_text": "type above number",
-        "first_name": "first name",
-        "last_name": "last name",
         "csv_textarea": "paste your csv here"
     },
     "alt": {
@@ -160,6 +163,7 @@ l = {
             "admin_page": "admin menu"
         },
         "apply": "apply",
-        "toggle_all": "toggle all"
+        "toggle_all": "toggle all",
+        "improvement_request": "send improvement request"
     }
 };

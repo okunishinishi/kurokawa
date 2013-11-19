@@ -13,7 +13,7 @@ l = {
         "password": "password",
         "account": "account",
         "personal": "personal",
-        "your_name": "your actual name",
+        "your_name": "your real name",
         "birthday": "birthday",
         "gender": "gender",
         "sign": "sign",
@@ -21,8 +21,7 @@ l = {
         "signin": "sign in",
         "signup": "sign up",
         "signout": "sign out",
-        "actual_name": "real name",
-        "first_name": "first name",
+        "real_name": "real name",
         "last_name": "last name",
         "company": "company",
         "companies": "companies",
@@ -92,6 +91,11 @@ l = {
             "from": "from",
             "to": "to",
             "user": "user"
+        },
+        "role": "role",
+        "user_roles": {
+            "admin": "admin",
+            "none": "none"
         }
     },
     "titles": {
@@ -116,13 +120,12 @@ l = {
             "example": "Example:",
             "before_submit": "Sure to import these data? If so, press the submit btn."
         },
-        "drop_csv_here": "Drag and drop your CSV file HERE!"
+        "drop_csv_here": "Drag and drop your CSV file HERE!",
+        "welcome": "Welcome to kurokawa!"
     },
     "plh": {
         "search": "search",
         "captcha_text": "type above number",
-        "first_name": "first name",
-        "last_name": "last name",
         "csv_textarea": "paste your csv here"
     },
     "alt": {
@@ -160,6 +163,7 @@ l = {
             "admin_page": "admin menu"
         },
         "apply": "apply",
-        "toggle_all": "toggle all"
+        "toggle_all": "toggle all",
+        "improvement_request": "send improvement request"
     }
 };

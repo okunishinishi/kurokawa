@@ -28,8 +28,7 @@ exports.lineToUserTest = function (test) {
         should.exist(user.salt);
         user.username.should.equal('j0123');
         user.email.should.equal('j@example.com');
-        user.first_name.should.equal('John');
-        user.last_name.should.equal('Crazy');
+        user.real_name.should.equal('John Crazy');
         user.password_expired.should.be.true;
         should.not.exist(user.password);
         test.done();

@@ -16,21 +16,19 @@ var csv = require('../util/u.csv'),
 
 
 exports.format = {};
-exports.format.user_import = 'username,email,first_name,last_name,password,role'.split(',');
+exports.format.user_import = 'username,email,real_name,password,role'.split(',');
 exports.format.user_import_example = [
     {
         username: 't_okunishi',
         email: 't_okuni@example.com',
-        first_name: 'Taka',
-        last_name: 'Okunishi',
+        real_name: 'Taka Okunishi',
         password: 'asd3',
         role: 'admin'
     },
     {
         username: 'some_body',
         email: '',
-        first_name: 'Sum',
-        last_name: 'Body',
+        real_name: 'Sum Body',
         password: 'ekj9',
         role: ''
     }

@@ -12,21 +12,21 @@ mixin user_detail_form(user, teams)
                         label.block-label(for=username-input)=l.lbl.username
                     td
                         input(type='text', name='username', value=user.username, id='username-input', data-role='editable-text')
-
+                tr
+                    th
+                        label.block-label=l.lbl.role
+                    td
+                        span=l.lbl.user_roles[user.role || 'none']
         br
         table.wide-table
             caption=l.lbl.personal
             tbody
                 tr
                     th
-                        label(for='first_name-input')=l.lbl.actual_name
+                        label(for='real_name-input')=l.lbl.real_name
                     td
-                        span.filed
-                            input(type='text', name='first_name',
-                                value=user.first_name, id='first_name-input', placeholder=l.plh.first_name, data-role='editable-text')
-                        span.filed
-                            input(type='text', name='last_name', value=user.last_name,
-                                id='last_name-input', placeholder=l.plh.last_name, data-role='editable-text')
+                        input(type='text', name='real_name', value=user.real_name,
+                            id='real_name-input', placeholder=l.plh.real_name, data-role='editable-text')
                 tr
                     th
                         label(for='email-input')=l.lbl.email

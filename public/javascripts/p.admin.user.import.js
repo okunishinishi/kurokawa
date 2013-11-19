@@ -116,7 +116,7 @@
         importWayTabs: function (hash, callback) {
             var tabs = $(this);
             var tab = tabs.find('.tab');
-            tab.tab(function(e){
+            tab.tab(function(){
                 var a = $(this),
                     href = a.attr('href');
                 var id = a.attr('id');
@@ -125,7 +125,6 @@
                     location.href = '#' + id;
                     tab.show();
                 }
-                e.preventDefault();
                 callback(href);
             });
             var first = tab.filter(hash);

@@ -2,7 +2,7 @@ mixin person_score_rule_tr(data, key)
     tr
         th
             label(for="person_score_#{key}-input")=(l.lbl[key] || key)
-        td
+        td.text-right
             input.text-right(id="person_score_#{key}-input",
             min=0,
             max=100,
@@ -12,14 +12,20 @@ mixin person_score_rule_tr(data, key)
             value=data && data[key])
 
 mixin person_score_rule_table_basic(data, basic_data_keys)
-    table.float-left.float-table
+    table.float-left.float-table.score_rule-table
+        colgroup
+            col.head-col
+            col.data-col
         caption=l.lbl.personal_basic
         thead
         tbody
             each basic_data_key in basic_data_keys
                 +person_score_rule_tr(data,basic_data_key)
 mixin person_score_rule_table_extra(data, extra_data_keys)
-    table.float-left.float-table
+    table.float-left.float-table.score_rule-table
+        colgroup
+            col.head-col
+            col.data-col
         caption=l.lbl.personal_extra
         thead
         tbody

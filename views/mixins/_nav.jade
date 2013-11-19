@@ -18,4 +18,3 @@ mixin suv_nav(sign_user, id)
         case sign_user && sign_user.role
             when 'admin'
                 a.nav-item(href=url('/admin'), data-key='admin')=l.lbl.admin
-        a.nav-item(href=url('/issue'), key='issue')=l.lbl.issue

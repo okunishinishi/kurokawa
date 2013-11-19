@@ -15,7 +15,7 @@ l.lbl.username_or_email = [l.lbl.username, 'or', l.lbl.email].join(' ');
 l.lbl.password = 'password';
 l.lbl.account = 'account';
 l.lbl.personal = 'personal';
-l.lbl.your_name = 'your actual name';
+l.lbl.your_name = 'your real name';
 l.lbl.birthday = 'birthday';
 l.lbl.gender = 'gender';
 l.lbl.sign = 'sign';
@@ -24,8 +24,7 @@ l.lbl.signin = 'sign in';
 l.lbl.signup = 'sign up';
 l.lbl.signout = 'sign out';
 l.lbl.personal = 'personal';
-l.lbl.actual_name = 'real name';
-l.lbl.first_name = 'first name';
+l.lbl.real_name = 'real name';
 l.lbl.last_name = 'last name';
 l.lbl.email = 'email';
 l.lbl.company = 'company';
@@ -102,6 +101,11 @@ l.lbl.person_update_history = {
     to: 'to',
     user: l.lbl.user
 };
+l.lbl.role = 'role';
+l.lbl.user_roles = {
+    admin:'admin',
+    none:'none'
+};
 
 l.lead = {};
 l.lead.index_page = 'Select client company.';
@@ -126,13 +130,11 @@ l.msg.user_import = {
     before_submit: 'Sure to import these data? If so, press the submit btn.'
 };
 l.msg.drop_csv_here = 'Drag and drop your CSV file HERE!';
-
+l.msg.welcome = 'Welcome to ' + l.app.name + '!';
 
 l.plh = {};
 l.plh.search = l.lbl.search;
 l.plh.captcha_text = 'type above number';
-l.plh.first_name = l.lbl.first_name;
-l.plh.last_name = l.lbl.last_name;
 l.plh.csv_textarea = 'paste your csv here';
 
 
@@ -174,5 +176,5 @@ l.btn.back_link = {
 };
 l.btn.apply = 'apply';
 l.btn.toggle_all = 'toggle all';
-
+l.btn.improvement_request = 'send improvement request';
 
