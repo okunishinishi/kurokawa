@@ -7,7 +7,7 @@ var path = require('path'),
 var workDir = resolve(__dirname, '../../work');
 
 config.jsDir = workDir;
-mkdirP(resolve(workDir, 'report'));
+mkdirP(resolve(workDir, 'data'));
 
 var report = require('../../../routes/r.report');
 

@@ -77,3 +77,15 @@ http.createServer(app).listen(app.get('port'), function () {
     console.log('NODE_ENV=' + NODE_ENV);
     console.log("Express server listening on port " + app.get('port'));
 });
+
+
+(function (report) {
+    function publishScoreReport() {
+        report.publishScoreReport(function (fiepath) {
+            console.log('score report published:', fiepath);
+        });
+    }
+
+    setInterval(publishScoreReport, config.reportPublishInterval);
+    publishScoreReport();
+})(require('./routes/r.report'));

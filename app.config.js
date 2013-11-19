@@ -66,3 +66,6 @@ exports.sign_filter = {
     enabled: true,
     ignore_path: '/javascripts,/images,/stylesheets,/sign'.split(',')
 };
+
+
+exports.reportPublishInterval = 10 * 60 * 1000;

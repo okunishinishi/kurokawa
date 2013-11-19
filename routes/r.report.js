@@ -8,8 +8,7 @@ var tek = require('tek'),
     obj = require('../util/u.obj'),
     models = db.models;
 
-var publicDir = config.publicDir,
-    reportDir = resolve(config.jsDir, 'report');
+var publicDir = config.publicDir;
 
 /**
  * show index page
@@ -62,11 +61,22 @@ exports.aggregateScores = function (callback) {
 
 exports.publishScoreReport = function (callback) {
     var publish = require('../util/u.publish');
-
+    var User = models['User'],
+        toIdMap = obj['toIdMap'];
     exports.aggregateScores(function (data) {
-        var filepath = resolve(reportDir, 'report.score.js');
-        publish(filepath, 'report.score', data, function (filepath) {
-            callback && callback(filepath);
+        User.findAll(function (users) {
+            var userMap = toIdMap(users);
+            data = data.map(function (data) {
+                var user = userMap[data.user_id] || {};
+                data.username = user.username;
+                data.actual_name = [user.first_name || '', user.last_name || ''].join(' ');
+                return data;
+            });
+            var dataDir = resolve(config.jsDir, 'data');
+            var filepath = resolve(dataDir, 'd.report.score.js');
+            publish(filepath, 'd.report.score', data, function (filepath) {
+                callback && callback(filepath);
+            });
         });
     });
 };
