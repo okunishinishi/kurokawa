@@ -300,7 +300,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (stack1 = helpers.priority) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.priority; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">\n                    <option value=\"high\">high</option>\n                    <option value=\"middle\">middle</option>\n                    <option value=\"low\">low</option>\n                </select>\n            </div>\n        </form>\n        <div class=\"stick-right stick-top block-list-item-control\">\n            <a href=\"javascript:void(0)\" data-role='edit-btn'>\n                <i class=\"icon icon-pencil\"></i>\n            </a>\n\n            <form class=\"inline-form\" action=\"";
+    + "\">\n                    <option value=\"high\">high</option>\n                    <option value=\"middle\">middle</option>\n                    <option value=\"low\">low</option>\n                </select>\n            </div>\n\n            <input class=\"btn wide-btn save-btn\" type=\"submit\" value=\"save\"/>\n        </form>\n        <div class=\"stick-right stick-top block-list-item-control\">\n            <a href=\"javascript:void(0)\" data-role='edit-btn'>\n                <i class=\"icon icon-pencil\"></i>\n            </a>\n\n            <form class=\"inline-form\" action=\"";
   if (stack1 = helpers.ctx) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.ctx; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)

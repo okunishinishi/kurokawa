@@ -6,7 +6,10 @@ body {
   padding: 20px 20px;
   color: @brown;
   .title-text {
-    font-size: 2em;
+  }
+  .paper-content{
+    max-width: 300px;
+    min-width:200px;
   }
   fieldset {
     border-color: @brown;
@@ -43,6 +46,9 @@ body {
         -webkit-appearance: none;
         -moz-appearance: window;
         outline: none;
+      }
+      .save-btn{
+        display: none !important;
       }
       .block-list-item-control {
         display: block;

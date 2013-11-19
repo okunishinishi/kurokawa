@@ -27,7 +27,6 @@
                 li
                     .find('textarea')
                     .blur(function () {
-                        $(this).parents('form').submit();
                     });
 
             });
