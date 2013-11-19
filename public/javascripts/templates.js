@@ -421,11 +421,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n        <label>\n            <span style=\"background-color: ";
+  buffer += "\n\n        <label>\n            <span style=\"background-color: ";
   if (stack1 = helpers.color) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.color; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\" class=\"pye-chart-label-color\"></span>\n            <span>";
+    + "\" class=\"pye-chart-label-color\"></span>\n            <span style=\"\">";
   if (stack1 = helpers.label) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.label; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
