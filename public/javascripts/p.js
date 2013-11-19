@@ -4,7 +4,7 @@
  *  -- namespaces --
  *  $ : jQuery
  *  l : message resource
- *  Hbs : handlebars
+ *  hbs : handlebars
  *
  */
 (function ($, l, hbs, window) {
@@ -42,6 +42,17 @@
     $.extend({
         errAlert: function (text) {
             $('#err-alert').text(text).show();
+        },
+        rainbowColor: function (base, count) {
+            var result = [];
+            if (!base) base = '#FF0000';
+            if (!count) count = 7;
+            var color = $.color(base);
+            for (var i = 0; i < count; i++) {
+                var hue = i / count;
+                result.push(color.hue(hue, true).hex());
+            }
+            return result;
         }
     });
     $.fn.extend({

@@ -99,7 +99,11 @@ l = {
             "admin": "admin",
             "none": "none"
         },
-        "top10": "top10"
+        "top10": "top10",
+        "report_charts": {
+            "top10": "top10",
+            "team": "team points"
+        }
     },
     "titles": {
         "chart_sheet_filter": "filter"

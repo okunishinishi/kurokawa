@@ -28,7 +28,14 @@ block left-content
 block right-content
     section#score-chart-section
         br
-        h1.text-center=l.lbl.top10
+        h1.text-center=l.lbl.report_charts.top10
         canvas#top10-chart-canvas.score-chart-canvas(
-        data-fillcolor='rgba(255, 165, 0, 0.56)',
-        data-strockcolor='rgba(255, 165, 0, 1)')
+            data-fillcolor='rgba(255, 165, 0, 0.56)',
+            data-strockcolor='rgba(255, 165, 0, 1)')
+        br
+        br
+        h1.text-center=l.lbl.report_charts.team
+        div.positioned
+            canvas#team-chart-canvas.score-chart-canvas.float-left(
+            data-basecolor='rgba(80, 243, 100, 0.9)')
+            br.clear

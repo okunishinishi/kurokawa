@@ -88,12 +88,12 @@ l.lbl.admin_menu = {
 };
 l.lbl.filter = 'filter';
 l.lbl.filter_on = 'filtered';
-l.lbl.issue = 'issue'.replace(/_/g,' ');
+l.lbl.issue = 'issue'.replace(/_/g, ' ');
 l.titles = {
     chart_sheet_filter: 'filter'
 };
-l.lbl.rank ='rank';
-l.lbl.score ='score';
+l.lbl.rank = 'rank';
+l.lbl.score = 'score';
 l.lbl.__empty__ = '__empty__';
 l.lbl.person_update_history = {
     caption: 'update history',
@@ -105,11 +105,17 @@ l.lbl.person_update_history = {
 };
 l.lbl.role = 'role';
 l.lbl.user_roles = {
-    admin:'admin',
-    none:'none'
+    admin: 'admin',
+    none: 'none'
 };
 
 l.lbl.top10 = 'top10';
+
+l.lbl.report_charts = {
+    top10: l.lbl.top10,
+    team: 'team points'
+};
+
 l.lead = {};
 l.lead.index_page = 'Select client company.';
 l.lead.score_rule = 'Manage how much score will be given for each data.';

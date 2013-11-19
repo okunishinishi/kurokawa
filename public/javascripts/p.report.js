@@ -43,7 +43,7 @@
 
             return section;
         },
-        chartCanvas: function () {
+        prepareDraw: function () {
             var canvas = $(this);
             canvas.removeAttr('style')
                 .removeAttr('width')
@@ -55,49 +55,90 @@
                 width: w,
                 height: h
             });
-            return canvas;
+            return canvas[0].getContext('2d');
         },
-        top10ChartCanvas: function (animation) {
-            var canvas = $(this).chartCanvas(),
-                ctx = canvas[0].getContext('2d');
-            new Chart(ctx)
-                .Bar({
-                    labels: canvas.data('labels'),
-                    datasets: [
-                        {
-                            fillColor: canvas.data('fillcolor'),
-                            strokeColor: canvas.data('strockcolor'),
-                            data: canvas.data('values')
-                        }
-                    ]
-                }, {
-                    animation: animation
-                });
-            return canvas;
-        },
-        scoreChartSection: function (data) {
-            var section = $(this),
-                form = $('#score-chart-condition-form', section),
-                top10canvas = $('#top10-chart-canvas', section);
+        top10ChartCanvas: function (data) {
+            var canvas = $(this);
 
-
-            var top10Data = data.slice(0, 10);
-            top10canvas.data({
-                labels: top10Data.map(function (data) {
+            data = data.slice(0, 10);
+            canvas.data({
+                labels: data.map(function (data) {
                     return data.real_name;
                 }),
-                values: top10Data.map(function (data) {
+                values: data.map(function (data) {
                     return Number(data.total);
                 })
             });
 
-            section.draw = function (animation) {
-                top10canvas.top10ChartCanvas(animation);
+            canvas.draw = function (animation) {
+                var ctx = canvas.prepareDraw();
+                new Chart(ctx)
+                    .Bar({
+                        labels: canvas.data('labels'),
+                        datasets: [
+                            {
+                                fillColor: canvas.data('fillcolor'),
+                                strokeColor: canvas.data('strockcolor'),
+                                data: canvas.data('values')
+                            }
+                        ]
+                    }, {
+                        animation: animation
+                    });
+            };
+            return canvas;
+        },
+        teamCanvas: function (data) {
+            var canvas = $(this);
+
+            var tmpl = {
+                labels: hbs.templates['pie-chart-labels']
             };
 
-            $(window).resize(function () {
-                section.draw(false);
+            var pointMap = {};
+            data.forEach(function (data) {
+                var team_name = data.team_name;
+                pointMap[team_name] = (pointMap[team_name] || 0) + Number(data.total);
             });
+            var teamNames = Object.keys(pointMap),
+                colors = $.rainbowColor(canvas.data('basecolor'), teamNames.length);
+            var pieData = teamNames.map(function (team_name, i) {
+                return {
+                    label: team_name,
+                    value: pointMap[team_name],
+                    color: colors[i]
+                }
+            });
+
+            canvas.after(tmpl.labels(pieData));
+            var labels = canvas.next('.pie-chart-labels');
+
+
+            canvas.data({
+                pie: pieData
+            });
+            canvas.draw = function (animation) {
+                var ctx = canvas.prepareDraw();
+                new Chart(ctx).Pie(canvas.data('pie'), {
+                    animation: animation
+                });
+                labels.css({
+                    left: canvas.width() / 2 + 180
+                });
+            };
+            return canvas;
+        },
+        scoreChartSection: function (data) {
+            var section = $(this),
+                top10canvas = $('#top10-chart-canvas', section).top10ChartCanvas(data),
+                teamCanvas = $('#team-chart-canvas', section).teamCanvas(data);
+
+
+            section.draw = function (animation) {
+                top10canvas.draw(animation);
+                teamCanvas.draw(animation);
+            };
+
             section.draw(true);
             return section;
         }
@@ -111,8 +152,14 @@
 
         var data = d && d['report'];
 
-        $('#score-list-section', body).scoreListSection(data['score']);
-        $('#score-chart-section', body).scoreChartSection(data['score']);
+        $('#score-list-section', body).scoreListSection(data['score'] || []);
+        var scoreChartSection = $('#score-chart-section', body).scoreChartSection(data['score'] || []);
+
+
+        win.resize(function () {
+            scoreChartSection.draw(false);
+        });
+
         $('#sub-nav', body).subNav('report');
 
 
