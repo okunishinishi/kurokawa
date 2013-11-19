@@ -1,9 +1,9 @@
 /**
  * tek.view.js
  * - javascript library for tek -
- * @version v0.2.36
+ * @version v0.2.39
  * @author Taka Okunishi
- * @date 2013-11-18
+ * @date 2013-11-19
  *
  */
 (function (dependencies, window, undefined) {
@@ -947,35 +947,38 @@
 		                console.warn(msg);
 		                th.wrapInner('<label/>');
 		            }
-		        })
-		        .click(function () {
-		            var th = $(this),
-		                asc = eval(th.attr('data-tk-asc') || 'false'),
-		                col = th.data('col');
-		            th.siblings('[data-tk-asc]').removeAttr('data-tk-asc');
-		            bodyTr
-		                .each(function (i) {
-		                    var tr = $(this),
-		                        td = tr.find('.tk-col-' + col);
-		                    tr
-		                        .data('tk-sort-value', td.text() || '')
-		                        .data('tk-row', i);
-		                })
-		                .sort(function (a, b) {
-		                    var $1 = $(a);
-		                    var $2 = $(b);
-		                    var v1 = $1.data('tk-sort-value'),
-		                        v2 = $2.data('tk-sort-value');
-		                    var sorted = v1.localeCompare(v2) * (asc ? 1 : -1);
-		                    if (sorted) {
-		                        return  sorted;
-		                    } else {
-		                        return ($2.data('tk-row') - $1.data('tk-row')) * (asc ? 1 : -1);
-		                    }
-		                })
-		                .appendTo(tbody);
-		            th.attr('data-tk-asc', !asc);
-		            callback && callback(col, asc);
+		            if (!th.data('tek-sortable-th')) {
+		                th.data('tek-sortable-th', true);
+		                th.click(function () {
+		                    var th = $(this),
+		                        asc = eval(th.attr('data-tk-asc') || 'false'),
+		                        col = th.data('col');
+		                    th.siblings('[data-tk-asc]').removeAttr('data-tk-asc');
+		                    bodyTr
+		                        .each(function (i) {
+		                            var tr = $(this),
+		                                td = tr.find('.tk-col-' + col);
+		                            tr
+		                                .data('tk-sort-value', td.text() || '')
+		                                .data('tk-row', i);
+		                        })
+		                        .sort(function (a, b) {
+		                            var $1 = $(a);
+		                            var $2 = $(b);
+		                            var v1 = $1.data('tk-sort-value'),
+		                                v2 = $2.data('tk-sort-value');
+		                            var sorted = v1.localeCompare(v2) * (asc ? 1 : -1);
+		                            if (sorted) {
+		                                return  sorted;
+		                            } else {
+		                                return ($2.data('tk-row') - $1.data('tk-row')) * (asc ? 1 : -1);
+		                            }
+		                        })
+		                        .appendTo(tbody);
+		                    th.attr('data-tk-asc', !asc);
+		                    callback && callback(col, asc);
+		                });
+		            }
 		        });
 		    return table;
 		};
@@ -1024,7 +1027,14 @@
 		        form.submit();
 		    });
 		};
-		
+		/**
+		 * drop upload file input
+		 * @param url
+		 * @param name
+		 * @param msg
+		 * @param callback
+		 * @returns {*|jQuery}
+		 */
 		$.fn.dropUploadInput = function (url, name, msg, callback) {
 		    var tmpl = hbs.templates['tk-drop-upload-form'];
 		    var data = $.extend({
@@ -1055,6 +1065,32 @@
 		                    form.removeClass('tk-loading').removeSpin();
 		                    callback && callback(data);
 		                });
+		        });
+		};
+		
+		/**
+		 * move a element from one to another by dragging
+		 */
+		$.fn.transferable = function (draggable) {
+		    $(draggable)
+		        .draggable({
+		
+		            revert: "invalid"
+		        })
+		        .addClass('tk-transferable-item');
+		    return $(this)
+		        .not('.tk-transferable')
+		        .addClass('tk-transferable')
+		        .droppable({
+		            accept: '.tk-transferable-item',
+		            hoverClass: 'tk-transferable-drop-ready',
+		            drop: function (e, ui) {
+		                var droppable = $(this),
+		                    draggable = $(ui.draggable);
+		                droppable.append(draggable);
+		                draggable.removeAttr('style');
+		                droppable.trigger('tk-transfer', [draggable]);
+		            }
 		        });
 		};
 	})(dependencies, undefined);

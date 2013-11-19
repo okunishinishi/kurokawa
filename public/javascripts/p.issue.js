@@ -17,10 +17,7 @@
                 var li = $(this);
                 li
                     .destroyableListItem()
-                    .editableListItem('dblclick')
-                    .draggable({
-                        containment:'#issue-list-section'
-                    });
+                    .editableListItem('dblclick');
                 li
                     .find('select').each(function () {
                         var select = $(this),
@@ -36,6 +33,9 @@
             });
         },
         issueList: function (data) {
+            data = data.filter(function (data) {
+                return !!data.title;
+            });
             var ul = $(this);
             ul.htmlHandlebars(tmpl.li, data)
                 .find('li')
@@ -47,25 +47,36 @@
                 addBtn = section.findByRole('add-btn'),
                 ul = section.find('ul');
             var firstUl = ul.first();
-            firstUl.appendableList(tmpl.li, addBtn, function (li) {
-                li.issueListItem()
-                    .find('textarea')
-                    .focus()
-                    .removeClass('editable-list-item-fixed');
-                li
-                    .findByName('status')
-                    .val(firstUl.data('status'));
-            });
+            firstUl
+                .appendableList(tmpl.li, addBtn, function (li) {
+                    li.issueListItem()
+                        .find('textarea')
+                        .focus()
+                        .removeClass('editable-list-item-fixed');
+                    li
+                        .findByName('status')
+                        .val(firstUl.data('status'));
+                    firstUl.transferable('.issue-list-item');
+                });
 
-            ul.each(function () {
-                var ul = $(this),
-                    status = ul.data('status');
-                ul.issueList(data.filter(function (data) {
-                    return data.status == status;
-                }))
-            });
-
-            addBtn.click();
+            ul
+                .each(function () {
+                    var ul = $(this),
+                        status = ul.data('status');
+                    ul.issueList(data.filter(function (data) {
+                        return data.status == status;
+                    }))
+                })
+                .on('tk-transfer', function (e, item) {
+                    var status = $(this).data('status'),
+                        statusInput = item.findByName('status');
+                    var changed = statusInput.val() != status;
+                    if (changed) {
+                        statusInput.val(status);
+                        statusInput.submit();
+                    }
+                })
+                .transferable('.issue-list-item');
 
             return section;
         }

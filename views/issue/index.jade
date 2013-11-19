@@ -9,17 +9,17 @@ block javascripts
 block downer-content
     #issue-list-section(data-issues=issues).positioned
         h1#section-title issues
-        a#issue-add-btn.float-right(
-        data-role='add-btn', href='javascript:void(0)', style='right:10px;') +new issue
         br.clear
         fieldset.positioned
             legend request
-            ul#request-issues-list(data-status='request')
+            ul#request-issues-list(data-status='request').clear
+            a#issue-add-btn(data-role='add-btn', href='javascript:void(0)', style='right:10px;') +new issue
         fieldset#working-fieldset
             legend working
-            ul#working-issues-list(data-status='working')
+            ul#working-issues-list(data-status='working').clear
+
         fieldset#done-fieldset
             legend done
-            ul#done-issues-list(data-status='done')
+            ul#done-issues-list(data-status='done').clear
 
 

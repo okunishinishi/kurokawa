@@ -63,6 +63,37 @@ body {
   display: none !important;
 }
 
+#issue-add-btn{
+  .stick-right(10px);
+  .stick-top(20px);
+}
+
+fieldset{
+  padding: 0;
+  .white-back(.2);
+  .box-shadow(2px 2px 4px, .5);
+  .text-shadow(2px 2px 4px, .1);
+  legend{
+    margin-left:20px;
+    font-size: 2em;
+  }
+  li{
+    float: left;
+  }
+  .tk-transferable{
+    min-height: 120px;
+    padding: 20px 40px;
+    margin: -15px 0 0;
+    width:100%;
+    height: 100%;
+  }
+  .tk-transferable-drop-ready{
+    .white-back(.5);
+  }
+}
+.ui-draggable-dragging{
+  z-index: 101;
+}
 .add-btn {
   display: inline-block;
   font-size: 2em;
@@ -88,3 +119,21 @@ body {
 }
 
 
+#working-issues-list{
+  .paper-content{
+    @back:#FFF68B;
+    background-color: @back;
+    border-color:darken(@back,5);
+    color:rgb(119, 86, 0);
+    .text-shadow(none);
+  }
+}
+#done-issues-list{
+  .paper-content{
+    @back:#DFDFDF;
+    color:darken(@back, 20);
+    background-color: @back;
+    border-color:darken(@back,5);
+    .text-shadow(none);
+  }
+}
