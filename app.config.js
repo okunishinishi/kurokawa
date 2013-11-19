@@ -69,3 +69,5 @@ exports.sign_filter = {
 
 
 exports.reportPublishInterval = 10 * 60 * 1000;
+exports.reportHTML = resolve(exports.publicDir, 'html/report.score.html');
+exports.reportHTML_compact = resolve(exports.publicDir, 'html_c/report.score.html');

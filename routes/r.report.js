@@ -16,7 +16,12 @@ var publicDir = config.publicDir;
  * @param res
  */
 exports.index = function (req, res) {
-    res.render('report/index.jade', {});
+    var relative = path.relative;
+    var redirect_path = '/' + relative(config.publicDir, config.reportHTML_compact);
+    res.redirect([
+        redirect_path,
+        'back_url=' + encodeURIComponent('/' + config.context)
+    ].join('?'));
 };
 
 /**
@@ -71,7 +76,7 @@ exports.publishScoreReport = function (callback) {
                     teamMap = toIdMap(teams);
                 data = data.map(function (data) {
                     var user = userMap[data.user_id] || {},
-                        team = teamMap[data.team_id] || {};
+                        team = user && teamMap[user.team_id] || {};
                     data.username = user.username;
                     data.real_name = user.real_name;
                     data.team_name = team.name;

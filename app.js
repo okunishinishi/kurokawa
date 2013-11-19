@@ -21,6 +21,16 @@ app.configure('all', function () {
     app.use(app['router']);
 });
 
+function publishScoreReport() {
+    require('./routes/r.report').publishScoreReport(function () {
+        require('tek-html').compact(config.reportHTML, config.reportHTML_compact, function () {
+            console.log('score report published:', config.reportHTML_compact);
+        });
+    });
+}
+publishScoreReport();
+setInterval(publishScoreReport, config.reportPublishInterval);
+
 app.configure('development', function () {
     var errorHandler = express['errorHandler'];
     app.use(errorHandler());
@@ -28,6 +38,7 @@ app.configure('development', function () {
     var hbs = require('./util/u.hbs');
     hbs.precompileAll(config.hbsDir, config.hbsTemplateFile, function () {
         console.log('precompile templates file:', config.hbsTemplateFile);
+        publishScoreReport();
     });
 
     var publish = require('./util/u.publish'),
@@ -79,13 +90,4 @@ http.createServer(app).listen(app.get('port'), function () {
 });
 
 
-(function (report) {
-    function publishScoreReport() {
-        report.publishScoreReport(function (fiepath) {
-            console.log('score report published:', fiepath);
-        });
-    }
 
-    setInterval(publishScoreReport, config.reportPublishInterval);
-    publishScoreReport();
-})(require('./routes/r.report'));

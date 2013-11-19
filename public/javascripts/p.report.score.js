@@ -31,10 +31,23 @@
             table.scoreReportTable(data);
 
             return section;
+        },
+        backLink: function (url) {
+            var link = $(this);
+            if (url) {
+                link.show().attr('href', url);
+            } else {
+                link.hide();
+            }
+            return link;
         }
     });
     $(function () {
-        var body = $(document.body);
+        var body = $(document.body),
+            q = $.getQuery();
+
+        body.findByRole('back-link').backLink(q['back_url']);
+
         var data = d && d['report'];
         if (!data) {
             body.addClass('sorry-page')

@@ -8,7 +8,7 @@ module.exports = {
     /** データ定義 **/
     entries: [
         {
-            _id: "${padZero(rownum, 24)}",
+            _id: "90${padZero(rownum, 22)}",
             name: 'チーム${vegetable}'
         }.repeat(10)
     ]
