@@ -53,6 +53,7 @@ app.all('*', function (req, res, next) {
 //    res.locals.lang = lang.fromRequest(req);
     res.locals.lang = 'ja';
     res.locals.l = locale[res.locals.lang];
+    res.locals.time = new Date().getTime();
     res.locals.context = config.context;
     next();
 });

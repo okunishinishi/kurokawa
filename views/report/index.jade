@@ -4,8 +4,9 @@ block stylesheets
     link(rel='stylesheet', href=url.css('report.css'))
 
 block javascripts
+    script(src=url.js('lib/Chart.js'))
     script(src=url.js('p.report.js'))
-    script(src=url.js('data/d.report.score.js')+'?t=#t')
+    script(src=url.js('data/d.report.score.js')+'?t=#{time}')
 
 
 mixin head_th(key)
@@ -13,8 +14,8 @@ mixin head_th(key)
         label=l.lbl[key]
 
 block left-content
-    section#score-report-section
-        table#score-report-table.wide-table
+    section#score-list-section
+        table#score-table.wide-table
             thead
                 tr
                     +head_th('rank')
@@ -24,3 +25,5 @@ block left-content
             tbody
 
 block right-content
+    section#score-chart-section
+        canvas#score-chart-canvas.cover

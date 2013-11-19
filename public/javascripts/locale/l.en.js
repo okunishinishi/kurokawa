@@ -83,6 +83,8 @@ l = {
         },
         "filter": "filter",
         "filter_on": "filtered",
+        "rank": "rank",
+        "score": "score",
         "__empty__": "__empty__",
         "person_update_history": {
             "caption": "update history",

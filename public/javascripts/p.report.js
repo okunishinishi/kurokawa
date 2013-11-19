@@ -5,11 +5,11 @@
  *  $ : jQuery
  *  l : message resource
  *  hbs : handlebars
- *
+ *  Chart : Chart
  */
-(function ($, l, hbs) {
+(function ($, l, hbs, Chart) {
     $.fn.extend({
-        scoreReportTable: function (data) {
+        scoreTable: function (data) {
             var table = $(this),
                 thead = $('thead', table),
                 tbody = $('tbody', table);
@@ -24,9 +24,9 @@
 
             return table
         },
-        scoreReportSection: function (data) {
+        scoreListSection: function (data) {
             var section = $(this),
-                table = $('#score-report-table', section);
+                table = $('#score-table', section);
 
             data = data
                 .sort(function (a, b) {
@@ -38,9 +38,35 @@
                 });
 
             table
-                .scoreReportTable(data)
+                .scoreTable(data)
                 .trigger('resize-book');
 
+            return section;
+        },
+        scoreChartCanvas: function (data) {
+            var canvas = $(this),
+                ctx = canvas[0].getContext('2d');
+
+            console.log('data', data);
+            new Chart(ctx)
+                .Bar({
+                    labels: data.map(function (data) {
+                        return data.real_name;
+                    }),
+                    datasets: [
+                        {
+                            data:data.map(function (data) {
+                                return Number(data.total);
+                            })
+                        }
+
+                    ]
+                });
+            return canvas;
+        },
+        scoreChartSection: function (data) {
+            var section = $(this);
+            $('#score-chart-canvas', section).scoreChartCanvas(data);
             return section;
         }
     });
@@ -51,7 +77,8 @@
         var data = d && d['report'];
 
 
-        $('#score-report-section', body).scoreReportSection(data['score']);
+        $('#score-list-section', body).scoreListSection(data['score']);
+        $('#score-chart-section', body).scoreChartSection(data['score']);
         $('#sub-nav', body).subNav('report');
     });
-})(jQuery, window['l'], Handlebars);
+})(jQuery, window['l'], Handlebars, Chart);
