@@ -92,6 +92,8 @@ l.lbl.issue = 'issue'.replace(/_/g,' ');
 l.titles = {
     chart_sheet_filter: 'filter'
 };
+l.lbl.rank ='rank';
+l.lbl.score ='score';
 l.lbl.__empty__ = '__empty__';
 l.lbl.person_update_history = {
     caption: 'update history',

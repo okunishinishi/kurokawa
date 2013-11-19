@@ -5,6 +5,22 @@ block stylesheets
 
 block javascripts
     script(src=url.js('p.report.js'))
+    script(src=url.js('data/d.report.score.js')+'?t=#t')
 
-block content
 
+mixin head_th(key)
+    th
+        label=l.lbl[key]
+
+block left-content
+    section#score-report-section
+        table#score-report-table.wide-table
+            thead
+                tr
+                    +head_th('rank')
+                    +head_th('user')
+                    +head_th('score')
+                    +head_th('team')
+            tbody
+
+block right-content

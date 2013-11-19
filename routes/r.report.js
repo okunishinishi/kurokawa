@@ -16,12 +16,7 @@ var publicDir = config.publicDir;
  * @param res
  */
 exports.index = function (req, res) {
-    var relative = path.relative;
-    var redirect_path = '/' + relative(config.publicDir, config.reportHTML_compact);
-    res.redirect([
-        redirect_path,
-        'back_url=' + encodeURIComponent('/' + config.context)
-    ].join('?'));
+    res.render('report/index.jade', {});
 };
 
 /**

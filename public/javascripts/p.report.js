@@ -4,42 +4,43 @@
  *  -- namespaces --
  *  $ : jQuery
  *  l : message resource
- *  Hbs : handlebars
+ *  hbs : handlebars
  *
  */
-(function ($, l, Hbs) {
-    var tmpl = {
-        li: Hbs.templates['report-list-item']
-    };
+(function ($, l, hbs) {
     $.fn.extend({
-        reportSearchForm: function (callback) {
-            var form = $(this);
-            form.searchForm(callback);
-            return form;
+        scoreReportTable: function (data) {
+            var table = $(this),
+                thead = $('thead', table),
+                tbody = $('tbody', table);
+
+            var tmpl = {
+                bodyRow: hbs.templates['score-report-table-body-row']
+            };
+
+            tbody.htmlHandlebars(tmpl.bodyRow, data);
+            table.sortableTable();
+
+
+            return table
         },
-        reportListItem: function () {
-            return $(this)
-                .destroyableListItem()
-                .editableListItem('dblclick');
-        },
-        reportList: function (data) {
-            var ul = $(this);
-            ul.htmlHandlebars(tmpl.li, data)
-                .find('li')
-                .reportListItem();
-            return ul;
-        },
-        reportListSection: function () {
+        scoreReportSection: function (data) {
             var section = $(this),
-                addBtn = section.findByRole('add-btn'),
-                ul = section.find('ul'),
-                searchForm = section.findByRole('search-form');
-            ul.appendableList(tmpl.li, addBtn, function (li) {
-                li.reportListItem();
-            });
-            searchForm.reportSearchForm(function (data) {
-                ul.reportList(data);
-            }).submit();
+                table = $('#score-report-table', section);
+
+            data = data
+                .sort(function (a, b) {
+                    return Number(b.total) - Number(a.total);
+                })
+                .map(function (data, i) {
+                    data['rank'] = (i + 1);
+                    return data;
+                });
+
+            table
+                .scoreReportTable(data)
+                .trigger('resize-book');
+
             return section;
         }
     });
@@ -47,8 +48,10 @@
     $(function () {
         var body = $(document.body);
 
-        $('#report-list-section', body).reportListSection();
+        var data = d && d['report'];
 
+
+        $('#score-report-section', body).scoreReportSection(data['score']);
         $('#sub-nav', body).subNav('report');
     });
 })(jQuery, window['l'], Handlebars);
