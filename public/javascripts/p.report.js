@@ -122,7 +122,8 @@
             canvas.draw = function (animation) {
                 var ctx = canvas.prepareDraw();
                 new Chart(ctx).Pie(canvas.data('pie'), {
-                    animation: animation
+                    animation: animation,
+                    animationEasing : "easeOutQuart"
                 });
                 labels.css({
                     left: canvas.width() / 2 + 180
