@@ -17,6 +17,14 @@ v.user = (function (v) {
         admin = new Schema(user);
     return {
         mypage: mypage,
-        admin: admin
+        admin: admin,
+        password_change: {
+            password: {
+                required: true
+            },
+            password_confirm: {
+                required: true
+            }
+        }
     }
 })(v);

@@ -41,6 +41,7 @@ post('/api/user/save', user.api.save);
 post('/api/user/destroy', user.api.destroy);
 get('/api/user.json', user.api.list);
 get('/api/user/:_id', user.api.one);
+post('/api/user/change_password', user.api.change_password);
 
 var company = r['company'];
 post('/api/company/save', company.api.save);

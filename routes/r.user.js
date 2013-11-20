@@ -168,6 +168,38 @@ exports.api = {
 
         });
     },
+    /**
+     * change password
+     * @param req
+     * @param res
+     */
+    change_password: function (req, res) {
+        var body = req.body;
+        var _id = body && body['_id'];
+        var schema = validations.user.PasswordChangeSchema();
+        schema.validate(body, function (valid, errors) {
+            if (valid) {
+                findOne(_id, function (user) {
+                    User.derive(body.password, user.salt, function (password_digest) {
+                        delete user.password;
+                        delete user.captcha_text;
+                        user.password_digest = password_digest;
+                        user.update(function () {
+                            res.json({
+                                valid: true,
+                                model: user
+                            });
+                        });
+                    });
+                });
+            } else {
+                res.json({
+                    valid: valid,
+                    errors: errors
+                });
+            }
+        });
+    },
 
     /**
      * destroy data
@@ -175,7 +207,8 @@ exports.api = {
      * @param res
      */
     destroy: function (req, res) {
-        var _id = req.body['_id'];
+        var body = req.body;
+        var _id = body && body['_id'];
         findOne(_id, function (user) {
             if (user) {
                 user.remove(function () {
