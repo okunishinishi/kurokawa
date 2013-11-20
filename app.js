@@ -83,7 +83,7 @@ http.createServer(app).listen(app.get('port'), function () {
 
 function publishScoreReport() {
     require('./routes/r.report').publishScoreReport(function (filepath) {
-        console.log('score report published:');
+        console.log('score report published:', filepath);
     });
 }
 publishScoreReport();
