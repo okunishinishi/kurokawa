@@ -31,6 +31,7 @@ function load(modelName, data, callback) {
 }
 
 new JobQueue()
+    .timeout(20 * 1000)
     .push(function (next) {
         var models = db['models'];
         var dropJob = new JobQueue;
