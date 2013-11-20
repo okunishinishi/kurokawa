@@ -132,6 +132,11 @@ l = {
             "example": "Example:",
             "before_submit": "Sure to import these data? If so, press the submit btn."
         },
+        "send_issue": {
+            "prefix": "このアプリに対する改善要望・不具合報告は",
+            "link_text": "こちら",
+            "suffix": "まで。"
+        },
         "drop_csv_here": "Drag and drop your CSV file HERE!",
         "welcome": "Welcome to kurokawa!",
         "password_change_done": "password did change"

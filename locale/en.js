@@ -143,6 +143,11 @@ l.msg.user_import = {
     example: 'Example:',
     before_submit: 'Sure to import these data? If so, press the submit btn.'
 };
+l.msg.send_issue = {
+    prefix: 'If you want to send issue report, please post ',
+    link_text: 'HERE',
+    suffix: ''
+};
 l.msg.drop_csv_here = 'Drag and drop your CSV file HERE!';
 l.msg.welcome = 'Welcome to ' + l.app.name + '!';
 l.msg.password_change_done = 'password did change';

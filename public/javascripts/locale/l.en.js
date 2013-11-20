@@ -132,6 +132,11 @@ l = {
             "example": "Example:",
             "before_submit": "Sure to import these data? If so, press the submit btn."
         },
+        "send_issue": {
+            "prefix": "If you want to send issue report, please post ",
+            "link_text": "HERE",
+            "suffix": ""
+        },
         "drop_csv_here": "Drag and drop your CSV file HERE!",
         "welcome": "Welcome to kurokawa!",
         "password_change_done": "password did change"

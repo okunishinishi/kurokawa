@@ -1,8 +1,10 @@
 mixin footer()
     footer
         ul
-            li
-                a(href=url('/issue'))=l.btn.improvement_request
+            li.issue-link-li
+                | #{l.msg.send_issue.prefix}
+                a(href=url('/issue'))!=l.msg.send_issue.link_text
+                | #{l.msg.send_issue.suffix}
         small.float-right.
             <div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" about="http://subtlepatterns.com/"><span property="dct:title">Subtle Patterns</span> (<a rel="cc:attributionURL" property="cc:attributionName" href="http://subtlepatterns.com">Subtle Patterns</a>) / <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a></div>
         br.clear
