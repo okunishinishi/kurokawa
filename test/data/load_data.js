@@ -18,7 +18,7 @@ function handleErr(err) {
 }
 function load(modelName, data, callback) {
     var Model = db.models[modelName];
-    var saveJobs = new JobQueue;
+    var saveJobs = new JobQueue().timeout(60 * 1000);
     [].concat(data).forEach(function (data) {
         saveJobs.push(function (next) {
             new Model(data).save(function () {
@@ -31,7 +31,7 @@ function load(modelName, data, callback) {
 }
 
 new JobQueue()
-    .timeout(20 * 1000)
+    .timeout(60 * 1000)
     .push(function (next) {
         var models = db['models'];
         var dropJob = new JobQueue;
@@ -66,7 +66,7 @@ new JobQueue()
     .push(function (next) {
         fs.readdir(jsonDir, function (err, filenames) {
             err && handleErr(err);
-            var loadJobs = new JobQueue();
+            var loadJobs = new JobQueue().timeout(60 * 1000);
             filenames && filenames.forEach(function (filename) {
                 var filepath = resolve(jsonDir, filename);
                 var data = require(filepath),
