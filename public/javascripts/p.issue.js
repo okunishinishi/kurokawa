@@ -50,7 +50,7 @@
                 .appendableList(tmpl.li, addBtn, function (li) {
                     li.issueListItem()
                         .find('textarea')
-                        .focus()
+                        .focus();
                     li
                         .removeClass('editable-list-item-fixed');
                     li
