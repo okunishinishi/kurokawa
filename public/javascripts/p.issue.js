@@ -51,6 +51,7 @@
                     li.issueListItem()
                         .find('textarea')
                         .focus()
+                    li
                         .removeClass('editable-list-item-fixed');
                     li
                         .findByName('status')
@@ -60,7 +61,7 @@
 
             ul
                 .each(function () {
-                    if(!data) return;
+                    if (!data) return;
                     var ul = $(this),
                         status = ul.data('status');
                     ul.issueList(data && data.filter(function (data) {
