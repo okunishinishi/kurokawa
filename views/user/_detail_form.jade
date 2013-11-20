@@ -13,6 +13,11 @@ mixin user_detail_form(user, teams)
                     td
                         input(type='text', name='username', value=user.username, id='username-input', data-role='editable-text')
                 tr
+                    th=l.lbl.password
+                    td
+                        span=l.lbl.password_mask
+                        a.small.float-right(href='#')=l.btn.password_change
+                tr
                     th
                         label.block-label=l.lbl.role
                     td

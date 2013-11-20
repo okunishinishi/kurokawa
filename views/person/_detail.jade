@@ -38,7 +38,7 @@ mixin person_basic_table(person)
             tr
                 th=l.lbl.company
                 td
-                    a(href=url("/chart/sheet/"+person.company_id))=person.company_name
+                    a(href=url("/chart/"+person.company_id))=person.company_name
 
             each basic_data_key in basic_data_keys
                 +text-tr(basic_data_key, person)

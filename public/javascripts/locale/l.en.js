@@ -11,6 +11,7 @@ l = {
         "mypage": "mypage",
         "username_or_email": "username or email",
         "password": "password",
+        "password_mask": "*****",
         "account": "account",
         "personal": "personal",
         "your_name": "your real name",
@@ -171,6 +172,7 @@ l = {
         "back_link": {
             "admin_page": "admin menu"
         },
+        "password_change": "change password",
         "apply": "apply",
         "toggle_all": "toggle all",
         "improvement_request": "send improvement request"

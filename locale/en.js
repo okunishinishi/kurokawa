@@ -13,6 +13,7 @@ l.lbl.email = 'email';
 l.lbl.mypage = 'mypage';
 l.lbl.username_or_email = [l.lbl.username, 'or', l.lbl.email].join(' ');
 l.lbl.password = 'password';
+l.lbl.password_mask = '*****';
 l.lbl.account = 'account';
 l.lbl.personal = 'personal';
 l.lbl.your_name = 'your real name';
@@ -185,6 +186,7 @@ l.btn.add_filter = '+ add filter';
 l.btn.back_link = {
     admin_page: [l.lbl.admin, 'menu'].join(' ')
 };
+l.btn.password_change = 'change password';
 l.btn.apply = 'apply';
 l.btn.toggle_all = 'toggle all';
 l.btn.improvement_request = 'send improvement request';
