@@ -4,6 +4,10 @@
 v.user = (function (v) {
     var Schema = v.Schema;
 
+    var min_length = {
+        password:2
+    };
+
     var user = {
         username: {
             required: true,
@@ -18,13 +22,19 @@ v.user = (function (v) {
     return {
         mypage: mypage,
         admin: admin,
-        password_change: {
-            password: {
+        password_change: new Schema({
+            _id: {
                 required: true
             },
+            password: {
+                required: true,
+                minLength: min_length.password
+            },
             password_confirm: {
-                required: true
+                required: true,
+                minLength: min_length.password,
+                dependencies:'password'
             }
-        }
+        })
     }
 })(v);

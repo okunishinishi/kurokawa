@@ -1,9 +1,14 @@
 mixin password_field(name, label)
-    label(for="#{name}-input")=label
-    input(type='password', name=name, id="#{name}-input")
+    div
+        label.block-label(for="#{name}-input")=label
+        input(type='password', name=name, id="#{name}-input")
 mixin password_change_form(user)
     form#password-change-form(method='post', action=url('/api/user/change_password'))
-        input(type='hidden', name='_id', value=user.id)
-        +password_field('password', l.lbl.password)
-        +password_field('password_confirm', l.lbl.password_confirm)
-        input(type='submit', value=l.lbl.submit)
+        .paper
+            .paper-content.positioned
+                .paper-title=l.lead.password_change
+                a.stick-right.stick-top.close-btn(href='javascript:void(0)') &times;
+                input(type='hidden', name='_id', value=user._id)
+                +password_field('password', l.lbl.password)
+                +password_field('password_confirm', l.lbl.password_confirm)
+                input.btn.wide-btn(type='submit', value=l.lbl.submit)

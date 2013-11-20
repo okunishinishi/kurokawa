@@ -176,10 +176,31 @@ exports.api = {
     change_password: function (req, res) {
         var body = req.body;
         var _id = body && body['_id'];
-        var schema = validations.user.PasswordChangeSchema();
+        var schema = new validations.user.PasswordChangeSchema();
         schema.validate(body, function (valid, errors) {
             if (valid) {
                 findOne(_id, function (user) {
+                    if (!user) {
+                        res.json({
+                            valid: false,
+                            err_alert: l.err.something_worng
+                        });
+                        return;
+                    }
+                    var passwordMatches = body.password == body.password_confirm;
+                    if (!passwordMatches) {
+                        res.json({
+                            valid: false,
+                            errors: [
+                                {
+                                    label: '!',
+                                    property: 'password_confirm',
+                                    message: l.err.password_not_match
+                                }
+                            ]
+                        });
+                        return;
+                    }
                     User.derive(body.password, user.salt, function (password_digest) {
                         delete user.password;
                         delete user.captcha_text;
@@ -187,6 +208,7 @@ exports.api = {
                         user.update(function () {
                             res.json({
                                 valid: true,
+                                info_alert: l.msg.password_change_done,
                                 model: user
                             });
                         });

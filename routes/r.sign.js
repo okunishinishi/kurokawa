@@ -32,7 +32,7 @@ exports.index = function (req, res) {
         res.render('sign/index.jade', {
             err_alert: req.flash('err_alert'),
             info_alert: req.flash('info_alert'),
-            back_url:req.flash('back_url')
+            back_url: req.flash('back_url')
         });
     }
 };
@@ -157,7 +157,7 @@ exports.api.signup = function (req, res) {
                 });
                 return;
             }
-            User.newUser(body, function(user){
+            User.newUser(body, function (user) {
                 user.save(function (user) {
                     setSignUser(req, user);
                     res.json({

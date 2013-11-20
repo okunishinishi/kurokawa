@@ -6,7 +6,7 @@ mixin user_detail_form(user, teams)
         a#user-detail-edit-btn.stick-right.stick-top(href='javascript:void(0)')=l.btn.edit
         table.wide-table
             caption=l.lbl.account
-            tbody
+            tbody.hover-show-parent
                 tr
                     th
                         label.block-label(for=username-input)=l.lbl.username
@@ -16,7 +16,7 @@ mixin user_detail_form(user, teams)
                     th=l.lbl.password
                     td
                         span=l.lbl.password_mask
-                        a.small.float-right(href='#')=l.btn.password_change
+                        a#password_change-btn.hover-show-child.small.float-right(href='javascript:void(0)')=l.btn.password_change
                 tr
                     th
                         label.block-label=l.lbl.role

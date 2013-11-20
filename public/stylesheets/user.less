@@ -1,9 +1,28 @@
 @import "lib/tek-mixin";
 
-#user-detail-form{
+body {
+  .rich();
+}
+
+#user-detail-form {
   padding-top: 5px;
 }
-.filed{
+
+.filed {
   display: inline-block;
   margin: 0 5px;
+}
+
+#password-change-form {
+  display: inline-block;
+  position: absolute;
+  top: 140px;
+  @w: 150px;
+  left: 40%;
+  z-index: 200020;
+  max-width: 500px;
+  .block-label {
+    width: @w;
+    display: inline-block;
+  }
 }

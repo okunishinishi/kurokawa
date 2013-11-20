@@ -1,4 +1,5 @@
 include _detail_form
+include _passowrd_change_form
 extends ../layout
 
 block javascripts
@@ -7,8 +8,14 @@ block javascripts
 block stylesheets
     link(rel='stylesheet', href=url.css("user.css"))
 
+
+block upper-content
+
+
 block left-content
     h1.page-title=l.lbl.mypage
 
 block right-content
     +user_detail_form(sign_user, teams)
+    +password_change_form(sign_user)
+

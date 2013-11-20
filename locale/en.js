@@ -4,7 +4,6 @@ var l = exports;
 var app = l.app = {};
 l.app.name = 'kurokawa';
 
-
 l.lbl = {};
 l.lbl.search = 'search';
 l.lbl.understand = 'I understand consequences.';
@@ -13,6 +12,7 @@ l.lbl.email = 'email';
 l.lbl.mypage = 'mypage';
 l.lbl.username_or_email = [l.lbl.username, 'or', l.lbl.email].join(' ');
 l.lbl.password = 'password';
+l.lbl.password_confirm = 'password again';
 l.lbl.password_mask = '*****';
 l.lbl.account = 'account';
 l.lbl.personal = 'personal';
@@ -119,9 +119,11 @@ l.lbl.report_charts = {
 l.lbl.user_count_preffix = '';
 l.lbl.user_count_suffix = '';
 
+
 l.lead = {};
 l.lead.index_page = 'Select client company.';
 l.lead.score_rule = 'Manage how much score will be given for each data.';
+l.lead.password_change = 'change your password';
 
 l.msg = {};
 l.msg.sure = 'Are you ABSOLUTELY sure?';
@@ -143,6 +145,7 @@ l.msg.user_import = {
 };
 l.msg.drop_csv_here = 'Drag and drop your CSV file HERE!';
 l.msg.welcome = 'Welcome to ' + l.app.name + '!';
+l.msg.password_change_done = 'password did change';
 
 l.plh = {};
 l.plh.search = l.lbl.search;
@@ -162,6 +165,7 @@ l.err.sign_required = 'sign is required';
 l.err.is_wrong = 'is wrong';
 l.err.already_taken = ['is', 'already taken'].join(' ');
 l.err.something_worng = 'Sorry! Something is wrong.';
+l.err.password_not_match = [l.lbl.password, 'and', l.lbl.password_confirm].join(' ') + "does not match.";
 
 
 l.btn = {};

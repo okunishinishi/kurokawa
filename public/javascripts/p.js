@@ -43,6 +43,9 @@
         errAlert: function (text) {
             $('#err-alert').text(text).show();
         },
+        infoAlert: function (text) {
+            $('#info-alert').text(text).show();
+        },
         rainbowColor: function (base, count) {
             var result = [];
             if (!base) base = '#FF0000';
@@ -451,9 +454,14 @@
             })
             .ajaxComplete(function (e, xhr, settings) {
                 var json = xhr['responseJSON'];
-                var error_alert = json && json['error_alert'];
+                if (!json) return;
+                var error_alert = json['err_alert'] || json['error_alert'];
                 if (error_alert) {
                     $.errAlert(error_alert);
+                }
+                var info_alert = json['info_alert'];
+                if(info_alert){
+                    $.infoAlert(info_alert);
                 }
             });
 

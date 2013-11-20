@@ -11,6 +11,7 @@ l = {
         "mypage": "mypage",
         "username_or_email": "username or email",
         "password": "password",
+        "password_confirm": "password again",
         "password_mask": "*****",
         "account": "account",
         "personal": "personal",
@@ -113,7 +114,8 @@ l = {
     },
     "lead": {
         "index_page": "Select client company.",
-        "score_rule": "Manage how much score will be given for each data."
+        "score_rule": "Manage how much score will be given for each data.",
+        "password_change": "change your password"
     },
     "msg": {
         "sure": "Are you ABSOLUTELY sure?",
@@ -131,7 +133,8 @@ l = {
             "before_submit": "Sure to import these data? If so, press the submit btn."
         },
         "drop_csv_here": "Drag and drop your CSV file HERE!",
-        "welcome": "Welcome to kurokawa!"
+        "welcome": "Welcome to kurokawa!",
+        "password_change_done": "password did change"
     },
     "plh": {
         "search": "search",
@@ -148,7 +151,8 @@ l = {
         "sign_required": "sign is required",
         "is_wrong": "is wrong",
         "already_taken": "is already taken",
-        "something_worng": "Sorry! Something is wrong."
+        "something_worng": "Sorry! Something is wrong.",
+        "password_not_match": "password and password againdoes not match."
     },
     "btn": {
         "new": "new",

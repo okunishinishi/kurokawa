@@ -20,12 +20,46 @@
             form.detailForm(mode, saveBtn, editBtn);
 
             return form;
+        },
+        passwordChangeForm: function (callback) {
+            var form = $(this);
+            form.validatableAjaxForm(function (data) {
+                console.log('data', data);
+                if (data.valid) {
+                    callback && callback();
+                }
+            });
+            form.find('.close-btn').click(function () {
+                callback && callback();
+            });
+            return form;
         }
+
     });
     $(function () {
         var body = $(document.body),
+            book = $('#book', body),
             q = $.getQuery();
 
         $('#user-detail-form', body).userDetailForm(q.mode);
+
+        var passwordChangeForm = $('#password-change-form', body)
+            .insertAfter(book)
+            .passwordChangeForm(function () {
+                book.removeClass('covered-book');
+                passwordChangeForm.hide();
+            }).hide();
+
+        $('#password-change-form', body).click(function () {
+            book
+                .addClass('covered-book');
+            passwordChangeForm
+                .show();
+            passwordChangeForm
+                .css({
+                    left: (book.outerWidth() - passwordChangeForm.outerWidth()) / 2 + 20
+                });
+        })
+        ;
     })
 })(jQuery, window['l'], window['v'], Handlebars);
