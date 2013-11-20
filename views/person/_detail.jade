@@ -15,7 +15,9 @@ mixin textarea-tr(key, data)
         th
             label(for=key+'-input')=l.lbl[key]
         td
-            textarea.wide-textarea(name=key,id=key+'-input', data-role='editable-text')=data[key]
+            textarea.wide-textarea(name=key,id=key+'-input',
+                rows=4,
+            data-role='editable-text')=data[key]
 
 mixin radio-tr(key, data, choices)
     tr
@@ -26,7 +28,7 @@ mixin radio-tr(key, data, choices)
                 input(name=key, type='radio',value=choice.value, checked=data[key]==choice.value, id="#{key}-input-#{choice.value}")
                 label.checkable-label(
                     for="#{key}-input-#{choice.value}"
-                )=l.lbl[choice.label]
+                )=choice.label
 
 mixin person_basic_table(person)
     br
@@ -44,20 +46,22 @@ mixin person_basic_table(person)
                 +text-tr(basic_data_key, person)
 
 
-mixin bool_radio_tr(key, data)
+mixin bool_radio_tr(key, data, labels)
     +radio-tr(key, data,[
-        {label:l.lbl.true,value:'true'},
-        {label:l.lbl.false,value:'false'}
+        {label:labels.true,value:"true"},
+        {label:labels.false,value:"false"}
     ])
 
 mixin person_extra_tr(key, data)
+    - var b = l.booleans;
     case key
         when 'single'
-            +bool_radio_tr(key, data)
+            p=l.booleans.single['true_label']
+            +bool_radio_tr(key, data, b.single)
         when 'drinks'
-            +bool_radio_tr(key, data)
+            +bool_radio_tr(key, data, b.drinks)
         when 'smokes'
-            +bool_radio_tr(key, data)
+            +bool_radio_tr(key, data, b.smokes)
         when 'free_word'
             +textarea-tr(key, person)
         default

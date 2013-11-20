@@ -38,7 +38,7 @@ l = {
         "join_year": "join year",
         "years_of_service": "years of service",
         "family": "family",
-        "single": "single",
+        "single": "single or married",
         "children": "children",
         "favorite_food": "favorite food",
         "live_at": "lives at",
@@ -185,5 +185,19 @@ l = {
         "apply": "apply",
         "toggle_all": "toggle all",
         "improvement_request": "send improvement request"
+    },
+    "booleans": {
+        "single": {
+            "true": "single",
+            "false": "married"
+        },
+        "drinks": {
+            "true": "drinks",
+            "false": "not drinks"
+        },
+        "smokes": {
+            "true": "smokes",
+            "false": "not smokes"
+        }
     }
 };

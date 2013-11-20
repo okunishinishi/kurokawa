@@ -42,7 +42,7 @@ l.lbl.graduated_from = 'graduated from';
 l.lbl.join_year = 'join year';
 l.lbl.years_of_service = 'years of service';
 l.lbl.family = 'family';
-l.lbl.single = 'single';
+l.lbl.single = 'single or married';
 l.lbl.children = 'children';
 l.lbl.favorite_food = 'favorite food';
 l.lbl.live_at = 'lives at';
@@ -200,3 +200,9 @@ l.btn.apply = 'apply';
 l.btn.toggle_all = 'toggle all';
 l.btn.improvement_request = 'send improvement request';
 
+
+l.booleans = {
+    single: {true: 'single', false: 'married'},
+    drinks: {true: 'drinks', false: 'not drinks'},
+    smokes: {true: 'smokes', false: 'not smokes'}
+};

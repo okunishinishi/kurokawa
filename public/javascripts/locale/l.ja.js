@@ -38,14 +38,14 @@ l = {
         "join_year": "入社年次",
         "years_of_service": "社会人歴",
         "family": "family",
-        "single": "single",
+        "single": "独身/既婚",
         "children": "子供",
         "favorite_food": "好きな食べ物",
         "live_at": "住所",
-        "drinks": "drinks",
+        "drinks": "飲酒",
         "true": "true",
         "false": "false",
-        "smokes": "smoke",
+        "smokes": "喫煙",
         "dislike_vender": "dislike vendor",
         "favorite_vender": "favorite vendor",
         "personal_basic": "basic",
@@ -185,5 +185,19 @@ l = {
         "apply": "apply",
         "toggle_all": "toggle all",
         "improvement_request": "send improvement request"
+    },
+    "booleans": {
+        "single": {
+            "true": "独身",
+            "false": "既婚"
+        },
+        "drinks": {
+            "true": "嗜む",
+            "false": "嗜まない"
+        },
+        "smokes": {
+            "true": "嗜む",
+            "false": "嗜まない"
+        }
     }
 };

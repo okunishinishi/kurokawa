@@ -177,6 +177,7 @@ exports.api = {
                     personUpdate.changes = change.concat(personUpdate.changes).sort(function (a, b) {
                         return Number(b.date) - Number(a.date);
                     });
+                    personUpdate.mergeTooNearChanges();
                     personUpdate.update(function () {
                         person.person_update_id = personUpdate._id;
                         save(person, action, change.map(function (change) {
@@ -200,7 +201,15 @@ exports.api = {
         findOne(_id, function (person) {
             if (person) {
                 person.remove(function () {
-                    res.json({count: 1});
+                    PersonUpdate.findByPerson(person, function (personUpdate) {
+                        if (personUpdate) {
+                            personUpdate.remove(function () {
+                                res.json({count: 1});
+                            });
+                        } else {
+                            res.json({count: 1});
+                        }
+                    });
                 });
             } else {
                 res.json({count: 0});

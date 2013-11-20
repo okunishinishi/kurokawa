@@ -2,13 +2,14 @@ mixin person_update_history_th(key)
     th
         label=l.lbl.person_update_history[key]
 
-mixin person_update_history_td(data, key)
-    td(data-key=key)=data[key]
+mixin person_update_history_td(data, key, label)
+    - var value = data[key];
+    td(data-key=key, data-label=label)=(label?(l.lbl[value]||value):value)
 
 mixin person_update_history_tr(data)
     tr
         +person_update_history_td(data, 'date_label')
-        +person_update_history_td(data, 'property')
+        +person_update_history_td(data, 'property', "true")
         +person_update_history_td(data, 'from')
         +person_update_history_td(data, 'to')
         +person_update_history_td(data, 'username')

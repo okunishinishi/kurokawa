@@ -37,7 +37,8 @@ Person.prototype.getChanges = function (data) {
             from: s[key],
             to: data[key]
         } : null
-    }).filter(function (data) {
+    })
+        .filter(function (data) {
             return !!data;
         });
 };
@@ -57,6 +58,7 @@ Person.extra_data_keys = [
     'live_at',
     'favorite_food',
     'single',
+    'children',
     'drinks',
     'smokes',
     'free_word'

@@ -22,6 +22,34 @@ PersonUpdate.prototype.validate = function () {
     return PersonUpdate.schema.validate(s);
 };
 
+PersonUpdate.change_merge_interval = 24 * 60 * 60 * 1000;
+PersonUpdate.prototype.mergeTooNearChanges = function () {
+    var s = this,
+        changes = s.changes;
+    if (!changes) return s;
+    var later = null;
+    s.changes = changes.map(function (change) {
+        if (later) {
+            var same_property = later.property == change.property;
+            if (same_property) {
+                var same_user = later.user_id == change.user_id;
+                if (same_user) {
+                    var tooNear = Math.abs(Number(change.date) - Number(later.date)) < PersonUpdate.change_merge_interval;
+                    if (tooNear) {
+                        later.from = change.from;
+                        return null;
+                    }
+                }
+            }
+        }
+        later = change;
+        return change;
+    }).filter(function (change) {
+            return !!change;
+        });
+    return s;
+};
+
 
 PersonUpdate.findByPerson = function (person, callback) {
     var s = this;

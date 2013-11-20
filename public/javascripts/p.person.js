@@ -4,10 +4,10 @@
  *  -- namespaces --
  *  $ : jQuery
  *  l : message resource
- *  Hbs : handlebars
+ *  hbs : handlebars
  *
  */
-(function ($, l, Hbs) {
+(function ($, l, hbs) {
     $.fn.extend({
         personDetailForm: function (mode, callback) {
             var form = $(this),
@@ -43,14 +43,18 @@
 
 
         var personUpdateTable = $('#person_update-table', body).personUpdateTable();
-
         personUpdateTable.appendData = function (data) {
             var tbody = personUpdateTable.find('tbody');
             var tmpl = personUpdateTable.find('#person_update-tr-tmpl').html();
             data && data.reverse().forEach(function (data) {
                 var tr = $(tmpl).prependTo(tbody);
                 Object.keys(data).forEach(function (key) {
-                    tr.findByAttr('data-key', key).text(data[key]);
+                    var td = tr.findByAttr('data-key', key);
+                    var value = data[key];
+                    if (td.data('label')) {
+                        value = l.lbl[value] || value;
+                    }
+                    td.text(value);
                 });
             });
         };

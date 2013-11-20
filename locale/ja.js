@@ -28,8 +28,10 @@ l.lbl.graduated_from = '出身大学';
 l.lbl.join_year = '入社年次';
 l.lbl.years_of_service = '社会人歴';
 l.lbl.family = 'family';
-l.lbl.single = 'single';
+l.lbl.single = '独身/既婚';
 l.lbl.children = '子供';
+l.lbl.drinks = '飲酒';
+l.lbl.smokes = '喫煙';
 l.lbl.favorite_food = '好きな食べ物';
 l.lbl.birthday = '生年月日';
 l.lbl.birthplace = '出身地';
@@ -39,3 +41,9 @@ l.lbl.free_word = 'フリーワード';
 l.plh = l.plh || {};
 
 l.alt = l.alt || {};
+
+l.booleans = {
+    single: {true: '独身', false: '既婚'},
+    drinks: {true: '嗜む', false: '嗜まない'},
+    smokes: {true: '嗜む', false: '嗜まない'}
+};
