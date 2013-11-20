@@ -93,6 +93,7 @@ exports.parse_users.lineToUser = function (line, callback) {
 
 function validateTakenValues(users, callback) {
     function takenErr(property, user, takens) {
+        if (!user[property]) return null;
         var taken = (takens.indexOf(user[property]) !== -1);
         return taken && {
             row: user.row,
@@ -216,7 +217,7 @@ exports.import_user.from_file = function (req, res) {
                     fail(l.err.something_worng);
                     return;
                 }
-                csv.parseString(buffer.toString(), function(data){
+                csv.parseString(buffer.toString(), function (data) {
                     exports.import_user(data, function (result) {
                         send(result);
                     });
