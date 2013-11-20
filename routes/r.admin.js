@@ -1,6 +1,7 @@
 var tek = require('tek'),
     copy = tek['meta']['copy'],
     db = require('../db'),
+    config = require('../app.config'),
     ScoreRule = db.models['ScoreRule'],
     Person = db.models['Person'],
     Team = db.models['Team'];
@@ -50,7 +51,8 @@ exports.score_rule = function (req, res) {
             person_keys: {
                 basic_data_keys: Person.basic_data_keys,
                 extra_data_keys: Person.extra_data_keys
-            }
+            },
+            report_publish_interval: config.reportPublishInterval
         });
     });
 };

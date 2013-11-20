@@ -15,6 +15,7 @@ block upper-content
 block left-content
     h1.page-title=l.lbl.admin_menu.score_rule
     p.lead=l.lead.score_rule
+    p.lead=l.lead.report_update_time.replace('{{minutes}}',report_publish_interval / (60 * 1000))
 
 block right-content
     form#score_rule-form(action=url('/api/score_rule/save'), method='post')

@@ -6,6 +6,10 @@
   width:100%;
 }
 
+header{
+  display: none !important;
+}
+
 #sign-link {
   display: none;
 }
@@ -43,7 +47,11 @@
 }
 
 #book .book-page-left{
-  display: none !important;
+  &:before,&:after{
+    display: none !important;
+  }
+  background-color: transparent !important;
+  color:rgba(83, 83, 83, 1);
 }
 
 #sign-tab-contents{

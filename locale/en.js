@@ -3,6 +3,7 @@ var l = exports;
 
 var app = l.app = {};
 l.app.name = 'kurokawa';
+l.app.description = 'client personal data management system.';
 
 l.lbl = {};
 l.lbl.search = 'search';
@@ -123,6 +124,7 @@ l.lbl.user_count_suffix = '';
 l.lead = {};
 l.lead.index_page = 'Select client company.';
 l.lead.score_rule = 'Manage how much score will be given for each data.';
+l.lead.report_update_time = 'When you change, it takes up to {{minutes}} minutes to reflect to the score reports.';
 l.lead.password_change = 'change your password';
 
 l.msg = {};

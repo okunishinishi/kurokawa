@@ -53,6 +53,11 @@
                     var value = data[key];
                     if (td.data('label')) {
                         value = l.lbl[value] || value;
+                    } else{
+                        var booleans = data.property && l.booleans[data.property];
+                        if(booleans){
+                            value = booleans[value] || value;
+                        }
                     }
                     td.text(value);
                 });

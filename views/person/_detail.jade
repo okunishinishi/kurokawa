@@ -16,7 +16,7 @@ mixin textarea-tr(key, data)
             label(for=key+'-input')=l.lbl[key]
         td
             textarea.wide-textarea(name=key,id=key+'-input',
-                rows=4,
+                rows=7,
             data-role='editable-text')=data[key]
 
 mixin radio-tr(key, data, choices)

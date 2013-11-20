@@ -8,7 +8,7 @@ l.app = l.app || {};
 
 l.msg = l.msg || {};
 l.msg.send_issue = {
-    prefix: 'このアプリに対する改善要望・不具合報告は',
+    prefix: 'このシステムに対する改善要望・不具合報告は',
     link_text: 'こちら',
     suffix: 'まで。'
 };

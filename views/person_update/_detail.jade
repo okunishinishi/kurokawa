@@ -2,9 +2,16 @@ mixin person_update_history_th(key)
     th
         label=l.lbl.person_update_history[key]
 
-mixin person_update_history_td(data, key, label)
+mixin person_update_history_td(data, key, label, boolean)
     - var value = data[key];
-    td(data-key=key, data-label=label)=(label?(l.lbl[value]||value):value)
+    if label
+        td(data-key=key, data-label="true")=l.lbl[value]||value
+    else
+        - var booleans = data.property && l.booleans[data.property]
+        if booleans
+            td(data-key=key)=booleans[value] || value
+        else
+            td(data-key=key)=value
 
 mixin person_update_history_tr(data)
     tr
