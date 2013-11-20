@@ -117,7 +117,8 @@ l = {
         "index_page": "Select client company.",
         "score_rule": "Manage how much score will be given for each data.",
         "report_update_time": "When you change, it takes up to {{minutes}} minutes to reflect to the score reports.",
-        "password_change": "change your password"
+        "password_change": "change your password",
+        "signin": "Sign in and start kurokawa!"
     },
     "msg": {
         "sure": "Are you ABSOLUTELY sure?",
@@ -141,7 +142,8 @@ l = {
         },
         "drop_csv_here": "Drag and drop your CSV file HERE!",
         "welcome": "Welcome to kurokawa!",
-        "password_change_done": "password did change"
+        "password_change_done": "password did change",
+        "password_forget": "If your forget password, please contact to the administrator."
     },
     "plh": {
         "search": "search",

@@ -67,14 +67,47 @@
                 form = $('#user-detail-form', section);
             form.userDetailForm(data);
             return section;
+        },
+        passwordChangeForm: function (callback) {
+            var form = $(this);
+            form.validatableAjaxForm(function (data) {
+                if (data.valid) {
+                    callback && callback();
+                }
+            });
+            form.find('.close-btn').click(function () {
+                callback && callback();
+            });
+            return form;
         }
     });
 
     $(function () {
         var doc = $(document),
+            book = $('#book', body),
             body = $(document.body);
 
         $('#user-list-section', body).userListSection();
+
+        var passwordChangeForm = $('#password-change-form', body)
+            .insertAfter(book)
+            .passwordChangeForm(function () {
+                book.removeClass('covered-book');
+                passwordChangeForm.hide();
+            }).hide();
+        $('#password_change-btn', body).click(function () {
+            book
+                .addClass('covered-book');
+            passwordChangeForm
+                .show()
+                .css({
+                    left: (book.outerWidth() - passwordChangeForm.outerWidth()) / 2 + 20
+                })
+                .find('[type="password"]')
+                .first()
+                .focus();
+        })
+        ;
 
         var userDetailSection = $('#user-detail-section', body);
 
@@ -83,11 +116,16 @@
             if(li.is('.selected')) return;
             li.addClass('selected')
                 .siblings('.selected').removeClass('selected');
-            userDetailSection.userDetailSection(li.data('user'));
+            var data = li.data('user');
+            userDetailSection.userDetailSection(data);
+            passwordChangeForm.setFormValue(data);
         });
 
         $('#user-detail-form').hide();
 
         $('#sub-nav', body).subNav('admin');
+
+
+
     });
 })(jQuery, window['l'], Handlebars);

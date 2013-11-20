@@ -32,7 +32,7 @@ exports.aggregateScores = function (callback) {
             var userMap = {};
             personUpdates.forEach(function (personUpdate) {
                 personUpdate.changes.forEach(function (change) {
-                    var score = scoreRule.person[change.property];
+                    var score = scoreRule.person && scoreRule.person[change.property];
                     if (!score) return;
                     score = Number(score);
 

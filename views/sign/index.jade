@@ -18,7 +18,7 @@ block left-content
 block right-content
 
     section#sign-section
-        h1=l.lbl.signin
+        h1.lead-msg=l.lead.signin
         #sign-tab-contents.tab-contents
             .tab-content#signin-tab-content
                 +signin-form(err)
@@ -26,3 +26,4 @@ block right-content
             .tab-content#signup-tab-content(style='display:none;')
                 +signup-form(err)
                 a#signup-success-link(href=url('/'))
+        small.small-msg.float-right=l.msg.password_forget

@@ -153,7 +153,7 @@ l.msg.send_issue = {
 l.msg.drop_csv_here = 'Drag and drop your CSV file HERE!';
 l.msg.welcome = 'Welcome to ' + l.app.name + '!';
 l.msg.password_change_done = 'password did change';
-
+l.msg.password_forget = 'If your forget password, please contact to the administrator.';
 l.plh = {};
 l.plh.search = l.lbl.search;
 l.plh.captcha_text = 'type above number';
@@ -208,3 +208,5 @@ l.booleans = {
     drinks: {true: 'drinks', false: 'not drinks'},
     smokes: {true: 'smokes', false: 'not smokes'}
 };
+
+l.lead.signin='Sign in and start kurokawa!';

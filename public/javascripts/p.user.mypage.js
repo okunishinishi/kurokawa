@@ -24,7 +24,6 @@
         passwordChangeForm: function (callback) {
             var form = $(this);
             form.validatableAjaxForm(function (data) {
-                console.log('data', data);
                 if (data.valid) {
                     callback && callback();
                 }
@@ -50,7 +49,7 @@
                 passwordChangeForm.hide();
             }).hide();
 
-        $('#password-change-form', body).click(function () {
+        $('#password_change-btn', body).click(function () {
             book
                 .addClass('covered-book');
             passwordChangeForm
@@ -58,7 +57,10 @@
             passwordChangeForm
                 .css({
                     left: (book.outerWidth() - passwordChangeForm.outerWidth()) / 2 + 20
-                });
+                })
+                .find('[type="password"]')
+                .first()
+                .focus();
         })
         ;
     })
