@@ -69,14 +69,19 @@ exports.publishScoreReport = function (callback) {
             User.findAll(function (users) {
                 var userMap = toIdMap(users),
                     teamMap = toIdMap(teams);
-                data = data.map(function (data) {
-                    var user = userMap[data.user_id] || {},
-                        team = user && teamMap[user.team_id] || {};
-                    data.username = user.username;
-                    data.real_name = user.real_name;
-                    data.team_name = team.name;
-                    return data;
-                });
+                data = data
+                    .map(function (data) {
+                        var user = userMap[data.user_id];
+                        if (!user) return null;
+                        var team = user && teamMap[user.team_id] || {};
+                        data.username = user.username;
+                        data.real_name = user.real_name;
+                        data.team_name = team.name;
+                        return data;
+                    })
+                    .filter(function (data) {
+                        return !!data;
+                    });
                 var dataDir = resolve(config.jsDir, 'data');
                 var filepath = resolve(dataDir, 'd.report.score.js');
                 publish(filepath, 'd.report.score', data, function (filepath) {

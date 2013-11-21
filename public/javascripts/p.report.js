@@ -18,7 +18,7 @@
                 bodyRow: hbs.templates['score-report-table-body-row']
             };
             var len = data.length;
-            $('#score-table-count').text(['1-'+len, '/', len].join('')).hide();
+            $('#score-table-count').text(['1-' + len, '/', len].join('')).hide();
             tbody.htmlHandlebars(tmpl.bodyRow, data);
             table.sortableTable();
 
@@ -64,7 +64,7 @@
             data = data.slice(0, 10);
             canvas.data({
                 labels: data.map(function (data) {
-                    return data.real_name;
+                    return $.trim(data.real_name) || data.username;
                 }),
                 values: data.map(function (data) {
                     return Number(data.total);
@@ -123,7 +123,7 @@
                 var ctx = canvas.prepareDraw();
                 new Chart(ctx).Pie(canvas.data('pie'), {
                     animation: animation,
-                    animationEasing : "easeOutQuart"
+                    animationEasing: "easeOutQuart"
                 });
                 labels.css({
                     left: canvas.width() / 2 + 180

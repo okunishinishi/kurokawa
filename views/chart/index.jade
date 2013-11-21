@@ -32,10 +32,11 @@ block left-content
             tr
                 th
                 each key,i in sheet_keys
-                    th(data-col=i, data-key=key, class='sortable-th col-'+i).positioned
-                        a.filter-edit-btn="F"
-                        a.filter-add-btn="+"
-                        label=l.lbl[key]
+                    th(data-col=i, data-key=key, class='sortable-th col-'+i)
+                        .positioned
+                            a.filter-edit-btn="F"
+                            a.filter-add-btn="+"
+                            label=l.lbl[key]
 
         tbody.sheet-tbody
             each person in persons

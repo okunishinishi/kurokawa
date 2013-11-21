@@ -32,7 +32,7 @@
 
             var bodyTr = tbody.find('tr');
             thead.find('th label').click(function () {
-                var th = $(this).parent('th'),
+                var th = $(this).parents('th'),
                     asc = eval(th.attr('data-asc') || 'false'),
                     col = th.data('col');
                 th.siblings('[data-asc]').removeAttr('data-asc');
@@ -265,7 +265,7 @@
             .find('.filter-add-btn,.filter-edit-btn')
             .each(function () {
                 var btn = $(this),
-                    key = btn.parent('th').data('key');
+                    key = btn.parents('th').data('key');
                 btn.data('key', key);
                 var values = tek.unique(sheetTable.getColValues(key).filter(function (value) {
                     return !!value;
