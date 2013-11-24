@@ -20,45 +20,6 @@ var tek = require('tek'),
 })(config);
 
 
-(function (js_filenames) {
-    var out_dir = resolve(publicDir, 'javascripts', 'lib');
-    var publishQueue = new JobQueue;
-    js_filenames.forEach(function (filename) {
-        publishQueue.push(function (next) {
-            tekHTML.publish(filename, out_dir, next);
-        });
-    });
-    publishQueue.execute(function () {
-        console.log('js publish done');
-    });
-})([
-        'tek.js',
-        'tek.view.js',
-        'jquery.treeview.js',
-        'one-color.js',
-        'jquery.spreadsheet.js'
-    ]);
-
-
-(function (less_filenames) {
-    var out_dir = resolve(publicDir, 'stylesheets', 'lib');
-    var publishQueue = new JobQueue;
-    less_filenames.forEach(function (filename) {
-        publishQueue.push(function (next) {
-            tekHTML.publish(filename, out_dir, next);
-        });
-    });
-    publishQueue.execute(function () {
-        console.log('less publish done');
-    });
-})([
-        'tek-mixin.less',
-        'tek-style-clean.less',
-        'tek.view.less',
-        'jquery.treeview.less',
-        'jquery.spreadsheet.less'
-    ]);
-
 
 (function minifyJs(config) {
     var minify = tekHTML.minify;
