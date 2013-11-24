@@ -10,13 +10,13 @@ mixin text-tr(key, data)
             data-role='editable-text',
             data-helper=person_helpers && person_helpers[key])
 
-mixin textarea-tr(key, data)
+mixin textarea-tr(key, data, rows)
     tr
         th
             label(for=key+'-input')=l.lbl[key]
         td
             textarea.wide-textarea(name=key,id=key+'-input',
-                rows=7,
+                rows=row,
             data-role='editable-text')=data[key]
 
 mixin radio-tr(key, data, choices)
@@ -62,8 +62,12 @@ mixin person_extra_tr(key, data)
             +bool_radio_tr(key, data, b.drinks)
         when 'smokes'
             +bool_radio_tr(key, data, b.smokes)
+        when 'good_terms'
+            +textarea-tr(key, person, 2)
         when 'free_word'
-            +textarea-tr(key, person)
+            +textarea-tr(key, person, 2)
+        when 'bad_terms'
+            +textarea-tr(key, person, 7)
         default
             +text-tr(key, data)
 

@@ -50,6 +50,7 @@ Person.basic_data_keys = [
     'birthplace' ,
     'graduated_from' ,
     'years_of_service' ,
+    'previous_job',
     'join_year' ,
     'hobby'
 ];
@@ -61,6 +62,8 @@ Person.extra_data_keys = [
     'children',
     'drinks',
     'smokes',
+    'good_terms',
+    'bad_terms',
     'free_word'
 ];
 

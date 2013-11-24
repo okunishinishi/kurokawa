@@ -42,7 +42,7 @@ block left-content
             each person in persons
                 tr
                     th
-                        a(href=url("/person/#{person._id}"))=person.name
+                        a(href=url("/person/#{person._id}") + "?t=#{time}")=person.name
                     for key,i in sheet_keys
                         td(class='sheet-cell col-'+i, data-col=i)=person[key]
 

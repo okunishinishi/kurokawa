@@ -27,6 +27,7 @@ l.lbl.hobby = '趣味';
 l.lbl.graduated_from = '出身大学';
 l.lbl.join_year = '入社年次';
 l.lbl.years_of_service = '社会人歴';
+l.lbl.previous_job = '前職';
 l.lbl.family = 'family';
 l.lbl.single = '独身/既婚';
 l.lbl.children = '子供';
@@ -36,6 +37,8 @@ l.lbl.favorite_food = '好きな食べ物';
 l.lbl.birthday = '生年月日';
 l.lbl.birthplace = '出身地';
 l.lbl.live_at = '住所';
+l.lbl.good_terms = '友好・親密';
+l.lbl.bad_terms = '敵対・疎遠';
 l.lbl.free_word = 'フリーワード';
 
 l.plh = l.plh || {};
