@@ -18,17 +18,14 @@ html
 
         +ie_scripts()
 
-        if NODE_ENV == 'production'
-            script(src=url.js('lib.min.js'))
-        else
-            script(src=url.js('lib/tek.js'))
-            script(src=url.js('lib/jquery.js'))
-            script(src=url.js('lib/jquery-ui.custom.js'))
-            script(src=url.js('lib/spin.js'))
-            script(src=url.js('lib/handlebars.runtime.min.js'))
-            script(src=url.js('lib/tek.view.js'))
-            script(src=url.js('lib/revalidator.js'))
-            script(src=url.js('lib/one-color.js'))
+        script(src=url.js('lib/tek.js'))
+        script(src=url.js('lib/jquery.js'))
+        script(src=url.js('lib/jquery-ui.custom.js'))
+        script(src=url.js('lib/spin.js'))
+        script(src=url.js('lib/handlebars.runtime.min.js'))
+        script(src=url.js('lib/tek.view.js'))
+        script(src=url.js('lib/revalidator.js'))
+        script(src=url.js('lib/one-color.js'))
 
 
         script(src=url.js('locale/l.#{lang}.js'))
