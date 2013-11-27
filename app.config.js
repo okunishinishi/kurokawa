@@ -47,17 +47,17 @@ exports.use = [
     express.static(exports.publicDir)
 ];
 
-//exports.db = {
-//    kind: 'mongojs',
-//    host: 'localhost',
-//    name: 'kurokawa'.replace(/\./g, '_')
-//};
-
 exports.db = {
-    kind: 'sqlite3',
-    host: resolve(__dirname),
-    name: 'kurokawa'.replace(/\./g, '_') + ".db"
+    kind: 'mongojs',
+    host: 'localhost',
+    name: 'kurokawa'.replace(/\./g, '_')
 };
+
+//exports.db = {
+//    kind: 'sqlite3',
+//    host: resolve(__dirname),
+//    name: 'kurokawa'.replace(/\./g, '_') + ".db"
+//};
 
 exports.context = '';
 
@@ -69,3 +69,7 @@ exports.sign_filter = {
 
 
 exports.reportPublishInterval = 10 * 60 * 1000;
+
+exports.backupDir = resolve(__dirname, 'backup');
+exports.backInterval = 24 * 60 * 60 * 1000;
+exports.backGenerations = 3;

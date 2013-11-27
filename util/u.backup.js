@@ -4,6 +4,7 @@
  */
 var dateFormat = require('dateformat'),
     fs = require('fs'),
+    tek = require('tek'),
     path = require('path'),
     resolve = path.resolve,
     basename = path.basename;
@@ -52,9 +53,27 @@ exports.cleanBackupDir = function (maxcount, bk_dirpath, callback) {
             if (filename.match(/^\./)) return;
             var filepath = resolve(bk_dirpath, filename);
             if (maxcount <= i) {
-                fs.unlinkSync(filepath);
+                if (tek.file.isDir(filepath)) {
+                    tek.file.rmdirRecursive(filepath);
+                } else {
+                    fs.unlinkSync(filepath);
+                }
             }
         });
+        callback && callback();
+    });
+};
+
+exports.mongodump = function (db_name, backup_dirpath, callback) {
+    var exec = require('child_process').exec,
+        command = [
+            'mongodump',
+            '-d', db_name,
+            '-o ', backup_dirpath
+        ].join(' ');
+    exec(command, function (err, stdout, stderr) {
+        if (err) console.error(err);
+        if (stderr) console.error(stderr);
         callback && callback();
     });
 };

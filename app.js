@@ -88,3 +88,19 @@ function publishScoreReport() {
 }
 publishScoreReport();
 setInterval(publishScoreReport, config.reportPublishInterval);
+
+function backup() {
+    var backupUtil = require('./util/u.backup');
+    var mongodump = backupUtil.mongodump,
+        cleanBackupDir = backupUtil.cleanBackupDir;
+    var resolve = require('path').resolve;
+    var backupPath = resolve(config.backupDir, "db." + new Date().getTime());
+    mongodump(config.db.name, backupPath, function () {
+        cleanBackupDir(config.backGenerations, config.backupDir, function () {
+            console.log('backup taken:', backupPath);
+        });
+    });
+}
+
+backup();
+setInterval(backup, config.backInterval);
