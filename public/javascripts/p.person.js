@@ -14,7 +14,10 @@
                 saveBtn = $('#person-save-btn', form),
                 editBtn = $('#person-edit-btn', form);
 
-            form.detailForm(mode, saveBtn, editBtn, callback);
+            form.detailForm(mode, saveBtn, editBtn, function (data) {
+                console.log('data', data);
+                callback && callback(data);
+            });
 
             form.find('[data-helper]').each(function () {
                 var input = $(this),
@@ -53,9 +56,9 @@
                     var value = data[key];
                     if (td.data('label')) {
                         value = l.lbl[value] || value;
-                    } else{
+                    } else {
                         var booleans = data.property && l.booleans[data.property];
-                        if(booleans){
+                        if (booleans) {
                             value = booleans[value] || value;
                         }
                     }

@@ -74,7 +74,7 @@ PersonUpdate.findByPerson = function (person, callback) {
         new_person_update(person, callback);
         return;
     }
-    s.findById(person_update_id, function (personUpdate) {
+    s.findById(person_update_id.toString(), function (personUpdate) {
         if (personUpdate) {
             callback(personUpdate);
         } else {

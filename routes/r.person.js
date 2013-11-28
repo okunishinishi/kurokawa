@@ -48,27 +48,12 @@ exports.new = function (req, res) {
         notFound(res);
         return;
     }
-    Helper.findSingleton(function (helper) {
-        Company.findAll(function (companies) {
-            var company = companies.filter(function (company) {
-                return company._id.toString() == company_id;
-            }).shift();
-            if (!company) {
-                notFound(res);
-                return;
-            }
-
-            res.render('person/new', {
-                person: {
-                    company_name: company.name,
-                    company_id: company._id
-                },
-                personUpdate: {},
-                companies: companies,
-                basic_data_keys: Person.basic_data_keys,
-                extra_data_keys: Person.extra_data_keys,
-                person_helpers: helper.person || ''
-            });
+    Company.findById(company_id, function (company) {
+        var person = new Person({
+            company_id: company_id
+        });
+        person.save(function (person) {
+            res.redirect('/person/' + person._id.toString() + '?mode=edit');
         });
     });
 };
@@ -197,6 +182,7 @@ exports.api = {
                     return;
                 }
                 var change = duplicate.getChanges(person) || [];
+                console.log('change', change);
                 var sign_user = res.locals.sign_user;
                 change.forEach(function (change) {
                     change.user_id = sign_user._id;
@@ -209,7 +195,7 @@ exports.api = {
                     });
                     personUpdate.mergeTooNearChanges();
                     personUpdate.update(function () {
-                        person.person_update_id = personUpdate._id;
+                        person.person_update_id = personUpdate._id.toString();
                         save(person, action, change.map(function (change) {
                             return formatChange(change);
                         }));
