@@ -112,7 +112,8 @@ l = {
             "team": "contributions"
         },
         "user_count_preffix": "",
-        "user_count_suffix": ""
+        "user_count_suffix": "",
+        "name": "name"
     },
     "titles": {
         "chart_sheet_filter": "filter"
@@ -197,7 +198,8 @@ l = {
         "password_change": "change password",
         "apply": "apply",
         "toggle_all": "toggle all",
-        "improvement_request": "send improvement request"
+        "improvement_request": "send improvement request",
+        "add_person": "add person"
     },
     "booleans": {
         "single": {

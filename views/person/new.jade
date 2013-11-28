@@ -1,0 +1,23 @@
+extends ../layout
+include ./_detail
+include ../mixins/_back_link
+include ../person_update/_detail
+block stylesheets
+    link(rel='stylesheet', href=url.css('person.css'))
+block javascripts
+    script(src=url.js('p.person.js'))
+block upper-content
+    if person.company_name
+        +back_link(person.company_name, url("/chart/"+person.company_id))
+block left-content
+    h1.page-title=person.name
+    +person_basic_table(person)
+block right-content
+    a#person-edit-btn.float-right(href='javascript:void(0)')=l.btn.edit
+    +person_extra_table(person)
+    each key in '_id,_vr,sort_num'.split(',')
+        input(type='hidden', value=person[key], name=key)
+    input#person-save-btn.btn.wide-btn(type='submit', value=l.btn.save)
+    form#person-detail-form(method='post', action='/api/person/save')
+block downer-content
+    +person_update_history_table(personUpdate)

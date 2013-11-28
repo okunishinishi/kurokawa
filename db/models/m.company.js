@@ -41,3 +41,14 @@ Company.listUnknownCompanies = function (company_names, callback) {
         callback(unknowns);
     });
 };
+
+Company.mapCompanyByName = function (callback) {
+    var result = {};
+    Company.findAll(function (companies) {
+        companies.forEach(function (company) {
+            var name = company.name;
+            result[name] = company;
+        });
+        callback(result);
+    });
+};

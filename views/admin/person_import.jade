@@ -18,7 +18,7 @@ block left-content
         p!=l.msg.person_import.lead
 
         blockquote
-            div=csv_headers.join(',')
+            div=csv_headers.map(function(h){return l.lbl[h] || h;}).join(',')
 
         p!=l.msg.person_import.example
         blockquote
@@ -41,7 +41,7 @@ block left-content
             br
             #submit-preview-sheet.preview-sheet
             form.wide-form#submit-form.inline-form(
-            data-onsuccess=url('/admin/person'),
+            data-onsuccess=url('/admin/client'),
             method='post',
             action=url('/api/csv/person_import/execute'))
                 input(type='hidden', name='person_json_path')

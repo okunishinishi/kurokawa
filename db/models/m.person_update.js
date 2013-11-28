@@ -57,9 +57,10 @@ PersonUpdate.findByPerson = function (person, callback) {
 
     function new_person_update(person, callback) {
         var personUpdate = new PersonUpdate({
-            person_id: person._id
+            person_id: person._id.toString()
         });
         personUpdate.changes = [];
+        delete personUpdate._id;
         personUpdate.save(function (personUpdate) {
             callback(personUpdate);
         });

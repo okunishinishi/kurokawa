@@ -123,6 +123,7 @@ l.lbl.report_charts = {
 };
 l.lbl.user_count_preffix = '';
 l.lbl.user_count_suffix = '';
+l.lbl.name = 'name';
 
 
 l.lead = {};
@@ -213,7 +214,7 @@ l.btn.password_change = 'change password';
 l.btn.apply = 'apply';
 l.btn.toggle_all = 'toggle all';
 l.btn.improvement_request = 'send improvement request';
-
+l.btn.add_person = 'add person';
 
 l.booleans = {
     single: {true: 'single', false: 'married'},
@@ -221,4 +222,4 @@ l.booleans = {
     smokes: {true: 'smokes', false: 'not smokes'}
 };
 
-l.lead.signin='Sign in and start kurokawa!';
+l.lead.signin = 'Sign in and start kurokawa!';

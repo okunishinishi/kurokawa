@@ -53,6 +53,7 @@ var chart = r['chart'];
 get('/chart/:company_id', chart.index);
 
 var person = r['person'];
+get('/new_person', person.new);
 get('/person/:_id', person.index);
 post('/api/person/save', person.api.save);
 post('/api/person/destroy', person.api.destroy);
@@ -84,7 +85,6 @@ post('/api/csv/user_import/execute', csv.import_user.execute);
 post('/api/csv/person_import/text', csv.import_person.from_text);
 post('/api/csv/person_import/file', csv.import_person.from_file);
 post('/api/csv/person_import/execute', csv.import_person.execute);
-
 
 
 var score_rule = r['score_rule'];

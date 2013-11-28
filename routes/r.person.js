@@ -41,7 +41,37 @@ function find(condition, limit, skip, callback) {
         callback(models.splice(skip, limit));
     }).limit(limit).skip(skip);
 }
+exports.new = function (req, res) {
+    var q = req.query,
+        company_id = q && q.company_id;
+    if (!company_id) {
+        notFound(res);
+        return;
+    }
+    Helper.findSingleton(function (helper) {
+        Company.findAll(function (companies) {
+            var company = companies.filter(function (company) {
+                return company._id.toString() == company_id;
+            }).shift();
+            if (!company) {
+                notFound(res);
+                return;
+            }
 
+            res.render('person/new', {
+                person: {
+                    company_name: company.name,
+                    company_id: company._id
+                },
+                personUpdate: {},
+                companies: companies,
+                basic_data_keys: Person.basic_data_keys,
+                extra_data_keys: Person.extra_data_keys,
+                person_helpers: helper.person || ''
+            });
+        });
+    });
+};
 /**
  * show index page
  * @param req

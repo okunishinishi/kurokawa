@@ -145,9 +145,10 @@ function validateUserTakenValues(users, callback) {
 
 function validatePersonTakenValues(persons, callback) {
     Person.listAllTakenValues(function (taken_names) {
-        taken_names = taken_names.map(function (takenname) {
-            return takenname.trim();
-        });
+        taken_names = taken_names
+            .map(function (takenname) {
+                return takenname.trim();
+            });
         var errors = [];
         var colmns = exports.format.person_import;
         persons.forEach(function (person) {
@@ -429,6 +430,16 @@ exports.import_person.save_preview = function (raw, errors, persons, callback) {
         });
 };
 
+exports.import_person.from_text = function (req, res) {
+    var body = req['body'];
+    csv.parseString(body['csv_text'], function (data) {
+        exports.import_person(data, function (result) {
+            res.json(result);
+        });
+    });
+};
+
+
 exports.import_person.from_file = function (req, res) {
     from_file(req, res, exports.import_person, 'csv_file');
 };
@@ -482,19 +493,18 @@ exports.import_person.execute = function (req, res) {
                     var company_names = Object.keys(companiesMap);
                     Company.listUnknownCompanies(company_names, function (companies) {
                         Company.saveAll(companies, function () {
-                            companies.forEach(function (company) {
-                                companiesMap[company.name] = company;
-                            });
-                            persons.forEach(function (person) {
-                                var company_name = person.company_name;
-                                person.company_id = companiesMap[company_name];
-                                delete person.company_name;
-                            });
-                            req.flash('info_alert', l.msg.user_import_done);
-                            Person.saveAll(persons, function () {
-                                res.json({
-                                    valid: valid,
-                                    errors: errors
+                            Company.mapCompanyByName(function (companiesMap) {
+                                persons.forEach(function (person) {
+                                    var company_name = person.company_name;
+                                    person.company_id = companiesMap[company_name];
+                                    delete person.company_name;
+                                });
+                                req.flash('info_alert', l.msg.user_import_done);
+                                Person.saveAll(persons, function () {
+                                    res.json({
+                                        valid: valid,
+                                        errors: errors
+                                    });
                                 });
                             });
                         });

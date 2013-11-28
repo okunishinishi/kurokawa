@@ -43,6 +43,7 @@ Person.prototype.getChanges = function (data) {
         });
 };
 Person.basic_data_keys = [
+    'name',
     'department' ,
     'post' ,
     'mission' ,
@@ -110,7 +111,7 @@ Person.listAllTakenValues = function (callback) {
     var names = [];
     Person.findByCondition({}, function (persons) {
         persons && persons.forEach(function (person) {
-            names.push(person.name);
+            if (person.name)names.push(person.name);
         });
         callback(names);
     });

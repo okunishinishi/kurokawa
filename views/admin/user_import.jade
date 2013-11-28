@@ -18,7 +18,7 @@ block left-content
         p!=l.msg.user_import.lead
 
         blockquote
-            div=csv_headers.join(',')
+            div=csv_headers.map(function(h){return l.lbl[h] || h;}).join(',')
 
         p!=l.msg.user_import.example
         blockquote

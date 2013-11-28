@@ -7,11 +7,11 @@ l = {
     "lbl": {
         "search": "search",
         "understand": "I understand consequences.",
-        "username": "username",
+        "username": "ユーザ名",
         "email": "email",
         "mypage": "mypage",
         "username_or_email": "username or email",
-        "password": "password",
+        "password": "パスワード",
         "password_confirm": "password again",
         "password_mask": "*****",
         "account": "account",
@@ -24,12 +24,12 @@ l = {
         "signin": "sign in",
         "signup": "sign up",
         "signout": "sign out",
-        "real_name": "real name",
+        "real_name": "名前",
         "last_name": "last name",
         "company": "会社",
         "companies": "companies",
         "chart": "chart",
-        "person": "person",
+        "person": "顧客",
         "birthplace": "出身地",
         "department": "部門",
         "post": "役職",
@@ -58,7 +58,7 @@ l = {
         "admin": "admin",
         "admin_page_title": "admin menu",
         "master": "master",
-        "user": "user",
+        "user": "ユーザ",
         "team": "team",
         "teams": "teams",
         "breadcrumb_sperator": ">",
@@ -82,11 +82,11 @@ l = {
             "file": "upload file"
         },
         "admin_menu": {
-            "master_manage": "master manage",
-            "user_import": "user import",
-            "person_import": "person import",
-            "user_manage": "user manage",
-            "score_rule": "score rule"
+            "master_manage": "マスタ管理",
+            "user_import": "ユーザ取り込み",
+            "person_import": "顧客取り込み",
+            "user_manage": "ユーザ管理",
+            "score_rule": "得点ルール"
         },
         "filter": "filter",
         "filter_on": "filtered",
@@ -101,7 +101,7 @@ l = {
             "to": "to",
             "user": "user"
         },
-        "role": "role",
+        "role": "権限",
         "user_roles": {
             "admin": "admin",
             "none": "none"
@@ -112,7 +112,9 @@ l = {
             "team": "contributions"
         },
         "user_count_preffix": "",
-        "user_count_suffix": ""
+        "user_count_suffix": "",
+        "name": "名前",
+        "company_name": "企業名称"
     },
     "titles": {
         "chart_sheet_filter": "filter"
@@ -197,7 +199,8 @@ l = {
         "password_change": "change password",
         "apply": "apply",
         "toggle_all": "toggle all",
-        "improvement_request": "send improvement request"
+        "improvement_request": "send improvement request",
+        "add_person": "add person"
     },
     "booleans": {
         "single": {

@@ -22,6 +22,8 @@ block left-content
 
 
     br
+    a.float-right(href=url('/new_person?mode=edit&company_id=')+company._id)=l.btn.add_person
+    br.clear
     table#sheet-table
         colgroup.sheet-colgroup
             col
@@ -47,8 +49,8 @@ block left-content
                         td(class='sheet-cell col-'+i, data-col=i)=person[key]
 
     from#sheet-search-form.inline-form.stick-right.stick-top(
-            action='',
-            style='right:0;'
-        )
+    action='',
+    style='right:0;'
+    )
         input(type='search', results, name='search_word')
 
