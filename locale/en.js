@@ -141,6 +141,7 @@ l.msg.new_account = 'create new account';
 l.msg.prove_human = 'prove you are human, not a bot.';
 l.msg.signout_done = [l.lbl.signout, 'done.'].join(' ');
 l.msg.user_import_done = 'user import done.';
+l.msg.person_import_done = 'person import done.';
 l.msg.invalid_csv = 'Oops! Your CSV is not valid. Please modify and retry.';
 l.msg.user_import = {
     lead: [

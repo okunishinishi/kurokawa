@@ -28,23 +28,27 @@ PersonUpdate.prototype.mergeTooNearChanges = function () {
         changes = s.changes;
     if (!changes) return s;
     var later = null;
-    s.changes = changes.map(function (change) {
-        if (later) {
-            var same_property = later.property == change.property;
-            if (same_property) {
-                var same_user = later.user_id == change.user_id;
-                if (same_user) {
-                    var tooNear = Math.abs(Number(change.date) - Number(later.date)) < PersonUpdate.change_merge_interval;
-                    if (tooNear) {
-                        later.from = change.from;
-                        return null;
+    s.changes = changes
+        .sort(function (a, b) {
+            return Number(b.date) - Number(a.date);
+        })
+        .map(function (change) {
+            if (later) {
+                var same_property = later.property == change.property;
+                if (same_property) {
+                    var same_user = later.user_id == change.user_id;
+                    if (same_user) {
+                        var tooNear = Math.abs(Number(change.date) - Number(later.date)) < PersonUpdate.change_merge_interval;
+                        if (tooNear) {
+                            later.from = change.from;
+                            return null;
+                        }
                     }
                 }
             }
-        }
-        later = change;
-        return change;
-    }).filter(function (change) {
+            later = change;
+            return change;
+        }).filter(function (change) {
             return !!change;
         });
     return s;

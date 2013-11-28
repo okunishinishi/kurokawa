@@ -13,7 +13,9 @@ var tek = require('tek'),
  * @param res
  */
 exports.index = function (req, res) {
-    res.render('admin/index.jade', {});
+    res.render('admin/index.jade', {
+        info_alert: req.flash('info_alert')
+    });
 };
 
 /**

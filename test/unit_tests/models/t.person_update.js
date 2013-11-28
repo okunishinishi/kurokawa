@@ -19,14 +19,14 @@ exports.mergeTooNearChangesTest = function (test) {
             "user_id": "140000000000000000000000"
         },
         {
-            "date": 1379412995320,
+            "date": 1379412995322,
             "property": "live_at",
             "from": "長野県",
             "to": "東京都",
             "user_id": "140000000000000000000002"
         },
         {
-            "date": 1379412995302,
+            "date": 1379412995320,
             "property": "live_at",
             "from": "東京都",
             "to": "山形",
@@ -36,7 +36,8 @@ exports.mergeTooNearChangesTest = function (test) {
     personUpdate.mergeTooNearChanges();
     var changes = personUpdate.changes;
     changes.should.be.lengthOf(3);
-    changes[2].should.have.property('from', '長野県');
-    changes[2].should.have.property('to', '山形');
+    changes[2].should.have.property('from', 'サソリ狩り');
+    changes[2].should.have.property('to', '鬼狩り');
+
     test.done();
 };

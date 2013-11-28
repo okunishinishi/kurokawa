@@ -115,12 +115,12 @@ exports.parse_users.lineToUser = function (line, callback) {
     });
 };
 
-function takenErr(property, model, takens, colmns) {
+function takenErr(property, model, takens, columns) {
     if (!model[property]) return null;
     var taken = (takens.indexOf(model[property]) !== -1);
     return taken && {
         row: model.row,
-        col: colmns.indexOf(property),
+        col: columns.indexOf(property),
         property: property,
         msg: ' is taken'
     }
@@ -460,16 +460,19 @@ exports.import_person.execute = function (req, res) {
             return;
         }
         fs.readFile(json_filepath, function (err, buffer) {
-            var persons, companiesMap = {};
+            var persons;
             try {
                 err && handleErr(err);
 
                 persons = JSON.parse(buffer.toString()).map(function (data) {
                     return new Person(data);
                 });
-                companiesMap = persons.map(function (person) {
-                    var company_name = companiesMap[person];
-                    companiesMap[company_name] = true;
+                var company_names = persons.map(function (person) {
+                    return person.company_name;
+                });
+                company_names = company_names.filter(function (name, i) {
+                    var first = company_names.indexOf(name);
+                    return first === i;
                 });
             } catch (e) {
                 console.error(e);
@@ -490,16 +493,16 @@ exports.import_person.execute = function (req, res) {
                 errors = errors.concat(takenErr);
                 var valid = !(errors && errors.length);
                 if (valid) {
-                    var company_names = Object.keys(companiesMap);
                     Company.listUnknownCompanies(company_names, function (companies) {
                         Company.saveAll(companies, function () {
                             Company.mapCompanyByName(function (companiesMap) {
                                 persons.forEach(function (person) {
                                     var company_name = person.company_name;
-                                    person.company_id = companiesMap[company_name];
+                                    var company = companiesMap[company_name];
+                                    person.company_id = company && company._id.toString();
                                     delete person.company_name;
                                 });
-                                req.flash('info_alert', l.msg.user_import_done);
+                                req.flash('info_alert', l.msg.person_import_done);
                                 Person.saveAll(persons, function () {
                                     res.json({
                                         valid: valid,

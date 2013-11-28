@@ -134,6 +134,7 @@ l = {
         "prove_human": "prove you are human, not a bot.",
         "signout_done": "sign out done.",
         "user_import_done": "user import done.",
+        "person_import_done": "person import done.",
         "invalid_csv": "Oops! Your CSV is not valid. Please modify and retry.",
         "user_import": {
             "lead": "Import users via CSV.<br/>Format is below:",
