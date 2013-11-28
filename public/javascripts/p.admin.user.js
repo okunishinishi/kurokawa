@@ -20,7 +20,11 @@
         userListItem: function () {
             return $(this)
                 .destroyableListItem()
-                .editableListItem('dblclick');
+                .editableListItem('dblclick')
+                .on('edit-done', function (e, data) {
+                    var li = $(this);
+                    li.data('user', data);
+                });
         },
         userList: function (data) {
             var ul = $(this);
@@ -113,7 +117,7 @@
 
         doc.on('click', '.user-list-item', function () {
             var li = $(this);
-            if(li.is('.selected')) return;
+            if (li.is('.selected')) return;
             li.addClass('selected')
                 .siblings('.selected').removeClass('selected');
             var data = li.data('user');
@@ -124,7 +128,6 @@
         $('#user-detail-form').hide();
 
         $('#sub-nav', body).subNav('admin');
-
 
 
     });

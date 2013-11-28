@@ -96,7 +96,7 @@
                         var form = $(this);
                         if (data.valid) {
                             form.setFormValue(data.model);
-                            form.trigger('edit-done');
+                            form.trigger('edit-done', [data.model]);
                             li.addClass('editable-list-item-fixed');
                             detailLink.show();
                         } else {
@@ -460,7 +460,7 @@
                     $.errAlert(error_alert);
                 }
                 var info_alert = json['info_alert'];
-                if(info_alert){
+                if (info_alert) {
                     $.infoAlert(info_alert);
                 }
             });
