@@ -14,13 +14,29 @@
                 thead = $('thead', table),
                 tbody = $('tbody', table);
 
+            var numericCols = thead.find('th').toArray().map(function (th, i) {
+                var numeric = $(th).hasClass('numeric');
+                return numeric ? i : null
+            }).filter(function (col) {
+                    return col != null;
+                });
+
             var tmpl = {
                 bodyRow: hbs.templates['score-report-table-body-row']
             };
             var len = data.length;
             $('#score-table-count').text(['1-' + len, '/', len].join('')).hide();
             tbody.htmlHandlebars(tmpl.bodyRow, data);
-            table.sortableTable();
+            table.sortableTable(function () {
+
+            }, function (v1, v2, col) {
+                var isNumeric = numericCols.indexOf(col) != -1;
+                if (isNumeric) {
+                    return v1 - v1;
+                } else {
+                    return v1.localeCompare(v2);
+                }
+            });
 
 
             return table

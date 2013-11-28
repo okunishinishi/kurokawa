@@ -22,18 +22,18 @@
 
 	/** tek.view for hbs.templates **/
 	(function (global, undefined) {
-	
+
 		var Handlebars=global.hbs;!function(){var a=Handlebars.template,t=Handlebars.templates=Handlebars.templates||{};t["tk-confirm-dialog"]=a(function(a,t,e,l,n){this.compilerInfo=[4,">= 1.0.0"],e=this.merge(e,a.helpers),n=n||{};var i,s="",o="function",p=this.escapeExpression;return s+='<div class="tk-confirm-dialog" id="tk-confirm-dialog">\n    <div class="tk-confirm-dialog-inner">\n        <h2 class="tk-confirm-dialog-title">',(i=e.title)?i=i.call(t,{hash:{},data:n}):(i=t.title,i=typeof i===o?i.apply(t):i),s+=p(i)+"</h2>\n        ",(i=e.sub_title)?i=i.call(t,{hash:{},data:n}):(i=t.sub_title,i=typeof i===o?i.apply(t):i),s+=p(i)+'\n        <form>\n            <a href="javascript:void(0)" class="tk-confirm-dialog-close-btn"\n                    >&times;</a>\n\n            <p>\n\n                <input type="checkbox" id="tk-confirm-dialog-check"/>\n                <label for="tk-confirm-dialog-check"><b>',(i=e.check_label)?i=i.call(t,{hash:{},data:n}):(i=t.check_label,i=typeof i===o?i.apply(t):i),s+=p(i)+'</b></label>\n            </p>\n            <input type="submit" class="tk-danger-btn tk-wide-btn"\n                   disabled="disabled" value="',(i=e.btn_label)?i=i.call(t,{hash:{},data:n}):(i=t.btn_label,i=typeof i===o?i.apply(t):i),s+=p(i)+'"/>\n        </form>\n    </div>\n</div>\n'}),t["tk-drop-upload-form"]=a(function(a,t,e,l,n){this.compilerInfo=[4,">= 1.0.0"],e=this.merge(e,a.helpers),n=n||{};var i,s="",o="function",p=this.escapeExpression;return s+='<form action="',(i=e.action)?i=i.call(t,{hash:{},data:n}):(i=t.action,i=typeof i===o?i.apply(t):i),s+=p(i)+'" method="post"\n      enctype="multipart/form-data" class="tk-upload-form">\n    <span>',(i=e.msg)?i=i.call(t,{hash:{},data:n}):(i=t.msg,i=typeof i===o?i.apply(t):i),(i||0===i)&&(s+=i),s+='</span>\n    <input type="file" name="',(i=e.name)?i=i.call(t,{hash:{},data:n}):(i=t.name,i=typeof i===o?i.apply(t):i),s+=p(i)+'" multiple="multiple" class="tk-cover">\n</form>'}),t["tk-editable-label"]=a(function(a,t,e,l,n){return this.compilerInfo=[4,">= 1.0.0"],e=this.merge(e,a.helpers),n=n||{},'<label class="tk-editable-label">\n\n</label>'}),t["tk-err-balloon"]=a(function(a,t,e,l,n){function i(a){var t="";return t+="\n            <li>"+r(typeof a===p?a.apply(a):a)+"</li>\n        "}this.compilerInfo=[4,">= 1.0.0"],e=this.merge(e,a.helpers),n=n||{};var s,o="",p="function",r=this.escapeExpression,c=this;return o+='<div class="tk-err-balloon">\n    <ul>\n        ',s=e.each.call(t,t.msg,{hash:{},inverse:c.noop,fn:c.program(1,i,n),data:n}),(s||0===s)&&(o+=s),o+='\n    </ul>\n    <div class="tek-text-center">\n        <a href="javascript:void(0)" class="tk-close-btn">',(s=e.close_label)?s=s.call(t,{hash:{},data:n}):(s=t.close_label,s=typeof s===p?s.apply(t):s),o+=r(s)+"</a>\n    </div>\n</div>"}),t["tk-hit-word"]=a(function(a,t,e,l,n){this.compilerInfo=[4,">= 1.0.0"],e=this.merge(e,a.helpers),n=n||{};var i="",s="function",o=this.escapeExpression;return i+='<span class="tk-hit-word">'+o(typeof t===s?t.apply(t):t)+"</span>"}),t["tk-no-support-dialog"]=a(function(a,t,e,l,n){this.compilerInfo=[4,">= 1.0.0"],e=this.merge(e,a.helpers),n=n||{};var i,s="",o="function",p=this.escapeExpression;return s+='<div class="tk-no-support-dialog" id="tk-no-support-dialog">\n    <div class="tk-no-support-dialog-inner">\n        <h1 class="tk-no-support-dialog-title">',(i=e.title)?i=i.call(t,{hash:{},data:n}):(i=t.title,i=typeof i===o?i.apply(t):i),s+=p(i)+"</h1>\n        <span>",(i=e.sub_title)?i=i.call(t,{hash:{},data:n}):(i=t.sub_title,i=typeof i===o?i.apply(t):i),s+=p(i)+"</span>\n\n        <p>\n            ",(i=e.msg)?i=i.call(t,{hash:{},data:n}):(i=t.msg,i=typeof i===o?i.apply(t):i),s+=p(i)+'\n        <ul>\n            <li><a href="https://www.google.com/intl/en/chrome/browser/" target="_blank">\n                <img class="tk-icon" src="https://www.google.com/images/icons/product/chrome-32.png" alt=""/>\n                Chrome\n            </a>\n            </li>\n            <li><a href="http://www.mozilla.org/en-US/firefox/new/" target="_blank">\n                <img class="tk-icon" src="http://mozorg.cdn.mozilla.net/media/img/firefox/favicon.ico?2013-08" alt=""/>\n                Firefox\n            </a></li>\n            <li><a href="http://support.apple.com/downloads/#safari" target="_blank">\n                <img class="tk-icon"\n                     src="http://km.support.apple.com/resources/sites/APPLE/content/live/IMAGES/0/IM26/en_US/safari-72.png"\n                     alt=""/>\n                Safari</a></li>\n            <li><a href="http://www.opera.com/">\n                <img class="tk-icon" src="http://d2jc9zwbrclgz3.cloudfront.net/static-heap/da/dafd15591b35d4f81ca96cf7de6582d705850ff0/apple-touch-icon-57x57.png" alt=""/>\n                Opera</a></li>\n        </ul>\n        </p>\n\n    </div>\n</div>'}),t["tk-selectable-label"]=a(function(a,t,e,l,n){return this.compilerInfo=[4,">= 1.0.0"],e=this.merge(e,a.helpers),n=n||{},'<label class="tk-selectable-label">\n</label>'}),t["tk-selectable-text-list"]=a(function(a,t,e,l,n){function i(a){var t="";return t+='\n        <li class="tk-selectable-list-item">\n            <a href="javascript:void(0)">'+r(typeof a===p?a.apply(a):a)+"</a>\n        </li>\n    "}this.compilerInfo=[4,">= 1.0.0"],e=this.merge(e,a.helpers),n=n||{};var s,o="",p="function",r=this.escapeExpression,c=this;return o+='<ul class="tk-selectable-text-list">\n    ',s=e.each.call(t,t.candidates,{hash:{},inverse:c.noop,fn:c.program(1,i,n),data:n}),(s||0===s)&&(o+=s),o+="\n</ul>\n"}),t["tk-spin"]=a(function(a,t,e,l,n){this.compilerInfo=[4,">= 1.0.0"],e=this.merge(e,a.helpers),n=n||{};var i,s="",o="function",p=this.escapeExpression;return s+='<div style="width:',(i=e.width)?i=i.call(t,{hash:{},data:n}):(i=t.width,i=typeof i===o?i.apply(t):i),s+=p(i)+"px;height:",(i=e.height)?i=i.call(t,{hash:{},data:n}):(i=t.height,i=typeof i===o?i.apply(t):i),s+=p(i)+"px;\n        position: absolute;left:",(i=e.left)?i=i.call(t,{hash:{},data:n}):(i=t.left,i=typeof i===o?i.apply(t):i),s+=p(i)+"px;top:",(i=e.top)?i=i.call(t,{hash:{},data:n}):(i=t.top,i=typeof i===o?i.apply(t):i),s+=p(i)+'px"></div>'}),t["tk-upload-work-div"]=a(function(a,t,e,l,n){function i(a,t){var l,n="";return n+='\n            <input type="hidden" name="',(l=e.name)?l=l.call(a,{hash:{},data:t}):(l=a.name,l=typeof l===p?l.apply(a):l),n+=r(l)+'" value="',(l=e.value)?l=l.call(a,{hash:{},data:t}):(l=a.value,l=typeof l===p?l.apply(a):l),n+=r(l)+'"/>\n        '}this.compilerInfo=[4,">= 1.0.0"],e=this.merge(e,a.helpers),n=n||{};var s,o="",p="function",r=this.escapeExpression,c=this;return o+='<div class="tk-upload-work-div" style="position:absolute;top:-9999px">\n    <form action="',(s=e.action)?s=s.call(t,{hash:{},data:n}):(s=t.action,s=typeof s===p?s.apply(t):s),o+=r(s)+'" target="',(s=e.work_id)?s=s.call(t,{hash:{},data:n}):(s=t.work_id,s=typeof s===p?s.apply(t):s),o+=r(s)+'" method="post" enctype="multipart/form-data">\n        ',s=e.each.call(t,t.data,{hash:{},inverse:c.noop,fn:c.program(1,i,n),data:n}),(s||0===s)&&(o+=s),o+='\n    </form>\n    <iframe src="" frameborder="0" name="',(s=e.work_id)?s=s.call(t,{hash:{},data:n}):(s=t.work_id,s=typeof s===p?s.apply(t):s),o+=r(s)+'">\n\n    </iframe>\n</div>\n'})}();
-		
+
 	})(dependencies, undefined);
-	
+
 	/** tek.view for $ **/
 	(function (global, undefined) {
-	
+
 		var tek = global['tek'],
 		    hbs = global['hbs'],
 		    $ = global['$'];
-		
+
 		/**
 		 * form value object
 		 * @type {tek.define|*}
@@ -62,7 +62,7 @@
 		        toObj: function () {
 		            var s = this,
 		                result = {};
-		
+
 		            function findInjectable(dst, key) {
 		                while (key.match(/\./)) {
 		                    var prop = key.match(/([^\.]*)\./)[1];
@@ -72,7 +72,7 @@
 		                }
 		                return dst;
 		            }
-		
+
 		            for (var key in s) {
 		                if (!s.hasOwnProperty(key)) continue;
 		                var value = s[key];
@@ -92,7 +92,7 @@
 		        }
 		    }
 		});
-		
+
 		/**
 		 * render Handlebars template
 		 * @param tmpl
@@ -112,7 +112,7 @@
 		    });
 		    return html;
 		};
-		
+
 		/**
 		 * parse JSON safely.
 		 * when failed to parse, put warning and close quietly.
@@ -126,7 +126,7 @@
 		        return null;
 		    }
 		};
-		
+
 		/**
 		 * show confirm dialog to remove something
 		 * @param data
@@ -135,7 +135,7 @@
 		$.confirmRemove = function (data, callback) {
 		    var body = document.body;
 		    $('#tk-confirm-dialog', body).remove();
-		
+
 		    var tmpl = hbs.templates['tk-confirm-dialog'];
 		    data = $.extend({
 		        title: 'Are you ABSOLUTELY sure?',
@@ -144,13 +144,13 @@
 		        btn_label: 'do it!'
 		    }, data);
 		    var html = tmpl(data);
-		
+
 		    var dialog = $(html).appendTo(body),
 		        inner = $('.tk-confirm-dialog-inner', dialog),
 		        form = dialog.find('form'),
 		        cancelBtn = form.find('.tk-confirm-dialog-close-btn'),
 		        submit = form.find(':submit');
-		
+
 		    cancelBtn.click(function () {
 		        dialog.fadeOut(100, function () {
 		            dialog.remove();
@@ -177,7 +177,7 @@
 		        callback && callback();
 		    });
 		};
-		
+
 		/**
 		 * get query for current page
 		 * @returns {tek.Query}
@@ -185,7 +185,7 @@
 		$.getQuery = function () {
 		    return tek.Query.fromLocation(location) || {};
 		};
-		
+
 		$.pushQueryToState = function (values) {
 		    var hst = history,
 		        loc = location;
@@ -200,7 +200,7 @@
 		    var new_url = [loc.path, $.param(query)].join('?');
 		    hst.pushState(null, null, new_url);
 		};
-		
+
 		/**
 		 * show sorry page for not supported
 		 * @param data
@@ -208,18 +208,18 @@
 		$.sorryNoSupport = function (data) {
 		    var body = document.body;
 		    $('#tk-no-support-dialog', body).remove();
-		
+
 		    var tmpl = hbs.templates['tk-no-support-dialog'];
 		    data = $.extend({
 		        title: 'Sorry!Your browser is not supported.',
 		        msg: "Why don't you try one of these?"
 		    }, data || {});
-		
+
 		    var html = tmpl(data);
-		
+
 		    $(html).appendTo(body);
 		};
-		
+
 		/**
 		 * confirm before page unload
 		 * @param msg
@@ -233,8 +233,8 @@
 		    }
 		    $.confirmLeave.msg = msg;
 		};
-		
-		
+
+
 		/**
 		 * scroll page to top
 		 * @param duration
@@ -244,7 +244,7 @@
 		        scrollTop: 0
 		    }, duration || 300);
 		};
-		
+
 		$.wordSearch = {};
 		$.wordSearch.restore = function (word) {
 		    if (!word) return;
@@ -264,16 +264,16 @@
 		    span.dataset.origin = origin;
 		    return span;
 		};
-		
+
 	})(dependencies, undefined);
-	
+
 	/** tek.view for $.fn **/
 	(function (global, undefined) {
-	
+
 		var tek = global['tek'],
 		    $ = global['$'],
 		    hbs = global['hbs'];
-		
+
 		/**
 		 * find element by attribute
 		 * @param key
@@ -293,8 +293,8 @@
 		    });
 		    return $(this).find(selector);
 		};
-		
-		
+
+
 		/**
 		 * find element by name attribute
 		 * @param name
@@ -303,7 +303,7 @@
 		$.fn.findByName = function (name) {
 		    return $(this).findByAttr('name', name);
 		};
-		
+
 		/**
 		 * find element by name data-role
 		 * @param role
@@ -312,8 +312,8 @@
 		$.fn.findByRole = function (role) {
 		    return $(this).findByAttr('data-role', role);
 		};
-		
-		
+
+
 		/**
 		 * get form value
 		 * @returns {$.FormValue}
@@ -338,8 +338,8 @@
 		    });
 		    return result;
 		};
-		
-		
+
+
 		/**
 		 * set form value
 		 * @param values
@@ -365,11 +365,11 @@
 		                input.val(value);
 		            }
 		        }
-		
+
 		    }
 		};
-		
-		
+
+
 		/**
 		 * capture text change in real time
 		 * @param callback
@@ -377,8 +377,8 @@
 		 * @returns {*}
 		 */
 		$.fn.textchange = function (callback, interval) {
-		
-		
+
+
 		    return $(this).each(function () {
 		        var text = $(this),
 		            val = text.val(),
@@ -403,11 +403,11 @@
 		            }
 		        }, interval || 300);
 		        text.data('textchange-timer', timer);
-		
+
 		    });
 		};
-		
-		
+
+
 		/**
 		 * create spin
 		 * @param opts
@@ -432,15 +432,15 @@
 		                length: 4,
 		                width: 2,
 		                radius: 4
-		
+
 		            }, opts);
 		            data.spinner = new Spinner(opts)
 		                .spin(this);
 		        }
 		    });
 		};
-		
-		
+
+
 		/**
 		 * show spin
 		 * @param size
@@ -462,8 +462,8 @@
 		    spin.show();
 		    return elm;
 		};
-		
-		
+
+
 		/**
 		 * remove spin
 		 * @returns {*|HTMLElement}
@@ -472,8 +472,8 @@
 		    $('.tk-spin', this).remove();
 		    return $(this);
 		};
-		
-		
+
+
 		/**
 		 * form for ajax
 		 * @param callback
@@ -504,7 +504,7 @@
 		                            form
 		                                .removeClass('tk-loading')
 		                                .removeSpin();
-		
+
 		                        }
 		                    });
 		                }, delay || 300);
@@ -515,8 +515,8 @@
 		        ;
 		}
 		;
-		
-		
+
+
 		/**
 		 * render text input as editable-text
 		 * @param trigger
@@ -574,8 +574,8 @@
 		        if (input.val()) input.change();
 		    });
 		};
-		
-		
+
+
 		/**
 		 * render select element as selectable-label
 		 * @param trigger
@@ -607,8 +607,8 @@
 		        }).change();
 		    });
 		};
-		
-		
+
+
 		/**
 		 * add open-up animation
 		 */
@@ -624,8 +624,8 @@
 		            elm.removeAttr('style');
 		        });
 		};
-		
-		
+
+
 		/**
 		 * add close-down animation
 		 */
@@ -641,7 +641,7 @@
 		            .hide();
 		    });
 		};
-		
+
 		/**
 		 * render html by handlebars
 		 * @param tmpl
@@ -654,8 +654,8 @@
 		        $(this).html(html);
 		    });
 		};
-		
-		
+
+
 		/**
 		 * render and append handlebars
 		 * @param tmpl
@@ -668,7 +668,7 @@
 		        $(this).append(html);
 		    });
 		};
-		
+
 		/**
 		 * text box with selection
 		 * @param candidates
@@ -714,7 +714,7 @@
 		            ul.hide();
 		        });
 		    }, 10);
-		
+
 		    return input
 		        .attr({
 		            autocomplete: 'off'
@@ -781,7 +781,7 @@
 		                });
 		        })
 		};
-		
+
 		/**
 		 * show fixed element as spy
 		 */
@@ -816,7 +816,7 @@
 		    });
 		    return spy;
 		};
-		
+
 		$.fn.showErrBalloon = function (msg, close_label) {
 		    var elm = $(this);
 		    elm.find('.tk-err-balloon').remove();
@@ -835,7 +835,7 @@
 		    });
 		    return elm;
 		};
-		
+
 		/**
 		 * input with auto format feature
 		 * @param format
@@ -882,7 +882,7 @@
 		        });
 		    });
 		};
-		
+
 		/**
 		 * search by word
 		 * @param word
@@ -892,14 +892,14 @@
 		    var elm = $(this);
 		    if (!elm.length) return false;
 		    if (elm.is('.tk-hit-word')) return false;
-		
+
 		    $.wordSearch.restore(elm.find('.tk-hit-word'));
-		
+
 		    var hit = false,
 		        contents = elm.contents(),
 		        inner = $();
-		
-		
+
+
 		    for (var i = 0, len = contents.length; i < len; i++) {
 		        var content = contents[i];
 		        switch (content.nodeType) {
@@ -914,23 +914,30 @@
 		            default:
 		                inner = inner.add(content);
 		                break;
-		
+
 		        }
 		    }
 		    return inner.wordSearch(word) || hit;
 		};
-		
+
 		/**
 		 * make table sortable by click th in thead
 		 * @returns {*|jQuery|HTMLElement}
 		 */
-		$.fn.sortableTable = function (callback) {
+		$.fn.sortableTable = function (callback,sorter) {
 		    var table = $(this),
 		        thead = table.find('thead'),
 		        tbody = table.find('tbody');
-		
+
+
+            if (!sorter) {
+                sorter = function (v1, v2, col) {
+                    return v1.localeCompare(v2);
+                };
+            }
+
 		    var bodyTr = tbody.find('tr');
-		
+
 		    bodyTr
 		        .each(function (row) {
 		            var tr = $(this);
@@ -972,7 +979,7 @@
 		                            var $2 = $(b);
 		                            var v1 = $1.data('tk-sort-value'),
 		                                v2 = $2.data('tk-sort-value');
-		                            var sorted = v1.localeCompare(v2) * (asc ? 1 : -1);
+                                    var sorted = sorter(v1, v2, col) * (asc ? 1 : -1);
 		                            if (sorted) {
 		                                return  sorted;
 		                            } else {
@@ -987,7 +994,7 @@
 		        });
 		    return table;
 		};
-		
+
 		/**
 		 * ajax file upload
 		 * @param url
@@ -1072,14 +1079,14 @@
 		                });
 		        });
 		};
-		
+
 		/**
 		 * move a element from one to another by dragging
 		 */
 		$.fn.transferable = function (draggable) {
 		    $(draggable)
 		        .draggable({
-		
+
 		            revert: "invalid"
 		        })
 		        .addClass('tk-transferable-item');
@@ -1099,7 +1106,7 @@
 		        });
 		};
 	})(dependencies, undefined);
-	
+
 
 })({
     $: this['$'],

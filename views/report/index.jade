@@ -10,7 +10,7 @@ block javascripts
 
 
 mixin head_th(key)
-    th
+    th(attributes)
         label=l.lbl[key]
 
 block left-content
@@ -24,9 +24,9 @@ block left-content
         table#score-table.wide-table
             thead
                 tr
-                    +head_th('rank')
+                    +head_th('rank').numeric
                     +head_th('user')
-                    +head_th('score')
+                    +head_th('score').numeric
                     +head_th('team')
             tbody
 
