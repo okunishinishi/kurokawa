@@ -25,10 +25,19 @@
         }
     });
     $.fn.extend({
-        sortableTable: function () {
+        sortableTable: function (numericCols) {
             var table = $(this),
                 thead = table.find('thead'),
                 tbody = table.find('tbody');
+
+            function sort(v1, v2, col) {
+                var isNumeric = numericCols.indexOf(col) != -1;
+                if (isNumeric) {
+                    return Number(v1) - Number(v2);
+                } else {
+                    return v1.localeCompare(v2);
+                }
+            }
 
             var bodyTr = tbody.find('tr');
             thead.find('th label').click(function () {
@@ -49,7 +58,7 @@
                         var $2 = $(b);
                         var v1 = $1.data('sort-value'),
                             v2 = $2.data('sort-value');
-                        var sorted = v1.localeCompare(v2) * (asc ? 1 : -1);
+                        var sorted = sort(v1, v2, col) * (asc ? 1 : -1);
                         if (sorted) {
                             return  sorted;
                         } else {
@@ -65,7 +74,13 @@
             var table = $(this),
                 thead = table.find('.sheet-thead'),
                 tbody = table.find('.sheet-tbody');
-            table.sortableTable();
+
+            var numericCols = 'years_of_service,join_year'.split(',').map(function (key) {
+                return thead.findByAttr('data-key', key).data('col');
+            });
+
+
+            table.sortableTable(numericCols);
 
             table.on('mouseenter', '.sheet-th,.sheet-cell', function () {
                 var cell = $(this),
