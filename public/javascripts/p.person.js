@@ -72,5 +72,18 @@
 
         $('#sub-nav', body).subNav('company');
 
+        $('#person-destroy-btn', body).click(function () {
+            var sure = confirm(l.msg.sure);
+            if (sure) {
+                var id = body.findByName('_id').val(),
+                    btn = $(this),
+                    destroy = btn.data('destroy'),
+                    success = btn.data('success');
+                $.post(destroy, {_id: id}, function () {
+                    location.href = success;
+                });
+            }
+        });
+
     });
 })(jQuery, window['l'], Handlebars);

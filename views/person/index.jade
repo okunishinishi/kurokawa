@@ -22,7 +22,15 @@ block left-content
 
 block right-content
 
-    a#person-edit-btn.float-right(href='javascript:void(0)')=l.btn.edit
+    a#person-destroy-btn.float-right.link-btn(href='javascript:void(0)',
+    data-success=url("/chart/"+person.company_id),
+    data-destroy=url('/api/person/destroy'))
+        i.icon.icon-trash
+        span=l.btn.remove
+
+    a#person-edit-btn.float-right.link-btn(href='javascript:void(0)')
+        i.icon.icon-pencil
+        span=l.btn.edit
     +person_extra_table(person)
 
 

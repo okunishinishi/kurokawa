@@ -217,6 +217,8 @@ exports.api = {
         findOne(_id, function (person) {
             if (person) {
                 person.remove(function () {
+                    var l = res.locals.l;
+                    req.flash('info_alert', l.msg.person_destroy_done);
                     PersonUpdate.findByPerson(person, function (personUpdate) {
                         if (personUpdate) {
                             personUpdate.remove(function () {

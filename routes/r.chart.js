@@ -23,7 +23,8 @@ exports.index = function (req, res) {
         }
         res.render('chart/index.jade', {
             persons: persons,
-            company: company
+            company: company,
+            info_alert: req.flash('info_alert')
         });
     });
 };
