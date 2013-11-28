@@ -18,8 +18,6 @@ User.schema = new Schema({
         minLength: 2
     },
     password_digest: {
-        required: true,
-        minLength: 2
     },
     email: {
         format: 'email'
