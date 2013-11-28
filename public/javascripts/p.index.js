@@ -20,7 +20,14 @@
         companyListItem: function () {
             return $(this)
                 .destroyableListItem()
-                .editableListItem('dblclick');
+                .editableListItem('dblclick')
+                .on('edit-done', function (e, data) {
+                    var li = $(this);
+                    var id = li.findByName('_id').val();
+                    li.find('.detail-link').attr({
+                        href: '/chart/' + id + '/?t=' + new Date().getTime()
+                    });
+                });
         },
         companyList: function (data) {
             var ul = $(this);

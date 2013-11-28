@@ -25,3 +25,19 @@ Company.prototype.validate = function () {
     var s = this;
     return Company.schema.validate(s);
 };
+
+
+Company.listUnknownCompanies = function (company_names, callback) {
+    Company.findAll(function (companies) {
+        var unknowns = companies
+            .filter(function (company) {
+                return company_names.indexOf(company.name) === -1;
+            })
+            .map(function (company_name) {
+                return new Company({
+                    name: company_name
+                });
+            });
+        callback(unknowns);
+    });
+};

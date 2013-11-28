@@ -104,3 +104,14 @@ Person.prototype.save = (function (save) {
         });
     }
 })(new Person({}).save);
+
+
+Person.listAllTakenValues = function (callback) {
+    var names = [];
+    Person.findByCondition({}, function (persons) {
+        persons && persons.forEach(function (person) {
+            names.push(person.name);
+        });
+        callback(names);
+    });
+};

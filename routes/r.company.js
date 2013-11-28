@@ -106,6 +106,8 @@ exports.api = {
                     return;
                 }
                 copy.fallback(duplicate, company);
+            } else {
+                delete company._id;
             }
             company[action](function (company) {
                 res.json({

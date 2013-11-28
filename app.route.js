@@ -64,6 +64,7 @@ get('/admin', admin.index);
 get('/admin/master', admin.master);
 get('/admin/user', admin.user);
 get('/admin/user/import', admin.user.import);
+get('/admin/person/import', admin.person.import);
 get('/admin/score_rule', admin.score_rule);
 
 var team = r['team'];
@@ -79,6 +80,12 @@ var csv = r['csv'];
 post('/api/csv/user_import/text', csv.import_user.from_text);
 post('/api/csv/user_import/file', csv.import_user.from_file);
 post('/api/csv/user_import/execute', csv.import_user.execute);
+
+post('/api/csv/person_import/text', csv.import_person.from_text);
+post('/api/csv/person_import/file', csv.import_person.from_file);
+post('/api/csv/person_import/execute', csv.import_person.execute);
+
+
 
 var score_rule = r['score_rule'];
 post('/api/score_rule/save', score_rule.api.save);

@@ -84,6 +84,7 @@ l = {
         "admin_menu": {
             "master_manage": "master manage",
             "user_import": "user import",
+            "person_import": "person import",
             "user_manage": "user manage",
             "score_rule": "score rule"
         },
@@ -135,6 +136,11 @@ l = {
         "invalid_csv": "Oops! Your CSV is not valid. Please modify and retry.",
         "user_import": {
             "lead": "Import users via CSV.<br/>Format is below:",
+            "example": "Example:",
+            "before_submit": "Sure to import these data? If so, press the submit btn."
+        },
+        "person_import": {
+            "lead": "Import persons via CSV.<br/>Format is below:",
             "example": "Example:",
             "before_submit": "Sure to import these data? If so, press the submit btn."
         },

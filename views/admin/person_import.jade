@@ -1,0 +1,65 @@
+extends ../layout
+include ../csv/_import_forms
+
+block stylesheets
+    link(rel='stylesheet', href=url.css('admin.css'))
+
+block javascripts
+    script(src=url.js('validation/v.csv.js'))
+    script(src=url.js('p.admin.person.import.js'))
+
+block upper-content
+    include back_to_admin
+
+block left-content
+    h1.page-title=l.lbl.admin_menu.person_import
+
+    #person-import-lead
+        p!=l.msg.person_import.lead
+
+        blockquote
+            div=csv_headers.join(',')
+
+        p!=l.msg.person_import.example
+        blockquote
+            each csv_example in csv_examples
+                div=csv_example.join(',')
+
+    #preview-section.positioned
+        #err-preview.preview(data-headers=csv_headers).text-left
+            p.large-err=l.msg.invalid_csv
+            br
+            #err-preview-sheet.preview-sheet
+            br
+            br
+            a.preview-hide-btn.float-right.btn.large-btn(
+            href='javascript:void(0)')=l.btn.modify
+            br
+        #submit-preview.preview(data-headers=csv_headers)
+            p=l.msg.person_import.before_submit
+            br
+            br
+            #submit-preview-sheet.preview-sheet
+            form.wide-form#submit-form.inline-form(
+            data-onsuccess=url('/admin/person'),
+            method='post',
+            action=url('/api/csv/person_import/execute'))
+                input(type='hidden', name='person_json_path')
+                a.float-right.btn.large-btn(data-role='submit-btn',href='javascript:void(0)')=l.btn.submit
+                a.float-right.preview-hide-btn.btn.large-btn(href='javascript:void(0)')=l.btn.cancel
+            br
+
+
+block right-content
+    #import-section
+        br
+        #import-way-tabs.tab-container
+            a#file-import-tab.tab(href='#file-import-div')=l.lbl.import_ways.file
+            a#text-import-tab.tab(href='#text-import-div')=l.lbl.import_ways.text
+        br.clear
+        #import-way-tab-contents
+            .tab-content#text-import-div
+                +import_form_by_text(url('/api/csv/person_import/text')))
+
+            .tab-content#file-import-div
+                +import_form_by_file(url('/api/csv/person_import/file'),'csv_file')

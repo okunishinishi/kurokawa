@@ -64,7 +64,7 @@ exports.index = function (req, res) {
                     var company = companyMap[person.company_id];
                     person.company_name = company && company.name;
                     PersonUpdate.findByPerson(person, function (personUpdate) {
-                        personUpdate.changes = personUpdate.changes.map(function (change) {
+                        personUpdate.changes = personUpdate && personUpdate.changes.map(function (change) {
                             return formatChange(change);
                         });
                         res.render('person/index.jade', {

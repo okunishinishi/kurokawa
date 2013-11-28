@@ -70,3 +70,13 @@ exports.user.import = function (req, res) {
         csv_examples: format.user_import_example
     });
 };
+
+exports.person = {};
+
+exports.person.import = function (req, res) {
+    var format = require('./r.csv').format;
+    res.render('admin/person_import.jade', {
+        csv_headers: format.person_import,
+        csv_examples: format.person_import_example
+    });
+};

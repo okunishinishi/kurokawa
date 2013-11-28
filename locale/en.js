@@ -88,6 +88,7 @@ l.lbl.import_ways = {
 l.lbl.admin_menu = {
     master_manage: [l.lbl.master, 'manage'].join(' '),
     user_import: [l.lbl.user, 'import'].join(' '),
+    person_import: [l.lbl.person, 'import'].join(' '),
     user_manage: [l.lbl.user, 'manage'].join(' '),
     score_rule: l.lbl.score_rule
 };
@@ -143,6 +144,14 @@ l.msg.invalid_csv = 'Oops! Your CSV is not valid. Please modify and retry.';
 l.msg.user_import = {
     lead: [
         'Import users via CSV.',
+        'Format is below:'
+    ].join('<br/>'),
+    example: 'Example:',
+    before_submit: 'Sure to import these data? If so, press the submit btn.'
+};
+l.msg.person_import = {
+    lead: [
+        'Import persons via CSV.',
         'Format is below:'
     ].join('<br/>'),
     example: 'Example:',

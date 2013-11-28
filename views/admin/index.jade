@@ -24,4 +24,9 @@ block right-content
             ul
                 +menu_item(url('admin/user/import'), l.lbl.admin_menu.user_import)
                 +menu_item(url('admin/user'), l.lbl.admin_menu.user_manage)
+        li
+
+            span=l.lbl.person
+            ul
+                +menu_item(url('admin/person/import'), l.lbl.admin_menu.person_import)
         +menu_item(url('admin/score_rule'), l.lbl.admin_menu.score_rule)

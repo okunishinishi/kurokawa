@@ -8,16 +8,16 @@ var route = require('../../../routes/r.csv'),
 // valid data
 function data0() {
     return [
-        'j0123,j@example.com,John,Crazy,p123,'.split(','),
-        'ttt,t@example.com,Tek,Roman,p555,'.split(',')
+        'j0123,j@example.com,John Crazy,p123,'.split(','),
+        'ttt,t@example.com,Tek Roman,p555,'.split(',')
     ];
 }
 
 //invalid data
 function data1() {
     return [
-        'j0123,not_email_format,John,Crazy,p123,'.split(','),
-        ',j@example.com,John,Crazy,,'.split(',')
+        'j0123,not_email_format,John Crazy,p123,'.split(','),
+        ',j@example.com,John Crazy,,'.split(',')
     ];
 }
 
