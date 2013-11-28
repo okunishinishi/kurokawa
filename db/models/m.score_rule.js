@@ -15,7 +15,9 @@ var ScoreRule = module.exports = defineModel({
 
 ScoreRule.schema = new Schema({
     //schemas
-
+    _id:{
+        required:true
+    }
 });
 
 ScoreRule.prototype.validate = function () {
@@ -24,11 +26,12 @@ ScoreRule.prototype.validate = function () {
 };
 
 
-ScoreRule.findSingleton = function(callback){
-    ScoreRule.findOneByCondition({}, function(scoreRule){
-        if(scoreRule){
+ScoreRule.findSingleton = function (callback) {
+    ScoreRule.findAll(function (scoreRules) {
+        var scoreRule = scoreRules.shift();
+        if (scoreRule) {
             callback(scoreRule);
-        } else{
+        } else {
             scoreRule = new ScoreRule({});
             scoreRule.save(callback);
         }

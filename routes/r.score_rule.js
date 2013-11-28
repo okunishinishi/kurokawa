@@ -17,26 +17,14 @@ exports.api = {
             res.json(result);
             return;
         }
-        ScoreRule.findSingleton(function (duplicate) {
-            var action = duplicate ? 'update' : 'save';
-            if (duplicate) {
-                var vr = scoreRule._vr,
-                    conflict = vr && (vr != duplicate._vr);
-                if (conflict) {
-                    const l = res.locals.l;
-                    res.json({
-                        valid: false,
-                        err_alert: l.err.conflict
-                    });
-                    return;
-                }
-                copy.fallback(duplicate, scoreRule);
-            }
-            scoreRule[action](function (scoreRule) {
+        ScoreRule.findById(scoreRule._id, function (duplicate) {
+            duplicate._id = duplicate._id.toString();
+            copy.fallback(duplicate, scoreRule);
+            scoreRule.update(function (scoreRule) {
                 res.json({
                     valid: true,
                     model: scoreRule,
-                    action: action
+                    action: 'update'
                 });
             });
         });
