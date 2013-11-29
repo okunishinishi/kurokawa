@@ -61,7 +61,12 @@
                 form.detailForm('view', saveBtn, editBtn);
             }
             form.find(':text,textarea').hide();
+
+            data.email = data.email || '';
+            data.team_id = data.team_id || '';
+
             form.setFormValue(data);
+
             $('.tk-editable-text', form).trigger('tk-editable-text-fix');
             form.fadeIn();
 
