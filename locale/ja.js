@@ -69,4 +69,4 @@ l.booleans = {
 
 
 l.lead = l.lead || {};
-l.lead.score_update_policy = '※反映には最大{{minutes}}分かかります';
+l.lead.score_update_policy = '※scoreは{{minutes}}分ごとに更新されます。';
