@@ -33,6 +33,7 @@ l.lbl.previous_job = '前職';
 l.lbl.real_name = '名前';
 l.lbl.username = 'ユーザ名';
 l.lbl.password = 'パスワード';
+l.lbl.password_confirm = 'パスワード確認';
 l.lbl.role = '権限';
 l.lbl.family = 'family';
 l.lbl.single = '独身/既婚';

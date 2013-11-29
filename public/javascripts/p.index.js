@@ -19,7 +19,7 @@
         },
         companyListItem: function () {
             return $(this)
-                .destroyableListItem()
+                .destroyableListItem(true)
                 .editableListItem('dblclick')
                 .on('edit-done', function (e, data) {
                     var li = $(this);

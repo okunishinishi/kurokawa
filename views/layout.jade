@@ -51,6 +51,12 @@ html
             +alert(err_alert, 'err-alert')
             +alert(info_alert, 'info-alert')
 
+
+            if sign_user
+                if sign_user.password_expired
+                    #password-expired-warn
+                        div!=l.msg.your_password_expired.replace('{{here}}','<a href="'+url('/mypage')+'?password_change=true">HERE.</a>')
+
             block upper-content
 
             .book#book.positioned

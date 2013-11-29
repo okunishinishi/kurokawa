@@ -15,7 +15,7 @@ var User = module.exports = defineModel({
 User.schema = new Schema({
     username: {
         required: true,
-        minLength: 2
+        minLength: 1
     },
     password_digest: {
     },

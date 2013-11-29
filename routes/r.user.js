@@ -205,6 +205,8 @@ exports.api = {
                         delete user.password;
                         delete user.captcha_text;
                         user.password_digest = password_digest;
+                        user.password_expired = false;
+                        req.flash('info_alert', l.msg.password_change_done);
                         user.update(function () {
                             res.json({
                                 valid: true,

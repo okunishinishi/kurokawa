@@ -47,6 +47,8 @@
             .passwordChangeForm(function () {
                 book.removeClass('covered-book');
                 passwordChangeForm.hide();
+                $.pushQueryToState({password_change:false});
+                location.reload();
             }).hide();
 
         $('#password_change-btn', body).click(function () {
@@ -63,5 +65,9 @@
                 .focus();
         })
         ;
+
+        if (q && q['password_change'] === 'true') {
+            $('#password_change-btn', body).click();
+        }
     })
 })(jQuery, window['l'], window['v'], Handlebars);

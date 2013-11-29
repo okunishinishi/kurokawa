@@ -138,6 +138,7 @@ l = {
         "user_destroy_done": "user destroy done",
         "person_import_done": "person import done.",
         "invalid_csv": "Oops! Your CSV is not valid. Please modify and retry.",
+        "your_password_expired": "Your password is expired. Please change it from {{here}}",
         "user_import": {
             "lead": "Import users via CSV.<br/>Format is below:",
             "example": "Example:",

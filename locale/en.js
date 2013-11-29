@@ -145,6 +145,7 @@ l.msg.person_destroy_done = 'person destroy done';
 l.msg.user_destroy_done = 'user destroy done';
 l.msg.person_import_done = 'person import done.';
 l.msg.invalid_csv = 'Oops! Your CSV is not valid. Please modify and retry.';
+l.msg.your_password_expired = 'Your password is expired. Please change it from {{here}}';
 l.msg.user_import = {
     lead: [
         'Import users via CSV.',

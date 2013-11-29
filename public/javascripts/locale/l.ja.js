@@ -12,7 +12,7 @@ l = {
         "mypage": "mypage",
         "username_or_email": "username or email",
         "password": "パスワード",
-        "password_confirm": "password again",
+        "password_confirm": "パスワード確認",
         "password_mask": "*****",
         "account": "account",
         "personal": "personal",
@@ -139,6 +139,7 @@ l = {
         "user_destroy_done": "user destroy done",
         "person_import_done": "person import done.",
         "invalid_csv": "Oops! Your CSV is not valid. Please modify and retry.",
+        "your_password_expired": "Your password is expired. Please change it from {{here}}",
         "user_import": {
             "lead": "Import users via CSV.<br/>Format is below:",
             "example": "Example:",

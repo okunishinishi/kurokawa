@@ -102,7 +102,7 @@
                         } else {
                             var errors = data['errors'];
                             if (errors && errors.length) {
-                                alert(errors[0]); //TODO
+                                alert(errors[0].message); //TODO
                             }
                         }
                     });

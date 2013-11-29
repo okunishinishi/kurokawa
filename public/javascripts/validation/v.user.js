@@ -11,7 +11,7 @@ v.user = (function (v) {
     var user = {
         username: {
             required: true,
-            minLength: 2
+            minLength: 1
         },
         email: {
             format: 'email'
