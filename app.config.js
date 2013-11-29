@@ -71,5 +71,5 @@ exports.sign_filter = {
 exports.reportPublishInterval = 10 * 60 * 1000;
 
 exports.backupDir = resolve(__dirname, 'backup');
-exports.backInterval = 24 * 60 * 60 * 1000;
-exports.backGenerations = 3;
+exports.backInterval = 4 * 24 * 60 * 60 * 1000;
+exports.backGenerations = 5;
