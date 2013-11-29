@@ -564,7 +564,6 @@
 		            })
 		            .on('tk-editable-text-fix', function () {
 		                var val = input.val();
-		                if (!val) return;
 		                input.hide();
 		                label.text(val).show();
 		            })
