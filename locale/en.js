@@ -74,6 +74,7 @@ l.lbl.example = 'example';
 l.lbl.on = 'on';
 l.lbl.off = 'off';
 l.lbl.issue = 'issue';
+l.lbl.anonymous = '(anonymous)';
 l.lbl.sub_menu = {
     company: l.lbl.client,
     report: l.lbl.reports

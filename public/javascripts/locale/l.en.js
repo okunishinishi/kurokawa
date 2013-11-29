@@ -70,6 +70,7 @@ l = {
         "on": "on",
         "off": "off",
         "issue": "issue",
+        "anonymous": "(anonymous)",
         "sub_menu": {
             "company": "client",
             "report": "reports"
