@@ -58,6 +58,7 @@ mixin user_detail_form(user, teams)
                         label(for=team-input)=l.lbl.team
                     td
                         select(name='team_id', id='team-input')
+                            option(value='')
                             each team in teams
                                 option(value=team._id, selected=team._id==user.team_id)=team.name
 
