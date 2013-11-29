@@ -21,6 +21,7 @@ block left-content
             span=l.lbl.user_count_preffix
             span#score-table-count
             span=l.lbl.user_count_suffix
+
         table#score-table.wide-table
             thead
                 tr
@@ -29,6 +30,10 @@ block left-content
                     +head_th('score').numeric
                     +head_th('team')
             tbody
+        span.float-right#score_update_policy-label
+            small=l.lead.score_update_policy.replace('{{minutes}}', (report_publish_interval / 60 / 1000))
+        br.clear
+
 
 block right-content
     section#score-chart-section

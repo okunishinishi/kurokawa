@@ -66,3 +66,7 @@ l.booleans = {
     drinks: {true: '嗜む', false: '嗜まない'},
     smokes: {true: '嗜む', false: '嗜まない'}
 };
+
+
+l.lead = l.lead || {};
+l.lead.score_update_policy = '※反映には最大{{minutes}}分かかります';

@@ -125,6 +125,7 @@ l = {
         "score_rule": "Manage how much score will be given for each data.",
         "report_update_time": "When you change, it takes up to {{minutes}} minutes to reflect to the score reports.",
         "password_change": "change your password",
+        "score_update_policy": "※反映には最大{{minutes}}分かかります",
         "signin": "Sign in and start kurokawa!"
     },
     "msg": {

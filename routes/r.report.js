@@ -16,7 +16,9 @@ var publicDir = config.publicDir;
  * @param res
  */
 exports.index = function (req, res) {
-    res.render('report/index.jade', {});
+    res.render('report/index.jade', {
+        report_publish_interval: config.reportPublishInterval
+    });
 };
 
 /**

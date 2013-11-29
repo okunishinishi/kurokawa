@@ -132,6 +132,7 @@ l.lead.index_page = 'Select client company.';
 l.lead.score_rule = 'Manage how much score will be given for each data.';
 l.lead.report_update_time = 'When you change, it takes up to {{minutes}} minutes to reflect to the score reports.';
 l.lead.password_change = 'change your password';
+l.lead.score_update_policy = 'updates each {{minutes}} minutes';
 
 l.msg = {};
 l.msg.sure = 'Are you ABSOLUTELY sure?';
