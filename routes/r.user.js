@@ -233,6 +233,8 @@ exports.api = {
         var _id = body && body['_id'];
         findOne(_id, function (user) {
             if (user) {
+                var l = res.locals.l;
+                req.flash('info_alert', l.msg.user_destroy_done);
                 user.remove(function () {
                     res.json({count: 1});
                 });

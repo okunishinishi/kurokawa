@@ -136,6 +136,7 @@ l = {
         "signout_done": "sign out done.",
         "user_import_done": "user import done.",
         "person_destroy_done": "person destroy done",
+        "user_destroy_done": "user destroy done",
         "person_import_done": "person import done.",
         "invalid_csv": "Oops! Your CSV is not valid. Please modify and retry.",
         "user_import": {

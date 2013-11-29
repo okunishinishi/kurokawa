@@ -2,8 +2,15 @@ mixin user_detail_form(user, teams)
     form#user-detail-form(action=url('/api/user/save'), method='post', autocomplete='off').positioned
         input(type='hidden', name='_id', value=user._id)
         input(type='hidden', name='_vr', value=user._vr)
-
-        a#user-detail-edit-btn.stick-right.stick-top(href='javascript:void(0)')=l.btn.edit
+        .stick-right.stick-top
+            a#user-destroy-btn(href='javascript:void(0)',
+                data-destroy=url('/api/user/destroy')
+            ).link-btn
+                i.icon.icon-trash
+                span=l.btn.remove
+            a#user-detail-edit-btn(href='javascript:void(0)').link-btn
+                i.icon.icon-pencil
+                span=l.btn.edit
         table.wide-table
             caption=l.lbl.account
             tbody.hover-show-parent
@@ -21,7 +28,9 @@ mixin user_detail_form(user, teams)
                     th
                         label.block-label=l.lbl.role
                     td
-                        span=l.lbl.user_roles[user.role || 'none']
+                        select(name='role')
+                            option(value='')=l.lbl.user_roles.none
+                            option(value='admin', selected=user.role==admin)=l.lbl.user_roles.admin
         br
         table.wide-table
             caption=l.lbl.personal

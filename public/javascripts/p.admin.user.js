@@ -64,6 +64,18 @@
             form.setFormValue(data);
             $('.tk-editable-text', form).trigger('tk-editable-text-fix');
             form.fadeIn();
+
+
+            $('#user-destroy-btn', form).click(function () {
+                var btn = $(this);
+                var id = form.findByName('_id').val(),
+                    destroy = btn.data('destroy');
+                $.confirmRemove({}, function () {
+                    $.post(destroy, {_id: id}, function () {
+                        location.reload();
+                    });
+                });
+            });
             return form;
         },
         userDetailSection: function (data) {
