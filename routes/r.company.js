@@ -1,6 +1,8 @@
 var tek = require('tek'),
     copy = tek['meta']['copy'],
     db = require('../db'),
+    Person = db.models['Person'],
+    PersonUpdate = db.models['PersonUpdate'],
     Company = db.models['Company'];
 
 /**
@@ -129,7 +131,9 @@ exports.api = {
         findOne(_id, function (company) {
             if (company) {
                 company.remove(function () {
-                    res.json({count: 1});
+                    destroyCompanyPersons(_id, function () {
+                        res.json({count: 1});
+                    });
                 });
             } else {
                 res.json({count: 0});
@@ -137,3 +141,29 @@ exports.api = {
         });
     }
 };
+
+
+function destroyCompanyPersons(company_id, callback) {
+    var JobQueue = require('tek')['JobQueue'];
+    Person.findByCondition({
+        company_id: company_id.toString()
+    }, function (persons) {
+        var personUpdates = [];
+        var queue = new JobQueue();
+        persons.forEach(function (person) {
+            queue.push(function (next) {
+                PersonUpdate.findByPerson(person, function (personUpdate) {
+                    personUpdates.push(personUpdate);
+                    next();
+                });
+            });
+        });
+        queue.execute(function () {
+            Person.removeAll(persons, function () {
+                PersonUpdate.removeAll(personUpdates, function () {
+                    callback();
+                });
+            });
+        })
+    });
+}
