@@ -28,9 +28,15 @@ mixin user_detail_form(user, teams)
                     th
                         label.block-label=l.lbl.role
                     td
-                        select(name='role')
-                            option(value='')=l.lbl.user_roles.none
-                            option(value='admin', selected=user.role==admin)=l.lbl.user_roles.admin
+                        case sign_user && sign_user.role
+                            when 'admin'
+                                select(name='role')
+                                    option(value='')=l.lbl.user_roles.none
+                                    option(value='admin', selected=(user.role=='admin'))=l.lbl.user_roles.admin
+                            default
+                                span=l.lbl.user_roles[user.role || 'none']
+
+
         br
         table.wide-table
             caption=l.lbl.personal

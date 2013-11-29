@@ -2,9 +2,10 @@ mixin main_nav(sign_user)
     nav#main-nav.slidein-menu
         #main-nav-inner.slidein-menu-inner
             if sign_user
-                a.slidein-menu-btn.nav-item(href='javascript:void(0)')=sign_user.username
+                a.slidein-menu-btn.nav-item(href='javascript:void(0)')
+                    span #{sign_user.real_name} (#{sign_user.username})
                 span.slidein-menu-content
-                    a.nav-item(href=url('/mypage'))=l.lbl.mypage
+                    a.nav-item(href=url('/mypage?t=')+time)=l.lbl.mypage
                     form#signout-form.inline-form(method='post',action=url('/signout'))
                         a.nav-item(href='#', onclick="$('#signout-form').submit();")=l.lbl.signout
             else
