@@ -62,6 +62,7 @@
             }
             form.find(':text,textarea').hide();
 
+            data._id = data._id || '';
             data.email = data.email || '';
             data.team_id = data.team_id || '';
 

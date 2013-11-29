@@ -163,7 +163,9 @@ exports.api = {
                     res.json(result);
                     return;
                 }
-                send(user, action);
+                User.newUser(user, function (user) {
+                    send(user, action);
+                });
             }
 
         });
@@ -176,6 +178,7 @@ exports.api = {
     change_password: function (req, res) {
         var body = req.body;
         var _id = body && body['_id'];
+        console.log('_id', _id, body);
         var schema = new validations.user.PasswordChangeSchema();
         schema.validate(body, function (valid, errors) {
             if (valid) {
