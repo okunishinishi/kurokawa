@@ -22,9 +22,7 @@ exports.newBuffer = function (text, style, callback) {
     var Canvas = require('canvas');
     switch
         (arguments.length) {
-        case
-        2
-        :
+        case 2 :
             callback = arguments[1];
             style = {};
             break;
