@@ -4,7 +4,6 @@
  */
 var tek = require('tek'),
     copy = tek.meta.copy,
-    Canvas = require('canvas'),
     random = Math.random,
     color = require('./u.color'),
     rainbow = color.rainbow;
@@ -20,8 +19,12 @@ exports.defaultStyle = {
     fontFamily: 'sans'
 };
 exports.newBuffer = function (text, style, callback) {
-    switch (arguments.length) {
-        case 2:
+    var Canvas = require('canvas');
+    switch
+        (arguments.length) {
+        case
+        2
+        :
             callback = arguments[1];
             style = {};
             break;
@@ -56,9 +59,9 @@ exports.newBuffer = function (text, style, callback) {
     for (i = 0; i < text.length; i++) {
         ctx.fillStyle = colors[i];
         ctx.setTransform(
-            random() * 0.5 + 1, random() * 0.4, random() * 0.4,
-            random() * 0.5 + 1,
-            style.fontSize * .5 * i+5, 100);
+                random() * 0.5 + 1, random() * 0.4, random() * 0.4,
+                random() * 0.5 + 1,
+                style.fontSize * .5 * i + 5, 100);
         ctx.fillText(text[i], 5, 0);
     }
     canvas.toBuffer(callback);
