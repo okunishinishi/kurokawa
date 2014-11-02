@@ -5,6 +5,12 @@ kurokawa
 
 営業部向けの、顧客情報管理システムです。
 
++ 顧客情報管理
++ 営業マン点数付け
++ エクセル出力
+
+などができます。
+
 ![capture](doc/img/capture.png "capture")
 
 
